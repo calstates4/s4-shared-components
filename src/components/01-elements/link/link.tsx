@@ -5,7 +5,7 @@ import { type ReactNode } from 'react';
 interface LinkProps extends MuiLinkProps {
   href: string;
   prefetch?: 'none' | 'intent' | 'render';
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
 }
 
 export default function Link({

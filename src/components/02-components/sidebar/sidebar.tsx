@@ -5,7 +5,7 @@ import { type ReactNode } from 'react';
 type SidebarProps = {
   sidebarOpen: boolean;
   sidebarWidth: number;
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
 };
 
 export default function Sidebar({

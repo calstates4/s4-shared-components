@@ -15,7 +15,7 @@ export type ContextProps = {
   campuses: Array<{ title: string; id: string }>;
   selectedUniversity: number;
   selectedCampus: number;
-  formSubmit: Function;
+  formSubmit: (a: HTMLFormElement) => void;
 };
 
 export default function Context({
@@ -136,7 +136,8 @@ export default function Context({
           defaultValue={selectedCampus}
           onChange={(event) => {
             const element = event.currentTarget as HTMLSelectElement;
-            formSubmit(element.closest('form'));
+            const form = element.closest('form');
+            if (form) formSubmit(form);
           }}
         >
           <option value="0">Select campus...</option>

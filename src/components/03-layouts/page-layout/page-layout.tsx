@@ -14,7 +14,7 @@ import TopBar from '../../02-components/topbar/topbar';
 type PageLayoutProps = {
   brandingBarLinks: BrandingBarProps;
   sidebarLinks: SidebarMenuProps;
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
   brand: ReactNode;
   context: ReactNode;
 };

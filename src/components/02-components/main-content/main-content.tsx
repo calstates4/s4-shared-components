@@ -2,7 +2,7 @@ import { styled, useTheme, type Theme } from '@mui/material/styles';
 import { type ReactNode } from 'react';
 
 type MainContentProps = {
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
   sidebarOpen: boolean;
   sidebarWidth: number;
 };

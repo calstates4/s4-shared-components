@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 
 type SidebarToggleProps = {
   sidebarOpen: boolean;
-  setSidebarOpen: Function;
+  setSidebarOpen: (a: boolean) => void;
   sidebarWidth: number;
 };
 
