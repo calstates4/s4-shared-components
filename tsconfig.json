@@ -1,5 +1,10 @@
 {
-  "exclude": ["vite.config.ts", "**/*.stories.tsx", "**/*.stories.ts"],
+  "exclude": [
+    "vite.config.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.ts",
+    "dist/*"
+  ],
   "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
