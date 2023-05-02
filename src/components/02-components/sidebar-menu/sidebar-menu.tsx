@@ -1,8 +1,4 @@
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ExperiencesIcon from '@mui/icons-material/InsertEmoticon';
-import CreateExperienceIcon from '@mui/icons-material/KeyboardArrowRight';
-import ProgramsIcon from '@mui/icons-material/LibraryBooks';
-import OpportunitiesIcon from '@mui/icons-material/LocalLibrary';
+import ArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import {
   Divider,
   List,
@@ -10,23 +6,24 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
+import { type ElementType } from 'react';
 import Link from '../../01-elements/link/link';
 
+interface SidebarBasicLink {
+  title: string;
+  url: string;
+}
+
+interface SidebarIconLink extends SidebarBasicLink {
+  icon: ElementType;
+}
+
 export type SidebarMenuProps = {
-  dashboardURL: string;
-  experiencesURL: string;
-  opportunitiesURL: string;
-  programsURL: string;
-  createExperienceURL: string;
+  menuItems: SidebarIconLink[];
+  actions: SidebarBasicLink[];
 };
 
-export default function SidebarMenu({
-  dashboardURL,
-  experiencesURL,
-  opportunitiesURL,
-  programsURL,
-  createExperienceURL,
-}: SidebarMenuProps) {
+export default function SidebarMenu({ menuItems, actions }: SidebarMenuProps) {
   const dividerStyles = {
     color: 'inherit',
     textTransform: 'uppercase',
@@ -38,29 +35,6 @@ export default function SidebarMenu({
       borderTopColor: 'white',
     },
   };
-
-  const menuItems = [
-    {
-      title: 'Dashboard',
-      url: dashboardURL,
-      icon: DashboardIcon,
-    },
-    {
-      title: 'Experiences',
-      url: experiencesURL,
-      icon: ExperiencesIcon,
-    },
-    {
-      title: 'Opportunities',
-      url: opportunitiesURL,
-      icon: OpportunitiesIcon,
-    },
-    {
-      title: 'Programs',
-      url: programsURL,
-      icon: ProgramsIcon,
-    },
-  ];
 
   return (
     <>
@@ -88,16 +62,16 @@ export default function SidebarMenu({
         <Divider component="li" textAlign="left" sx={dividerStyles}>
           Actions
         </Divider>
-        <li>
-          <ListItem component={Link} href={createExperienceURL} color="inherit">
-            <ListItemText sx={{ flexGrow: 0 }}>
-              Create an Experience
-            </ListItemText>
-            <ListItemIcon sx={{ minWidth: 0 }}>
-              <CreateExperienceIcon fontSize="small" sx={{ color: 'white' }} />
-            </ListItemIcon>
-          </ListItem>
-        </li>
+        {actions.map((item, index) => (
+          <li key={index}>
+            <ListItem component={Link} href={item.url} color="inherit">
+              <ListItemText sx={{ flexGrow: 0 }}>{item.title}</ListItemText>
+              <ListItemIcon sx={{ minWidth: 0 }}>
+                <ArrowRightIcon fontSize="small" sx={{ color: 'white' }} />
+              </ListItemIcon>
+            </ListItem>
+          </li>
+        ))}
       </List>
     </>
   );
