@@ -1,11 +1,11 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import type { Preview } from "@storybook/react";
-import React from "react";
-import theme from "../src/theme";
+import React from 'react';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import type { Preview } from '@storybook/react';
+import theme from '../src/theme';
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
