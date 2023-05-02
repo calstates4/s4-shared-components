@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 // Only use this component in storybook, loading all icons is not good for performance.
 import * as MuiIcons from '@mui/icons-material';
 import { Typography } from '@mui/material';
