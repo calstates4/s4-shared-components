@@ -56,7 +56,7 @@ export default function CtaCard({ heading, subHeading, description, cta = '/' }:
   );
 
   return (
-    <Paper sx={{ padding: (theme) => theme.spacing(3) }}> 
+    <Paper sx={{ padding: (theme) => theme.spacing(5) }}> 
       {renderedHeading}
       {renderedSubheading}
       {renderedDescription}
