@@ -6,35 +6,31 @@ export type BrandProps = {
   subHeading: string | null;
   description: string | null;
   cta: string;
-  // linkURL?: string;
 };
 
-export default function CtaCard({ heading, subHeading, description, cta = '/',  }: BrandProps) {
+export default function CtaCard({ heading, subHeading, description, cta = '/' }: BrandProps) {
 
   const theme = useTheme();
 
   // Styles
   const headingStyles = {
-    fontSize: '36px',
     fontWeight: '800',
     mb: theme.spacing(4),
   };
 
   const subHeadingStyles = {
-    fontSize: '24px',
     fontWeight: '800',
     mb: theme.spacing(1),
   };
 
   const descriptionStyles = {
-    fontSize: '16px',
     mb: theme.spacing(2),
   };
 
   const buttonStyles = {
     backgroundColor: 'primary.main',
     color: 'white',
-    fontWeight: '800',
+    fontWeight: '700',
     '&:focus, &:hover, &:active': 
       { backgroundColor: 'primary.dark' }
   };
@@ -42,13 +38,13 @@ export default function CtaCard({ heading, subHeading, description, cta = '/',  
   // Rendered
 
   const renderedHeading = heading && (
-    <Typography sx={headingStyles}>
+    <Typography sx={headingStyles} variant="h1">
         {heading}
     </Typography>
   );
 
   const renderedSubheading = subHeading && (
-    <Typography sx={subHeadingStyles}>
+    <Typography sx={subHeadingStyles} variant="h2">
         {subHeading}
     </Typography>
   );
@@ -60,7 +56,7 @@ export default function CtaCard({ heading, subHeading, description, cta = '/',  
   );
 
   return (
-    <Paper sx={{ padding: (theme) => theme.spacing(3) }}>
+    <Paper sx={{ padding: (theme) => theme.spacing(3) }}> 
       {renderedHeading}
       {renderedSubheading}
       {renderedDescription}

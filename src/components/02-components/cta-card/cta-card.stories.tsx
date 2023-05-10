@@ -18,9 +18,9 @@ export default meta;
 export const Default: StoryObj<typeof CtaCard> = {
   args: {
     heading: 'Let’s create your first experience!',
-    subHeading: 'Test subheading',
+    subHeading: 'What is an experience?',
     description: dummyText,
-    cta: 'BROWSE ALL OPPORTUNITIES',
+    cta: 'Browse all opportunities',
   },
   render: (args) => (
     <CtaCard {...args} />
