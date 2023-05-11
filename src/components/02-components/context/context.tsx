@@ -5,35 +5,57 @@ import {
   InputLabel,
   Button,
   Drawer,
+  SelectChangeEvent,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { useState } from 'react';
 
 export type ContextProps = {
-  universities: Array<{ title: string; id: string }>;
-  campuses: Array<{ title: string; id: string }>;
-  selectedUniversity: number;
-  selectedCampus: number;
+  level1: {
+    items: Array<{ title: string; id: string }>;
+    selectedItem: string;
+    label: string;
+    placeholder: string;
+  };
+  level2?: {
+    items: Array<{ title: string; id: string }>;
+    selectedItem: string;
+    label: string;
+    placeholder: string;
+  };
   formSubmit: (a: HTMLFormElement) => void;
 };
 
-export default function Context({
-  universities,
-  campuses,
-  selectedUniversity,
-  selectedCampus,
-  formSubmit,
-}: ContextProps) {
+export default function Context({ level1, level2, formSubmit }: ContextProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [level2Disabled, setLevel2Disabled] = useState(
+    level1.selectedItem === '0',
+  );
 
   const theme = useTheme();
+
+  // Event handler for select onChange event.
+  function onChangeHandler(event: SelectChangeEvent) {
+    const element = event.currentTarget as HTMLSelectElement;
+    const isLevel1 = element.getAttribute('id') === 'level1-select';
+    // If on level 1 select and level 2 exists, enable/disable level 2 based in level 1 value.
+    if (isLevel1 && level2) {
+      setLevel2Disabled(element.value === '0');
+    }
+    // Call formSubmit() when applies.
+    if (!level2 || !isLevel1) {
+      const form = element.closest('form');
+      if (form) formSubmit(form);
+    }
+  }
 
   // Styles.
   const desktopContainerStyles = {
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
+      justifyContent: 'flex-end',
       '.MuiFormControl-root + .MuiFormControl-root': {
         ml: theme.spacing(2),
       },
@@ -62,6 +84,7 @@ export default function Context({
     maxWidth: 400,
     mx: 'auto',
     [theme.breakpoints.up('md')]: {
+      mx: 0,
       width: 250,
       display: 'inline-flex',
     },
@@ -69,16 +92,22 @@ export default function Context({
 
   const selectStyles = {
     color: 'primary.main',
+    '&.Mui-disabled, & select:disabled': {
+      WebkitTextFillColor: theme.palette.primary.main,
+      [theme.breakpoints.up('md')]: {
+        WebkitTextFillColor: 'white',
+      },
+    },
     [theme.breakpoints.up('md')]: {
       color: 'white',
     },
     '& .MuiNativeSelect-icon': {
-      fill: 'primary.main',
+      fill: theme.palette.primary.main,
       [theme.breakpoints.up('md')]: {
         fill: 'white',
       },
     },
-    '&, &:hover, &.Mui-focused': {
+    '&, &:hover, &.Mui-focused, &.Mui-disabled': {
       '& .MuiOutlinedInput-notchedOutline': {
         borderColor: 'primary.main',
         [theme.breakpoints.up('md')]: {
@@ -89,7 +118,7 @@ export default function Context({
   };
 
   const labelStyles = {
-    '&, &.Mui-focused': {
+    '&, &.Mui-focused, &.Mui-disabled': {
       color: 'primary.main',
       [theme.breakpoints.up('md')]: {
         color: 'white',
@@ -100,54 +129,57 @@ export default function Context({
   const formElements = (
     <>
       <FormControl size="small" sx={formControlStyles}>
-        <InputLabel id="university-select-label" sx={labelStyles}>
-          University
+        <InputLabel id="level1-select-label" sx={labelStyles}>
+          {level1.label}
         </InputLabel>
         <Select
-          labelId="university-select-label"
-          id="university-select"
-          label="University"
+          labelId="level1-select-label"
+          id="level1-select"
+          label={level1.label}
           IconComponent={SwapHorizIcon}
           native={true}
-          name="university"
+          name="level1"
           sx={selectStyles}
-          defaultValue={selectedUniversity}
+          defaultValue={level1.selectedItem}
+          onChange={onChangeHandler}
         >
-          <option value="0">Select university...</option>
-          {universities.map((item) => (
+          <option value="0">{level1.placeholder}</option>
+          {level1.items.map((item) => (
             <option key={item.id} value={item.id}>
               {item.title}
             </option>
           ))}
         </Select>
       </FormControl>
-      <FormControl size="small" sx={formControlStyles}>
-        <InputLabel id="campus-select-label" sx={labelStyles}>
-          Campus
-        </InputLabel>
-        <Select
-          labelId="campus-select-label"
-          id="campus-select"
-          label="Campus"
-          IconComponent={SwapHorizIcon}
-          native={true}
-          name="campus"
-          sx={selectStyles}
-          defaultValue={selectedCampus}
-          onChange={(event) => {
-            const element = event.currentTarget as HTMLSelectElement;
-            const form = element.closest('form');
-            if (form) formSubmit(form);
-          }}
+      {level2 && (
+        <FormControl
+          size="small"
+          sx={formControlStyles}
+          disabled={level2Disabled}
         >
-          <option value="0">Select campus...</option>
-          {campuses.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.title}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
+          <InputLabel id="level2-select-label" sx={labelStyles}>
+            {level2.label}
+          </InputLabel>
+          <Select
+            labelId="level2-select-label"
+            id="level2-select"
+            label={level2.label}
+            IconComponent={SwapHorizIcon}
+            native={true}
+            name="level2"
+            sx={selectStyles}
+            defaultValue={level2.selectedItem}
+            onChange={onChangeHandler}
+          >
+            <option value="0">{level2.placeholder}</option>
+            {level2.items.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+      )}
     </>
   );
 
