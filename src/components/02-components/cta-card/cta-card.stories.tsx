@@ -20,7 +20,8 @@ export const Default: StoryObj<typeof CtaCard> = {
     heading: 'Let’s create your first experience!',
     subHeading: 'What is an experience?',
     description: dummyText,
-    cta: 'Browse all opportunities',
+    cta: '/opportunities',
+    ctaTitle: 'BROWSE ALL OPPORTUNITIES',
   },
   render: (args) => (
     <CtaCard {...args} />

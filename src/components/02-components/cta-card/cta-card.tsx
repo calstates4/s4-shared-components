@@ -6,9 +6,10 @@ export type BrandProps = {
   subHeading: string | null;
   description: string | null;
   cta: string;
+  ctaTitle: string;
 };
 
-export default function CtaCard({ heading, subHeading, description, cta = '/' }: BrandProps) {
+export default function CtaCard({ heading, subHeading, description, cta = '/', ctaTitle }: BrandProps) {
 
   const theme = useTheme();
 
@@ -56,12 +57,17 @@ export default function CtaCard({ heading, subHeading, description, cta = '/' }:
   );
 
   return (
-    <Paper sx={{ padding: (theme) => theme.spacing(5) }}> 
+    <Paper 
+      sx={{ 
+        padding: (theme) => theme.spacing(5), 
+        mb: (theme) => theme.spacing(5), 
+      }}
+    > 
       {renderedHeading}
       {renderedSubheading}
       {renderedDescription}
-      <Button sx={buttonStyles}>
-        {cta}
+      <Button sx={buttonStyles} href={cta}>
+        {ctaTitle}
       </Button>
     </Paper>
   );
