@@ -20,6 +20,7 @@ export {
 export { default as MainContent } from './components/02-components/main-content/main-content';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
+export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export {
   default as SidebarMenu,
   type SidebarMenuProps,
