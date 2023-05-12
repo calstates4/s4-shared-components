@@ -13,6 +13,24 @@ declare module '@mui/material/styles' {
 export default createTheme({
   typography: {
     fontFamily: '"Albert Sans", sans-serif',
+    h1: {
+      fontSize: 32,
+    },
+    h2: {
+      fontSize: 24,
+    },
+    h3: {
+      fontSize: 18,
+    },
+    h4: {
+      fontSize: 16,
+    },
+    h5: {
+      fontSize: 14,
+    },
+    h6: {
+      fontSize: 12,
+    }
   },
   palette: {
     // Blue.
@@ -47,6 +65,16 @@ export default createTheme({
           margin: 0,
         },
       }),
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingRight: 16,
+          paddingLeft: 16,
+        },
+      },
     },
   },
 });
