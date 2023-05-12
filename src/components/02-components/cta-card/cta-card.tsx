@@ -2,25 +2,25 @@ import { Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 export type BrandProps = {
-  heading: string | null;
-  subHeading: string | null;
-  description: string | null;
+  heading?: string;
+  subHeading?: string;
+  description?: string;
   cta: string;
   ctaTitle: string;
 };
 
-export default function CtaCard({ heading, subHeading, description, cta = '/', ctaTitle }: BrandProps) {
+export default function CtaCard({ heading, subHeading, description, cta, ctaTitle }: BrandProps) {
 
   const theme = useTheme();
 
-  // Styles
+  // Styles.
   const headingStyles = {
-    fontWeight: '800',
+    fontWeight: '700',
     mb: theme.spacing(4),
   };
 
   const subHeadingStyles = {
-    fontWeight: '800',
+    fontWeight: '700',
     mb: theme.spacing(1),
   };
 
@@ -36,7 +36,7 @@ export default function CtaCard({ heading, subHeading, description, cta = '/', c
       { backgroundColor: 'primary.dark' }
   };
 
-  // Rendered
+  // Render funtions.
 
   const renderedHeading = heading && (
     <Typography sx={headingStyles} variant="h1">
