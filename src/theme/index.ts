@@ -66,5 +66,15 @@ export default createTheme({
         },
       }),
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingRight: 16,
+          paddingLeft: 16,
+        },
+      },
+    },
   },
 });
