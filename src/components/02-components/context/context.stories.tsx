@@ -44,7 +44,7 @@ export const UniversityAndCampus: StoryObj<typeof Context> = {
       items: universities,
       label: 'University',
       placeholder: 'Select university...',
-      selectedItem: '0',
+      selectedItem: '1',
     },
     level2: {
       items: campuses,

@@ -92,16 +92,17 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
 
   const selectStyles = {
     color: 'primary.main',
-    '&.Mui-disabled, & select:disabled': {
+    [theme.breakpoints.up('md')]: {
+      color: 'white',
+    },
+    'select:disabled': {
+      opacity: 0.5,
       WebkitTextFillColor: theme.palette.primary.main,
       [theme.breakpoints.up('md')]: {
         WebkitTextFillColor: 'white',
       },
     },
-    [theme.breakpoints.up('md')]: {
-      color: 'white',
-    },
-    '& .MuiNativeSelect-icon': {
+    '.MuiNativeSelect-icon': {
       fill: theme.palette.primary.main,
       [theme.breakpoints.up('md')]: {
         fill: 'white',
@@ -115,6 +116,11 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
         },
       },
     },
+    '&.Mui-disabled': {
+      '.MuiOutlinedInput-notchedOutline, .MuiNativeSelect-icon': {
+        opacity: 0.5,
+      },
+    },
   };
 
   const labelStyles = {
@@ -123,6 +129,9 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
       [theme.breakpoints.up('md')]: {
         color: 'white',
       },
+    },
+    '&.Mui-disabled': {
+      opacity: 0.5,
     },
   };
 
