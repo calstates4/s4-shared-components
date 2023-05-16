@@ -17,7 +17,7 @@ export const Default: StoryObj<typeof Brand> = {
     </Box>
   ),
   args: {
-    campusName: 'Campus Name',
+    title: 'Channel Islands',
     linkURL: '#',
   },
 };
