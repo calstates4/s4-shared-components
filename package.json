@@ -14,7 +14,7 @@
     "build-storybook": "storybook build",
     "link-all": "./scripts/link-all.sh"
   },
-  "peerDependencies": {
+  "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@emotion/react": "^11.10.8",
