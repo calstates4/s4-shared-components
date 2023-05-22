@@ -15,6 +15,7 @@ export const Default: StoryObj<typeof CardNumber> = {
     subHeading: 'HOURS LOGGED',
     cta: '/opportunities',
     ctaTitle: 'log time',
+    variation: 'row',
   },
   render: (args) => (
     <CardNumber {...args} />
