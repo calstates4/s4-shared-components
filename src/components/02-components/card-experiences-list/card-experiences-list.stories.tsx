@@ -11,40 +11,39 @@ const meta: Meta<typeof CardExperiencesList> = {
 const cardList = [
   {
     id: '4',
-    title: 'Experiencia 1',
-    workflow: 'published',
+    workflow: 'APPROVED',
     dateEnd: '2023-05-31',
     dateStart: '2023-05-17',
     estimatedHours: 100,
     opportunity: [ {
-      title: 'Opportunity',
-      summary: '<p>Pellentesque habitant morbi tristique senectus et netus.</p>',
+      title: 'Service Learning aT cam',
+      summary: `Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt.
+        Platea sapien vel laoreet pellentesque urna. Sollicitudin sem sed sed eu porttitor ornare elit.`,
       location: { locality: 'San Francisco' }
     } ],
   },
   {
     id: '3',
-    title: 'Experiencia 2',
-    workflow: 'published',
+    workflow: 'APPROVED',
     dateEnd: '2023-05-31',
     dateStart: '2023-05-17',
     estimatedHours: 100,
     opportunity: [ {
       title: 'Opportunity',
-      summary: '<p>Pellentesque habitant morbi tristique senectus et netus.</p>',
+      summary: 'Pellentesque habitant morbi tristique senectus et netus.',
       location: { locality: 'San Francisco' }
     } ],
   },
   {
     id: '2',
-    title: 'Experiencia 3',
-    workflow: 'published',
+    workflow: 'APPROVED',
     dateEnd: '2023-05-31',
     dateStart: '2023-05-17',
     estimatedHours: 100,
     opportunity: [ {
       title: 'Opportunity',
-      summary: '<p>Pellentesque habitant morbi tristique senectus et netus.</p>',
+      summary: `Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt.
+      Platea sapien vel laoreet pellentesque urna. Sollicitudin sem sed sed eu porttitor ornare elit.`,
       location: { locality: 'San Francisco' }
     } ],
   }

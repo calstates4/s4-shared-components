@@ -22,15 +22,17 @@ export default function CardExperiencesList ({
   const listStyle = {
     display: 'flex',
     listStyle: 'none',
+    overflowX: 'scroll',
   };
 
   const itemStyle = {
     marginRight: theme.spacing(2),
+    flex: '1 0 50%',
   };
 
 
   const cardExperiences = cardList?.map((item, index) => (
-    <li style={itemStyle}>
+    <Box content="li" sx={itemStyle}>
       <CardExperiences 
         heading={item.opportunity[0].title}
         state={item.workflow}
@@ -46,9 +48,10 @@ export default function CardExperiencesList ({
         hoursCtaTitle= "log time"
         hoursCtaUrl = "/opportunities"
         variation = {2}
+        cardNumberVariation= 'row'
         key={index}
       />
-    </li>
+    </Box>
   )  
 ) 
 
