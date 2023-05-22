@@ -1,4 +1,4 @@
-import { Button, Box, Label, Paper, Typography } from '@mui/material';
+import { Button, Box, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CardNumber from '../card-number/card-number';
 
@@ -16,9 +16,10 @@ export type BrandProps = {
   hoursText: string;
   hoursCtaTitle: string;
   hoursCtaUrl: string;
+  variation: number;
 };
 
-export default function CardExperience({ 
+export default function CardExperiences ({ 
   heading, 
   state,
   description, 
@@ -31,21 +32,56 @@ export default function CardExperience({
   hours, 
   hoursText, 
   hoursCtaTitle, 
-  hoursCtaUrl 
+  hoursCtaUrl,
+  variation 
 }: BrandProps) {
 
   const theme = useTheme();
 
+  // Variables according to the variant of the number of items
+  let position;
+
+  if (variation) {
+    if(variation >= 2) {
+      position = 'column';
+    } else {
+      position = 'row';
+    }
+  }
+
+  console.log(position);
+
   // Styles.
   const containerStyle = {
-    padding: theme.spacing(5), 
+    padding: theme.spacing(3), 
     mb: theme.spacing(5), 
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(5), 
+    }
   };
+
+  const contentStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: position,
+    [theme.breakpoints.up('md')]: {
+      flexDirection: position,
+    }
+  }
+
+  const bodyWrapperStyle = {
+    padding: '1px'
+  }
 
   const headingWrapperStyle = {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: theme.spacing(1),
+    flexDirection: position,
+    [theme.breakpoints.up('md')]: {
+      flexDirection: position,
+      alignItems: 'center',
+    }
   };
 
   const headingStyles = {
@@ -53,11 +89,26 @@ export default function CardExperience({
   };
 
   const stateStyle = {
-    marginLeft: theme.spacing(2),
+    marginTop: theme.spacing(2),
     backgroundColor: 'success.main',
     px: theme.spacing(1),
     borderRadius: '4px',
+    [theme.breakpoints.up('md')]: {
+      marginLeft: theme.spacing(2),
+      marginTop: 0,
+    }
   }
+
+  const descriptionContainerStyle = {
+    maxWidth: '50%',
+    marginRight: theme.spacing(5),
+  }
+
+  const descriptionStyle = {
+   display: 'flex',
+   flexDirection: 'column',
+  }
+
 
   const buttonStyles = {
     backgroundColor: 'white',
@@ -68,17 +119,16 @@ export default function CardExperience({
       { backgroundColor: 'primary.dark' }
   };
 
-  const style1 = {
+  const infoStyle = {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: position,
+    [theme.breakpoints.up('md')]: {
+      flexDirection: position,
+    }
   }
 
-  const style2 = {
-    padding: '1px'
-  }
-
-  const style3 = {
-    display: 'flex',
+  const cardHoursStyle = {
+    flex: '45%'
   }
 
   // Render funtions.
@@ -96,43 +146,43 @@ export default function CardExperience({
   );
 
   const renderedDescription = description && (
-    <Typography>
-      <label>  Experience Details: </label>
+    <Typography sx={descriptionStyle}>
+      <label style={{fontWeight: '700'}}>  Experience Details: </label>
       {description}
     </Typography>
   );
   
   const renderedProgram = program && (
     <Typography>
-      <label> Program: </label>
+      <label style={{fontWeight: '700'}}> Program: </label>
       {program}
     </Typography>
   );
 
   const renderedLocation = location && (
     <Typography>
-      <label> Location: </label>
+      <label style={{fontWeight: '700'}}> Location: </label>
       {location}
     </Typography>
   );
 
   const renderedDate = dateStart && dateEnd && (
     <Typography>
-      <label> Date: </label>
+      <label style={{fontWeight: '700'}}> Date: </label>
       {dateStart} - {dateEnd}
     </Typography>
   );
 
   return (
     <Paper sx={containerStyle}>
-      <Box sx={style1}>
-        <Box sx={style2}>
+      <Box sx={contentStyle}>
+        <Box sx={bodyWrapperStyle}>
           <Box sx={headingWrapperStyle}>
             {renderedHeading}
             {renderedState}
           </Box>
-          <Box sx={style3}>
-            <Box>
+          <Box sx={infoStyle}>
+            <Box sx={descriptionContainerStyle}>
               {renderedDescription}
             </Box>
             <Box>
@@ -142,13 +192,14 @@ export default function CardExperience({
             </Box>
           </Box>
         </Box>
-
-        <CardNumber 
-          heading= {hours}
-          subHeading={hoursText}
-          cta={hoursCtaUrl}
-          ctaTitle={hoursCtaTitle}
-        />
+        <Box sx={cardHoursStyle}>
+          <CardNumber 
+            heading= {hours}
+            subHeading={hoursText}
+            cta={hoursCtaUrl}
+            ctaTitle={hoursCtaTitle}
+          />
+        </Box>
       </Box> 
       <Button sx={buttonStyles} href={cta}>
         {ctaTitle}

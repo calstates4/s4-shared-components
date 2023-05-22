@@ -30,6 +30,7 @@ export const Default: StoryObj<typeof CardExperiences> = {
     hoursText: 'HOURS LOGGED',
     hoursCtaTitle: 'log time',
     hoursCtaUrl: '/',
+    variation: 1,
   },
   render: (args) => (
     <CardExperiences {...args} />
