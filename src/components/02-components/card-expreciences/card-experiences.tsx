@@ -17,6 +17,7 @@ export type BrandProps = {
   hoursCtaTitle: string;
   hoursCtaUrl: string;
   variation: number;
+  cardNumberVariation: string;
 };
 
 export default function CardExperiences ({ 
@@ -33,23 +34,40 @@ export default function CardExperiences ({
   hoursText, 
   hoursCtaTitle, 
   hoursCtaUrl,
-  variation 
+  variation,
+  cardNumberVariation, 
 }: BrandProps) {
 
   const theme = useTheme();
 
   // Variables according to the variant of the number of items
   let position;
+  let itemsAligmend;
+  let stateMargin;
+  let stateMarginX;
+  let infoMargin;
+  let bodyWidth;
+
 
   if (variation) {
     if(variation >= 2) {
       position = 'column';
+      cardNumberVariation = 'row';
+      itemsAligmend = 'flex-start';
+      stateMargin = theme.spacing(2);
+      stateMarginX = '0'
+      infoMargin = theme.spacing(8)
+      bodyWidth = '100%'
     } else {
       position = 'row';
+      cardNumberVariation = 'column';
+      itemsAligmend= 'center';
+      stateMargin= '0';
+      stateMarginX = theme.spacing(2);
+      infoMargin = '0';
+      bodyWidth= '60%'
     }
   }
-
-  console.log(position);
 
   // Styles.
   const containerStyle = {
@@ -57,13 +75,14 @@ export default function CardExperiences ({
     mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(5), 
+      height: 'calc(100% - 1rem)',
     }
   };
 
   const contentStyle = {
     display: 'flex',
     justifyContent: 'space-between',
-    flexDirection: position,
+    flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
     }
@@ -77,10 +96,10 @@ export default function CardExperiences ({
     display: 'flex',
     alignItems: 'flex-start',
     marginBottom: theme.spacing(1),
-    flexDirection: position,
+    flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
-      alignItems: 'center',
+      alignItems: itemsAligmend,
     }
   };
 
@@ -94,13 +113,13 @@ export default function CardExperiences ({
     px: theme.spacing(1),
     borderRadius: '4px',
     [theme.breakpoints.up('md')]: {
-      marginLeft: theme.spacing(2),
-      marginTop: 0,
+      marginLeft: stateMarginX,
+      my: stateMargin,
     }
   }
 
   const descriptionContainerStyle = {
-    maxWidth: '50%',
+    maxWidth: bodyWidth,
     marginRight: theme.spacing(5),
   }
 
@@ -121,9 +140,10 @@ export default function CardExperiences ({
 
   const infoStyle = {
     display: 'flex',
-    flexDirection: position,
+    flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
+      marginBottom: infoMargin,
     }
   }
 
@@ -198,6 +218,7 @@ export default function CardExperiences ({
             subHeading={hoursText}
             cta={hoursCtaUrl}
             ctaTitle={hoursCtaTitle}
+            variation= {cardNumberVariation}
           />
         </Box>
       </Box> 
