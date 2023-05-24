@@ -84,7 +84,7 @@ export default function CardExperiences ({
     justifyContent: 'space-between',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: position,
+      flexDirection: 'row',
     }
   }
 
@@ -98,8 +98,8 @@ export default function CardExperiences ({
     marginBottom: theme.spacing(1),
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: position,
-      alignItems: itemsAligmend,
+      flexDirection: 'row',
+      alignItems: 'center',
     }
   };
 
@@ -131,7 +131,7 @@ export default function CardExperiences ({
 
   const buttonStyles = {
     backgroundColor: 'white',
-    border: (theme) => `2px solid ${theme.palette.primary.main}`,
+    border: `2px solid ${theme.palette.primary.main}`,
     color: 'primary.main',
     fontWeight: '700',
     '&:focus, &:hover, &:active': 
@@ -142,8 +142,8 @@ export default function CardExperiences ({
     display: 'flex',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: position,
-      marginBottom: infoMargin,
+      flexDirection: 'row',
+      marginBottom: '0',
     }
   }
 
