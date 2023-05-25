@@ -207,7 +207,12 @@ export default function OrganizationPage({
         <Typography variant="h1" color="primary.main" sx={titleStyles}>
           {title}
         </Typography>
-        <Button variant="contained" component={Link} href={editUrl} sx={{ flexShrink: 0 }}>
+        <Button
+          variant="contained"
+          component={Link}
+          href={editUrl}
+          sx={{ flexShrink: 0 }}
+        >
           Edit Organization
         </Button>
       </Box>
