@@ -9,7 +9,7 @@ import Context, {
 } from '../..//02-components/context/context';
 import { Default as BrandingBarStory } from '../../02-components/branding-bar/branding-bar.stories';
 import { Default as BrandStory } from '../../02-components/brand/brand.stories';
-import { Default as ContextStory } from '../../02-components/context/context.stories';
+import { UniversityAndCampus as ContextStory } from '../../02-components/context/context.stories';
 import { Default as SidebarMenuStory } from '../../02-components/sidebar-menu/sidebar-menu.stories';
 import PageLayout from './page-layout';
 

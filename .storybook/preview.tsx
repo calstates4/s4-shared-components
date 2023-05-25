@@ -1,6 +1,7 @@
-import React from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing';
 import type { Preview } from '@storybook/react';
+import React from 'react';
 import theme from '../src/theme';
 
 const preview: Preview = {
@@ -14,12 +15,23 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Story />
-      </ThemeProvider>
-    ),
+    (Story) => {
+      const wrappedStory = (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Story />
+        </ThemeProvider>
+      );
+
+      const RemixStub = createRemixStub([
+        {
+          path: '/',
+          element: wrappedStory,
+        },
+      ]);
+      console.log(RemixStub);
+      return <RemixStub />;
+    },
   ],
 };
 
