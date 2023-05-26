@@ -1,5 +1,6 @@
+import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
-
+import CardExperiences from '../card-expreciences/card-experience';
 import CardExperiencesList from './card-experiences-list';
 
 
@@ -8,10 +9,14 @@ const meta: Meta<typeof CardExperiencesList> = {
   component: CardExperiencesList,
 };
 
+const itemStyle = {
+  mx: '8px',
+};
+
 const cardList = [
   {
     id: '4',
-    workflow: 'APPROVED',
+    workflow: 'publishied',
     dateEnd: '2023-05-31',
     dateStart: '2023-05-17',
     estimatedHours: 100,
@@ -36,7 +41,7 @@ const cardList = [
   },
   {
     id: '2',
-    workflow: 'APPROVED',
+    workflow: 'publishied',
     dateEnd: '2023-05-31',
     dateStart: '2023-05-17',
     estimatedHours: 100,
@@ -49,13 +54,33 @@ const cardList = [
   }
 ]
 
+const cardExperiences = cardList?.map((item, index) => (
+  <Box content={"li"} sx={itemStyle}>
+    <CardExperiences 
+      heading={item.opportunity[0].title}
+      state={item.workflow}
+      description={item.opportunity[0].summary}
+      program="Test"
+      dateStart={item.dateStart}
+      dateEnd={item.dateEnd}
+      location={item.opportunity[0].location.locality}
+      ctaTitle="More Details"
+      cta="/opportunities"
+      hours= {item.estimatedHours}
+      hoursText= "HOURS LOGGED"
+      hoursCtaTitle= "log time"
+      hoursCtaUrl = "/opportunities"
+      cardCount={3}
+      key={index}
+    />
+  </Box>
+)  
+) 
+
 export default meta;
 
 export const Default: StoryObj<typeof CardExperiencesList> = {
   args: {
-   cardList: cardList,
+    children: cardExperiences,
   },
-  render: (args) => (
-    <CardExperiencesList {...args} />
-  ),
 };

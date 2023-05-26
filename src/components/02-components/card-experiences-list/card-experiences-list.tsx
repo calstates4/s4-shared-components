@@ -1,21 +1,17 @@
-import { Box, Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CardExperiences from '../card-expreciences/card-experiences';
 
+// export type CardExperiencesListProps = {
+//   children: CardExperiencesProps[];
+// };
 
-export type BrandProps = {
-  children: Array<object>,
-};
-
-export default function CardExperiencesList ({ 
-  children,
-}: BrandProps) {
+export default function CardExperiencesList ({ children }) {
 
   const theme = useTheme();
 
   // Styles.
   const containerStyle = {
-    padding: theme.spacing(5), 
+    p: theme.spacing(5), 
     mb: theme.spacing(5), 
   };
 
@@ -25,13 +21,10 @@ export default function CardExperiencesList ({
     overflowX: 'scroll',
   };
 
-  // Render funtions.
-
-  
   return (
     <Box sx={containerStyle}>
       <Box  sx={listStyle} content="ul">
-        Texto de prueba
+        {children}
       </Box>
     </Box>
   );
