@@ -1,15 +1,13 @@
 import { Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-export type CardExperieceHourProps = {
-  heading?: number;
-  subHeading?: string;
+export type CardExperienceHourProps = {
+  hours: number;
   cta: string;
-  ctaTitle: string;
   position: string;
 };
 
-export default function CardExperieceHour({ heading, subHeading, cta, ctaTitle, position }: CardExperieceHourProps) {
+export default function CardExperienceHour({ hours, cta, position }: CardExperienceHourProps) {
 
   const theme = useTheme();
 
@@ -18,7 +16,6 @@ export default function CardExperieceHour({ heading, subHeading, cta, ctaTitle, 
   const bodySize = position == 'row' ? theme.typography.h3 : theme.typography.h4;
   const spacingText = position == 'row' ? '0' : theme.spacing(2) ;
   const spacingRight = position == 'row' ? theme.spacing(2) : '0' ;
-  const componentSize = position == 'row' ? '600px' : '300px' ;
   const paddingSize = position == 'row' ? theme.spacing(2) : theme.spacing(5);
 
   // Styles.
@@ -27,14 +24,13 @@ export default function CardExperieceHour({ heading, subHeading, cta, ctaTitle, 
     flexDirection: positionOrientation,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: paddingSize, 
+    p: paddingSize, 
     mb: theme.spacing(5), 
-    maxWidth: componentSize,
     backgroundColor: 'primary.light'
 
   };
 
-  const headingStyles = {
+  const hoursStyles = {
     fontWeight: '700',
     mb: spacingText,
     mr: spacingRight,
@@ -57,24 +53,24 @@ export default function CardExperieceHour({ heading, subHeading, cta, ctaTitle, 
 
   // Render funtions.
 
-  const renderedHeading = heading && (
-    <Typography sx={headingStyles} variant="h1">
-        {heading}
+  const renderedHours = hours && (
+    <Typography sx={hoursStyles} variant="h1">
+        {hours}
     </Typography>
   );
 
-  const renderedSubheading = subHeading && (
+  const renderedHoursText = 
     <Typography sx={subHeadingStyles} variant="h4">
-        {subHeading}
+        {"Hours Logged"}
     </Typography>
-  );
+  ;
 
   return (
     <Paper sx={contentStyle}> 
-      {renderedHeading}
-      {renderedSubheading}
+      {renderedHours}
+      {renderedHoursText}
       <Button sx={buttonStyles} href={cta}>
-        {ctaTitle}
+        {"Log Time"}
       </Button>
     </Paper>
   );

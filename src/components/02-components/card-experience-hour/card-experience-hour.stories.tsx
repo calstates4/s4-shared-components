@@ -1,20 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardExperieceHour from './card-experience-hour';
+import CardExperienceHour from './card-experience-hour';
 
-const meta: Meta<typeof CardExperieceHour> = {
+const meta: Meta<typeof CardExperienceHour> = {
   title: 'Components/Card Experience Hour',
-  component: CardExperieceHour,
+  component: CardExperienceHour,
 };
 
 export default meta;
 
-export const Default: StoryObj<typeof CardExperieceHour> = {
+export const Default: StoryObj<typeof CardExperienceHour> = {
   args: {
-    heading: 128,
-    subHeading: 'HOURS LOGGED',
+    hours: 128,
     cta: '/opportunities',
-    ctaTitle: 'log time',
     position: 'row',
   },
 };
