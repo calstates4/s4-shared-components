@@ -1,8 +1,8 @@
 import { Button, Box, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CardNumber from '../card-number/card-number';
+import CardNumber from '../card-experience-hour/card-experience-hour';
 
-export type BrandProps = {
+export type CardExperiencesProps = {
   heading?: string;
   state: string;
   description?: string;
@@ -12,12 +12,11 @@ export type BrandProps = {
   location?: string;
   cta: string;
   ctaTitle: string;
-  hours: string;
+  hours: number;
   hoursText: string;
   hoursCtaTitle: string;
   hoursCtaUrl: string;
-  variation: number;
-  cardNumberVariation: string;
+  cardCount: number;
 };
 
 export default function CardExperiences ({ 
@@ -34,48 +33,32 @@ export default function CardExperiences ({
   hoursText, 
   hoursCtaTitle, 
   hoursCtaUrl,
-  variation,
-  cardNumberVariation, 
-}: BrandProps) {
+  cardCount,
+}: CardExperiencesProps) {
 
   const theme = useTheme();
 
   // Variables according to the variant of the number of items
-  let position;
-  let itemsAligmend;
-  let stateMargin;
-  let stateMarginX;
-  let infoMargin;
-  let bodyWidth;
+  const position = cardCount >= 2 ? 'column' : 'row';
+  const contentWidth = cardCount >= 2 ? theme.spacing(4) :theme.spacing(5);
+  const itemsAlignment = cardCount >= 2 ? 'flex-start' : 'center';
+  const stateMarginY = cardCount >= 2 ? theme.spacing(2) : '0';
+  const stateMarginX = cardCount >= 2 ? '0' : theme.spacing(2);
+  const bodyWidth = cardCount >= 2 ? '100' : '60%';
+  const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
+  const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
+  const stateBackgorund = state == 'publishied' ? 'success.main' : 'warning.main';
+  const stateText= state == 'publishied' ? 'Approved' : 'Hold';
 
-
-  if (variation) {
-    if(variation >= 2) {
-      position = 'column';
-      cardNumberVariation = 'row';
-      itemsAligmend = 'flex-start';
-      stateMargin = theme.spacing(2);
-      stateMarginX = '0'
-      infoMargin = theme.spacing(8)
-      bodyWidth = '100%'
-    } else {
-      position = 'row';
-      cardNumberVariation = 'column';
-      itemsAligmend= 'center';
-      stateMargin= '0';
-      stateMarginX = theme.spacing(2);
-      infoMargin = '0';
-      bodyWidth= '60%'
-    }
-  }
 
   // Styles.
   const containerStyle = {
-    padding: theme.spacing(3), 
+    p: theme.spacing(3), 
     mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(5), 
+      p: contentWidth, 
       height: 'calc(100% - 1rem)',
+      minWidth: '600px',
     }
   };
 
@@ -84,12 +67,12 @@ export default function CardExperiences ({
     justifyContent: 'space-between',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: 'row',
+      flexDirection: position,
     }
   }
 
   const bodyWrapperStyle = {
-    padding: '1px'
+    flex: '1 0 75%',
   }
 
   const headingWrapperStyle = {
@@ -98,8 +81,8 @@ export default function CardExperiences ({
     marginBottom: theme.spacing(1),
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: 'row',
-      alignItems: 'center',
+      flexDirection: position,
+      alignItems: itemsAlignment,
     }
   };
 
@@ -109,12 +92,12 @@ export default function CardExperiences ({
 
   const stateStyle = {
     marginTop: theme.spacing(2),
-    backgroundColor: 'success.main',
+    backgroundColor: stateBackgorund,
     px: theme.spacing(1),
     borderRadius: '4px',
     [theme.breakpoints.up('md')]: {
       marginLeft: stateMarginX,
-      my: stateMargin,
+      my: stateMarginY,
     }
   }
 
@@ -142,13 +125,13 @@ export default function CardExperiences ({
     display: 'flex',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: 'row',
-      marginBottom: '0',
+      flexDirection: position,
+      marginBottom: bodyMarginBottom,
     }
   }
 
   const cardHoursStyle = {
-    flex: '45%'
+    flex: '1 0 25%'
   }
 
   // Render funtions.
@@ -161,36 +144,36 @@ export default function CardExperiences ({
 
   const renderedState = state && (
     <Typography sx={stateStyle} variant="body2">
-        {state}
+        {stateText}
     </Typography>
   );
 
   const renderedDescription = description && (
-    <Typography sx={descriptionStyle}>
-      <label style={{fontWeight: '700'}}>  Experience Details: </label>
+    <Box sx={descriptionStyle}>
+      <strong>  Experience Details: </strong>
       {description}
-    </Typography>
+    </Box>
   );
   
   const renderedProgram = program && (
-    <Typography>
-      <label style={{fontWeight: '700'}}> Program: </label>
+    <Box>
+      <strong> Program: </strong>
       {program}
-    </Typography>
+    </Box>
   );
 
   const renderedLocation = location && (
-    <Typography>
-      <label style={{fontWeight: '700'}}> Location: </label>
+    <Box>
+      <strong> Location: </strong>
       {location}
-    </Typography>
+    </Box>
   );
 
   const renderedDate = dateStart && dateEnd && (
-    <Typography>
-      <label style={{fontWeight: '700'}}> Date: </label>
+    <Box>
+      <strong> Date: </strong>
       {dateStart} - {dateEnd}
-    </Typography>
+    </Box>
   );
 
   return (
@@ -218,7 +201,7 @@ export default function CardExperiences ({
             subHeading={hoursText}
             cta={hoursCtaUrl}
             ctaTitle={hoursCtaTitle}
-            variation= {cardNumberVariation}
+            position= {cardNumberVariation}
           />
         </Box>
       </Box> 

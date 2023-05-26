@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardExperiences from './card-experiences';
+import CardExperiences from './card-experience';
 
 
 const meta: Meta<typeof CardExperiences> = {
@@ -26,12 +26,11 @@ export const Default: StoryObj<typeof CardExperiences> = {
     dateStart: '05/03/2023',
     dateEnd: '05/03/2023',
     location: 'Location',
-    hours: '128',
+    hours: 128,
     hoursText: 'HOURS LOGGED',
     hoursCtaTitle: 'log time',
     hoursCtaUrl: '/',
-    variation: 1,
-    cardNumberVariation: 'column', 
+    cardCount: 1,
   },
   render: (args) => (
     <CardExperiences {...args} />
