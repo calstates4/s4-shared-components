@@ -10,27 +10,33 @@ declare module '@mui/material/styles' {
   }
 }
 
-export default createTheme({
+const theme = createTheme({
   typography: {
     fontFamily: '"Albert Sans", sans-serif',
     h1: {
       fontSize: 32,
+      fontWeight: 700,
     },
     h2: {
       fontSize: 24,
+      fontWeight: 700,
     },
     h3: {
       fontSize: 18,
+      fontWeight: 700,
     },
     h4: {
       fontSize: 16,
+      fontWeight: 700,
     },
     h5: {
       fontSize: 14,
+      fontWeight: 700,
     },
     h6: {
       fontSize: 12,
-    }
+      fontWeight: 700,
+    },
   },
   palette: {
     // Blue.
@@ -58,21 +64,33 @@ export default createTheme({
       main: '#1f1f1f',
     },
   },
+});
+
+export default createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: () => ({
         body: {
           margin: 0,
+          backgroundColor: theme.palette.secondary.light,
+          fontSize: '0.875rem',
         },
       }),
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingRight: 16,
-          paddingLeft: 16,
+          paddingTop: theme.spacing(1),
+          paddingBottom: theme.spacing(1),
+          paddingRight: theme.spacing(2),
+          paddingLeft: theme.spacing(2),
+        },
+      },
+    },
+    MuiBreadcrumbs: {
+      styleOverrides: {
+        root: {
+          marginBottom: theme.spacing(2),
         },
       },
     },

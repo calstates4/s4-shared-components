@@ -17,7 +17,8 @@ export default function Brand({ title, linkURL = '/' }: BrandProps) {
       <Logo />
       {title && (
         <Typography
-          variant="h5"
+          component="div"
+          variant="h2"
           color="white"
           sx={{ fontWeight: '800', marginLeft: (theme) => theme.spacing(3) }}
         >
