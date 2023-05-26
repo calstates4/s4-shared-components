@@ -1,59 +1,42 @@
 import { Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-export type BrandProps = {
-  heading?: string;
+export type CardExperieceHourProps = {
+  heading?: number;
   subHeading?: string;
   cta: string;
   ctaTitle: string;
-  variation: string;
+  position: string;
 };
 
-export default function CardNumber({ heading, subHeading, cta, ctaTitle, variation }: BrandProps) {
+export default function CardExperieceHour({ heading, subHeading, cta, ctaTitle, position }: CardExperieceHourProps) {
 
   const theme = useTheme();
 
   // Variables according to the variant of position 
-  let position;
-  let headingSize;
-  let bodySize;
-  let spacingText;
-  let spacingRight;
-  let componentSize;
-  let paddingSize;
-
-  if (variation === 'row') {
-    position = 'row'
-    headingSize = '24px'
-    bodySize = theme.typography.h3
-    spacingText = '0'
-    spacingRight = theme.spacing(2)
-    componentSize = '600px'
-    paddingSize = theme.spacing(2)
-  } else {
-    position = 'column'
-    headingSize = '48px'
-    spacingText = theme.spacing(2)
-    spacingRight = '0'
-    componentSize = '300px'
-    paddingSize = theme.spacing(5)
-  }
+  const positionOrientation = position == 'row' ? 'row' : 'column' ;
+  const bodySize = position == 'row' ? theme.typography.h3 : theme.typography.h4;
+  const spacingText = position == 'row' ? '0' : theme.spacing(2) ;
+  const spacingRight = position == 'row' ? theme.spacing(2) : '0' ;
+  const componentSize = position == 'row' ? '600px' : '300px' ;
+  const paddingSize = position == 'row' ? theme.spacing(2) : theme.spacing(5);
 
   // Styles.
   const contentStyle = {
     display: 'flex',
-    flexDirection: position,
+    flexDirection: positionOrientation,
     alignItems: 'center',
+    justifyContent: 'center',
     padding: paddingSize, 
     mb: theme.spacing(5), 
     maxWidth: componentSize,
     backgroundColor: 'primary.light'
+
   };
 
   const headingStyles = {
     fontWeight: '700',
     mb: spacingText,
-    fontSize: headingSize,
     mr: spacingRight,
   };
 
