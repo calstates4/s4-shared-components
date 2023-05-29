@@ -53,11 +53,11 @@ export default function CardExperienceHour({ hours, cta, position }: CardExperie
 
   // Render funtions.
 
-  const renderedHours = hours && (
+  const renderedHours =
     <Typography sx={hoursStyles} variant="h1">
-        {hours}
+        {hours || 0}
     </Typography>
-  );
+  ;
 
   const renderedHoursText = 
     <Typography sx={subHeadingStyles} variant="h4">
