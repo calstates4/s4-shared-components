@@ -37,10 +37,11 @@ export default function CardExperienceHour({ hours, cta, position }: CardExperie
   };
 
   const subHeadingStyles = {
-    fontWeight: '700',
     mb: spacingText,
-    fontSize: bodySize,
     mr: spacingRight,
+    fontSize: bodySize,
+    fontWeight: '700',
+    textTransform: 'uppercase'
   };
 
   const buttonStyles = {
