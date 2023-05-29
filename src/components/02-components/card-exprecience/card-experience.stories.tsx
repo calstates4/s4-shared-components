@@ -18,7 +18,7 @@ export default meta;
 export const Default: StoryObj<typeof CardExperiences> = {
   args: {
     heading: '{Opportunity Name}',
-    state: 'APPROVED',
+    state: 'approved',
     description: dummyText,
     cta: '/opportunities',
     ctaTitle: 'MORE DETAILS',
@@ -27,10 +27,8 @@ export const Default: StoryObj<typeof CardExperiences> = {
     dateEnd: '05/03/2023',
     location: 'Location',
     hours: 128,
-    hoursText: 'HOURS LOGGED',
-    hoursCtaTitle: 'log time',
     hoursCtaUrl: '/',
-    cardCount: 1,
+    cardCount: 3,
   },
   render: (args) => (
     <CardExperiences {...args} />

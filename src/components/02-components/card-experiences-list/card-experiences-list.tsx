@@ -1,11 +1,12 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { ReactNode } from 'react';
 
-// export type CardExperiencesListProps = {
-//   children: CardExperiencesProps[];
-// };
+export type CardExperiencesListProps = {
+  children: ReactNode;
+};
 
-export default function CardExperiencesList ({ children }) {
+export default function CardExperiencesList ({ children }: CardExperiencesListProps) {
 
   const theme = useTheme();
 
@@ -19,6 +20,7 @@ export default function CardExperiencesList ({ children }) {
     display: 'flex',
     listStyle: 'none',
     overflowX: 'scroll',
+    gap: theme.spacing(2),
   };
 
   return (

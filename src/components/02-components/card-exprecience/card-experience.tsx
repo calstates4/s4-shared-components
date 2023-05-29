@@ -1,6 +1,6 @@
 import { Button, Box, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CardNumber from '../card-experience-hour/card-experience-hour';
+import CardExperienceHours from '../card-experience-hour/card-experience-hour';
 
 export type CardExperiencesProps = {
   heading?: string;
@@ -13,8 +13,6 @@ export type CardExperiencesProps = {
   cta: string;
   ctaTitle: string;
   hours: number;
-  hoursText: string;
-  hoursCtaTitle: string;
   hoursCtaUrl: string;
   cardCount: number;
 };
@@ -30,8 +28,6 @@ export default function CardExperiences ({
   ctaTitle,
   cta, 
   hours, 
-  hoursText, 
-  hoursCtaTitle, 
   hoursCtaUrl,
   cardCount,
 }: CardExperiencesProps) {
@@ -40,24 +36,66 @@ export default function CardExperiences ({
 
   // Variables according to the variant of the number of items
   const position = cardCount >= 2 ? 'column' : 'row';
-  const contentWidth = cardCount >= 2 ? theme.spacing(4) :theme.spacing(5);
+  const contentPadding = cardCount >= 2 ? theme.spacing(4) :theme.spacing(5);
   const itemsAlignment = cardCount >= 2 ? 'flex-start' : 'center';
   const stateMarginY = cardCount >= 2 ? theme.spacing(2) : '0';
   const stateMarginX = cardCount >= 2 ? '0' : theme.spacing(2);
-  const bodyWidth = cardCount >= 2 ? '100' : '60%';
+  const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5) ;
   const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
-  const stateBackgorund = state == 'publishied' ? 'success.main' : 'warning.main';
-  const stateText= state == 'publishied' ? 'Approved' : 'Hold';
 
+  // Variables to manage workflow status
+  const states:{[index: string]: {color: string, label:string}} = {
+    draft : {
+      color: '#FFF289',
+      label: 'Risk Acknowledgment'
+    },
+    pending : {
+      color: '#FFC67E',
+      label: 'Pending'
+    },
+    approved : {
+      color: '#A3F4B5',
+      label: 'Approved'
+    },
+    declined : {
+      color: '#C9C9C9',
+      label: 'Declined'
+    },
+    site_staff : {
+      color: '#D6CFFF',
+      label: 'Site Staff'
+    },
+    duration : {
+      color: '#BFFFF5',
+      label: 'Duration'
+    },
+    grace_period : {
+      color: '#A1C7FF',
+      label: 'Grace Period'
+    },
+    published : {
+      color: '#D7FFD1',
+      label: 'Active'
+    },
+    success : {
+      color: '#97F089',
+      label: 'Success'
+    },
+    incomplete : {
+      color: '#FFC6C6',
+      label: 'Incomplete'
+    },
+
+  }
 
   // Styles.
   const containerStyle = {
     p: theme.spacing(3), 
     mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
-      p: contentWidth, 
-      height: 'calc(100% - 1rem)',
+      p: contentPadding, 
+      height: 'calc(100% - 1rem)', // This is necessary to match the highs of the card.
       minWidth: '600px',
     }
   };
@@ -92,7 +130,7 @@ export default function CardExperiences ({
 
   const stateStyle = {
     marginTop: theme.spacing(2),
-    backgroundColor: stateBackgorund,
+    backgroundColor: states[state].color,
     px: theme.spacing(1),
     borderRadius: '4px',
     [theme.breakpoints.up('md')]: {
@@ -102,8 +140,12 @@ export default function CardExperiences ({
   }
 
   const descriptionContainerStyle = {
-    maxWidth: bodyWidth,
-    marginRight: theme.spacing(5),
+    flexBasis: '60%',
+    marginRight: bodyMarginLeft,
+  }
+
+  const programInfoStyle = {
+    flexBasis: '40%',
   }
 
   const descriptionStyle = {
@@ -124,6 +166,7 @@ export default function CardExperiences ({
   const infoStyle = {
     display: 'flex',
     flexDirection: 'column',
+    marginBottom: theme.spacing(4),
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
       marginBottom: bodyMarginBottom,
@@ -144,7 +187,7 @@ export default function CardExperiences ({
 
   const renderedState = state && (
     <Typography sx={stateStyle} variant="body2">
-        {stateText}
+        {states[state].label}
     </Typography>
   );
 
@@ -188,7 +231,7 @@ export default function CardExperiences ({
             <Box sx={descriptionContainerStyle}>
               {renderedDescription}
             </Box>
-            <Box>
+            <Box sx={programInfoStyle}>
               {renderedProgram}
               {renderedLocation}
               {renderedDate}
@@ -196,11 +239,9 @@ export default function CardExperiences ({
           </Box>
         </Box>
         <Box sx={cardHoursStyle}>
-          <CardNumber 
-            heading= {hours}
-            subHeading={hoursText}
+          <CardExperienceHours 
+            hours= {hours}
             cta={hoursCtaUrl}
-            ctaTitle={hoursCtaTitle}
             position= {cardNumberVariation}
           />
         </Box>
