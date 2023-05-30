@@ -29,7 +29,6 @@ const preview: Preview = {
           element: wrappedStory,
         },
       ]);
-      console.log(RemixStub);
       return <RemixStub />;
     },
   ],
