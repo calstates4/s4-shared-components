@@ -53,9 +53,11 @@ const theme = createTheme({
     },
     warning: {
       main: '#ff9800',
+      light: '#ffc68b',
     },
     success: {
       main: '#4caf50',
+      light: '#d7ffd1',
     },
     error: {
       main: '#d32f2f',

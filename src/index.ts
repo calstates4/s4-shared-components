@@ -15,6 +15,7 @@ export {
   default as BrandingBar,
   type BrandingBarProps,
 } from './components/02-components/branding-bar/branding-bar';
+export { default as CampusCard } from './components/02-components/campus-card/campus-card';
 export {
   default as Context,
   type ContextProps,
