@@ -5,7 +5,7 @@ import WebAssetIcon from '@mui/icons-material/WebAsset';
 import DocumentIcon from '@mui/icons-material/LibraryBooks';
 import Link from '../../01-elements/link/link';
 
-type CampusCardProps = {
+export type CampusCardProps = {
   title: string;
   location: string;
   website: string;
@@ -210,7 +210,7 @@ export default function CampusCard({
   ) : null;
 
   return (
-    <Paper sx={containerStyles}>
+    <Paper sx={containerStyles} component="article">
       <Typography variant="h2">{title}</Typography>
       <Box sx={contentContainerStyles}>
         <Box sx={campusInfoStyles}>
