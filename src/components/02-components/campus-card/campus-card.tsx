@@ -76,6 +76,7 @@ export default function CampusCard({
   const containerStyles = {
     px: theme.spacing(3),
     py: theme.spacing(3),
+    border: `1px solid ${theme.palette.secondary.main}`,
     [theme.breakpoints.up('sm')]: {
       px: theme.spacing(5),
       py: theme.spacing(4),
