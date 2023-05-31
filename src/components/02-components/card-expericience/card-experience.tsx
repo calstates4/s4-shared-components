@@ -3,13 +3,13 @@ import { useTheme } from '@mui/material/styles';
 import CardExperienceHours from '../card-experience-hour/card-experience-hour';
 
 export type CardExperiencesProps = {
-  heading?: string;
+  heading: string;
   state: string;
-  description?: string;
-  program?: string;
+  description: string;
+  program: string;
   dateStart: string;
   dateEnd: string;
-  location?: string;
+  location: string;
   cta: string;
   ctaTitle: string;
   hours: number;
@@ -86,7 +86,6 @@ export default function CardExperiences ({
       color: '#FFC6C6',
       label: 'Incomplete'
     },
-
   }
 
   // Styles.
@@ -95,7 +94,6 @@ export default function CardExperiences ({
     mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
       p: contentPadding, 
-      height: 'calc(100% - 1rem)', // This is necessary to match the highs of the card.
       minWidth: '600px',
     }
   };
@@ -153,7 +151,6 @@ export default function CardExperiences ({
    flexDirection: 'column',
   }
 
-
   const buttonStyles = {
     backgroundColor: 'white',
     border: `2px solid ${theme.palette.primary.main}`,
@@ -178,7 +175,6 @@ export default function CardExperiences ({
   }
 
   // Render funtions.
-
   const renderedHeading = heading && (
     <Typography sx={headingStyles} variant="h2">
         {heading}
