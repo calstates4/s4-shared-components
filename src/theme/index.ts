@@ -1,12 +1,15 @@
 import { createTheme } from '@mui/material';
-
 declare module '@mui/material/styles' {
   interface Palette {
     black: Palette['primary'];
+    blue: Palette['primary'];
+    teal: Palette['primary'];
   }
 
   interface PaletteOptions {
     black: PaletteOptions['primary'];
+    blue: PaletteOptions['primary'];
+    teal: PaletteOptions['primary'];
   }
 }
 
@@ -46,17 +49,26 @@ export default createTheme({
       light: '#f2f2f2',
     },
     warning: {
-      main: '#ff9800',
+      main: '#ffc67e',
+      light: '#fff289'
     },
     success: {
-      main: '#4caf50',
+      main: '#a3f4b5',
+      dark: '#97f089',
+      light: '#d7ffd1'
     },
     error: {
-      main: '#d32f2f',
+      main: '#ffb9b9',
     },
     black: {
       main: '#1f1f1f',
     },
+    blue: {
+      main: '#a1c7ff'
+    },
+    teal: {
+      main: '#bffff5'
+    }
   },
   components: {
     MuiCssBaseline: {
