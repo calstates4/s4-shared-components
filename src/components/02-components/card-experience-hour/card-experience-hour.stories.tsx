@@ -16,3 +16,11 @@ export const Default: StoryObj<typeof CardExperienceHour> = {
     position: 'row',
   },
 };
+
+export const ColumnModifier: StoryObj<typeof CardExperienceHour> = {
+  args: {
+    hours: 128,
+    cta: '/opportunities',
+    position: 'column',
+  },
+};
