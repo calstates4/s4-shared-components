@@ -59,6 +59,7 @@ export default createTheme({
     },
     error: {
       main: '#ffb9b9',
+      light: '#d6cfff'
     },
     black: {
       main: '#1f1f1f',

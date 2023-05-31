@@ -47,43 +47,43 @@ export default function CardExperiences ({
   // Variables to manage workflow status
   const states:{[index: string]: {color: string, label:string}} = {
     draft : {
-      color: '#FFF289',
+      color: theme.palette.warning.light,
       label: 'Risk Acknowledgment'
     },
     pending : {
-      color: '#FFC67E',
+      color:  theme.palette.warning.main,
       label: 'Pending'
     },
     approved : {
-      color: '#A3F4B5',
+      color: theme.palette.success.main,
       label: 'Approved'
     },
     declined : {
-      color: '#C9C9C9',
+      color:  theme.palette.secondary.main,
       label: 'Declined'
     },
     site_staff : {
-      color: '#D6CFFF',
+      color: theme.palette.error.light,
       label: 'Site Staff'
     },
     duration : {
-      color: '#BFFFF5',
+      color: theme.palette.teal.main,
       label: 'Duration'
     },
     grace_period : {
-      color: '#A1C7FF',
+      color: theme.palette.blue.main,
       label: 'Grace Period'
     },
     published : {
-      color: '#D7FFD1',
+      color: theme.palette.success.light,
       label: 'Active'
     },
     success : {
-      color: '#97F089',
+      color: theme.palette.success.dark,
       label: 'Success'
     },
     incomplete : {
-      color: '#FFC6C6',
+      color: theme.palette.error.main,
       label: 'Incomplete'
     },
   }
