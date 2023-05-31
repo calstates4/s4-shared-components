@@ -1,23 +1,30 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExperiences, { type CardExperiencesProps} from '../card-exprecience/card-experience';
+import CardExperience, { type CardExperiencesProps} from '../card-expericience/card-experience';
 import CardExperiencesList from './card-experiences-list';
-import { Default as CardExperiencesStories } from '../card-exprecience/card-experience.stories'
+import { MoreElements as CardExperienceStorie } from '../card-expericience/card-experience.stories'
+import { Default as CardExperienceOneStorie } from '../card-expericience/card-experience.stories'
 
 const meta: Meta<typeof CardExperiencesList> = {
   title: 'Components/Card Experiences List',
   component: CardExperiencesList,
 };
 
-const cardLst: React.ReactNode[] = [];
+const cardList: React.ReactNode[] = [];
 
 for(let i = 0; i < 3; i++) {
-  cardLst.push(<CardExperiences {...(CardExperiencesStories.args as CardExperiencesProps)}/>)
+  cardList.push(<CardExperience {...(CardExperienceStorie.args as CardExperiencesProps)}/>)
 }
 
 export default meta;
 
 export const Default: StoryObj<typeof CardExperiencesList> = {
   args: {
-    children: cardLst ,
+    children: cardList,
+  },
+};
+
+export const OneExperience: StoryObj<typeof CardExperiencesList> = {
+  args: {
+    children: <CardExperience {...(CardExperienceOneStorie.args as CardExperiencesProps)}/> ,
   },
 };
