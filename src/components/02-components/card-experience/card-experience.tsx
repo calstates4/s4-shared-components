@@ -42,6 +42,10 @@ export default function CardExperiences({
   const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
   const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
+  const bodyWrapper =  cardCount >= 2 ? '0' : '1 0 75%';
+  const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
+  const containerAlignment =  cardCount >= 2 ? 'normal' : 'flex-start';
+  const containerPosition = cardCount >= 2 ? 'row' : 'column';
 
   // Variables to manage workflow status
   const states: { [index: string]: { color: string; label: string } } = {
@@ -89,26 +93,30 @@ export default function CardExperiences({
 
   // Styles.
   const containerStyle = {
-    p: theme.spacing(3),
-    mb: theme.spacing(5),
+    display: 'flex',
+    p: theme.spacing(3), 
+    mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
       p: contentPadding,
       minWidth: '600px',
-    },
+      flexDirection: containerPosition,
+      alignItems: containerAlignment,
+    }
   };
 
   const contentStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
+    flex: 'auto',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
     },
   };
 
   const bodyWrapperStyle = {
-    flex: '1 0 75%',
-  };
+    flex: bodyWrapper,
+  }
 
   const headingWrapperStyle = {
     display: 'flex',
@@ -169,8 +177,8 @@ export default function CardExperiences({
   };
 
   const cardHoursStyle = {
-    flex: '1 0 25%',
-  };
+    flex: cardHourWrapper
+  }
 
   // Render funtions.
   const renderedHeading = heading && (
@@ -222,7 +230,9 @@ export default function CardExperiences({
             {renderedState}
           </Box>
           <Box sx={infoStyle}>
-            <Box sx={descriptionContainerStyle}>{renderedDescription}</Box>
+            <Box sx={descriptionContainerStyle}>
+              {renderedDescription}
+            </Box>
             <Box sx={programInfoStyle}>
               {renderedProgram}
               {renderedLocation}
@@ -231,16 +241,23 @@ export default function CardExperiences({
           </Box>
         </Box>
         <Box sx={cardHoursStyle}>
-          <CardExperienceHours
-            hours={hours}
+          <CardExperienceHours 
+            hours= {hours}
             cta={hoursCtaUrl}
-            position={cardNumberVariation}
+            position= {cardNumberVariation}
           />
+          {cardCount >= 2 && (
+            <Button sx={buttonStyles} href={cta}>
+              {ctaTitle}
+            </Button>
+          )}
         </Box>
-      </Box>
-      <Button sx={buttonStyles} href={cta}>
-        {ctaTitle}
-      </Button>
+      </Box> 
+      {cardCount == 1 && (
+        <Button sx={buttonStyles} href={cta}>
+          {ctaTitle}
+        </Button>
+      )}
     </Paper>
   );
 }
