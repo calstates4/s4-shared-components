@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import CardExperience from './card-experience';
 
-
 const meta: Meta<typeof CardExperience> = {
   title: 'Components/Card Experience',
   component: CardExperience,
@@ -21,7 +20,7 @@ export const Default: StoryObj<typeof CardExperience> = {
     state: 'approved',
     description: dummyText,
     cta: '/opportunities',
-    ctaTitle: 'MORE DETAILS',
+    ctaTitle: 'More Details',
     program: 'Program',
     dateStart: '05/03/2023',
     dateEnd: '05/03/2023',
@@ -30,9 +29,7 @@ export const Default: StoryObj<typeof CardExperience> = {
     hoursCtaUrl: '/',
     cardCount: 1,
   },
-  render: (args) => (
-    <CardExperience {...args} />
-  ),
+  render: (args) => <CardExperience {...args} />,
 };
 
 export const MoreElements: StoryObj<typeof CardExperience> = {
@@ -50,7 +47,5 @@ export const MoreElements: StoryObj<typeof CardExperience> = {
     hoursCtaUrl: '/',
     cardCount: 3,
   },
-  render: (args) => (
-    <CardExperience {...args} />
-  ),
+  render: (args) => <CardExperience {...args} />,
 };

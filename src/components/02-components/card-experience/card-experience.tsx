@@ -187,28 +187,28 @@ export default function CardExperiences({
 
   const renderedDescription = description && (
     <Box sx={descriptionStyle}>
-      <strong> Experience Details: </strong>
+      <strong>Experience Details:</strong>
       {description}
     </Box>
   );
 
   const renderedProgram = program && (
     <Box>
-      <strong> Program: </strong>
+      <strong>Program: </strong>
       {program}
     </Box>
   );
 
   const renderedLocation = location && (
     <Box>
-      <strong> Location: </strong>
+      <strong>Location: </strong>
       {location}
     </Box>
   );
 
   const renderedDate = dateStart && dateEnd && (
     <Box>
-      <strong> Date: </strong>
+      <strong>Date: </strong>
       {dateStart} - {dateEnd}
     </Box>
   );

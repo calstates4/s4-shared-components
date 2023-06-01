@@ -22,6 +22,7 @@ export { default as Placeholder } from './components/02-components/placeholder/p
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as CardExperience } from './components/02-components/card-experience/card-experience';
+export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
 export {
   default as SidebarMenu,
   type SidebarMenuProps,
