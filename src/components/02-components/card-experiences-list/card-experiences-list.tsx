@@ -1,19 +1,20 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export type CardExperiencesListProps = {
   children: ReactNode;
 };
 
-export default function CardExperiencesList ({ children }: CardExperiencesListProps) {
-
+export default function CardExperiencesList({
+  children,
+}: CardExperiencesListProps) {
   const theme = useTheme();
 
   // Styles.
   const containerStyle = {
-    p: theme.spacing(5), 
-    mb: theme.spacing(5), 
+    p: theme.spacing(5),
+    mb: theme.spacing(5),
   };
 
   const listStyle = {
@@ -24,7 +25,7 @@ export default function CardExperiencesList ({ children }: CardExperiencesListPr
 
   return (
     <Box sx={containerStyle}>
-      <Box  sx={listStyle} content="ul">
+      <Box sx={listStyle} content="ul">
         {children}
       </Box>
     </Box>

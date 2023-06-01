@@ -1,6 +1,6 @@
 import { Button, Box, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CardExperienceHours from '../card-experience-hour/card-experience-hour';
+import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type CardExperiencesProps = {
   heading: string;
@@ -17,30 +17,29 @@ export type CardExperiencesProps = {
   cardCount: number;
 };
 
-export default function CardExperiences ({ 
-  heading, 
+export default function CardExperiences({
+  heading,
   state,
-  description, 
-  program, 
+  description,
+  program,
   dateStart,
   dateEnd,
-  location, 
+  location,
   ctaTitle,
-  cta, 
-  hours, 
+  cta,
+  hours,
   hoursCtaUrl,
   cardCount,
 }: CardExperiencesProps) {
-
   const theme = useTheme();
 
   // Variables according to the variant of the number of items
   const position = cardCount >= 2 ? 'column' : 'row';
-  const contentPadding = cardCount >= 2 ? theme.spacing(4) :theme.spacing(5);
+  const contentPadding = cardCount >= 2 ? theme.spacing(4) : theme.spacing(5);
   const itemsAlignment = cardCount >= 2 ? 'flex-start' : 'center';
   const stateMarginY = cardCount >= 2 ? theme.spacing(2) : '0';
   const stateMarginX = cardCount >= 2 ? '0' : theme.spacing(2);
-  const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5) ;
+  const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
   const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
   const bodyWrapper =  cardCount >= 2 ? '0' : '1 0 75%';
@@ -48,48 +47,48 @@ export default function CardExperiences ({
   const containerAlignment =  cardCount >= 2 ? 'normal' : 'flex-start';
 
   // Variables to manage workflow status
-  const states:{[index: string]: {color: string, label:string}} = {
-    draft : {
+  const states: { [index: string]: { color: string; label: string } } = {
+    draft: {
       color: theme.palette.warning.light,
-      label: 'Risk Acknowledgment'
+      label: 'Risk Acknowledgment',
     },
-    pending : {
-      color:  theme.palette.warning.main,
-      label: 'Pending'
+    pending: {
+      color: theme.palette.warning.main,
+      label: 'Pending',
     },
-    approved : {
+    approved: {
       color: theme.palette.success.main,
-      label: 'Approved'
+      label: 'Approved',
     },
-    declined : {
-      color:  theme.palette.secondary.main,
-      label: 'Declined'
+    declined: {
+      color: theme.palette.secondary.main,
+      label: 'Declined',
     },
-    site_staff : {
+    site_staff: {
       color: theme.palette.error.light,
-      label: 'Site Staff'
+      label: 'Site Staff',
     },
-    duration : {
+    duration: {
       color: theme.palette.teal.main,
-      label: 'Duration'
+      label: 'Duration',
     },
-    grace_period : {
+    grace_period: {
       color: theme.palette.blue.main,
-      label: 'Grace Period'
+      label: 'Grace Period',
     },
-    published : {
+    published: {
       color: theme.palette.success.light,
-      label: 'Active'
+      label: 'Active',
     },
-    success : {
+    success: {
       color: theme.palette.success.dark,
-      label: 'Success'
+      label: 'Success',
     },
-    incomplete : {
+    incomplete: {
       color: theme.palette.error.main,
-      label: 'Incomplete'
+      label: 'Incomplete',
     },
-  }
+  };
 
   // Styles.
   const containerStyle = {
@@ -97,7 +96,7 @@ export default function CardExperiences ({
     p: theme.spacing(3), 
     mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
-      p: contentPadding, 
+      p: contentPadding,
       minWidth: '600px',
       flexDirection: cardNumberVariation,
       alignItems: containerAlignment,
@@ -116,8 +115,8 @@ export default function CardExperiences ({
     flex: 'auto',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
-    }
-  }
+    },
+  };
 
   const bodyWrapperStyle = {
     flex: bodyWrapper,
@@ -131,7 +130,7 @@ export default function CardExperiences ({
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
       alignItems: itemsAlignment,
-    }
+    },
   };
 
   const headingStyles = {
@@ -146,30 +145,29 @@ export default function CardExperiences ({
     [theme.breakpoints.up('md')]: {
       marginLeft: stateMarginX,
       my: stateMarginY,
-    }
-  }
+    },
+  };
 
   const descriptionContainerStyle = {
     flexBasis: '60%',
     marginRight: bodyMarginLeft,
-  }
+  };
 
   const programInfoStyle = {
     flexBasis: '40%',
-  }
+  };
 
   const descriptionStyle = {
-   display: 'flex',
-   flexDirection: 'column',
-  }
+    display: 'flex',
+    flexDirection: 'column',
+  };
 
   const buttonStyles = {
     backgroundColor: 'white',
     border: `2px solid ${theme.palette.primary.main}`,
     color: 'primary.main',
     fontWeight: '700',
-    '&:focus, &:hover, &:active': 
-      { backgroundColor: 'primary.dark' }
+    '&:focus, &:hover, &:active': { backgroundColor: 'primary.dark' },
   };
 
   const infoStyle = {
@@ -179,8 +177,8 @@ export default function CardExperiences ({
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
       marginBottom: bodyMarginBottom,
-    }
-  }
+    },
+  };
 
   const cardHoursStyle = {
     flex: cardHourWrapper
@@ -189,23 +187,23 @@ export default function CardExperiences ({
   // Render funtions.
   const renderedHeading = heading && (
     <Typography sx={headingStyles} variant="h2">
-        {heading}
+      {heading}
     </Typography>
   );
 
   const renderedState = state && (
     <Typography sx={stateStyle} variant="body2">
-        {states[state].label}
+      {states[state].label}
     </Typography>
   );
 
   const renderedDescription = description && (
     <Box sx={descriptionStyle}>
-      <strong>  Experience Details: </strong>
+      <strong> Experience Details: </strong>
       {description}
     </Box>
   );
-  
+
   const renderedProgram = program && (
     <Box>
       <strong> Program: </strong>

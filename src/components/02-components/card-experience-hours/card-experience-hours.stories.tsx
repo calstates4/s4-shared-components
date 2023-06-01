@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardExperienceHour from './card-experience-hour';
+import CardExperienceHours from './card-experience-hours';
 
-const meta: Meta<typeof CardExperienceHour> = {
+const meta: Meta<typeof CardExperienceHours> = {
   title: 'Components/Card Experience Hour',
-  component: CardExperienceHour,
+  component: CardExperienceHours,
 };
 
 export default meta;
 
-export const Default: StoryObj<typeof CardExperienceHour> = {
+export const Default: StoryObj<typeof CardExperienceHours> = {
   args: {
     hours: 128,
     cta: '/opportunities',
@@ -17,7 +17,7 @@ export const Default: StoryObj<typeof CardExperienceHour> = {
   },
 };
 
-export const ColumnModifier: StoryObj<typeof CardExperienceHour> = {
+export const ColumnModifier: StoryObj<typeof CardExperienceHours> = {
   args: {
     hours: 128,
     cta: '/opportunities',
