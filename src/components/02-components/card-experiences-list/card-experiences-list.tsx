@@ -20,7 +20,6 @@ export default function CardExperiencesList ({ children }: CardExperiencesListPr
     display: 'flex',
     listStyle: 'none',
     overflowX: 'scroll',
-    gap: theme.spacing(2),
   };
 
   return (

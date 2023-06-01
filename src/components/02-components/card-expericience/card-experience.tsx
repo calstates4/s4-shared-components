@@ -43,6 +43,9 @@ export default function CardExperiences ({
   const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5) ;
   const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
+  const bodyWrapper =  cardCount >= 2 ? '0' : '1 0 75%';
+  const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
+  const containerAlignment =  cardCount >= 2 ? 'normal' : 'flex-start';
 
   // Variables to manage workflow status
   const states:{[index: string]: {color: string, label:string}} = {
@@ -90,25 +93,34 @@ export default function CardExperiences ({
 
   // Styles.
   const containerStyle = {
+    display: 'flex',
     p: theme.spacing(3), 
     mb: theme.spacing(5), 
     [theme.breakpoints.up('md')]: {
       p: contentPadding, 
       minWidth: '600px',
+      flexDirection: cardNumberVariation,
+      alignItems: containerAlignment,
     }
   };
+
+  const listItemStyle = {
+    ml: theme.spacing(1), 
+    mr: theme.spacing(1), 
+  }
 
   const contentStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
+    flex: 'auto',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
     }
   }
 
   const bodyWrapperStyle = {
-    flex: '1 0 75%',
+    flex: bodyWrapper,
   }
 
   const headingWrapperStyle = {
@@ -171,7 +183,7 @@ export default function CardExperiences ({
   }
 
   const cardHoursStyle = {
-    flex: '1 0 25%'
+    flex: cardHourWrapper
   }
 
   // Render funtions.
@@ -216,35 +228,44 @@ export default function CardExperiences ({
   );
 
   return (
-    <Paper sx={containerStyle}>
-      <Box sx={contentStyle}>
-        <Box sx={bodyWrapperStyle}>
-          <Box sx={headingWrapperStyle}>
-            {renderedHeading}
-            {renderedState}
-          </Box>
-          <Box sx={infoStyle}>
-            <Box sx={descriptionContainerStyle}>
-              {renderedDescription}
+    <Box sx={listItemStyle} content={"li"} >
+      <Paper sx={containerStyle}>
+        <Box sx={contentStyle}>
+          <Box sx={bodyWrapperStyle}>
+            <Box sx={headingWrapperStyle}>
+              {renderedHeading}
+              {renderedState}
             </Box>
-            <Box sx={programInfoStyle}>
-              {renderedProgram}
-              {renderedLocation}
-              {renderedDate}
+            <Box sx={infoStyle}>
+              <Box sx={descriptionContainerStyle}>
+                {renderedDescription}
+              </Box>
+              <Box sx={programInfoStyle}>
+                {renderedProgram}
+                {renderedLocation}
+                {renderedDate}
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Box sx={cardHoursStyle}>
-          <CardExperienceHours 
-            hours= {hours}
-            cta={hoursCtaUrl}
-            position= {cardNumberVariation}
-          />
-        </Box>
-      </Box> 
-      <Button sx={buttonStyles} href={cta}>
-        {ctaTitle}
-      </Button>
-    </Paper>
+          <Box sx={cardHoursStyle}>
+            <CardExperienceHours 
+              hours= {hours}
+              cta={hoursCtaUrl}
+              position= {cardNumberVariation}
+            />
+            {cardCount >= 2 && (
+              <Button sx={buttonStyles} href={cta}>
+                {ctaTitle}
+              </Button>
+            )}
+          </Box>
+        </Box> 
+        {cardCount == 1 && (
+          <Button sx={buttonStyles} href={cta}>
+            {ctaTitle}
+          </Button>
+        )}
+      </Paper>
+    </Box>
   );
 }
