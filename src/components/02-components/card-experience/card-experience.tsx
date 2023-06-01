@@ -104,11 +104,6 @@ export default function CardExperiences({
     }
   };
 
-  const listItemStyle = {
-    ml: theme.spacing(1), 
-    mr: theme.spacing(1), 
-  }
-
   const contentStyle = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -227,44 +222,42 @@ export default function CardExperiences({
   );
 
   return (
-    <Box sx={listItemStyle} content={"li"} >
-      <Paper sx={containerStyle}>
-        <Box sx={contentStyle}>
-          <Box sx={bodyWrapperStyle}>
-            <Box sx={headingWrapperStyle}>
-              {renderedHeading}
-              {renderedState}
+    <Paper sx={containerStyle}>
+      <Box sx={contentStyle}>
+        <Box sx={bodyWrapperStyle}>
+          <Box sx={headingWrapperStyle}>
+            {renderedHeading}
+            {renderedState}
+          </Box>
+          <Box sx={infoStyle}>
+            <Box sx={descriptionContainerStyle}>
+              {renderedDescription}
             </Box>
-            <Box sx={infoStyle}>
-              <Box sx={descriptionContainerStyle}>
-                {renderedDescription}
-              </Box>
-              <Box sx={programInfoStyle}>
-                {renderedProgram}
-                {renderedLocation}
-                {renderedDate}
-              </Box>
+            <Box sx={programInfoStyle}>
+              {renderedProgram}
+              {renderedLocation}
+              {renderedDate}
             </Box>
           </Box>
-          <Box sx={cardHoursStyle}>
-            <CardExperienceHours 
-              hours= {hours}
-              cta={hoursCtaUrl}
-              position= {cardNumberVariation}
-            />
-            {cardCount >= 2 && (
-              <Button sx={buttonStyles} href={cta}>
-                {ctaTitle}
-              </Button>
-            )}
-          </Box>
-        </Box> 
-        {cardCount == 1 && (
-          <Button sx={buttonStyles} href={cta}>
-            {ctaTitle}
-          </Button>
-        )}
-      </Paper>
-    </Box>
+        </Box>
+        <Box sx={cardHoursStyle}>
+          <CardExperienceHours 
+            hours= {hours}
+            cta={hoursCtaUrl}
+            position= {cardNumberVariation}
+          />
+          {cardCount >= 2 && (
+            <Button sx={buttonStyles} href={cta}>
+              {ctaTitle}
+            </Button>
+          )}
+        </Box>
+      </Box> 
+      {cardCount == 1 && (
+        <Button sx={buttonStyles} href={cta}>
+          {ctaTitle}
+        </Button>
+      )}
+    </Paper>
   );
 }

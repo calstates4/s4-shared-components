@@ -21,6 +21,7 @@ export default function CardExperiencesList({
     display: 'flex',
     listStyle: 'none',
     overflowX: 'scroll',
+    gap: theme.spacing(2),
   };
 
   return (
