@@ -45,6 +45,7 @@ export default function CardExperiences({
   const bodyWrapper =  cardCount >= 2 ? '0' : '1 0 75%';
   const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
   const containerAlignment =  cardCount >= 2 ? 'normal' : 'flex-start';
+  const containerPosition = cardCount >= 2 ? 'row' : 'column';
 
   // Variables to manage workflow status
   const states: { [index: string]: { color: string; label: string } } = {
@@ -98,7 +99,7 @@ export default function CardExperiences({
     [theme.breakpoints.up('md')]: {
       p: contentPadding,
       minWidth: '600px',
-      flexDirection: cardNumberVariation,
+      flexDirection: containerPosition,
       alignItems: containerAlignment,
     }
   };
