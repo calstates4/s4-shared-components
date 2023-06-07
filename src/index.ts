@@ -20,6 +20,8 @@ export {
   type CampusCardProps,
 } from './components/02-components/campus-card/campus-card';
 export { default as CampusList } from './components/02-components/campus-list/campus-list';
+export { default as CardExperience } from './components/02-components/card-experience/card-experience';
+export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
 export {
   default as Context,
   type ContextProps,
