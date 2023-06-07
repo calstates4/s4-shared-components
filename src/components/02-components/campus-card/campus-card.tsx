@@ -6,19 +6,20 @@ import DocumentIcon from '@mui/icons-material/LibraryBooks';
 import Link from '../../01-elements/link/link';
 
 export type CampusCardProps = {
+  id: string;
   title: string;
-  location: string;
-  website: string;
-  programs: string;
+  location?: string;
+  website?: string;
+  programs?: string;
   agreement?: {
     state: string;
     name: string;
     agreementDocument?: string;
     expireDate?: string;
   };
-  initiatePartnershipLink: string;
-  renewPartnershipLink: string;
-  reactivePartnershipLink: string;
+  initiatePartnershipLink?: string;
+  renewPartnershipLink?: string;
+  reactivePartnershipLink?: string;
 };
 
 export default function CampusCard({
@@ -40,7 +41,7 @@ export default function CampusCard({
       color: string;
       expireDateVerb: string;
       buttonText: string;
-      buttonLink: string;
+      buttonLink?: string;
     }
   > = {
     draft: {
@@ -220,10 +221,12 @@ export default function CampusCard({
               <PlaceIcon sx={iconStyles} />
               {location}
             </li>
-            <li>
-              <WebAssetIcon sx={iconStyles} />
-              <Link href={website}>{website}</Link>
-            </li>
+            {website && (
+              <li>
+                <WebAssetIcon sx={iconStyles} />
+                <Link href={website}>{website}</Link>
+              </li>
+            )}
           </Box>
           <Typography variant="h4">Programs</Typography>
           <Typography>{programs}</Typography>

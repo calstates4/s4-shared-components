@@ -23,6 +23,10 @@ type CampusListProps = {
     id: string;
     label: string;
   }[];
+  currentFilters: {
+    agreementStatus: string | null;
+    campusName: string | null;
+  };
 };
 
 export default function CampusList({
@@ -33,6 +37,7 @@ export default function CampusList({
   itemsPerPage,
   currentPage,
   statusFilterValues,
+  currentFilters,
 }: CampusListProps) {
   const theme = useTheme();
 
@@ -53,11 +58,27 @@ export default function CampusList({
     },
   };
 
+  const formItemStyles = {
+    mb: theme.spacing(2),
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'inline-flex',
+      mb: 0,
+      mr: theme.spacing(2),
+    },
+  };
+
   const formInner = (
     <>
-      <FormControl size="small" sx={{ mr: theme.spacing(2) }}>
+      <FormControl size="small" sx={formItemStyles}>
         <InputLabel id="status-select-label">Status</InputLabel>
-        <Select id="status-select" label="Status" native={true} name="status">
+        <Select
+          id="status-select"
+          label="Status"
+          native={true}
+          name="agreementStatus"
+          defaultValue={currentFilters.agreementStatus}
+        >
           {statusFilterValues.map((item) => (
             <option key={item.id} value={item.id}>
               {item.label}
@@ -69,8 +90,9 @@ export default function CampusList({
         label="Name"
         id="name"
         size="small"
-        name="name"
-        sx={{ mr: theme.spacing(2) }}
+        name="campusName"
+        sx={formItemStyles}
+        defaultValue={currentFilters.campusName}
       />
       <Button variant="contained" type="submit">
         Apply Filters
@@ -100,16 +122,18 @@ export default function CampusList({
           Showing {firstItem} to {lastItem} of {totalItems} results
         </Typography>
         <Box sx={listStyles}>{children}</Box>
-        <Pager
-          baseUrl={url}
-          count={Math.ceil(totalItems / itemsPerPage)}
-          page={currentPage}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pt: theme.spacing(3),
-          }}
-        />
+        {totalItems > itemsPerPage && (
+          <Pager
+            baseUrl={url}
+            count={Math.ceil(totalItems / itemsPerPage)}
+            page={currentPage}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              pt: theme.spacing(3),
+            }}
+          />
+        )}
       </Paper>
     </div>
   );

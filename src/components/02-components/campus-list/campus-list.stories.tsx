@@ -45,5 +45,9 @@ export const Default: StoryObj<typeof CampusList> = {
         label: 'Archived',
       },
     ],
+    currentFilters: {
+      agreementStatus: 'all',
+      campusName: '',
+    },
   },
 };
