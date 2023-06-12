@@ -9,18 +9,17 @@ import {
   Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CardPendingTask from '../card-pending-task/card-pending-task';
 import Link from '../../01-elements/link/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 type PastExpericiencesPageProps = {
-  experienceInfo: Array<{
-    [index: string]: { experience: string; status: string };
-  }>;
+  experienceInfo: { experience: string; status: string; }[];
+  ctaLink: string;
 };
 
-export default function PastExpericiencesPage({
+export default function PastExpericiencesList({
   experienceInfo,
+  ctaLink,
 }: PastExpericiencesPageProps) {
   const theme = useTheme();
 
@@ -39,12 +38,12 @@ export default function PastExpericiencesPage({
   const tableWrapperStyles = {
     flexBasis: '65%',
   };
-
+  
   const tableStyle = {
     th: {
       fontWeight: 700,
-    },
-  };
+    }
+  }
 
   const cardPendingWrapperStyles = {
     flexBasis: '30%',
@@ -57,13 +56,15 @@ export default function PastExpericiencesPage({
     textTransform: 'uppercase',
     fontWeight: 700,
     textDecoration: 'none',
-  };
+}
 
-  const iconStyle = {
-    ml: theme.spacing(2),
-  };
+const iconStyle = {
+  ml: theme.spacing(2),
+}
 
-  // Components redered
+
+
+  // Components
   const renderedHeader = ['Experience', 'Status'].map((label) => {
     return <TableCell>{label}</TableCell>;
   });
@@ -92,14 +93,13 @@ export default function PastExpericiencesPage({
         <Typography sx={headingStyles} variant="h2">
           Past experiences
         </Typography>
-        <Link href="/experiences" sx={linkStyle}>
+        <Link href={ctaLink} sx={linkStyle}>
           See all
-          <ArrowForwardIcon sx={iconStyle} />
+          <ArrowForwardIcon sx={iconStyle}/>
         </Link>
-        <Paper>{renderTable}</Paper>
-      </Box>
-      <Box sx={cardPendingWrapperStyles}>
-        <CardPendingTask />
+        <Paper>
+          {renderTable}
+        </Paper>
       </Box>
     </Box>
   );
