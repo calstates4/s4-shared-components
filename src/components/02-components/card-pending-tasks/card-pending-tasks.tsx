@@ -1,8 +1,13 @@
 import { Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import AddAlarmIcon from '@mui/icons-material/AddAlarm';
+import Link from '../../01-elements/link/link';
 
-export default function CardPendingTask() {
+type CardPendingTasksProps = {
+  ctaLink: string;
+};
+
+export default function CardPendingTasks({ ctaLink }: CardPendingTasksProps) {
   const theme = useTheme();
 
   // Styles.
@@ -49,7 +54,7 @@ export default function CardPendingTask() {
       <Typography sx={descriptionStyles}>
         Please review your Tasks to ensure they are complete and up-to-date.
       </Typography>
-      <Button sx={buttonStyles} href="/opportunity">
+      <Button sx={buttonStyles} component={Link} href={ctaLink}>
         Go to pending task
       </Button>
     </Paper>
