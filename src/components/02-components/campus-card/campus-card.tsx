@@ -74,6 +74,7 @@ export default function CampusCard({
     },
   };
 
+  // Styles
   const containerStyles = {
     px: theme.spacing(3),
     py: theme.spacing(3),
@@ -84,7 +85,6 @@ export default function CampusCard({
     },
   };
 
-  // Styles
   const contentContainerStyles = {
     [theme.breakpoints.up('md')]: {
       display: 'flex',
@@ -191,16 +191,25 @@ export default function CampusCard({
               </p>
             </Box>
           </Box>
-          <Button
-            variant="outlined"
-            href={
-              agreement.state === 'published'
-                ? agreement.agreementDocument
-                : agreementStates[agreement.state].buttonLink
-            }
-          >
-            {agreementStates[agreement.state].buttonText}
-          </Button>
+          {agreement.state === 'published' && agreement.agreementDocument ? (
+            <Button
+              variant="outlined"
+              component={Link}
+              href={agreement.agreementDocument}
+            >
+              {agreementStates[agreement.state].buttonText}
+            </Button>
+          ) : null}
+          {agreement.state !== 'published' &&
+          agreementStates[agreement.state].buttonLink ? (
+            <Button
+              variant="outlined"
+              component={Link}
+              href={agreementStates[agreement.state].buttonLink}
+            >
+              {agreementStates[agreement.state].buttonText}
+            </Button>
+          ) : null}
         </>
       ) : (
         <Typography>
@@ -216,20 +225,28 @@ export default function CampusCard({
       <Typography variant="h2">{title}</Typography>
       <Box sx={contentContainerStyles}>
         <Box sx={campusInfoStyles}>
-          <Box component="ul" sx={campusDataListStyles}>
-            <li>
-              <PlaceIcon sx={iconStyles} />
-              {location}
-            </li>
-            {website && (
-              <li>
-                <WebAssetIcon sx={iconStyles} />
-                <Link href={website}>{website}</Link>
-              </li>
-            )}
-          </Box>
-          <Typography variant="h4">Programs</Typography>
-          <Typography>{programs}</Typography>
+          {(location || website) && (
+            <Box component="ul" sx={campusDataListStyles}>
+              {location && (
+                <li>
+                  <PlaceIcon sx={iconStyles} />
+                  {location}
+                </li>
+              )}
+              {website && (
+                <li>
+                  <WebAssetIcon sx={iconStyles} />
+                  <Link href={website}>{website}</Link>
+                </li>
+              )}
+            </Box>
+          )}
+          {programs && (
+            <>
+              <Typography variant="h4">Programs</Typography>
+              <Typography>{programs}</Typography>
+            </>
+          )}
         </Box>
         <Box sx={agreementStyles}>
           {agreement ? (
@@ -239,13 +256,15 @@ export default function CampusCard({
               <Typography sx={{ mb: theme.spacing(2) }}>
                 You do not have a partnership with this campus yet.
               </Typography>
-              <Button
-                variant="contained"
-                component={Link}
-                href={initiatePartnershipLink}
-              >
-                Initiate Partnership
-              </Button>
+              {initiatePartnershipLink && (
+                <Button
+                  variant="contained"
+                  component={Link}
+                  href={initiatePartnershipLink}
+                >
+                  Initiate Partnership
+                </Button>
+              )}
             </>
           )}
         </Box>

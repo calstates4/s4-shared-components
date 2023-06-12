@@ -61,7 +61,7 @@ export default function CampusList({
   const formItemStyles = {
     mb: theme.spacing(2),
     display: 'flex',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       display: 'inline-flex',
       mb: 0,
       mr: theme.spacing(2),
@@ -118,9 +118,11 @@ export default function CampusList({
           with, use the Initiate Partnership button to begin the process.
         </Typography>
         <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
-        <Typography sx={{ mb: theme.spacing(2) }}>
-          Showing {firstItem} to {lastItem} of {totalItems} results
-        </Typography>
+        {totalItems ? (
+          <Typography sx={{ mb: theme.spacing(2) }}>
+            Showing {firstItem} to {lastItem} of {totalItems} results
+          </Typography>
+        ) : null}
         <Box sx={listStyles}>{children}</Box>
         {totalItems > itemsPerPage && (
           <Pager
