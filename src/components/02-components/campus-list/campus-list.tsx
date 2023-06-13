@@ -7,8 +7,8 @@ import {
   Select,
   TextField,
   Typography,
+  useTheme,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import { ElementType, ReactNode } from 'react';
 import Pager from '../../01-elements/pager/pager';
 

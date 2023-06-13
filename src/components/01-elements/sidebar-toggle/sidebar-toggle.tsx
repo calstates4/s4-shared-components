@@ -1,7 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Fab, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Fab, useMediaQuery, useTheme } from '@mui/material';
 
 type SidebarToggleProps = {
   sidebarOpen: boolean;

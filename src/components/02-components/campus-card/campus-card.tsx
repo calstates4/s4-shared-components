@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material';
 import PlaceIcon from '@mui/icons-material/Place';
 import WebAssetIcon from '@mui/icons-material/WebAsset';
 import DocumentIcon from '@mui/icons-material/LibraryBooks';
@@ -84,6 +84,8 @@ export default function CampusCard({
       py: theme.spacing(4),
     },
   };
+
+  console.log(theme.palette);
 
   const contentContainerStyles = {
     [theme.breakpoints.up('md')]: {

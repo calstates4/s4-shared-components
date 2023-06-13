@@ -1,5 +1,4 @@
-import { Button, Box, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type CardExperiencesProps = {
@@ -42,9 +41,9 @@ export default function CardExperiences({
   const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
   const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
-  const bodyWrapper =  cardCount >= 2 ? '0' : '1 0 75%';
+  const bodyWrapper = cardCount >= 2 ? '0' : '1 0 75%';
   const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
-  const containerAlignment =  cardCount >= 2 ? 'normal' : 'flex-start';
+  const containerAlignment = cardCount >= 2 ? 'normal' : 'flex-start';
   const containerPosition = cardCount >= 2 ? 'row' : 'column';
 
   // Variables to manage workflow status
@@ -94,14 +93,14 @@ export default function CardExperiences({
   // Styles.
   const containerStyle = {
     display: 'flex',
-    p: theme.spacing(3), 
-    mb: theme.spacing(5), 
+    p: theme.spacing(3),
+    mb: theme.spacing(5),
     [theme.breakpoints.up('md')]: {
       p: contentPadding,
       minWidth: '600px',
       flexDirection: containerPosition,
       alignItems: containerAlignment,
-    }
+    },
   };
 
   const contentStyle = {
@@ -116,7 +115,7 @@ export default function CardExperiences({
 
   const bodyWrapperStyle = {
     flex: bodyWrapper,
-  }
+  };
 
   const headingWrapperStyle = {
     display: 'flex',
@@ -177,8 +176,8 @@ export default function CardExperiences({
   };
 
   const cardHoursStyle = {
-    flex: cardHourWrapper
-  }
+    flex: cardHourWrapper,
+  };
 
   // Render funtions.
   const renderedHeading = heading && (
@@ -230,9 +229,7 @@ export default function CardExperiences({
             {renderedState}
           </Box>
           <Box sx={infoStyle}>
-            <Box sx={descriptionContainerStyle}>
-              {renderedDescription}
-            </Box>
+            <Box sx={descriptionContainerStyle}>{renderedDescription}</Box>
             <Box sx={programInfoStyle}>
               {renderedProgram}
               {renderedLocation}
@@ -241,10 +238,10 @@ export default function CardExperiences({
           </Box>
         </Box>
         <Box sx={cardHoursStyle}>
-          <CardExperienceHours 
-            hours= {hours}
+          <CardExperienceHours
+            hours={hours}
             cta={hoursCtaUrl}
-            position= {cardNumberVariation}
+            position={cardNumberVariation}
           />
           {cardCount >= 2 && (
             <Button sx={buttonStyles} href={cta}>
@@ -252,7 +249,7 @@ export default function CardExperiences({
             </Button>
           )}
         </Box>
-      </Box> 
+      </Box>
       {cardCount == 1 && (
         <Button sx={buttonStyles} href={cta}>
           {ctaTitle}

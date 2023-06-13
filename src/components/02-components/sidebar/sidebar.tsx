@@ -1,5 +1,4 @@
-import { Drawer, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Drawer, useMediaQuery, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 type SidebarProps = {
