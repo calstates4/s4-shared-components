@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
 
-type CardOfferingProps = {
+export type OfferingCardProps = {
   title: string;
   url: string;
   editUrl: string;
@@ -14,7 +14,7 @@ type CardOfferingProps = {
   timeCommitment: string;
 };
 
-export default function CardOffering({
+export default function OfferingCard({
   title,
   url,
   editUrl,
@@ -24,7 +24,7 @@ export default function CardOffering({
   startDate,
   endDate,
   timeCommitment,
-}: CardOfferingProps) {
+}: OfferingCardProps) {
   const theme = useTheme();
 
   const publishedStatus = published ? 'published' : 'unpublished';
@@ -35,11 +35,11 @@ export default function CardOffering({
   }> = {
     published: {
       label: 'PUBLISHED',
-      backgroundColor: 'success.light',
+      backgroundColor: 'success.dark',
     },
     unpublished: {
       label: 'UNPUBLISHED',
-      backgroundColor: 'warning.light',
+      backgroundColor: 'warning.main',
     }
   }
 
@@ -65,12 +65,14 @@ export default function CardOffering({
 
   const statusStyles = {
     display: 'inline-block',
-    fontSize: '0.75rem',
     lineHeight: 1,
+    borderRadius: theme.spacing(0.5),
     px: theme.spacing(1),
     py: theme.spacing(0.5),
+    mt: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       ml: theme.spacing(1.5),
+      mt: 0,
     }
   };
 
@@ -100,7 +102,12 @@ export default function CardOffering({
     <Paper sx={containerStyles} component="article">
       <Box sx={headerContainerStyles}>
         <Typography variant="h2">{title}</Typography>
-        <Typography sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span">{offeringStates[publishedStatus].label}</Typography>
+        <Typography
+          sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span"
+          variant="h5"
+        >
+          {offeringStates[publishedStatus].label}
+        </Typography>
       </Box>
       <Box sx={textGroupContainerStyles}>
         <Box sx={textContainerStyles}>
