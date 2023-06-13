@@ -29,7 +29,7 @@ export const Default: StoryObj<typeof OfferingList> = {
         label: 'All Offerings',
       },
       {
-        id: 'my',
+        id: '1',
         label: 'My Offerings',
       },
     ],
@@ -45,7 +45,7 @@ export const Default: StoryObj<typeof OfferingList> = {
     ],
     currentFilters: {
       category: 'all',
-      departmentId: '',
+      departmentId: '1',
     },
   },
 };

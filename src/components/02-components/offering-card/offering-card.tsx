@@ -34,11 +34,11 @@ export default function OfferingCard({
     backgroundColor: string;
   }> = {
     published: {
-      label: 'PUBLISHED',
+      label: 'Published',
       backgroundColor: 'success.dark',
     },
     unpublished: {
-      label: 'UNPUBLISHED',
+      label: 'Unpublished',
       backgroundColor: 'warning.main',
     }
   }
@@ -67,6 +67,7 @@ export default function OfferingCard({
     display: 'inline-block',
     lineHeight: 1,
     borderRadius: theme.spacing(0.5),
+    textTransform: 'uppercase',
     px: theme.spacing(1),
     py: theme.spacing(0.5),
     mt: theme.spacing(1),
@@ -84,17 +85,19 @@ export default function OfferingCard({
     }
   }
 
-  const textContainerStyles = {
+  const definitionListStyles = {
+    mt: 0,
     mb: theme.spacing(1),
+    dt: {
+      display: 'inline',
+      fontWeight: '700',
+    },
+    dd: {
+      display: 'inline',
+      ml: 0,
+    },
     [theme.breakpoints.up('sm')]: {
       mb: 0,
-    }
-  };
-
-  const textStyles = {
-    [theme.breakpoints.up('sm')]: {
-      display: 'inline-block',
-      mr: theme.spacing(0.5),
     }
   };
 
@@ -110,27 +113,27 @@ export default function OfferingCard({
         </Typography>
       </Box>
       <Box sx={textGroupContainerStyles}>
-        <Box sx={textContainerStyles}>
-          <Typography sx={textStyles} variant="h4">Department:</Typography>
-          <Typography sx={textStyles}>{departments}</Typography>
+        <Box sx={definitionListStyles} component="dl">
+          <dt>Department: </dt>
+          <dd>{departments}</dd>
         </Box>
-        <Box sx={textContainerStyles}>
-          <Typography sx={textStyles} variant="h4">Type:</Typography>
-          <Typography sx={textStyles}>{type}</Typography>
+        <Box sx={definitionListStyles} component="dl">
+          <dt>Type: </dt>
+          <dd>{type}</dd>
         </Box>
-        <Box sx={textContainerStyles}>
-          <Typography sx={textStyles} variant="h4">Time commitment:</Typography>
-          <Typography sx={textStyles}>{timeCommitment}</Typography>
+        <Box sx={definitionListStyles} component="dl">
+          <dt>Time commitment: </dt>
+          <dd>{timeCommitment}</dd>
         </Box>
       </Box>
       <Box sx={textGroupContainerStyles}>
-        <Box sx={textContainerStyles}>
-          <Typography sx={textStyles} variant="h4">Start date:</Typography>
-          <Typography sx={textStyles}>{startDate}</Typography>
+        <Box sx={definitionListStyles} component="dl">
+          <dt>Start date: </dt>
+          <dd>{startDate}</dd>
         </Box>
-        <Box sx={textContainerStyles}>
-        <Typography sx={textStyles} variant="h4">End date:</Typography>
-        <Typography sx={textStyles}>{endDate}</Typography>
+        <Box sx={definitionListStyles} component="dl">
+          <dt>End date: </dt>
+          <dd>{startDate}</dd>
         </Box>
       </Box>
       <Box sx={{mt: theme.spacing(2)}}>
@@ -138,6 +141,7 @@ export default function OfferingCard({
           variant="outlined"
           component={Link}
           href={url}
+          sx={{mr: theme.spacing(1)}}
         >
           MORE DETAILS</Button>
         <Button href={editUrl}>EDIT</Button>
