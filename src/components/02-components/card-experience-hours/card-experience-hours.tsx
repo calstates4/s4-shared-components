@@ -1,5 +1,4 @@
-import { Button, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Button, Paper, Typography, useTheme } from '@mui/material';
 
 export type CardExperienceHoursProps = {
   hours: number;

@@ -1,14 +1,14 @@
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import {
-  Select,
   Box,
-  FormControl,
-  InputLabel,
   Button,
   Drawer,
+  FormControl,
+  InputLabel,
+  Select,
   SelectChangeEvent,
+  useTheme,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { useState } from 'react';
 
 export type ContextProps = {
