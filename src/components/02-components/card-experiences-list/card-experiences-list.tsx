@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Box, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 export type CardExperiencesListProps = {

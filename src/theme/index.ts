@@ -56,26 +56,26 @@ const theme = createTheme({
     },
     warning: {
       main: '#ffc67e',
-      light: '#fff289'
+      light: '#fff289',
     },
     success: {
       main: '#a3f4b5',
       dark: '#97f089',
-      light: '#d7ffd1'
+      light: '#d7ffd1',
     },
     error: {
       main: '#ffb9b9',
-      light: '#d6cfff'
+      light: '#d6cfff',
     },
     black: {
       main: '#1f1f1f',
     },
     blue: {
-      main: '#a1c7ff'
+      main: '#a1c7ff',
     },
     teal: {
-      main: '#bffff5'
-    }
+      main: '#bffff5',
+    },
   },
 });
 

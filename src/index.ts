@@ -16,20 +16,25 @@ export {
   type BrandingBarProps,
 } from './components/02-components/branding-bar/branding-bar';
 export {
+  default as CampusCard,
+  type CampusCardProps,
+} from './components/02-components/campus-card/campus-card';
+export { default as CampusList } from './components/02-components/campus-list/campus-list';
+export { default as CardExperience } from './components/02-components/card-experience/card-experience';
+export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
+export {
   default as Context,
   type ContextProps,
 } from './components/02-components/context/context';
+export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
 export { default as OrganizationPage } from './components/02-components/organization-page/organization-page';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
-export { default as Sidebar } from './components/02-components/sidebar/sidebar';
-export { default as CtaCard } from './components/02-components/cta-card/cta-card';
-export { default as CardExperience } from './components/02-components/card-experience/card-experience';
-export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
 export {
   default as SidebarMenu,
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
+export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
