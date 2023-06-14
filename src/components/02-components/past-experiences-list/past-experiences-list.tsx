@@ -12,21 +12,21 @@ import { useTheme } from '@mui/material/styles';
 import Link from '../../01-elements/link/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-type PastExpericiencesPageProps = {
-  experienceInfo: { experience: string; status: string; }[];
+export type PastExpericiencesListProps = {
+  experienceInfo: { experience: string; status: string }[];
   ctaLink: string;
 };
 
 export default function PastExpericiencesList({
   experienceInfo,
   ctaLink,
-}: PastExpericiencesPageProps) {
+}: PastExpericiencesListProps) {
   const theme = useTheme();
 
   // Styles.
   const contentStyle = {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
   };
 
   const headingStyles = {
@@ -35,18 +35,10 @@ export default function PastExpericiencesList({
     color: 'primary.main',
   };
 
-  const tableWrapperStyles = {
-    flexBasis: '65%',
-  };
-  
   const tableStyle = {
     th: {
       fontWeight: 700,
-    }
-  }
-
-  const cardPendingWrapperStyles = {
-    flexBasis: '30%',
+    },
   };
 
   const linkStyle = {
@@ -56,13 +48,11 @@ export default function PastExpericiencesList({
     textTransform: 'uppercase',
     fontWeight: 700,
     textDecoration: 'none',
-}
+  };
 
-const iconStyle = {
-  ml: theme.spacing(2),
-}
-
-
+  const iconStyle = {
+    ml: theme.spacing(2),
+  };
 
   // Components
   const renderedHeader = ['Experience', 'Status'].map((label) => {
@@ -89,18 +79,14 @@ const iconStyle = {
 
   return (
     <Box sx={contentStyle}>
-      <Box sx={tableWrapperStyles}>
-        <Typography sx={headingStyles} variant="h2">
-          Past experiences
-        </Typography>
-        <Link href={ctaLink} sx={linkStyle}>
-          See all
-          <ArrowForwardIcon sx={iconStyle}/>
-        </Link>
-        <Paper>
-          {renderTable}
-        </Paper>
-      </Box>
+      <Typography sx={headingStyles} variant="h2">
+        Past experiences
+      </Typography>
+      <Link href={ctaLink} sx={linkStyle}>
+        See all
+        <ArrowForwardIcon sx={iconStyle} />
+      </Link>
+      <Paper>{renderTable}</Paper>
     </Box>
   );
 }
