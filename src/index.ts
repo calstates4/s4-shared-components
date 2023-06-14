@@ -24,9 +24,12 @@ export { default as OrganizationPage } from './components/02-components/organiza
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
-export { default as CardExperience } from './components/02-components/card-experience/card-experience';
+export {
+  default as CardExperience,
+  type CardExperiencesProps,
+} from './components/02-components/card-experience/card-experience';
 export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
-export { default as PastExperiencesList } from './components/02-components/past-experiences-list/past-experiences-list'
+export { default as PastExperiencesList } from './components/02-components/past-experiences-list/past-experiences-list';
 export {
   default as SidebarMenu,
   type SidebarMenuProps,
