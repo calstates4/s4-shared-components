@@ -29,6 +29,7 @@ export {
   type CardExperiencesProps,
 } from './components/02-components/card-experience/card-experience';
 export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
+export { default as CardPendingTasks } from './components/02-components/card-pending-tasks/card-pending-tasks'
 export { default as PastExperiencesList } from './components/02-components/past-experiences-list/past-experiences-list';
 export {
   default as SidebarMenu,
