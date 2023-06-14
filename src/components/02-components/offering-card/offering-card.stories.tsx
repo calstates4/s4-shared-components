@@ -15,10 +15,10 @@ const offeringData = {
   editUrl: '/edit',
   published: true,
   type: 'Hybrid',
-  departments: 'Finance, Human Resources, Sales',
+  department: 'Finance, Human Resources, Sales',
   startDate: '04/04/2023',
   endDate: '04/10/2023',
-  timeCommitment: '20 hours'
+  timeCommitment: '20 hours per week'
 
 };
 

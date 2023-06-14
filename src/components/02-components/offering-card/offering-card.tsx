@@ -8,7 +8,7 @@ export type OfferingCardProps = {
   editUrl: string;
   published: boolean;
   type: string;
-  departments?: string;
+  department?: string;
   startDate: string;
   endDate: string;
   timeCommitment: string;
@@ -20,7 +20,7 @@ export default function OfferingCard({
   editUrl,
   published,
   type,
-  departments,
+  department,
   startDate,
   endDate,
   timeCommitment,
@@ -115,7 +115,7 @@ export default function OfferingCard({
       <Box sx={definitionListContainerStyles}>
         <Box sx={definitionListStyles} component="dl">
           <dt>Department: </dt>
-          <dd>{departments}</dd>
+          <dd>{department}</dd>
         </Box>
         <Box sx={definitionListStyles} component="dl">
           <dt>Type: </dt>
@@ -133,7 +133,7 @@ export default function OfferingCard({
         </Box>
         <Box sx={definitionListStyles} component="dl">
           <dt>End date: </dt>
-          <dd>{startDate}</dd>
+          <dd>{endDate}</dd>
         </Box>
       </Box>
       <Box sx={{mt: theme.spacing(2)}}>
