@@ -20,6 +20,7 @@ export const Default: StoryObj<typeof OfferingList> = {
   args: {
     children: offerings,
     url: '#',
+    addUrl: '#',
     totalItems: 38,
     itemsPerPage: 5,
     currentPage: 3,

@@ -5,16 +5,19 @@ import {
   InputLabel,
   Paper,
   Select,
-  TextField,
   Typography,
   useTheme
 } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { ElementType, ReactNode } from "react"
+import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
+import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 
 type OfferingListProps = {
   children: ReactNode
   url: string;
+  addUrl: string;
   FormElement?: ElementType;
   totalItems: number;
   itemsPerPage: number;
@@ -36,6 +39,7 @@ type OfferingListProps = {
 export default function OfferingList({
   children,
   url,
+  addUrl,
   FormElement,
   totalItems,
   itemsPerPage,
@@ -55,6 +59,22 @@ export default function OfferingList({
     mt: theme.spacing(3),
     p: theme.spacing(3),
     pb: theme.spacing(4),
+  };
+
+  const titleContainerStyles = {
+    mb: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+  };
+
+  const titleStyles = {
+    color: 'primary.main',
+    [theme.breakpoints.down('sm')]: {
+      mb: theme.spacing(2),
+    },
   };
 
   const listStyles = {
@@ -123,7 +143,26 @@ export default function OfferingList({
 
   return (
     <div>
-      <Typography variant="h1">Offerings</Typography>
+      <Breadcrumbs items={[{ title: 'Offerings', url }]} />
+      <Box sx={titleContainerStyles}>
+        <Typography variant="h1" sx={titleStyles}>Offerings</Typography>
+        <Button
+          variant="outlined"
+          component={Link}
+          href={addUrl}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+          }}
+        >
+          <AddIcon
+            sx={{
+              fontSize: '1rem',
+              mr: theme.spacing(0.5),
+            }}/>
+          Add offering
+        </Button>
+      </Box>
       <Paper elevation={0} sx={containerStyles}>
         <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
         {totalItems ? (

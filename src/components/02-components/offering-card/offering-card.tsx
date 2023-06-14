@@ -59,7 +59,7 @@ export default function OfferingCard({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'center',
+      alignItems: 'flex-start',
     }
   };
 
@@ -77,7 +77,7 @@ export default function OfferingCard({
     }
   };
 
-  const textGroupContainerStyles = {
+  const definitionListContainerStyles = {
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       columnGap: theme.spacing(5),
@@ -104,7 +104,7 @@ export default function OfferingCard({
   return (
     <Paper sx={containerStyles} component="article">
       <Box sx={headerContainerStyles}>
-        <Typography variant="h2">{title}</Typography>
+        <Typography variant="h2" color="primary.main">{title}</Typography>
         <Typography
           sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span"
           variant="h5"
@@ -112,7 +112,7 @@ export default function OfferingCard({
           {offeringStates[publishedStatus].label}
         </Typography>
       </Box>
-      <Box sx={textGroupContainerStyles}>
+      <Box sx={definitionListContainerStyles}>
         <Box sx={definitionListStyles} component="dl">
           <dt>Department: </dt>
           <dd>{departments}</dd>
@@ -126,7 +126,7 @@ export default function OfferingCard({
           <dd>{timeCommitment}</dd>
         </Box>
       </Box>
-      <Box sx={textGroupContainerStyles}>
+      <Box sx={definitionListContainerStyles}>
         <Box sx={definitionListStyles} component="dl">
           <dt>Start date: </dt>
           <dd>{startDate}</dd>
@@ -141,10 +141,13 @@ export default function OfferingCard({
           variant="outlined"
           component={Link}
           href={url}
-          sx={{mr: theme.spacing(1)}}
+          sx={{
+            mr: theme.spacing(1),
+            fontWeight: 700
+          }}
         >
-          MORE DETAILS</Button>
-        <Button href={editUrl}>EDIT</Button>
+          More Details</Button>
+        <Button sx={{fontWeight: 700}}href={editUrl}>Edit</Button>
       </Box>
     </Paper>
   );
