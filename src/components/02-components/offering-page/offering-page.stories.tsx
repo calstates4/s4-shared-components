@@ -58,10 +58,11 @@ const offeringData = {
   startDate: '04/04/2023',
   endDate: '04/10/2023',
   primaryContact: 'Emily Parker',
-  timeApprovers: 'Emily Parker',
+  timeApprovers: 'Emily Parker, Emily Parker',
   formSigners: 'Emily Parker',
-  observers: 'Emily Parker',
-  training
+  observers: 'Emily Parker, Emily Parker, Emily Parker',
+  training,
+  published: true,
 };
 
 export const Default: StoryObj<typeof OfferingPage> = {
