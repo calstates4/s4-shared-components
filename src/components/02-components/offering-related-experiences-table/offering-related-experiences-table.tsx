@@ -22,6 +22,8 @@ export type OfferingRelatedExperiencesTableProps = {
       stundentLastname: string;
       studentEmail: string;
       campus: string;
+      signFormUrl: string;
+      approveTimeUrl: string;
     }[];
   };
 }
@@ -72,7 +74,7 @@ export default function OfferingRelatedExperiencesTable({
                   variant="outlined"
                   component={Link}
                   sx={{fontWeight: 700, mr: theme.spacing(1)}}
-                  href={`/experiences/${row.id}`}
+                  href={row.signFormUrl}
                   >
                     Sign forms
                   </Button>
@@ -80,7 +82,7 @@ export default function OfferingRelatedExperiencesTable({
                   variant="outlined"
                   component={Link}
                   sx={{fontWeight: 700}}
-                  href={`/experiences/${row.id}`}
+                  href={row.approveTimeUrl}
                   >
                     Approve time
                   </Button>
