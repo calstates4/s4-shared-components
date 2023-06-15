@@ -27,6 +27,7 @@ export default function PastExpericiencesList({
   const contentStyle = {
     display: 'flex',
     flexDirection: 'column',
+    flexBasis: '75%',
   };
 
   const headingStyles = {

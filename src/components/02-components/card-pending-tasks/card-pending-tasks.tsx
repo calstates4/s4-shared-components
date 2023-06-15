@@ -13,6 +13,7 @@ export default function CardPendingTasks({ ctaLink }: CardPendingTasksProps) {
   // Styles.
   const contentStyle = {
     display: 'flex',
+    flexBasis: '20%',
     flexDirection: 'column',
     alignItems: 'center',
     p: theme.spacing(5),

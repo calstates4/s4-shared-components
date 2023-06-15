@@ -18,6 +18,7 @@ export default function MainContent({
     menuOpen?: boolean;
     theme: Theme;
   }>(({ theme, menuOpen }) => ({
+    maxWidth: '100vw',
     flexGrow: 1,
     padding: theme.spacing(2),
     marginLeft: 0,

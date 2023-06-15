@@ -13,7 +13,7 @@ export default function CardExperiencesList({
 
   // Styles.
   const containerStyle = {
-    p: theme.spacing(5),
+    pt: theme.spacing(5),
     mb: theme.spacing(5),
   };
 
