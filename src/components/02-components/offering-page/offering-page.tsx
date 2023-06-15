@@ -4,6 +4,10 @@ import Link from '../../01-elements/link/link';
 import { ReactNode } from 'react';
 
 type OfferingPageProps = {
+  parentBreadcrumb: {
+    title: string;
+    url: string;
+  }[];
   title: string;
   url: string;
   editUrl: string;
@@ -32,6 +36,7 @@ type OfferingPageProps = {
 };
 
 export default function OfferingPage({
+  parentBreadcrumb,
   title,
   url,
   editUrl,
@@ -61,6 +66,7 @@ export default function OfferingPage({
   const theme = useTheme();
 
   const publishedStatus = published ? 'published' : 'unpublished';
+  parentBreadcrumb.push({title, url});
 
   const offeringStates: Record<string, {
     label: string;
@@ -195,7 +201,7 @@ export default function OfferingPage({
 
   return (
     <article>
-      <Breadcrumbs items={[{ title: 'Oferrings', url: '/offerings' }, { title, url }]} />
+      <Breadcrumbs items={parentBreadcrumb} />
       <Box sx={titleContainerStyles}>
         <Typography variant="h1" sx={titleStyles}>
           {title}

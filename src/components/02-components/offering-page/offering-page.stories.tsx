@@ -43,9 +43,15 @@ const training = `<p>
 </p>`;
 
 const offeringData = {
+  parentBreadcrumb: [
+    {
+      title: 'Offerings',
+      url: '#'
+    }
+  ],
   title: 'Hi omnes lingua, institutis, legibus inter se differunt.',
-  url: '/',
-  editUrl: '/edit',
+  url: '#',
+  editUrl: '#',
   type: 'Hybrid',
   description,
   healthSafety,
