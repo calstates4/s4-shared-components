@@ -146,7 +146,7 @@ export default function OfferingCard({
           }}
         >
           More Details</Button>
-        <Button sx={{fontWeight: 700}}href={editUrl}>Edit</Button>
+        <Button sx={{fontWeight: 700}} href={editUrl}>Edit</Button>
       </Box>
     </Paper>
   );

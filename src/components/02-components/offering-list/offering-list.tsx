@@ -150,16 +150,18 @@ export default function OfferingList({
           variant="outlined"
           component={Link}
           href={addUrl}
+          startIcon = {
+            <AddIcon
+              sx={{
+                fontSize: '1rem',
+                mr: theme.spacing(0.5),
+              }}/>
+          }
           sx={{
             flexShrink: 0,
             fontWeight: 700,
           }}
         >
-          <AddIcon
-            sx={{
-              fontSize: '1rem',
-              mr: theme.spacing(0.5),
-            }}/>
           Add offering
         </Button>
       </Box>

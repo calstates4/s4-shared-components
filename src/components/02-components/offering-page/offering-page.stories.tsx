@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import OfferingPage from './offering-page';
+import OfferingRelatedExperiencesTable , { type OfferingRelatedExperiencesTableProps } from '../offering-related-experiences-table/offering-related-experiences-table';
+
+import { Experiences as OfferingExperiencesRelatedTableStories } from '../offering-related-experiences-table/offering-related-experiences-table.stories'
+import React from 'react';
 
 const meta: Meta<typeof OfferingPage> = {
   title: 'Components/OfferingPage',
@@ -63,11 +67,19 @@ const offeringData = {
   observers: 'Emily Parker, Emily Parker, Emily Parker',
   training,
   published: true,
+  children: <OfferingRelatedExperiencesTable {...OfferingExperiencesRelatedTableStories.args as OfferingRelatedExperiencesTableProps}/>
 };
 
 export const Default: StoryObj<typeof OfferingPage> = {
   args: {
     ...offeringData,
+  }
+};
+
+export const NoExperiences: StoryObj<typeof OfferingPage> = {
+  args: {
+    ...offeringData,
+    children: <OfferingRelatedExperiencesTable url='#'/>
   }
 };
 

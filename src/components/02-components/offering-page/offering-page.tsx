@@ -329,12 +329,7 @@ export default function OfferingPage({
           <Typography>{activities}</Typography>
         </Paper>
       </Box>
-      {children &&
-        <Paper sx={paperStyles}>
-          <Typography component="h2" variant="h2">Experiences related to this offering</Typography>
-          {children}
-        </Paper>
-      }
+      {children}
     </article>
   );
 }
