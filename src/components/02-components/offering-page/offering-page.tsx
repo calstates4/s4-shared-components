@@ -1,6 +1,7 @@
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
+import { ReactNode } from 'react';
 
 type OfferingPageProps = {
   title: string;
@@ -27,6 +28,7 @@ type OfferingPageProps = {
   observers: string;
   training?: string;
   published: boolean;
+  children?: ReactNode
 };
 
 export default function OfferingPage({
@@ -54,6 +56,7 @@ export default function OfferingPage({
   observers,
   training,
   published,
+  children,
 }: OfferingPageProps) {
   const theme = useTheme();
 
@@ -115,7 +118,7 @@ export default function OfferingPage({
   };
 
   const twoColContainerStyles = {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'flex',
       columnGap: theme.spacing(3)
     }
@@ -140,13 +143,16 @@ export default function OfferingPage({
   };
 
   const contactContainerStyles = {
+    mt: theme.spacing(1),
     pt: theme.spacing(1),
     borderTop: `1px solid ${theme.palette.secondary.main}`,
-    [theme.breakpoints.up('sm')]: {
-      borderTop: 'none',
-      borderLeft: `1px solid ${theme.palette.secondary.main}`,
+    [theme.breakpoints.up('md')]: {
+      mt: 0,
       pt: 0,
       pl: theme.spacing(2),
+      borderTop: 'none',
+      borderLeft: `1px solid ${theme.palette.secondary.main}`,
+
 
     }
   }
@@ -155,12 +161,12 @@ export default function OfferingPage({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       columnGap: theme.spacing(5),
-      mb: theme.spacing(1),
     }
   }
 
-  const definitionListStyles = {
+  const inlineDefinitionListStyles = {
     m: 0,
+    mb: theme.spacing(0.5),
     dt: {
       display: 'inline',
       fontWeight: '700',
@@ -170,8 +176,21 @@ export default function OfferingPage({
       ml: 0,
     },
     [theme.breakpoints.up('sm')]: {
-      mb: 0,
+      flex: '1 1 50%'
+    },
+    '> div': {
+      mb: theme.spacing(0.5),
     }
+  };
+
+  const definitionListStyles = {
+    ...inlineDefinitionListStyles,
+    dt: {
+      fontWeight: '700',
+    },
+    dd: {
+      ml: 0,
+    },
   };
 
   return (
@@ -202,40 +221,51 @@ export default function OfferingPage({
         </Box>
         <Box sx={twoColContainerStyles}>
           <Box sx={leftColumnContainerStyles}>
-          <Box sx={definitionListContainerStyles}>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>Department: </dt>
-              <dd>{department}</dd>
+            <Box sx={definitionListContainerStyles}>
+              <Box sx={inlineDefinitionListStyles} component="dl">
+                <dt>Department: </dt>
+                <dd>{department}</dd>
+              </Box>
+              <Box sx={inlineDefinitionListStyles} component="dl">
+                <dt>Address: </dt>
+                <dd>{address}</dd>
+              </Box>
             </Box>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>Address: </dt>
-              <dd>{address}</dd>
+            <Box sx={definitionListContainerStyles}>
+              <Box sx={inlineDefinitionListStyles} component="dl">
+                <dt>Type: </dt>
+                <dd>{type}</dd>
+              </Box>
+              <Box sx={inlineDefinitionListStyles} component="dl">
+                <dt>Max number of students: </dt>
+                <dd>{maxStudents}</dd>
+              </Box>
             </Box>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>Type: </dt>
-              <dd>{type}</dd>
+            <Box sx={definitionListContainerStyles}>
+              <Box sx={definitionListStyles} component="dl">
+                <dt>Time commitment: </dt>
+                <dd>{timeCommitment}</dd>
+              </Box>
+              <Box sx={definitionListStyles} component="dl">
+                <dt>Dates: </dt>
+                <dd>{`Start: ${startDate}`}</dd>
+                <dd>{`End: ${endDate}`}</dd>
+              </Box>
             </Box>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>Max number of students: </dt>
-              <dd>{maxStudents}</dd>
+            <Box sx={inlineDefinitionListStyles} component="dl">
+              <div>
+                <dt>Required Language(s) other than English: </dt>
+                <dd>{requiredLanguages}</dd>
+              </div>
+              <div>
+                <dt>Preferred Language(s) other than English: </dt>
+                <dd>{preferredLanguages}</dd>
+              </div>
             </Box>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>Time commitment: </dt>
-              <dd>{timeCommitment}</dd>
-            </Box>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>Start date: </dt>
-              <dd>{startDate}</dd>
-            </Box>
-            <Box sx={definitionListStyles} component="dl">
-              <dt>End date: </dt>
-              <dd>{endDate}</dd>
-            </Box>
-          </Box>
           </Box>
           <Box sx={{...rightColumnContainerStyles, ...contactContainerStyles}}>
-            <Typography component="h3" variant="h4">Contact and other roles</Typography>
-            <Box sx={definitionListStyles} component="dl">
+            <Typography sx={{mb: theme.spacing(0.5)}}component="h3" variant="h4">Contact and other roles</Typography>
+            <Box sx={inlineDefinitionListStyles} component="dl">
               <div>
                 <dt>Primary contact: </dt>
                 <dd>{primaryContact}</dd>
@@ -254,16 +284,6 @@ export default function OfferingPage({
               </div>
             </Box>
           </Box>
-        </Box>
-        <Box sx={definitionListStyles} component="dl">
-          <div>
-            <dt>Required Language(s) other than English: </dt>
-            <dd>{requiredLanguages}</dd>
-          </div>
-          <div>
-            <dt>Preferred Language(s) other than English: </dt>
-            <dd>{preferredLanguages}</dd>
-          </div>
         </Box>
       </Paper>
       <Paper sx={paperStyles}>
@@ -289,7 +309,7 @@ export default function OfferingPage({
       <Box sx={twoColContainerStyles}>
         <Paper sx={{...paperStyles, ...leftColumnContainerStyles}}>
         <Typography sx={{mb: theme.spacing(1)}}component="h2" variant="h2">Focus</Typography>
-        <Box sx={definitionListStyles} component="dl">
+        <Box sx={inlineDefinitionListStyles} component="dl">
           <div>
             <dt>Population: </dt>
             <dd>{focusPopulation}</dd>
@@ -309,6 +329,12 @@ export default function OfferingPage({
           <Typography>{activities}</Typography>
         </Paper>
       </Box>
+      {children &&
+        <Paper sx={paperStyles}>
+          <Typography component="h2" variant="h2">Experiences related to this offering</Typography>
+          {children}
+        </Paper>
+      }
     </article>
   );
 }

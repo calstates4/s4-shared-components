@@ -59,7 +59,6 @@ export default function OfferingCard({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'flex-start',
     }
   };
 
