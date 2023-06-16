@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
-export type CardExperiencesProps = {
+export type CardExperienceProps = {
   heading: string;
   state: string;
   description: string;
@@ -16,7 +16,7 @@ export type CardExperiencesProps = {
   cardCount: number;
 };
 
-export default function CardExperiences({
+export default function CardExperience({
   heading,
   state,
   description,
@@ -29,7 +29,7 @@ export default function CardExperiences({
   hours,
   hoursCtaUrl,
   cardCount,
-}: CardExperiencesProps) {
+}: CardExperienceProps) {
   const theme = useTheme();
 
   // Variables according to the variant of the number of items
