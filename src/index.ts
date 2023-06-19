@@ -31,7 +31,10 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
-export { default as OrganizationPage } from './components/02-components/organization-page/organization-page';
+export {
+  default as OrganizationPage,
+  type OrganizationPageProps,
+} from './components/02-components/organization-page/organization-page';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export {
   default as SidebarMenu,

@@ -7,7 +7,7 @@ import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
 
-type OrganizationPageProps = {
+export type OrganizationPageProps = {
   title: string;
   url: string;
   editUrl: string;
@@ -325,10 +325,20 @@ export default function OrganizationPage({
                 </Typography>
                 <Box sx={deptsItemContentStyles}>
                   <Box sx={deptsItemDescStyles}>{item.description}</Box>
-                  <Button variant="outlined" sx={{ flexShrink: 0 }}>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    href={`/organization/offerings?department=${item.id}`}
+                    sx={{ flexShrink: 0 }}
+                  >
                     See Offerings
                   </Button>
-                  <Button variant="outlined" sx={{ flexShrink: 0 }}>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    href={`/organization/staff?department=${item.id}`}
+                    sx={{ flexShrink: 0 }}
+                  >
                     See Staff
                   </Button>
                 </Box>
