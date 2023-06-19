@@ -15,7 +15,7 @@ export const Default: StoryObj<typeof CardPendingTasks> = {
     ctaLink: 'opportunity',
   }, 
   render: (args) => (
-    <Box maxWidth={'400px'}>
+    <Box maxWidth="400px">
       <CardPendingTasks {...args} />
     </Box>
   ),

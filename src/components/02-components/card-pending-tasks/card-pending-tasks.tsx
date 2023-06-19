@@ -1,5 +1,5 @@
 import { Button, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material';
 import AddAlarmIcon from '@mui/icons-material/AddAlarm';
 import Link from '../../01-elements/link/link';
 
