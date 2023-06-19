@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import PastExperiencesList from './past-experiences-list';
-import React from 'react';
 
 const meta: Meta<typeof PastExperiencesList> = {
   title: 'Components/Past Experiences List',
