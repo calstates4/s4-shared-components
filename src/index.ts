@@ -20,7 +20,10 @@ export {
   type CampusCardProps,
 } from './components/02-components/campus-card/campus-card';
 export { default as CampusList } from './components/02-components/campus-list/campus-list';
-export { default as CardExperience } from './components/02-components/card-experience/card-experience';
+export {
+  default as CardExperience,
+  type CardExperienceProps,
+} from './components/02-components/card-experience/card-experience';
 export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
 export {
   default as Context,
@@ -31,7 +34,10 @@ export { default as MainContent } from './components/02-components/main-content/
 export { default as OfferingCard, type OfferingCardProps } from './components/02-components/offering-card/offering-card';
 export { default as OfferingList } from './components/02-components/offering-list/offering-list';
 export { default as OfferingPage } from './components/02-components/offering-page/offering-page';
-export { default as OrganizationPage } from './components/02-components/organization-page/organization-page';
+export {
+  default as OrganizationPage,
+  type OrganizationPageProps,
+} from './components/02-components/organization-page/organization-page';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export {
   default as SidebarMenu,
