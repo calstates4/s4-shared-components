@@ -2,13 +2,12 @@ import MailIcon from '@mui/icons-material/Mail';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PlaceIcon from '@mui/icons-material/Place';
 import WebAssetIcon from '@mui/icons-material/WebAsset';
-import { Box, Button, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
 
-type OrganizationPageProps = {
+export type OrganizationPageProps = {
   title: string;
   url: string;
   editUrl: string;
@@ -326,10 +325,20 @@ export default function OrganizationPage({
                 </Typography>
                 <Box sx={deptsItemContentStyles}>
                   <Box sx={deptsItemDescStyles}>{item.description}</Box>
-                  <Button variant="outlined" sx={{ flexShrink: 0 }}>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    href={`/organization/offerings?department=${item.id}`}
+                    sx={{ flexShrink: 0 }}
+                  >
                     See Offerings
                   </Button>
-                  <Button variant="outlined" sx={{ flexShrink: 0 }}>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    href={`/organization/staff?department=${item.id}`}
+                    sx={{ flexShrink: 0 }}
+                  >
                     See Staff
                   </Button>
                 </Box>
