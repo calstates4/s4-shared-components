@@ -86,6 +86,7 @@ export default function OfferingList({
   const formItemStyles = {
     mb: theme.spacing(2),
     display: 'flex',
+    minWidth: '8rem',
     [theme.breakpoints.up('sm')]: {
       display: 'inline-flex',
       mb: 0,
@@ -98,6 +99,7 @@ export default function OfferingList({
       <FormControl size="small" sx={formItemStyles}>
         <InputLabel id="category-select-label">Category</InputLabel>
         <Select
+          labelId="categiry-select-label"
           id="category-select"
           label="Category"
           native={true}
@@ -115,6 +117,7 @@ export default function OfferingList({
           <FormControl size="small" sx={formItemStyles}>
             <InputLabel id="department-select-label">Department</InputLabel>
             <Select
+              labelId="department-select-label"
               id="department-select"
               label="Department"
               native={true}

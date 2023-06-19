@@ -7,7 +7,7 @@ import { Experiences as OfferingExperiencesRelatedTableStories } from '../offeri
 import React from 'react';
 
 const meta: Meta<typeof OfferingPage> = {
-  title: 'Components/OfferingPage',
+  title: 'Components/Offering Page',
   component: OfferingPage,
 };
 
@@ -43,9 +43,13 @@ const training = `<p>
 </p>`;
 
 const offeringData = {
-  parentBreadcrumb: [
+  breadcrumb: [
     {
       title: 'Offerings',
+      url: '#'
+    },
+    {
+      title: 'Hi omnes lingua, institutis, legibus inter se differunt.',
       url: '#'
     }
   ],

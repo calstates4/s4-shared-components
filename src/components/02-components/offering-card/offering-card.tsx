@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
 
 export type OfferingCardProps = {
+  id: string;
   title: string;
   url: string;
   editUrl: string;
@@ -59,6 +60,7 @@ export default function OfferingCard({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       justifyContent: 'space-between',
+      alignItems: 'flex-start',
     }
   };
 
@@ -73,6 +75,7 @@ export default function OfferingCard({
     [theme.breakpoints.up('sm')]: {
       ml: theme.spacing(1.5),
       mt: 0,
+
     }
   };
 
@@ -112,10 +115,12 @@ export default function OfferingCard({
         </Typography>
       </Box>
       <Box sx={definitionListContainerStyles}>
-        <Box sx={definitionListStyles} component="dl">
-          <dt>Department: </dt>
-          <dd>{department}</dd>
-        </Box>
+        {department && (
+          <Box sx={definitionListStyles} component="dl">
+            <dt>Department: </dt>
+            <dd>{department}</dd>
+          </Box>
+        )}
         <Box sx={definitionListStyles} component="dl">
           <dt>Type: </dt>
           <dd>{type}</dd>

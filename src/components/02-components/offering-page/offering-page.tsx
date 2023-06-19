@@ -4,7 +4,7 @@ import Link from '../../01-elements/link/link';
 import { ReactNode } from 'react';
 
 type OfferingPageProps = {
-  parentBreadcrumb: {
+  breadcrumb: {
     title: string;
     url: string;
   }[];
@@ -36,7 +36,7 @@ type OfferingPageProps = {
 };
 
 export default function OfferingPage({
-  parentBreadcrumb,
+  breadcrumb,
   title,
   url,
   editUrl,
@@ -66,7 +66,6 @@ export default function OfferingPage({
   const theme = useTheme();
 
   const publishedStatus = published ? 'published' : 'unpublished';
-  parentBreadcrumb.push({title, url});
 
   const offeringStates: Record<string, {
     label: string;
@@ -201,7 +200,7 @@ export default function OfferingPage({
 
   return (
     <article>
-      <Breadcrumbs items={parentBreadcrumb} />
+      <Breadcrumbs items={breadcrumb} />
       <Box sx={titleContainerStyles}>
         <Typography variant="h1" sx={titleStyles}>
           {title}
@@ -228,14 +227,18 @@ export default function OfferingPage({
         <Box sx={twoColContainerStyles}>
           <Box sx={leftColumnContainerStyles}>
             <Box sx={definitionListContainerStyles}>
-              <Box sx={inlineDefinitionListStyles} component="dl">
+              {department && (
+                <Box sx={inlineDefinitionListStyles} component="dl">
                 <dt>Department: </dt>
                 <dd>{department}</dd>
               </Box>
-              <Box sx={inlineDefinitionListStyles} component="dl">
-                <dt>Address: </dt>
-                <dd>{address}</dd>
-              </Box>
+              )}
+              {address && (
+                <Box sx={inlineDefinitionListStyles} component="dl">
+                  <dt>Address: </dt>
+                  <dd>{address}</dd>
+                </Box>
+              )}
             </Box>
             <Box sx={definitionListContainerStyles}>
               <Box sx={inlineDefinitionListStyles} component="dl">
@@ -259,14 +262,18 @@ export default function OfferingPage({
               </Box>
             </Box>
             <Box sx={inlineDefinitionListStyles} component="dl">
-              <div>
-                <dt>Required Language(s) other than English: </dt>
-                <dd>{requiredLanguages}</dd>
-              </div>
-              <div>
-                <dt>Preferred Language(s) other than English: </dt>
-                <dd>{preferredLanguages}</dd>
-              </div>
+              {requiredLanguages && (
+                <div>
+                  <dt>Required Language(s) other than English: </dt>
+                  <dd>{requiredLanguages}</dd>
+                </div>
+              )}
+              {preferredLanguages && (
+                <div>
+                  <dt>Preferred Language(s) other than English: </dt>
+                  <dd>{preferredLanguages}</dd>
+                </div>
+              )}
             </Box>
           </Box>
           <Box sx={{...rightColumnContainerStyles, ...contactContainerStyles}}>

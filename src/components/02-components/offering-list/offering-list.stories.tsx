@@ -6,7 +6,7 @@ import { Published as OfferingCardStories } from '../offering-card/offering-card
 import OfferingList from './offering-list';
 
 const meta: Meta<typeof OfferingList> = {
-  title: 'Components/OfferingList',
+  title: 'Components/Offering List',
   component: OfferingList,
 };
 
@@ -39,10 +39,10 @@ export const Default: StoryObj<typeof OfferingList> = {
         id: '1',
         label: 'Sales',
       },
-      {
-        id: '2',
-        label: 'Human Resources',
-      },
+      // {
+      //   id: '2',
+      //   label: 'Human Resources',
+      // },
     ],
     currentFilters: {
       category: 'all',
