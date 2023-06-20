@@ -15,6 +15,10 @@ import Pager from '../../01-elements/pager/pager';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 
 type OfferingListProps = {
+  breadcrumb: {
+    title: string;
+    url: string;
+  }[];
   children: ReactNode
   url: string;
   addUrl: string;
@@ -24,19 +28,20 @@ type OfferingListProps = {
   currentPage: number;
   categoryFilterValues: {
     id: string;
-    label: string;
+    name: string;
   }[],
   departmentFilterValues?: {
     id: string;
-    label: string;
+    name: string;
   }[],
   currentFilters: {
     category: string | null;
-    departmentId: string | null;
+    department: string | null;
   };
 }
 
 export default function OfferingList({
+  breadcrumb,
   children,
   url,
   addUrl,
@@ -108,7 +113,7 @@ export default function OfferingList({
         >
           {categoryFilterValues.map((item) => (
             <option key={item.id} value={item.id}>
-              {item.label}
+              {item.name}
             </option>
           ))}
         </Select>
@@ -122,11 +127,11 @@ export default function OfferingList({
               label="Department"
               native={true}
               name="department"
-              defaultValue={currentFilters.departmentId}
+              defaultValue={currentFilters.department}
             >
               {departmentFilterValues.map((item) => (
                 <option key={item.id} value={item.id}>
-                  {item.label}
+                  {item.name}
                 </option>
               ))}
             </Select>
@@ -146,7 +151,7 @@ export default function OfferingList({
 
   return (
     <div>
-      <Breadcrumbs items={[{ title: 'Offerings', url }]} />
+      <Breadcrumbs items={breadcrumb} />
       <Box sx={titleContainerStyles}>
         <Typography variant="h1" sx={titleStyles}>Offerings</Typography>
         <Button

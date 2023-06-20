@@ -3,7 +3,7 @@ import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 import { ReactNode } from 'react';
 
-type OfferingPageProps = {
+export type OfferingPageProps = {
   breadcrumb: {
     title: string;
     url: string;

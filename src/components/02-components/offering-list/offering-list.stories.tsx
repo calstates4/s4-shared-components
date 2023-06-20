@@ -18,6 +18,12 @@ const offerings = Array.from({ length: 5 }, (_, i) => i).map(() => (
 
 export const Default: StoryObj<typeof OfferingList> = {
   args: {
+    breadcrumb: [
+      {
+        title: 'Offerings',
+        url: '#'
+      }
+    ],
     children: offerings,
     url: '#',
     addUrl: '#',
@@ -27,22 +33,22 @@ export const Default: StoryObj<typeof OfferingList> = {
     categoryFilterValues: [
       {
         id: 'all',
-        label: 'All Offerings',
+        name: 'All Offerings',
       },
       {
         id: '1',
-        label: 'My Offerings',
+        name: 'My Offerings',
       },
     ],
     departmentFilterValues: [
       {
         id: '1',
-        label: 'Sales',
+        name: 'Sales',
       },
-      // {
-      //   id: '2',
-      //   label: 'Human Resources',
-      // },
+      {
+        id: '2',
+        name: 'Human Resources',
+      },
     ],
     currentFilters: {
       category: 'all',
