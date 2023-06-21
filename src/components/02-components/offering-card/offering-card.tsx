@@ -7,7 +7,7 @@ export type OfferingCardProps = {
   title: string;
   url: string;
   editUrl: string;
-  published: boolean;
+  published?: boolean;
   type?: string;
   department?: string;
   startDate?: string;
