@@ -38,6 +38,10 @@ export {
   type OfferingPageProps
 } from './components/02-components/offering-page/offering-page';
 export {
+  default as OfferingRelatedExperiencesTable,
+  type OfferingRelatedExperiencesTableRowProps
+} from './components/02-components/offering-related-experiences-table/offering-related-experiences-table'
+export {
   default as OrganizationPage,
   type OrganizationPageProps,
 } from './components/02-components/organization-page/organization-page';

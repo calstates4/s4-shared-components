@@ -11,26 +11,30 @@ import { useTheme,
 import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
 
+export type OfferingRelatedExperiencesTableRowProps = {
+  id: string;
+  studentName?: string;
+  stundentLastname?: string;
+  studentEmail?: string;
+  campus?: string;
+  signFormUrl: string;
+  approveTimeUrl: string;
+}
+
 export type OfferingRelatedExperiencesTableProps = {
   url: string;
-  experiences?: {
-    pages: number;
-    currentPage: number;
-    items: {
-      id: string;
-      studentName: string;
-      stundentLastname: string;
-      studentEmail: string;
-      campus: string;
-      signFormUrl: string;
-      approveTimeUrl: string;
-    }[];
-  };
+  totalItems: number;
+  itemsPerPage: number;
+  currentPage: number;
+  items?: OfferingRelatedExperiencesTableRowProps[];
 }
 
 export default function OfferingRelatedExperiencesTable({
   url,
-  experiences,
+  totalItems,
+  itemsPerPage,
+  currentPage,
+  items,
 }: OfferingRelatedExperiencesTableProps) {
   const theme = useTheme();
 
@@ -49,7 +53,7 @@ export default function OfferingRelatedExperiencesTable({
   }
 
   // Render funtions.
-  const renderedTable = experiences ? (
+  const renderedTable = items && items.length ? (
     <TableContainer component={Paper} sx={paperStyles}>
       <Typography sx={{mb: theme.spacing(2)}} component="h2" variant="h2">Experiences related to this offering</Typography>
       <Table sx={tableStyles}>
@@ -63,7 +67,7 @@ export default function OfferingRelatedExperiencesTable({
           </TableRow>
         </TableHead>
         <TableBody>
-          {experiences.items.map((row) => (
+          {items.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.studentName}</TableCell>
               <TableCell>{row.stundentLastname}</TableCell>
@@ -93,8 +97,8 @@ export default function OfferingRelatedExperiencesTable({
       </Table>
       <Pager
         baseUrl={url}
-        count={experiences.pages}
-        page={experiences.currentPage}
+        count={Math.ceil(totalItems / itemsPerPage)}
+        page={currentPage}
         sx={{
           display: 'flex',
           justifyContent: 'center',

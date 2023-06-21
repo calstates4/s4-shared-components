@@ -8,11 +8,11 @@ export type OfferingCardProps = {
   url: string;
   editUrl: string;
   published: boolean;
-  type: string;
+  type?: string;
   department?: string;
-  startDate: string;
-  endDate: string;
-  timeCommitment: string;
+  startDate?: string;
+  endDate?: string;
+  timeCommitment?: string;
 };
 
 export default function OfferingCard({
@@ -107,12 +107,14 @@ export default function OfferingCard({
     <Paper sx={containerStyles} component="article">
       <Box sx={headerContainerStyles}>
         <Typography variant="h2" color="primary.main">{title}</Typography>
-        <Typography
-          sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span"
-          variant="h5"
-        >
-          {offeringStates[publishedStatus].label}
-        </Typography>
+        {typeof published !== 'undefined' && (
+          <Typography
+            sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span"
+            variant="h5"
+          >
+            {offeringStates[publishedStatus].label}
+          </Typography>
+        )}
       </Box>
       <Box sx={definitionListContainerStyles}>
         {department && (
@@ -121,24 +123,33 @@ export default function OfferingCard({
             <dd>{department}</dd>
           </Box>
         )}
-        <Box sx={definitionListStyles} component="dl">
-          <dt>Type: </dt>
-          <dd>{type}</dd>
-        </Box>
-        <Box sx={definitionListStyles} component="dl">
-          <dt>Time commitment: </dt>
-          <dd>{timeCommitment}</dd>
-        </Box>
+        {type && (
+          <Box sx={definitionListStyles} component="dl">
+            <dt>Type: </dt>
+            <dd>{type}</dd>
+          </Box>
+        )}
+        {timeCommitment && (
+          <Box sx={definitionListStyles} component="dl">
+            <dt>Time commitment: </dt>
+            <dd>{timeCommitment}</dd>
+          </Box>
+        )}
       </Box>
       <Box sx={definitionListContainerStyles}>
-        <Box sx={definitionListStyles} component="dl">
-          <dt>Start date: </dt>
-          <dd>{startDate}</dd>
-        </Box>
-        <Box sx={definitionListStyles} component="dl">
-          <dt>End date: </dt>
-          <dd>{endDate}</dd>
-        </Box>
+        {startDate && (
+          <Box sx={definitionListStyles} component="dl">
+            <dt>Start date: </dt>
+            <dd>{startDate}</dd>
+          </Box>
+        )}
+        {endDate && (
+          <Box sx={definitionListStyles} component="dl">
+            <dt>End date: </dt>
+            <dd>{endDate}</dd>
+          </Box>
+        )}
+
       </Box>
       <Box sx={{mt: theme.spacing(2)}}>
         <Button
