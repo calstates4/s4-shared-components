@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import OfferingPage from './offering-page';
-import OfferingRelatedExperiencesTable , { type OfferingRelatedExperiencesTableProps } from '../offering-related-experiences-table/offering-related-experiences-table';
+import OfferingRelatedExperiencesTable, {
+  type OfferingRelatedExperiencesTableProps,
+} from '../offering-related-experiences-table/offering-related-experiences-table';
 
-import { Experiences as OfferingExperiencesRelatedTableStories } from '../offering-related-experiences-table/offering-related-experiences-table.stories'
+import { Experiences as OfferingExperiencesRelatedTableStories } from '../offering-related-experiences-table/offering-related-experiences-table.stories';
 import React from 'react';
 
 const meta: Meta<typeof OfferingPage> = {
@@ -46,12 +48,12 @@ const offeringData = {
   breadcrumb: [
     {
       title: 'Offerings',
-      url: '#'
+      url: '#',
     },
     {
       title: 'Hi omnes lingua, institutis, legibus inter se differunt.',
-      url: '#'
-    }
+      url: '#',
+    },
   ],
   title: 'Hi omnes lingua, institutis, legibus inter se differunt.',
   url: '#',
@@ -60,9 +62,12 @@ const offeringData = {
   description,
   healthSafety,
   department: 'Finance, Human Resources, Sales',
-  focusPopulation: 'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
-  focusAreas: 'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
-  subFocusAreas: 'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
+  focusPopulation:
+    'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
+  focusAreas:
+    'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
+  subFocusAreas:
+    'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
   activities: 'People Experiencing Disability, Seniors',
   timeCommitment: '20 hours per week',
   address: 'Camarillo, CA United States',
@@ -77,22 +82,22 @@ const offeringData = {
   observers: 'Emily Parker, Emily Parker, Emily Parker',
   training,
   published: true,
-  children: <OfferingRelatedExperiencesTable {...OfferingExperiencesRelatedTableStories.args as OfferingRelatedExperiencesTableProps}/>
+  children: (
+    <OfferingRelatedExperiencesTable
+      {...(OfferingExperiencesRelatedTableStories.args as OfferingRelatedExperiencesTableProps)}
+    />
+  ),
 };
 
 export const Default: StoryObj<typeof OfferingPage> = {
   args: {
     ...offeringData,
-  }
+  },
 };
 
 export const NoExperiences: StoryObj<typeof OfferingPage> = {
   args: {
     ...offeringData,
-    children: <OfferingRelatedExperiencesTable url='#'/>
-  }
+    children: <OfferingRelatedExperiencesTable url="#" />,
+  },
 };
-
-
-
-

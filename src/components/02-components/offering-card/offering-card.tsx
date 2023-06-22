@@ -30,10 +30,13 @@ export default function OfferingCard({
 
   const publishedStatus = published ? 'published' : 'unpublished';
 
-  const offeringStates: Record<string, {
-    label: string;
-    backgroundColor: string;
-  }> = {
+  const offeringStates: Record<
+    string,
+    {
+      label: string;
+      backgroundColor: string;
+    }
+  > = {
     published: {
       label: 'Published',
       backgroundColor: 'success.dark',
@@ -41,8 +44,8 @@ export default function OfferingCard({
     unpublished: {
       label: 'Unpublished',
       backgroundColor: 'warning.main',
-    }
-  }
+    },
+  };
 
   // Styles
   const containerStyles = {
@@ -61,7 +64,7 @@ export default function OfferingCard({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'flex-start',
-    }
+    },
   };
 
   const statusStyles = {
@@ -75,8 +78,7 @@ export default function OfferingCard({
     [theme.breakpoints.up('sm')]: {
       ml: theme.spacing(1.5),
       mt: 0,
-
-    }
+    },
   };
 
   const definitionListContainerStyles = {
@@ -84,8 +86,8 @@ export default function OfferingCard({
       display: 'flex',
       columnGap: theme.spacing(5),
       mb: theme.spacing(1),
-    }
-  }
+    },
+  };
 
   const definitionListStyles = {
     mt: 0,
@@ -100,16 +102,22 @@ export default function OfferingCard({
     },
     [theme.breakpoints.up('sm')]: {
       mb: 0,
-    }
+    },
   };
 
   return (
     <Paper sx={containerStyles} component="article">
       <Box sx={headerContainerStyles}>
-        <Typography variant="h2" color="primary.main">{title}</Typography>
+        <Typography variant="h2" color="primary.main">
+          {title}
+        </Typography>
         {typeof published !== 'undefined' && (
           <Typography
-            sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span"
+            sx={{
+              ...statusStyles,
+              backgroundColor: offeringStates[publishedStatus].backgroundColor,
+            }}
+            component="span"
             variant="h5"
           >
             {offeringStates[publishedStatus].label}
@@ -149,20 +157,22 @@ export default function OfferingCard({
             <dd>{endDate}</dd>
           </Box>
         )}
-
       </Box>
-      <Box sx={{mt: theme.spacing(2)}}>
+      <Box sx={{ mt: theme.spacing(2) }}>
         <Button
           variant="outlined"
           component={Link}
           href={url}
           sx={{
             mr: theme.spacing(1),
-            fontWeight: 700
+            fontWeight: 700,
           }}
         >
-          More Details</Button>
-        <Button sx={{fontWeight: 700}} href={editUrl}>Edit</Button>
+          More Details
+        </Button>
+        <Button sx={{ fontWeight: 700 }} href={editUrl}>
+          Edit
+        </Button>
       </Box>
     </Paper>
   );

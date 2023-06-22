@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import OfferingCard, { type OfferingCardProps } from '../offering-card/offering-card';
+import OfferingCard, {
+  type OfferingCardProps,
+} from '../offering-card/offering-card';
 import { Published as OfferingCardStories } from '../offering-card/offering-card.stories';
 
 import OfferingList from './offering-list';
@@ -21,8 +23,8 @@ export const Default: StoryObj<typeof OfferingList> = {
     breadcrumb: [
       {
         title: 'Offerings',
-        url: '#'
-      }
+        url: '#',
+      },
     ],
     children: offerings,
     url: '#',

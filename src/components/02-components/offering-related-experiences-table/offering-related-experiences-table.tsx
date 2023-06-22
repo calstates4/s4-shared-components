@@ -1,4 +1,5 @@
-import { useTheme,
+import {
+  useTheme,
   Button,
   Paper,
   Typography,
@@ -7,7 +8,8 @@ import { useTheme,
   TableRow,
   TableCell,
   TableBody,
-  TableContainer } from '@mui/material';
+  TableContainer,
+} from '@mui/material';
 import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
 
@@ -19,7 +21,7 @@ export type OfferingRelatedExperiencesTableRowProps = {
   campus?: string;
   signFormUrl: string;
   approveTimeUrl: string;
-}
+};
 
 export type OfferingRelatedExperiencesTableProps = {
   url: string;
@@ -27,7 +29,7 @@ export type OfferingRelatedExperiencesTableProps = {
   itemsPerPage: number;
   currentPage: number;
   items?: OfferingRelatedExperiencesTableRowProps[];
-}
+};
 
 export default function OfferingRelatedExperiencesTable({
   url,
@@ -49,68 +51,73 @@ export default function OfferingRelatedExperiencesTable({
     minWidth: '56.25rem',
     th: {
       fontWeight: 700,
-    }
-  }
+    },
+  };
 
   // Render funtions.
-  const renderedTable = items && items.length ? (
-    <TableContainer component={Paper} sx={paperStyles}>
-      <Typography sx={{mb: theme.spacing(2)}} component="h2" variant="h2">Experiences related to this offering</Typography>
-      <Table sx={tableStyles}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Last name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Campus</TableCell>
-            <TableCell aria-label="actions">&nbsp;</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {items.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.studentName}</TableCell>
-              <TableCell>{row.stundentLastname}</TableCell>
-              <TableCell>{row.studentEmail}</TableCell>
-              <TableCell>{row.campus}</TableCell>
-              <TableCell>
-                <Button
-                  variant="outlined"
-                  component={Link}
-                  sx={{fontWeight: 700, mr: theme.spacing(1)}}
-                  href={row.signFormUrl}
+  const renderedTable =
+    items && items.length ? (
+      <TableContainer component={Paper} sx={paperStyles}>
+        <Typography sx={{ mb: theme.spacing(2) }} component="h2" variant="h2">
+          Experiences related to this offering
+        </Typography>
+        <Table sx={tableStyles}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Last name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Campus</TableCell>
+              <TableCell aria-label="actions">&nbsp;</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {items.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.studentName}</TableCell>
+                <TableCell>{row.stundentLastname}</TableCell>
+                <TableCell>{row.studentEmail}</TableCell>
+                <TableCell>{row.campus}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    sx={{ fontWeight: 700, mr: theme.spacing(1) }}
+                    href={row.signFormUrl}
                   >
                     Sign forms
                   </Button>
                   <Button
-                  variant="outlined"
-                  component={Link}
-                  sx={{fontWeight: 700}}
-                  href={row.approveTimeUrl}
+                    variant="outlined"
+                    component={Link}
+                    sx={{ fontWeight: 700 }}
+                    href={row.approveTimeUrl}
                   >
                     Approve time
                   </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Pager
-        baseUrl={url}
-        count={Math.ceil(totalItems / itemsPerPage)}
-        page={currentPage}
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          pt: theme.spacing(3),
-        }}
-      />
-    </TableContainer>
-  ) : (
-    <Paper sx={paperStyles}>
-      <Typography component="h2" variant="h2">No Experiences related to this offering</Typography>
-    </Paper>
-  );
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Pager
+          baseUrl={url}
+          count={Math.ceil(totalItems / itemsPerPage)}
+          page={currentPage}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            pt: theme.spacing(3),
+          }}
+        />
+      </TableContainer>
+    ) : (
+      <Paper sx={paperStyles}>
+        <Typography component="h2" variant="h2">
+          No Experiences related to this offering
+        </Typography>
+      </Paper>
+    );
 
-  return (renderedTable);
+  return renderedTable;
 }

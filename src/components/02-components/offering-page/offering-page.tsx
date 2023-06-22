@@ -32,7 +32,7 @@ export type OfferingPageProps = {
   observers: string;
   training?: string;
   published: boolean;
-  children?: ReactNode
+  children?: ReactNode;
 };
 
 export default function OfferingPage({
@@ -67,10 +67,13 @@ export default function OfferingPage({
 
   const publishedStatus = published ? 'published' : 'unpublished';
 
-  const offeringStates: Record<string, {
-    label: string;
-    backgroundColor: string;
-  }> = {
+  const offeringStates: Record<
+    string,
+    {
+      label: string;
+      backgroundColor: string;
+    }
+  > = {
     published: {
       label: 'Published',
       backgroundColor: 'success.dark',
@@ -78,8 +81,8 @@ export default function OfferingPage({
     unpublished: {
       label: 'Unpublished',
       backgroundColor: 'warning.main',
-    }
-  }
+    },
+  };
 
   // Styles.
   const titleContainerStyles = {
@@ -105,7 +108,7 @@ export default function OfferingPage({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'flex-start',
-    }
+    },
   };
 
   const statusStyles = {
@@ -119,14 +122,14 @@ export default function OfferingPage({
     [theme.breakpoints.up('sm')]: {
       ml: theme.spacing(1.5),
       mt: 0,
-    }
+    },
   };
 
   const twoColContainerStyles = {
     [theme.breakpoints.up('md')]: {
       display: 'flex',
-      columnGap: theme.spacing(3)
-    }
+      columnGap: theme.spacing(3),
+    },
   };
 
   const paperStyles = {
@@ -138,13 +141,13 @@ export default function OfferingPage({
   const leftColumnContainerStyles = {
     [theme.breakpoints.up('sm')]: {
       flex: '1 1 67%',
-    }
+    },
   };
 
   const rightColumnContainerStyles = {
     [theme.breakpoints.up('sm')]: {
       flex: '1 1 33%',
-    }
+    },
   };
 
   const contactContainerStyles = {
@@ -157,17 +160,15 @@ export default function OfferingPage({
       pl: theme.spacing(2),
       borderTop: 'none',
       borderLeft: `1px solid ${theme.palette.secondary.main}`,
-
-
-    }
-  }
+    },
+  };
 
   const definitionListContainerStyles = {
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       columnGap: theme.spacing(5),
-    }
-  }
+    },
+  };
 
   const inlineDefinitionListStyles = {
     m: 0,
@@ -181,11 +182,11 @@ export default function OfferingPage({
       ml: 0,
     },
     [theme.breakpoints.up('sm')]: {
-      flex: '1 1 50%'
+      flex: '1 1 50%',
     },
     '> div': {
       mb: theme.spacing(0.5),
-    }
+    },
   };
 
   const definitionListStyles = {
@@ -216,9 +217,15 @@ export default function OfferingPage({
       </Box>
       <Paper sx={paperStyles}>
         <Box sx={generalDetailsContainerStyles}>
-          <Typography component="h2" variant="h2">General details</Typography>
+          <Typography component="h2" variant="h2">
+            General details
+          </Typography>
           <Typography
-            sx={{...statusStyles, backgroundColor: offeringStates[publishedStatus].backgroundColor}} component="span"
+            sx={{
+              ...statusStyles,
+              backgroundColor: offeringStates[publishedStatus].backgroundColor,
+            }}
+            component="span"
             variant="h5"
           >
             {offeringStates[publishedStatus].label}
@@ -229,9 +236,9 @@ export default function OfferingPage({
             <Box sx={definitionListContainerStyles}>
               {department && (
                 <Box sx={inlineDefinitionListStyles} component="dl">
-                <dt>Department: </dt>
-                <dd>{department}</dd>
-              </Box>
+                  <dt>Department: </dt>
+                  <dd>{department}</dd>
+                </Box>
               )}
               {address && (
                 <Box sx={inlineDefinitionListStyles} component="dl">
@@ -276,8 +283,16 @@ export default function OfferingPage({
               )}
             </Box>
           </Box>
-          <Box sx={{...rightColumnContainerStyles, ...contactContainerStyles}}>
-            <Typography sx={{mb: theme.spacing(0.5)}}component="h3" variant="h4">Contact and other roles</Typography>
+          <Box
+            sx={{ ...rightColumnContainerStyles, ...contactContainerStyles }}
+          >
+            <Typography
+              sx={{ mb: theme.spacing(0.5) }}
+              component="h3"
+              variant="h4"
+            >
+              Contact and other roles
+            </Typography>
             <Box sx={inlineDefinitionListStyles} component="dl">
               <div>
                 <dt>Primary contact: </dt>
@@ -300,13 +315,17 @@ export default function OfferingPage({
         </Box>
       </Paper>
       <Paper sx={paperStyles}>
-        <Typography component="h2" variant="h2">Description</Typography>
+        <Typography component="h2" variant="h2">
+          Description
+        </Typography>
         <div dangerouslySetInnerHTML={{ __html: description }} />
       </Paper>
       {healthSafety && (
         <>
           <Paper sx={paperStyles}>
-            <Typography component="h2" variant="h2">Health & Safety</Typography>
+            <Typography component="h2" variant="h2">
+              Health & Safety
+            </Typography>
             <div dangerouslySetInnerHTML={{ __html: healthSafety }} />
           </Paper>
         </>
@@ -314,31 +333,37 @@ export default function OfferingPage({
       {training && (
         <>
           <Paper sx={paperStyles}>
-            <Typography component="h2" variant="h2">Training</Typography>
+            <Typography component="h2" variant="h2">
+              Training
+            </Typography>
             <div dangerouslySetInnerHTML={{ __html: training }} />
           </Paper>
         </>
       )}
       <Box sx={twoColContainerStyles}>
-        <Paper sx={{...paperStyles, ...leftColumnContainerStyles}}>
-        <Typography sx={{mb: theme.spacing(1)}}component="h2" variant="h2">Focus</Typography>
-        <Box sx={inlineDefinitionListStyles} component="dl">
-          <div>
-            <dt>Population: </dt>
-            <dd>{focusPopulation}</dd>
-          </div>
-          <div>
-            <dt>Areas: </dt>
-            <dd>{focusAreas}</dd>
-          </div>
-          <div>
-            <dt>Sub focus areas: </dt>
-            <dd>{subFocusAreas}</dd>
-          </div>
-        </Box>
+        <Paper sx={{ ...paperStyles, ...leftColumnContainerStyles }}>
+          <Typography sx={{ mb: theme.spacing(1) }} component="h2" variant="h2">
+            Focus
+          </Typography>
+          <Box sx={inlineDefinitionListStyles} component="dl">
+            <div>
+              <dt>Population: </dt>
+              <dd>{focusPopulation}</dd>
+            </div>
+            <div>
+              <dt>Areas: </dt>
+              <dd>{focusAreas}</dd>
+            </div>
+            <div>
+              <dt>Sub focus areas: </dt>
+              <dd>{subFocusAreas}</dd>
+            </div>
+          </Box>
         </Paper>
-        <Paper sx={{...paperStyles, ...rightColumnContainerStyles}}>
-          <Typography component="h2" variant="h2">Activities</Typography>
+        <Paper sx={{ ...paperStyles, ...rightColumnContainerStyles }}>
+          <Typography component="h2" variant="h2">
+            Activities
+          </Typography>
           <Typography>{activities}</Typography>
         </Paper>
       </Box>

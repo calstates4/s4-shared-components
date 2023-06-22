@@ -18,24 +18,18 @@ const offeringData = {
   department: 'Finance',
   startDate: '04/04/2023',
   endDate: '04/10/2023',
-  timeCommitment: '20 hours per week'
-
+  timeCommitment: '20 hours per week',
 };
 
 export const Published: StoryObj<typeof OfferingCard> = {
   args: {
     ...offeringData,
-
-  }
+  },
 };
 
 export const Unpublished: StoryObj<typeof OfferingCard> = {
   args: {
     ...offeringData,
     published: false,
-
-  }
+  },
 };
-
-
-

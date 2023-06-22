@@ -6,10 +6,10 @@ import {
   Paper,
   Select,
   Typography,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { ElementType, ReactNode } from "react"
+import { ElementType, ReactNode } from 'react';
 import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
@@ -19,7 +19,7 @@ type OfferingListProps = {
     title: string;
     url: string;
   }[];
-  children: ReactNode
+  children: ReactNode;
   url: string;
   addUrl: string;
   FormElement?: ElementType;
@@ -29,16 +29,16 @@ type OfferingListProps = {
   categoryFilterValues: {
     id: string;
     name: string;
-  }[],
+  }[];
   departmentFilterValues?: {
     id: string;
     name: string;
-  }[],
+  }[];
   currentFilters: {
     category: string | null;
     department: string | null;
   };
-}
+};
 
 export default function OfferingList({
   breadcrumb,
@@ -118,25 +118,25 @@ export default function OfferingList({
           ))}
         </Select>
       </FormControl>
-        {departmentFilterValues ? (
-          <FormControl size="small" sx={formItemStyles}>
-            <InputLabel id="department-select-label">Department</InputLabel>
-            <Select
-              labelId="department-select-label"
-              id="department-select"
-              label="Department"
-              native={true}
-              name="department"
-              defaultValue={currentFilters.department}
-            >
-              {departmentFilterValues.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
-        ) : null}
+      {departmentFilterValues ? (
+        <FormControl size="small" sx={formItemStyles}>
+          <InputLabel id="department-select-label">Department</InputLabel>
+          <Select
+            labelId="department-select-label"
+            id="department-select"
+            label="Department"
+            native={true}
+            name="department"
+            defaultValue={currentFilters.department}
+          >
+            {departmentFilterValues.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+      ) : null}
       <Button variant="contained" type="submit">
         Apply Filters
       </Button>
@@ -153,17 +153,20 @@ export default function OfferingList({
     <div>
       <Breadcrumbs items={breadcrumb} />
       <Box sx={titleContainerStyles}>
-        <Typography variant="h1" sx={titleStyles}>Offerings</Typography>
+        <Typography variant="h1" sx={titleStyles}>
+          Offerings
+        </Typography>
         <Button
           variant="outlined"
           component={Link}
           href={addUrl}
-          startIcon = {
+          startIcon={
             <AddIcon
               sx={{
                 fontSize: '1rem',
                 mr: theme.spacing(0.5),
-              }}/>
+              }}
+            />
           }
           sx={{
             flexShrink: 0,
