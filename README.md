@@ -12,13 +12,13 @@ Components for Remix sites, implemented using [Material UI](https://mui.com/) 5.
 - Run `npm install`
 - If also developing features in a Remix FE site, you need to link the dependencies:
 
-```
+```bash
 npm run link-all [FE-SITE-PATH]
 ```
 
 - In root directory of the FE site that uses the shared components, link the package:
 
-```
+```bash
 npm link s4-shared-components
 ```
 
