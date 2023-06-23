@@ -32,6 +32,10 @@ export {
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
 export {
+  default as ExperienceTimeEntriesTable,
+  type ExperienceTimeEntriesTableProps,
+} from './components/02-components/experience-time-entry-table/experience-time-entry-table';
+export {
   default as OrganizationPage,
   type OrganizationPageProps,
 } from './components/02-components/organization-page/organization-page';

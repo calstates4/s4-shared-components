@@ -10,11 +10,8 @@ const meta: Meta<typeof ExperienceTimeEntriesTable> = {
 export default meta;
 
 const description = `<p>
-  We exist to serve the most vulnerable in our communities. We do this by
-  partnering with agencies to give us insight into areas where volunteers can
-  meet the most pressing needs, empowering volunteers to manifest compassion and
-  service as representatives of their communities, and mobilizing churches and
-  businesses to serve in projects in their cities throughout the year!
+  Researching Walmart’s in the Kern county area will help locate how many stores
+  will gift funding for the Ronald McDonald House located in Bakersfield.
 </p>`;
 
 const learningOutcomes = `<p>
@@ -22,13 +19,7 @@ const learningOutcomes = `<p>
   ipsum id exercitation consequat. Irure pariatur est ea eiusmod duis quis veniam
   deserunt. Nisi commodo laboris anim mollit dolor. Reprehenderit sint nostrud
   enim qui.
-</p>
-<ul>
-  <li>Cillum mollit Lorem velit commodo exercitation irure deserunt Lorem dolore.</li>
-  <li>Ex eu et reprehenderit laboris.</li><li>Aute non amet magna.</li>
-  <li>Nulla pariatur ad amet eu tempor cillum incididunt enim irure nostrud exercitation elit labore est.</li>
-  <li>Cupidatat sint nulla mollit occaecat.</li>
-</ul>`;
+</p>`;
 
 export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
   args: {
@@ -40,63 +31,60 @@ export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
       {
         id: '1',
         state: 'submitted',
-        startDate: '08/30/2022',
-        endDate: '08/30/2022',
+        date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
         description,
         learningOutcomes,
-
       },
       {
         id: '2',
         state: 'submitted',
-        startDate: '08/30/2022',
-        endDate: '08/30/2022',
+        date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
         description,
         learningOutcomes,
-
       },
       {
         id: '3',
         state: 'published',
-        startDate: '08/30/2022',
-        endDate: '08/30/2022',
+        date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
         description,
         learningOutcomes,
-
       },
       {
         id: '4',
         state: 'declined',
-        startDate: '08/30/2022',
-        endDate: '08/30/2022',
+        date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
         description,
         learningOutcomes,
-
       },
       {
         id: '5',
         state: 'declined',
-        startDate: '08/30/2022',
-        endDate: '08/30/2022',
+        date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
         description,
         learningOutcomes,
-
       },
       {
-        id: '5',
+        id: '6',
         state: 'submitted',
-        startDate: '08/30/2022',
-        endDate: '08/30/2022',
+        date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
         description,
         learningOutcomes,
-
       },
     ],
+  },
+};
+
+export const NoContent: StoryObj<typeof ExperienceTimeEntriesTable> = {
+  args: {
+    url: '#',
+    totalItems: 6,
+    itemsPerPage: 4,
+    currentPage: 1,
   },
 };
