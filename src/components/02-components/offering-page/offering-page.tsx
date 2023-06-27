@@ -9,7 +9,6 @@ export type OfferingPageProps = {
     url: string;
   }[];
   title: string;
-  url: string;
   editUrl: string;
   department?: string;
   description: string;
@@ -38,7 +37,6 @@ export type OfferingPageProps = {
 export default function OfferingPage({
   breadcrumb,
   title,
-  url,
   editUrl,
   department,
   description,
@@ -354,10 +352,12 @@ export default function OfferingPage({
               <dt>Areas: </dt>
               <dd>{focusAreas}</dd>
             </div>
-            <div>
-              <dt>Sub focus areas: </dt>
-              <dd>{subFocusAreas}</dd>
-            </div>
+            {subFocusAreas && (
+              <div>
+                <dt>Sub focus areas: </dt>
+                <dd>{subFocusAreas}</dd>
+              </div>
+            )}
           </Box>
         </Paper>
         <Paper sx={{ ...paperStyles, ...rightColumnContainerStyles }}>

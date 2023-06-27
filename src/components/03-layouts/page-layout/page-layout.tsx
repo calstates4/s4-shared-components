@@ -11,10 +11,10 @@ import SidebarMenu, {
 import Sidebar from '../../02-components/sidebar/sidebar';
 import TopBar from '../../02-components/topbar/topbar';
 
-type PageLayoutProps = {
+export type PageLayoutProps = {
   brandingBarLinks: BrandingBarProps;
   sidebarLinks: SidebarMenuProps;
-  children: ReactNode;
+  children?: ReactNode;
   brand: ReactNode;
   context: ReactNode;
 };
