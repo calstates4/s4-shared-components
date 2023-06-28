@@ -34,7 +34,7 @@ export type ExperienceTimeEntriesTableProps = {
     state: string;
     date: string;
     calculatedHours: number;
-    description: string;
+    description?: string;
     learningOutcomes: string;
   }[];
 };
@@ -91,7 +91,7 @@ export default function ExperienceTimeEntriesTable({
             onClick={() => {
               setModalData({
                 timeEntryid: id,
-                timeEntryAction: 'reject ',
+                timeEntryAction: 'reject',
                 modalTile: 'Time entry needs to be updated',
                 submitButtonText: 'Save and continue',
               });
@@ -175,7 +175,11 @@ export default function ExperienceTimeEntriesTable({
                 <TableCell>{item.date}</TableCell>
                 <TableCell>{item.calculatedHours}</TableCell>
                 <TableCell>
-                  <div dangerouslySetInnerHTML={{ __html: item.description }} />
+                  {item.description && (
+                    <div
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    />
+                  )}
                 </TableCell>
                 <TableCell>
                   <div
@@ -266,7 +270,7 @@ export default function ExperienceTimeEntriesTable({
           Close
         </Button>
         {FormElement ? (
-          <FormElement>{renderedDialogContent}</FormElement>
+          <FormElement method="post">{renderedDialogContent}</FormElement>
         ) : (
           <form>{renderedDialogContent}</form>
         )}
