@@ -23,6 +23,12 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Pager from '../../01-elements/pager/pager';
 import { ElementType, useState } from 'react';
 
+type Revision = {
+  date: string;
+  message: string;
+  status: string;
+};
+
 export type ExperienceTimeEntriesTableProps = {
   url: string;
   FormElement?: ElementType;
@@ -36,14 +42,19 @@ export type ExperienceTimeEntriesTableProps = {
     calculatedHours: number;
     description?: string;
     learningOutcomes: string;
+    revisions?: Revision[];
   }[];
 };
 
-type ModalData = {
-  timeEntryid?: string;
-  timeEntryAction?: string;
-  modalTile?: string;
-  submitButtonText?: string;
+type DialogData = {
+  dialogType?: 'form' | 'list';
+  dialogTitle?: string;
+  dialogFormData?: {
+    formId: string;
+    formAction: string;
+    submitButtonText: string;
+  };
+  dialogListData?: Revision[];
 };
 
 export default function ExperienceTimeEntriesTable({
@@ -56,7 +67,7 @@ export default function ExperienceTimeEntriesTable({
 }: ExperienceTimeEntriesTableProps) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [modalData, setModalData] = useState<ModalData>({});
+  const [dialogData, setDialogData] = useState<DialogData>({});
 
   function handleClickOpen() {
     setOpen(true);
@@ -66,18 +77,29 @@ export default function ExperienceTimeEntriesTable({
     setOpen(false);
   }
 
-  function renderdTimeEntryState({ id, state }: { id: string; state: string }) {
+  function renderdTimeEntryState({
+    id,
+    state,
+    revisions,
+  }: {
+    id: string;
+    state: string;
+    revisions?: Revision[];
+  }) {
     if (state === 'submitted') {
       return (
         <>
           <Button
             variant="contained"
             onClick={() => {
-              setModalData({
-                timeEntryid: id,
-                timeEntryAction: 'approve',
-                modalTile: 'Confirm time entry approval',
-                submitButtonText: 'Save and appove',
+              setDialogData({
+                dialogType: 'form',
+                dialogTitle: 'Confirm time entry approval',
+                dialogFormData: {
+                  formId: id,
+                  formAction: 'approve',
+                  submitButtonText: 'Save and appove',
+                },
               });
               handleClickOpen();
             }}
@@ -89,11 +111,14 @@ export default function ExperienceTimeEntriesTable({
             variant="outlined"
             sx={{ display: 'block', fontWeight: 700 }}
             onClick={() => {
-              setModalData({
-                timeEntryid: id,
-                timeEntryAction: 'reject',
-                modalTile: 'Time entry needs to be updated',
-                submitButtonText: 'Save and continue',
+              setDialogData({
+                dialogType: 'form',
+                dialogTitle: 'Time entry needs to be updated',
+                dialogFormData: {
+                  formId: id,
+                  formAction: 'reject',
+                  submitButtonText: 'Save and continue',
+                },
               });
               handleClickOpen();
             }}
@@ -109,7 +134,20 @@ export default function ExperienceTimeEntriesTable({
             <CheckCircleOutlineIcon sx={{ color: 'success.dark' }} />
             <Typography sx={{ fontWeight: 700 }}>Approved</Typography>
           </Box>
-          <Button>View note(s)</Button>
+          {revisions && (
+            <Button
+              onClick={() => {
+                setDialogData({
+                  dialogType: 'list',
+                  dialogTitle: 'Time entry notes',
+                  dialogListData: revisions,
+                });
+                handleClickOpen();
+              }}
+            >
+              View note(s)
+            </Button>
+          )}
         </>
       );
     } else if (state === 'declined') {
@@ -121,7 +159,20 @@ export default function ExperienceTimeEntriesTable({
               Update request sent
             </Typography>
           </Box>
-          <Button>View note(s)</Button>
+          {revisions && (
+            <Button
+              onClick={() => {
+                setDialogData({
+                  dialogType: 'list',
+                  dialogTitle: 'Time entry notes',
+                  dialogListData: revisions,
+                });
+                handleClickOpen();
+              }}
+            >
+              View note(s)
+            </Button>
+          )}
         </>
       );
     }
@@ -145,6 +196,22 @@ export default function ExperienceTimeEntriesTable({
     display: 'flex',
     columnGap: theme.spacing(1),
     mb: theme.spacing(1),
+  };
+
+  const inlineDefinitionListStyles = {
+    m: 0,
+    mb: theme.spacing(0.5),
+    dt: {
+      display: 'inline',
+      fontWeight: '700',
+    },
+    dd: {
+      display: 'inline',
+      ml: 0,
+    },
+    '> div': {
+      mb: theme.spacing(1),
+    },
   };
 
   // Render elements.
@@ -210,7 +277,7 @@ export default function ExperienceTimeEntriesTable({
       </Paper>
     );
 
-  const renderedDialogContent = (
+  const renderedDialogFormContentInner = (
     <>
       <DialogContent>
         <DialogContentText sx={{ mb: theme.spacing(1) }}>
@@ -228,12 +295,12 @@ export default function ExperienceTimeEntriesTable({
         <input
           type="hidden"
           name="time-entry-id"
-          value={modalData.timeEntryid}
+          value={dialogData.dialogFormData?.formId}
         />
         <input
           type="hidden"
           name="time-entry-action"
-          value={modalData.timeEntryAction}
+          value={dialogData.dialogFormData?.formAction}
         />
       </DialogContent>
       <DialogActions>
@@ -246,17 +313,58 @@ export default function ExperienceTimeEntriesTable({
           onClick={handleClose}
           type="submit"
         >
-          {modalData.submitButtonText}
+          {dialogData.dialogFormData?.submitButtonText}
         </Button>
       </DialogActions>
     </>
   );
 
+  const renderedDialogFormContent = FormElement ? (
+    <FormElement method="post">{renderedDialogFormContentInner}</FormElement>
+  ) : (
+    <form>{renderedDialogFormContentInner}</form>
+  );
+
+  const renderedDialogListContent = (
+    <>
+      <DialogContent sx={{ maxHeight: '13rem' }}>
+        <Box sx={inlineDefinitionListStyles} component="dl">
+          {dialogData.dialogListData?.map((revision) => (
+            <div>
+              <dt>{`${revision.date} - ${revision.status}: `}</dt>
+              <dd>{revision.message}</dd>
+            </div>
+          ))}
+        </Box>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          variant="contained"
+          sx={{ fontWeight: 700 }}
+          onClick={handleClose}
+        >
+          Close
+        </Button>
+      </DialogActions>
+    </>
+  );
+
+  const renderedDialogContent =
+    dialogData.dialogType === 'form'
+      ? renderedDialogFormContent
+      : renderedDialogListContent;
+
   return (
     <>
       {renderedTable}
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <DialogTitle variant="h3">{modalData.modalTile}</DialogTitle>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="sm"
+        scroll="paper"
+        fullWidth
+      >
+        <DialogTitle variant="h3">{dialogData.dialogTitle}</DialogTitle>
         <Button
           startIcon={<HighlightOffIcon />}
           onClick={handleClose}
@@ -265,15 +373,12 @@ export default function ExperienceTimeEntriesTable({
             right: theme.spacing(1),
             top: theme.spacing(1),
             color: '',
+            textTransform: 'capitalize',
           }}
         >
           Close
         </Button>
-        {FormElement ? (
-          <FormElement method="post">{renderedDialogContent}</FormElement>
-        ) : (
-          <form>{renderedDialogContent}</form>
-        )}
+        {renderedDialogContent}
       </Dialog>
     </>
   );

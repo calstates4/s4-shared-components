@@ -51,6 +51,24 @@ export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
         calculatedHours: 3,
         description,
         learningOutcomes,
+        revisions: [
+          {
+            date: '04/26/2023',
+            message:
+              'Magna pars studiorum, prodita quaerimus. Hi omnes lingua, institutis, legibus inter se differunt.',
+            status: 'Needs update',
+          },
+          {
+            date: '04/28/2023',
+            message: 'Ut enim ad minim veniam, quis nostrud exercitation.',
+            status: 'Submitted',
+          },
+          {
+            date: '05/02/2023',
+            message: 'Plura mihi bona sunt, inclinet, amari petere vellent.',
+            status: 'Approved',
+          },
+        ],
       },
       {
         id: '4',
@@ -59,6 +77,44 @@ export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
         calculatedHours: 3,
         description,
         learningOutcomes,
+        revisions: [
+          {
+            date: '04/26/2023',
+            message:
+              'Magna pars studiorum, prodita quaerimus. Hi omnes lingua, institutis, legibus inter se differunt.',
+            status: 'Needs update',
+          },
+          {
+            date: '04/28/2023',
+            message: 'Ut enim ad minim veniam, quis nostrud exercitation.',
+            status: 'Submitted',
+          },
+          {
+            date: '05/02/2023',
+            message: 'Plura mihi bona sunt, inclinet, amari petere vellent.',
+            status: 'Needs update',
+          },
+          {
+            date: '05/03/2023',
+            message: 'Plura mihi bona sunt, inclinet, amari petere vellent.',
+            status: 'Submitted',
+          },
+          {
+            date: '05/10/2023',
+            message: 'Plura mihi bona sunt, inclinet, amari petere vellent.',
+            status: 'Needs update',
+          },
+          {
+            date: '05/20/2023',
+            message: 'Plura mihi bona sunt, inclinet, amari petere vellent.',
+            status: 'Submitted',
+          },
+          {
+            date: '05/26/2023',
+            message: 'Plura mihi bona sunt, inclinet, amari petere vellent.',
+            status: 'Needs update',
+          },
+        ],
       },
       {
         id: '5',
