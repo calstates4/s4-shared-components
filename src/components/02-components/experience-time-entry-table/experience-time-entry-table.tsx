@@ -134,20 +134,18 @@ export default function ExperienceTimeEntriesTable({
             <CheckCircleOutlineIcon sx={{ color: 'success.dark' }} />
             <Typography sx={{ fontWeight: 700 }}>Approved</Typography>
           </Box>
-          {revisions && (
-            <Button
-              onClick={() => {
-                setDialogData({
-                  dialogType: 'list',
-                  dialogTitle: 'Time entry notes',
-                  dialogListData: revisions,
-                });
-                handleClickOpen();
-              }}
-            >
-              View note(s)
-            </Button>
-          )}
+          <Button
+            onClick={() => {
+              setDialogData({
+                dialogType: 'list',
+                dialogTitle: 'Time entry notes',
+                dialogListData: revisions,
+              });
+              handleClickOpen();
+            }}
+          >
+            View note(s)
+          </Button>
         </>
       );
     } else if (state === 'declined') {
@@ -159,20 +157,18 @@ export default function ExperienceTimeEntriesTable({
               Update request sent
             </Typography>
           </Box>
-          {revisions && (
-            <Button
-              onClick={() => {
-                setDialogData({
-                  dialogType: 'list',
-                  dialogTitle: 'Time entry notes',
-                  dialogListData: revisions,
-                });
-                handleClickOpen();
-              }}
-            >
-              View note(s)
-            </Button>
-          )}
+          <Button
+            onClick={() => {
+              setDialogData({
+                dialogType: 'list',
+                dialogTitle: 'Time entry notes',
+                dialogListData: revisions,
+              });
+              handleClickOpen();
+            }}
+          >
+            View note(s)
+          </Button>
         </>
       );
     }
@@ -328,14 +324,20 @@ export default function ExperienceTimeEntriesTable({
   const renderedDialogListContent = (
     <>
       <DialogContent sx={{ maxHeight: '13rem' }}>
-        <Box sx={inlineDefinitionListStyles} component="dl">
-          {dialogData.dialogListData?.map((revision) => (
-            <div>
-              <dt>{`${revision.date} - ${revision.status}: `}</dt>
-              <dd>{revision.message}</dd>
-            </div>
-          ))}
-        </Box>
+        {dialogData.dialogListData ? (
+          <Box sx={inlineDefinitionListStyles} component="dl">
+            {dialogData.dialogListData?.map((revision) => (
+              <div>
+                <dt>{`${revision.date} - ${revision.status}: `}</dt>
+                <dd>{revision.message}</dd>
+              </div>
+            ))}
+          </Box>
+        ) : (
+          <DialogContentText sx={{ fontWeight: 700 }}>
+            There aren't notes associated with this time entry.
+          </DialogContentText>
+        )}
       </DialogContent>
       <DialogActions>
         <Button
