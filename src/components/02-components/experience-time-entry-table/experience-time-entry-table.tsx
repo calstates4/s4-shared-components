@@ -23,10 +23,20 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Pager from '../../01-elements/pager/pager';
 import { ElementType, useState } from 'react';
 
-type Revision = {
+export type TimeEntryRevisionProps = {
   date: string;
   message: string;
   status: string;
+};
+
+export type TimeEntryProps = {
+  id: string;
+  state?: string;
+  date?: string;
+  calculatedHours?: number;
+  description?: string;
+  learningOutcomes?: string;
+  revisions?: TimeEntryRevisionProps[];
 };
 
 export type ExperienceTimeEntriesTableProps = {
@@ -35,15 +45,7 @@ export type ExperienceTimeEntriesTableProps = {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
-  items?: {
-    id: string;
-    state: string;
-    date: string;
-    calculatedHours: number;
-    description?: string;
-    learningOutcomes: string;
-    revisions?: Revision[];
-  }[];
+  items?: TimeEntryProps[];
 };
 
 type DialogData = {
@@ -54,7 +56,7 @@ type DialogData = {
     formAction: string;
     submitButtonText: string;
   };
-  dialogListData?: Revision[];
+  dialogListData?: TimeEntryRevisionProps[];
 };
 
 export default function ExperienceTimeEntriesTable({
@@ -77,15 +79,7 @@ export default function ExperienceTimeEntriesTable({
     setOpen(false);
   }
 
-  function renderdTimeEntryState({
-    id,
-    state,
-    revisions,
-  }: {
-    id: string;
-    state: string;
-    revisions?: Revision[];
-  }) {
+  function renderdTimeEntryState({ id, state, revisions }: TimeEntryProps) {
     if (state === 'submitted') {
       return (
         <>
@@ -245,9 +239,13 @@ export default function ExperienceTimeEntriesTable({
                   )}
                 </TableCell>
                 <TableCell>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: item.learningOutcomes }}
-                  />
+                  {item.learningOutcomes && (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.learningOutcomes,
+                      }}
+                    />
+                  )}
                 </TableCell>
                 <TableCell>{renderdTimeEntryState(item)}</TableCell>
               </TableRow>

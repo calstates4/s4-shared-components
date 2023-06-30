@@ -38,14 +38,6 @@ export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
       },
       {
         id: '2',
-        state: 'submitted',
-        date: '08/30/2022 6:00pm to 8:00pm',
-        calculatedHours: 3,
-        description,
-        learningOutcomes,
-      },
-      {
-        id: '3',
         state: 'published',
         date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
@@ -71,7 +63,7 @@ export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
         ],
       },
       {
-        id: '4',
+        id: '3',
         state: 'declined',
         date: '08/30/2022 6:00pm to 8:00pm',
         calculatedHours: 3,
@@ -115,6 +107,14 @@ export const Default: StoryObj<typeof ExperienceTimeEntriesTable> = {
             status: 'Needs update',
           },
         ],
+      },
+      {
+        id: '4',
+        state: 'submitted',
+        date: '08/30/2022 6:00pm to 8:00pm',
+        calculatedHours: 3,
+        description,
+        learningOutcomes,
       },
       {
         id: '5',
