@@ -19,7 +19,7 @@ const campuses = Array.from({ length: 5 }, (_, i) => i).map(() => (
 export const Default: StoryObj<typeof CampusList> = {
   args: {
     children: campuses,
-    url: '#',
+    url: 'http://localhost:6006/',
     totalItems: 38,
     itemsPerPage: 5,
     currentPage: 3,

@@ -9,7 +9,6 @@ export type OfferingPageProps = {
     url: string;
   }[];
   title: string;
-  url: string;
   editUrl: string;
   department?: string;
   description: string;
@@ -38,7 +37,6 @@ export type OfferingPageProps = {
 export default function OfferingPage({
   breadcrumb,
   title,
-  url,
   editUrl,
   department,
   description,

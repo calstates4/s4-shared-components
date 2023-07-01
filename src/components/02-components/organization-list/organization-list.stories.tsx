@@ -23,7 +23,7 @@ export const Default: StoryObj<typeof OrganizationList> = {
     currentFilters: {
       orgName: '',
     },
-    url: '#',
+    url: 'http://localhost:6006/',
     createOrgUrl: '#',
     totalItems: 23,
     itemsPerPage: 9,

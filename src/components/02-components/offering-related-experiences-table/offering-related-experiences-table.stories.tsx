@@ -11,7 +11,7 @@ export default meta;
 
 export const Experiences: StoryObj<typeof OfferingExperiencesRelatedTable> = {
   args: {
-    url: '#',
+    url: 'http://localhost:6006/',
     totalItems: 10,
     itemsPerPage: 5,
     currentPage: 1,
