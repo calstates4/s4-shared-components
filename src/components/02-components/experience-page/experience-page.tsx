@@ -293,7 +293,7 @@ export default function ExperiencePage({
     gridTemplateColumns: 'repeat(1, 1fr)',
     [theme.breakpoints.up('md')]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
-      gap: `${theme.spacing(2)} ${theme.spacing(5)} `
+      gap: `${theme.spacing(2)} ${theme.spacing(5)} `,
     },
   };
 
@@ -302,8 +302,8 @@ export default function ExperiencePage({
     marginBottom: theme.spacing(3),
     border: `1px solid ${theme.palette.warning.main}`,
     padding: theme.spacing(1),
-    borderRadius:theme.spacing(1),
-  }
+    borderRadius: theme.spacing(1),
+  };
 
   // Components
   const renderedHeader = [
