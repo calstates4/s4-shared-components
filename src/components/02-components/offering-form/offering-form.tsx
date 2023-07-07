@@ -47,6 +47,7 @@ export type OfferingFormProps = {
     url: string;
   }[];
   title: string;
+  id: string | number;
   departments?: {
     id: string;
     name: string;
@@ -114,7 +115,8 @@ export type OfferingFormProps = {
   defaultTimeAmount?: number;
   defaultTimeUnit?: string;
   defaultTimeFrequency?: string;
-  formSubmit: () => void;
+  defaultPublished?: boolean;
+  formSubmit?: () => void;
 };
 
 type TabPanelProps = {
@@ -128,17 +130,18 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Box
       data-index={index}
       className="form-tab"
       role="tabpanel"
       hidden={value !== index}
       id={`offering-form-tabpanel-${index}`}
       aria-labelledby={`offering-form-tab-${index}`}
+      sx={{ p: theme.spacing(3) }}
       {...other}
     >
-      <Box sx={{ p: theme.spacing(3) }}>{children}</Box>
-    </div>
+      {children}
+    </Box>
   );
 }
 
@@ -152,6 +155,7 @@ function a11yProps(index: number) {
 export default function OfferingForm({
   breadcrumb,
   title,
+  id,
   departments,
   primaryContacts,
   timeApprovers,
@@ -186,6 +190,7 @@ export default function OfferingForm({
   defaultTimeAmount,
   defaultTimeUnit,
   defaultTimeFrequency,
+  defaultPublished,
 }: OfferingFormProps) {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
@@ -267,6 +272,8 @@ export default function OfferingForm({
       </Tabs>
 
       <TabPanel value={activeTab} index={0}>
+        <input name="offering-id" type="hidden" value={id} />
+
         <TextField
           autoFocus
           required
@@ -282,7 +289,13 @@ export default function OfferingForm({
         />
 
         <FormControlLabel
-          control={<Checkbox defaultChecked={defaultRequiresApproval} />}
+          control={
+            <Checkbox
+              id="offering-requires-approval"
+              name="offering-requires-approval"
+              defaultChecked={defaultRequiresApproval}
+            />
+          }
           label="Requires approval"
           sx={{ mb: theme.spacing(3) }}
         />
@@ -397,6 +410,18 @@ export default function OfferingForm({
         {/* Autocomplete for Preferred languages */}
 
         {/* Autocomplete for Required languages */}
+
+        <FormControlLabel
+          control={
+            <Checkbox
+              id="offering-published"
+              name="offering-published"
+              defaultChecked={defaultPublished}
+            />
+          }
+          label="Published"
+          sx={{ mb: theme.spacing(3) }}
+        />
       </TabPanel>
 
       <TabPanel value={activeTab} index={1}>
@@ -416,7 +441,6 @@ export default function OfferingForm({
         />
 
         <TextField
-          required
           fullWidth
           multiline
           maxRows={4}
