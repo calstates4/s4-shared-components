@@ -20,7 +20,20 @@ const defaultTraining = `<p>
 Plura mihi bona sunt, inclinet, amari petere vellent. Me non paenitet nullum festiviorem excogitasse ad hoc. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Tu quoque, Brute, fili mi, nihil timor populi, nihil!
 </p>`;
 
-const focousPopulations = [
+const users = [
+  { id: '1', name: 'Emily Parker' },
+  { id: '2', name: 'Mathew Ross' },
+  { id: '3', name: 'Carlos Smith' },
+  { id: '4', name: 'Robert Thomsom' },
+  { id: '5', name: 'Marcus Rivers' },
+  { id: '6', name: 'Peter Mask' },
+  { id: '7', name: 'David Paz' },
+  { id: '8', name: 'Martin Lopéz' },
+  { id: '9', name: 'Christopher James' },
+  { id: '10', name: 'Harry Brown' },
+];
+
+const focusPopulations = [
   { id: '1', name: 'People Experiencing Addiction' },
   { id: '2', name: 'Seniors' },
   { id: '3', name: 'Veterans, Active Military and/or Military Families' },
@@ -32,7 +45,7 @@ const focousPopulations = [
   { id: '9', name: 'Immigrants/Refugees' },
 ];
 
-const focousAreas = [
+const focusAreas = [
   { id: '1', name: 'Emergency Services & Public Safety' },
   { id: '2', name: 'International Service Experiences' },
   { id: '3', name: 'Arts, Culture, and Humanities' },
@@ -63,6 +76,14 @@ const activities = [
     name: 'Participate in a painting, building, renovation or construction activity (such as, neighborhood/housing restoration or building theater props or playgrounds, etc)',
   },
 ];
+
+const languages = [
+  { id: '1', name: 'Spanish' },
+  { id: '2', name: 'French' },
+  { id: '3', name: 'German' },
+  { id: '4', name: 'English' },
+];
+
 export const AddOffering: StoryObj<typeof OfferingForm> = {
   args: {
     breadcrumb: [
@@ -81,8 +102,14 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       { id: '2', name: 'Human Resources' },
       { id: '3', name: 'Sales' },
     ],
-    focousPopulations,
-    focousAreas,
+    primaryContacts: users,
+    timeApprovers: users,
+    formSigners: users,
+    observers: users,
+    preferredLanguages: languages,
+    requiredLanguages: languages,
+    focusPopulations,
+    focusAreas,
     subFocusAreas,
     activities,
   },
@@ -110,10 +137,22 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
       { id: '2', name: 'Human Resources' },
       { id: '3', name: 'Sales' },
     ],
-    focousPopulations,
-    focousAreas,
+    primaryContacts: users,
+    timeApprovers: users,
+    formSigners: users,
+    observers: users,
+    preferredLanguages: languages,
+    requiredLanguages: languages,
+    focusPopulations,
+    focusAreas,
     subFocusAreas,
     activities,
+    defaultPrimaryContact: '1',
+    defaultTimeApprovers: ['1', '4'],
+    defaultFormSigners: ['5', '8'],
+    defaultObservers: ['3', '6'],
+    defaultPreferredLanguages: ['1', '3'],
+    defaultRequiredLanguages: ['3', '4'],
     defaultFocusPopulations: ['2', '3'],
     defaultFocusAreas: ['5', '7'],
     defaultSubFocusAreas: ['2', '4'],

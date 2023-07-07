@@ -13,6 +13,7 @@ import {
 import {
   ChangeEvent,
   ElementType,
+  FormEvent,
   ReactNode,
   SyntheticEvent,
   useState,
@@ -50,11 +51,35 @@ export type OfferingFormProps = {
     id: string;
     name: string;
   }[];
-  focousPopulations?: {
+  primaryContacts?: {
     id: string;
     name: string;
   }[];
-  focousAreas?: {
+  timeApprovers?: {
+    id: string;
+    name: string;
+  }[];
+  formSigners?: {
+    id: string;
+    name: string;
+  }[];
+  observers?: {
+    id: string;
+    name: string;
+  }[];
+  preferredLanguages?: {
+    id: string;
+    name: string;
+  }[];
+  requiredLanguages?: {
+    id: string;
+    name: string;
+  }[];
+  focusPopulations?: {
+    id: string;
+    name: string;
+  }[];
+  focusAreas?: {
     id: string;
     name: string;
   }[];
@@ -74,6 +99,12 @@ export type OfferingFormProps = {
   defaultMaxStudents?: number;
   defaultStartDate?: string;
   defaultEndDate?: string;
+  defaultPrimaryContact?: string;
+  defaultTimeApprovers?: string[];
+  defaultFormSigners?: string[];
+  defaultObservers?: string[];
+  defaultPreferredLanguages?: string[];
+  defaultRequiredLanguages?: string[];
   defaultDescription?: string;
   defaultTraining?: string;
   defaultFocusPopulations?: string[];
@@ -83,6 +114,7 @@ export type OfferingFormProps = {
   defaultTimeAmount?: number;
   defaultTimeUnit?: string;
   defaultTimeFrequency?: string;
+  formSubmit: () => void;
 };
 
 type TabPanelProps = {
@@ -91,29 +123,21 @@ type TabPanelProps = {
   value: number;
 };
 
-type MultipleSelectNames =
-  | 'focusPopulations'
-  | 'focusAreas'
-  | 'subFocusAreas'
-  | 'activities';
-
 function TabPanel(props: TabPanelProps) {
   const theme = useTheme();
   const { children, value, index, ...other } = props;
 
   return (
     <div
+      data-index={index}
+      className="form-tab"
       role="tabpanel"
       hidden={value !== index}
       id={`offering-form-tabpanel-${index}`}
       aria-labelledby={`offering-form-tab-${index}`}
       {...other}
     >
-      <Box
-        sx={{ p: theme.spacing(3), display: 'flex', flexDirection: 'column' }}
-      >
-        {children}
-      </Box>
+      <Box sx={{ p: theme.spacing(3) }}>{children}</Box>
     </div>
   );
 }
@@ -129,14 +153,26 @@ export default function OfferingForm({
   breadcrumb,
   title,
   departments,
-  focousPopulations,
-  focousAreas,
+  primaryContacts,
+  timeApprovers,
+  formSigners,
+  observers,
+  preferredLanguages,
+  requiredLanguages,
+  focusPopulations,
+  focusAreas,
   subFocusAreas,
   activities,
   FormElement,
   defaultName,
   defaultRequiresApproval,
   defaultDepartment,
+  defaultPrimaryContact,
+  defaultTimeApprovers,
+  defaultFormSigners,
+  defaultObservers,
+  defaultPreferredLanguages,
+  defaultRequiredLanguages,
   defaultOfferingType,
   defaultMaxStudents,
   defaultStartDate,
@@ -176,15 +212,15 @@ export default function OfferingForm({
     mb: theme.spacing(2),
   };
 
-  function handleTabChange(event: SyntheticEvent, tabIndex: number) {
-    setActiveTab(tabIndex);
+  function handleTabOnChange(event: SyntheticEvent, value: number) {
+    setActiveTab(value);
   }
 
-  function handleStartDateChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
   }
 
-  function handleMultipleSelectChange(
+  function handleMultipleSelectOnChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const { options } = event.target as unknown as HTMLSelectElement;
@@ -197,12 +233,31 @@ export default function OfferingForm({
     return selectedValues;
   }
 
+  function onClickHandler(event: FormEvent<HTMLButtonElement>) {
+    const form = event.currentTarget.closest('form');
+    if (form && form.elements.length) {
+      for (let i = 0; i < form?.elements.length; i++) {
+        const element = form.elements[i] as HTMLInputElement;
+        if (element && !element.checkValidity()) {
+          const tab = element.closest('.form-tab');
+          if (tab) {
+            const tabIndex = tab.getAttribute('data-index');
+            if (tabIndex) {
+              setActiveTab(parseInt(tabIndex));
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+
   // Render.
   const formInner = (
     <>
       <Tabs
         value={activeTab}
-        onChange={handleTabChange}
+        onChange={handleTabOnChange}
         aria-label="Offering form tabs"
       >
         <Tab label="Metadata" {...a11yProps(0)} />
@@ -245,7 +300,7 @@ export default function OfferingForm({
             SelectProps={{
               native: true,
             }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            sx={{ mb: theme.spacing(3) }}
           >
             <option value="">Select a value</option>
             {departments.map((option) => (
@@ -269,7 +324,7 @@ export default function OfferingForm({
           SelectProps={{
             native: true,
           }}
-          sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+          sx={{ mb: theme.spacing(3) }}
         >
           {OFFERING_TYPES.map((option) => (
             <option key={option.value} value={option.value}>
@@ -292,7 +347,7 @@ export default function OfferingForm({
             step: 1,
             min: 1,
           }}
-          sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+          sx={{ mb: theme.spacing(3) }}
         />
 
         <TextField
@@ -301,7 +356,7 @@ export default function OfferingForm({
           id="offering-start-date"
           name="offering-start-date"
           label="Start date"
-          onChange={handleStartDateChange}
+          onChange={handleStartDateOnChange}
           defaultValue={defaultStartDate ?? undefined}
           InputLabelProps={{
             shrink: true,
@@ -309,7 +364,7 @@ export default function OfferingForm({
           inputProps={{
             pattern: 'd{4}-d{2}-d{2}',
           }}
-          sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+          sx={{ mb: theme.spacing(3) }}
         />
 
         {startDate && (
@@ -327,9 +382,21 @@ export default function OfferingForm({
               min: startDate,
               pattern: 'd{4}-d{2}-d{2}',
             }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            sx={{ mb: theme.spacing(3) }}
           />
         )}
+
+        {/* Autocomplete for Primary contact */}
+
+        {/* Autocomplete for Time approvers */}
+
+        {/* Autocomplete for Form signers */}
+
+        {/* Autocomplete for Observers */}
+
+        {/* Autocomplete for Preferred languages */}
+
+        {/* Autocomplete for Required languages */}
       </TabPanel>
 
       <TabPanel value={activeTab} index={1}>
@@ -365,7 +432,7 @@ export default function OfferingForm({
       </TabPanel>
 
       <TabPanel value={activeTab} index={2}>
-        {focousPopulations && (
+        {focusPopulations && (
           <TextField
             select
             required
@@ -375,7 +442,7 @@ export default function OfferingForm({
             label="Focus Population(s)"
             defaultValue={defaultFocusPopulations ?? undefined}
             onChange={(event) =>
-              setSelectedFocusPopulations(handleMultipleSelectChange(event))
+              setSelectedFocusPopulations(handleMultipleSelectOnChange(event))
             }
             InputLabelProps={{
               shrink: true,
@@ -384,9 +451,9 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            sx={{ mb: theme.spacing(3) }}
           >
-            {focousPopulations.map((option) => (
+            {focusPopulations.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.name}
               </option>
@@ -394,7 +461,7 @@ export default function OfferingForm({
           </TextField>
         )}
 
-        {focousAreas && (
+        {focusAreas && (
           <TextField
             select
             required
@@ -404,7 +471,7 @@ export default function OfferingForm({
             label="Focus Area(s)"
             defaultValue={defaultFocusAreas ?? undefined}
             onChange={(event) =>
-              setSelectedFocusAreas(handleMultipleSelectChange(event))
+              setSelectedFocusAreas(handleMultipleSelectOnChange(event))
             }
             InputLabelProps={{
               shrink: true,
@@ -413,9 +480,9 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            sx={{ mb: theme.spacing(3) }}
           >
-            {focousAreas.map((option) => (
+            {focusAreas.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.name}
               </option>
@@ -432,7 +499,7 @@ export default function OfferingForm({
             label="Sub focus Area(s)"
             defaultValue={defaultSubFocusAreas ?? undefined}
             onChange={(event) =>
-              setSelectedSubFocusAreas(handleMultipleSelectChange(event))
+              setSelectedSubFocusAreas(handleMultipleSelectOnChange(event))
             }
             InputLabelProps={{
               shrink: true,
@@ -441,7 +508,7 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            sx={{ mb: theme.spacing(3) }}
           >
             {subFocusAreas.map((option) => (
               <option key={option.id} value={option.id}>
@@ -461,7 +528,7 @@ export default function OfferingForm({
             label="Activities"
             defaultValue={defaultActivities ?? undefined}
             onChange={(event) =>
-              setSelectedActivities(handleMultipleSelectChange(event))
+              setSelectedActivities(handleMultipleSelectOnChange(event))
             }
             InputLabelProps={{
               shrink: true,
@@ -470,7 +537,7 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            sx={{ mb: theme.spacing(3) }}
           >
             {activities.map((option) => (
               <option key={option.id} value={option.id}>
@@ -496,7 +563,7 @@ export default function OfferingForm({
             step: 0.1,
             min: 1,
           }}
-          sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+          sx={{ mb: theme.spacing(3) }}
         />
         <TextField
           select
@@ -511,7 +578,7 @@ export default function OfferingForm({
           SelectProps={{
             native: true,
           }}
-          sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+          sx={{ mb: theme.spacing(3) }}
         >
           {OFFERING_TIME_UNITS.map((option) => (
             <option key={option.value} value={option.value}>
@@ -542,7 +609,7 @@ export default function OfferingForm({
         </TextField>
       </TabPanel>
 
-      <Button variant="contained" type="submit">
+      <Button variant="contained" type="submit" onClick={onClickHandler}>
         Create offering
       </Button>
     </>
