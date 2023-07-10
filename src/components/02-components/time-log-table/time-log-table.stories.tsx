@@ -36,4 +36,6 @@ export const Default: StoryObj<typeof TimeLogTable> = {
         status: 'Submitted',
       },
     ],
-  },};
+    cta: '/logtime',
+  },
+};

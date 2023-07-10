@@ -45,7 +45,7 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
   const iconStyle = {
     mr: theme.spacing(1),
     color: theme.palette.secondary.dark,
-  }
+  };
 
   const tableStyle = {
     td: {
@@ -53,7 +53,7 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
 
       '&:first-child': {
         pl: 0,
-      }
+      },
     },
     th: {
       p: theme.spacing(3),
@@ -61,7 +61,7 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
 
       '&:first-child': {
         pl: 0,
-      }
+      },
     },
   };
 
@@ -87,9 +87,9 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
         <TableCell>{row.status}</TableCell>
         <TableCell>
           <Box sx={iconWrapperStyle}>
-            <FileCopyIcon sx={iconStyle}/>
-            <DeleteIcon  sx={iconStyle}/>
-            <EditIcon sx={iconStyle}/>
+            <FileCopyIcon sx={iconStyle} />
+            <DeleteIcon sx={iconStyle} />
+            <EditIcon sx={iconStyle} />
           </Box>
         </TableCell>
       </TableRow>
