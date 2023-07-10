@@ -112,6 +112,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
     focusAreas,
     subFocusAreas,
     activities,
+    submitButtonText: 'Create offering',
   },
 };
 
@@ -147,6 +148,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     focusAreas,
     subFocusAreas,
     activities,
+    submitButtonText: 'Update offering',
     defaultPrimaryContact: '1',
     defaultTimeApprovers: ['1', '4'],
     defaultFormSigners: ['5', '8'],

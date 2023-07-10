@@ -93,6 +93,7 @@ export type OfferingFormProps = {
     name: string;
   }[];
   FormElement?: ElementType;
+  submitButtonText: string;
   defaultName?: string;
   defaultRequiresApproval?: boolean;
   defaultDepartment?: string;
@@ -168,6 +169,7 @@ export default function OfferingForm({
   subFocusAreas,
   activities,
   FormElement,
+  submitButtonText,
   defaultName,
   defaultRequiresApproval,
   defaultDepartment,
@@ -634,13 +636,13 @@ export default function OfferingForm({
       </TabPanel>
 
       <Button variant="contained" type="submit" onClick={onClickHandler}>
-        Create offering
+        {submitButtonText}
       </Button>
     </>
   );
 
   const form = FormElement ? (
-    <FormElement>{formInner}</FormElement>
+    <FormElement method="post">{formInner}</FormElement>
   ) : (
     <form>{formInner}</form>
   );
