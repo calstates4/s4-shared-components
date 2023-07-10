@@ -31,16 +31,25 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
-export { default as OfferingCard, type OfferingCardProps } from './components/02-components/offering-card/offering-card';
+export {
+  default as OfferingCard,
+  type OfferingCardProps,
+} from './components/02-components/offering-card/offering-card';
 export { default as OfferingList } from './components/02-components/offering-list/offering-list';
 export {
   default as OfferingPage,
-  type OfferingPageProps
+  type OfferingPageProps,
 } from './components/02-components/offering-page/offering-page';
 export {
   default as OfferingRelatedExperiencesTable,
-  type OfferingRelatedExperiencesTableRowProps
-} from './components/02-components/offering-related-experiences-table/offering-related-experiences-table'
+  type OfferingRelatedExperiencesTableRowProps,
+} from './components/02-components/offering-related-experiences-table/offering-related-experiences-table';
+export {
+  default as ExperienceTimeEntriesTable,
+  type ExperienceTimeEntriesTableProps,
+  type TimeEntryProps,
+  type TimeEntryRevisionProps,
+} from './components/02-components/experience-time-entry-table/experience-time-entry-table';
 export {
   default as OrganizationPage,
   type OrganizationPageProps,
