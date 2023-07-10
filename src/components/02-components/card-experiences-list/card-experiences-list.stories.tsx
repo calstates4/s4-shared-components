@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { type ReactNode } from 'react';
 import CardExperience, {
-  type CardExperiencesProps,
+  type CardExperienceProps,
 } from '../card-experience/card-experience';
 import CardExperiencesList from './card-experiences-list';
 import { MoreElements as CardExperienceStory } from '../card-experience/card-experience.stories';
@@ -16,7 +16,7 @@ const cardList: ReactNode[] = [];
 
 for (let i = 0; i < 3; i++) {
   cardList.push(
-    <CardExperience {...(CardExperienceStory.args as CardExperiencesProps)} />,
+    <CardExperience {...(CardExperienceStory.args as CardExperienceProps)} />,
   );
 }
 
@@ -32,7 +32,7 @@ export const OneExperience: StoryObj<typeof CardExperiencesList> = {
   args: {
     children: (
       <CardExperience
-        {...(CardExperienceOneStory.args as CardExperiencesProps)}
+        {...(CardExperienceOneStory.args as CardExperienceProps)}
       />
     ),
   },

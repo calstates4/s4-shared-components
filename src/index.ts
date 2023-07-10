@@ -53,6 +53,11 @@ export {
   type OrganizationPageProps,
 } from './components/02-components/organization-page/organization-page';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
+export { default as CardPendingTasks } from './components/02-components/card-pending-tasks/card-pending-tasks';
+export {
+  default as PastExperiencesList,
+  type PastExpericiencesListProps,
+} from './components/02-components/past-experiences-list/past-experiences-list';
 export {
   default as SidebarMenu,
   type SidebarMenuProps,
