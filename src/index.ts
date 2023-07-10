@@ -31,7 +31,6 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
-
 export {
   default as OfferingCard,
   type OfferingCardProps,
