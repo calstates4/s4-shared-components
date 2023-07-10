@@ -8,7 +8,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -22,12 +22,6 @@ export default function PastExpericiencesList({
   ctaLink,
 }: PastExpericiencesListProps) {
   const theme = useTheme();
-
-  // Styles.
-  const contentStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-  };
 
   const headingStyles = {
     mb: theme.spacing(1),
@@ -78,7 +72,7 @@ export default function PastExpericiencesList({
   );
 
   return (
-    <Box sx={contentStyle}>
+    <Box>
       <Typography sx={headingStyles} variant="h2">
         Past experiences
       </Typography>

@@ -23,5 +23,4 @@ export const Default: StoryObj<typeof PastExperiencesList> = {
     ],
     ctaLink: '/opportunities',
   },
-  render: (args) => <PastExperiencesList {...args} />,
 };

@@ -55,7 +55,7 @@ export default function CardPendingTasks({ ctaLink }: CardPendingTasksProps) {
         Please review your Tasks to ensure they are complete and up-to-date.
       </Typography>
       <Button sx={buttonStyles} component={Link} href={ctaLink}>
-        Go to pending task
+        Go to pending tasks
       </Button>
     </Paper>
   );
