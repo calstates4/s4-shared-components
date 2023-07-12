@@ -13,6 +13,7 @@ type AutocompleteFieldProps = {
   options: AutocompleteOptionType[];
   multiple?: boolean;
   selected?: string | string[] | null;
+  required?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sx?: any;
 };
@@ -24,6 +25,7 @@ export default function AutocompleteField({
   options,
   multiple = false,
   selected = null,
+  required = false,
   sx,
 }: AutocompleteFieldProps) {
   const [value, setValue] = useState<
@@ -64,7 +66,18 @@ export default function AutocompleteField({
         multiple={multiple}
         options={options}
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label={label} required />
+          <TextField
+            {...params}
+            variant="outlined"
+            label={label}
+            inputProps={{
+              ...params.inputProps,
+              required: required
+                ? (Array.isArray(value) && value.length === 0) || value == null
+                : false,
+            }}
+            required={required}
+          />
         )}
         isOptionEqualToValue={(
           option: AutocompleteOptionType,

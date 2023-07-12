@@ -54,6 +54,7 @@ export const SingleValue: StoryObj<typeof AutocompleteField> = {
     selected: '7',
     name: 'autocomplete',
     label: 'Select an option',
+    required: true,
   },
 };
 
@@ -64,5 +65,6 @@ export const MultipleValues: StoryObj<typeof AutocompleteField> = {
     name: 'autocomplete',
     selected: ['4', '7'],
     label: 'Select an option',
+    required: true,
   },
 };
