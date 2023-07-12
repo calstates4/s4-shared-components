@@ -300,7 +300,6 @@ export default function OfferingForm({
             <Switch
               id="offering-requires-approval"
               name="offering-requires-approval"
-              inputProps={{ 'aria-label': 'Requires approval' }}
               defaultChecked={defaultRequiresApproval}
             />
           }
@@ -427,7 +426,6 @@ export default function OfferingForm({
               id="offering-published"
               name="offering-published"
               defaultChecked={defaultPublished}
-              inputProps={{ 'aria-label': 'Published' }}
             />
           }
           label="Published"
