@@ -12,6 +12,7 @@ import { Default as BrandStory } from '../../02-components/brand/brand.stories';
 import { UniversityAndCampus as ContextStory } from '../../02-components/context/context.stories';
 import { Default as SidebarMenuStory } from '../../02-components/sidebar-menu/sidebar-menu.stories';
 import PageLayout from './page-layout';
+import React from 'react';
 
 const meta: Meta<typeof PageLayout> = {
   title: 'Layouts/Page Layout',

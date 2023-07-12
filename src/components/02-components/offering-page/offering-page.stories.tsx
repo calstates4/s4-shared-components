@@ -56,7 +56,6 @@ const offeringData = {
     },
   ],
   title: 'Hi omnes lingua, institutis, legibus inter se differunt.',
-  url: '#',
   editUrl: '#',
   type: 'Hybrid',
   description,
@@ -98,6 +97,13 @@ export const Default: StoryObj<typeof OfferingPage> = {
 export const NoExperiences: StoryObj<typeof OfferingPage> = {
   args: {
     ...offeringData,
-    children: <OfferingRelatedExperiencesTable url="#" />,
+    children: (
+      <OfferingRelatedExperiencesTable
+        url="#"
+        totalItems={0}
+        itemsPerPage={0}
+        currentPage={0}
+      />
+    ),
   },
 };

@@ -54,7 +54,7 @@ export const Default: StoryObj<typeof OfferingList> = {
     ],
     currentFilters: {
       category: 'all',
-      departmentId: '1',
+      department: '1',
     },
   },
 };

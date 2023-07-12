@@ -23,6 +23,7 @@ export default function MainContent({
     padding: theme.spacing(2),
     marginLeft: 0,
     paddingTop: '120px', // Space taken by branding bar + topbar + content top padding.
+    overflowX: 'hidden',
     [theme.breakpoints.up('md')]: {
       marginLeft: `-${sidebarWidth}%`,
       transition: theme.transitions.create('margin', {
