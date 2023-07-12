@@ -8,6 +8,14 @@ export { default as Pager } from './components/01-elements/pager/pager';
 export { default as SidebarToggle } from './components/01-elements/sidebar-toggle/sidebar-toggle';
 // Components.
 export {
+  default as AddressField,
+  type AddressType,
+} from './components/02-components/address-field/address-field';
+export {
+  default as AutocompleteField,
+  type AutocompleteOptionType,
+} from './components/02-components/autocomplete-field/autocomplete-field';
+export {
   default as Brand,
   type BrandProps,
 } from './components/02-components/brand/brand';
