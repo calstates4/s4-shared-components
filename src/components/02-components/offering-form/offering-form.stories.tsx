@@ -8,17 +8,17 @@ const meta: Meta<typeof OfferingForm> = {
 
 export default meta;
 
-const defaultDescription = `<p>
+const defaultDescription = `
   We exist to serve the most vulnerable in our communities. We do this by
   partnering with agencies to give us insight into areas where volunteers can
   meet the most pressing needs, empowering volunteers to manifest compassion and
   service as representatives of their communities, and mobilizing churches and
   businesses to serve in projects in their cities throughout the year!
-</p>`;
+`;
 
-const defaultTraining = `<p>
+const defaultTraining = `
 Plura mihi bona sunt, inclinet, amari petere vellent. Me non paenitet nullum festiviorem excogitasse ad hoc. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Tu quoque, Brute, fili mi, nihil timor populi, nihil!
-</p>`;
+`;
 
 const users = [
   { id: '1', name: 'Emily Parker' },

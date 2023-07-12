@@ -270,6 +270,9 @@ export default function OfferingForm({
       <Tabs
         value={activeTab}
         onChange={handleTabOnChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
         aria-label="Offering form tabs"
       >
         <Tab label="Metadata" {...a11yProps(0)} />
