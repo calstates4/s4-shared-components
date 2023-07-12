@@ -1,4 +1,11 @@
-import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Paper,
+  type SxProps,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type CardExperienceProps = {
@@ -39,11 +46,10 @@ export default function CardExperience({
   const stateMarginY = cardCount >= 2 ? theme.spacing(2) : '0';
   const stateMarginX = cardCount >= 2 ? '0' : theme.spacing(2);
   const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
-  const bodyMarginBottom = cardCount >= 2 ? theme.spacing(12) : '0';
+  const bodyMarginBottom = cardCount >= 2 ? theme.spacing(3) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
   const bodyWrapper = cardCount >= 2 ? '0' : '1 0 75%';
   const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
-  const containerAlignment = cardCount >= 2 ? 'normal' : 'flex-start';
   const containerPosition = cardCount >= 2 ? 'row' : 'column';
 
   // Variables to manage workflow status
@@ -91,19 +97,26 @@ export default function CardExperience({
   };
 
   // Styles.
-  const containerStyle = {
-    display: 'flex',
+  const containerStyles: SxProps = {
     p: theme.spacing(3),
     mb: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '100%',
+    [theme.breakpoints.up('sm')]: {
+      minWidth: '450px',
+    },
     [theme.breakpoints.up('md')]: {
       p: contentPadding,
-      minWidth: '600px',
       flexDirection: containerPosition,
-      alignItems: containerAlignment,
+      flex: '1 1 100%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: '500px',
     },
   };
 
-  const contentStyle = {
+  const contentStyles = {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
@@ -113,11 +126,11 @@ export default function CardExperience({
     },
   };
 
-  const bodyWrapperStyle = {
+  const bodyWrapperStyles = {
     flex: bodyWrapper,
   };
 
-  const headingWrapperStyle = {
+  const headingWrapperStyles = {
     display: 'flex',
     alignItems: 'flex-start',
     marginBottom: theme.spacing(1),
@@ -132,7 +145,7 @@ export default function CardExperience({
     fontWeight: '700',
   };
 
-  const stateStyle = {
+  const stateStyles = {
     marginTop: theme.spacing(2),
     backgroundColor: states[state].color,
     px: theme.spacing(1),
@@ -143,16 +156,16 @@ export default function CardExperience({
     },
   };
 
-  const descriptionContainerStyle = {
+  const descriptionContainerStyles = {
     flexBasis: '60%',
     marginRight: bodyMarginLeft,
   };
 
-  const programInfoStyle = {
+  const programInfoStyles = {
     flexBasis: '40%',
   };
 
-  const descriptionStyle = {
+  const descriptionStyles = {
     display: 'flex',
     flexDirection: 'column',
   };
@@ -162,10 +175,13 @@ export default function CardExperience({
     border: `2px solid ${theme.palette.primary.main}`,
     color: 'primary.main',
     fontWeight: '700',
-    '&:focus, &:hover, &:active': { backgroundColor: 'primary.dark' },
+    '&:focus, &:hover, &:active': {
+      backgroundColor: 'primary.dark',
+      color: 'white',
+    },
   };
 
-  const infoStyle = {
+  const infoStyles = {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: theme.spacing(4),
@@ -175,7 +191,7 @@ export default function CardExperience({
     },
   };
 
-  const cardHoursStyle = {
+  const cardHoursStyles = {
     flex: cardHourWrapper,
   };
 
@@ -187,15 +203,15 @@ export default function CardExperience({
   );
 
   const renderedState = state && (
-    <Typography sx={stateStyle} variant="body2">
+    <Typography sx={stateStyles} variant="body2">
       {states[state].label}
     </Typography>
   );
 
   const renderedDescription = description && (
-    <Box sx={descriptionStyle}>
+    <Box sx={descriptionStyles}>
       <strong>Experience Details:</strong>
-      {description}
+      <div dangerouslySetInnerHTML={{ __html: description }} />
     </Box>
   );
 
@@ -221,37 +237,37 @@ export default function CardExperience({
   );
 
   return (
-    <Paper sx={containerStyle}>
-      <Box sx={contentStyle}>
-        <Box sx={bodyWrapperStyle}>
-          <Box sx={headingWrapperStyle}>
+    <Paper sx={containerStyles}>
+      <Box sx={contentStyles}>
+        <Box sx={bodyWrapperStyles}>
+          <Box sx={headingWrapperStyles}>
             {renderedHeading}
             {renderedState}
           </Box>
-          <Box sx={infoStyle}>
-            <Box sx={descriptionContainerStyle}>{renderedDescription}</Box>
-            <Box sx={programInfoStyle}>
+          <Box sx={infoStyles}>
+            <Box sx={descriptionContainerStyles}>{renderedDescription}</Box>
+            <Box sx={programInfoStyles}>
               {renderedProgram}
               {renderedLocation}
               {renderedDate}
             </Box>
           </Box>
         </Box>
-        <Box sx={cardHoursStyle}>
+        <Box sx={cardHoursStyles}>
           <CardExperienceHours
             hours={hours}
             cta={hoursCtaUrl}
             position={cardNumberVariation}
           />
           {cardCount >= 2 && (
-            <Button sx={buttonStyles} href={cta}>
+            <Button sx={{ ...buttonStyles, width: '100%' }} href={cta}>
               {ctaTitle}
             </Button>
           )}
         </Box>
       </Box>
-      {cardCount == 1 && (
-        <Button sx={buttonStyles} href={cta}>
+      {cardCount === 1 && (
+        <Button sx={{ ...buttonStyles, alignSelf: 'flex-start' }} href={cta}>
           {ctaTitle}
         </Button>
       )}
