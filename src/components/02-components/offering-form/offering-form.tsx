@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Checkbox,
+  Switch,
   FormControlLabel,
   Paper,
   Tab,
@@ -219,6 +219,11 @@ export default function OfferingForm({
     mb: theme.spacing(2),
   };
 
+  const formFieldStyles = {
+    mb: theme.spacing(3),
+    display: 'block',
+  };
+
   function handleTabOnChange(event: SyntheticEvent, value: number) {
     setActiveTab(value);
   }
@@ -287,19 +292,20 @@ export default function OfferingForm({
           InputLabelProps={{
             shrink: true,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
 
         <FormControlLabel
           control={
-            <Checkbox
+            <Switch
               id="offering-requires-approval"
               name="offering-requires-approval"
+              inputProps={{ 'aria-label': 'Requires approval' }}
               defaultChecked={defaultRequiresApproval}
             />
           }
           label="Requires approval"
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
 
         {departments && (
@@ -315,7 +321,7 @@ export default function OfferingForm({
             SelectProps={{
               native: true,
             }}
-            sx={{ mb: theme.spacing(3) }}
+            sx={formFieldStyles}
           >
             <option value="">Select a value</option>
             {departments.map((option) => (
@@ -339,7 +345,7 @@ export default function OfferingForm({
           SelectProps={{
             native: true,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         >
           {OFFERING_TYPES.map((option) => (
             <option key={option.value} value={option.value}>
@@ -362,7 +368,7 @@ export default function OfferingForm({
             step: 1,
             min: 1,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
 
         <TextField
@@ -379,7 +385,7 @@ export default function OfferingForm({
           inputProps={{
             pattern: 'd{4}-d{2}-d{2}',
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
 
         {startDate && (
@@ -397,7 +403,7 @@ export default function OfferingForm({
               min: startDate,
               pattern: 'd{4}-d{2}-d{2}',
             }}
-            sx={{ mb: theme.spacing(3) }}
+            sx={formFieldStyles}
           />
         )}
 
@@ -413,16 +419,19 @@ export default function OfferingForm({
 
         {/* Autocomplete for Required languages */}
 
+        {/* Address */}
+
         <FormControlLabel
           control={
-            <Checkbox
+            <Switch
               id="offering-published"
               name="offering-published"
               defaultChecked={defaultPublished}
+              inputProps={{ 'aria-label': 'Published' }}
             />
           }
           label="Published"
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
       </TabPanel>
 
@@ -439,7 +448,7 @@ export default function OfferingForm({
           InputLabelProps={{
             shrink: true,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
 
         <TextField
@@ -453,7 +462,7 @@ export default function OfferingForm({
           InputLabelProps={{
             shrink: true,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
       </TabPanel>
 
@@ -466,7 +475,6 @@ export default function OfferingForm({
             id="offering-focus-populations"
             name="offering-focus-populations"
             label="Focus Population(s)"
-            defaultValue={defaultFocusPopulations ?? undefined}
             onChange={(event) =>
               setSelectedFocusPopulations(handleMultipleSelectOnChange(event))
             }
@@ -477,7 +485,7 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3) }}
+            sx={formFieldStyles}
           >
             {focusPopulations.map((option) => (
               <option key={option.id} value={option.id}>
@@ -495,7 +503,6 @@ export default function OfferingForm({
             id="offering-focus-areas"
             name="offering-focus-areas"
             label="Focus Area(s)"
-            defaultValue={defaultFocusAreas ?? undefined}
             onChange={(event) =>
               setSelectedFocusAreas(handleMultipleSelectOnChange(event))
             }
@@ -506,7 +513,7 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3) }}
+            sx={formFieldStyles}
           >
             {focusAreas.map((option) => (
               <option key={option.id} value={option.id}>
@@ -523,7 +530,6 @@ export default function OfferingForm({
             id="offering-sub-focus-areas"
             name="offering-sub-focus-areas"
             label="Sub focus Area(s)"
-            defaultValue={defaultSubFocusAreas ?? undefined}
             onChange={(event) =>
               setSelectedSubFocusAreas(handleMultipleSelectOnChange(event))
             }
@@ -534,7 +540,7 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3) }}
+            sx={formFieldStyles}
           >
             {subFocusAreas.map((option) => (
               <option key={option.id} value={option.id}>
@@ -552,7 +558,6 @@ export default function OfferingForm({
             id="offering-activities"
             name="offering-activities"
             label="Activities"
-            defaultValue={defaultActivities ?? undefined}
             onChange={(event) =>
               setSelectedActivities(handleMultipleSelectOnChange(event))
             }
@@ -563,7 +568,7 @@ export default function OfferingForm({
               native: true,
               multiple: true,
             }}
-            sx={{ mb: theme.spacing(3) }}
+            sx={formFieldStyles}
           >
             {activities.map((option) => (
               <option key={option.id} value={option.id}>
@@ -589,7 +594,7 @@ export default function OfferingForm({
             step: 0.1,
             min: 1,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         />
         <TextField
           select
@@ -604,7 +609,7 @@ export default function OfferingForm({
           SelectProps={{
             native: true,
           }}
-          sx={{ mb: theme.spacing(3) }}
+          sx={formFieldStyles}
         >
           {OFFERING_TIME_UNITS.map((option) => (
             <option key={option.value} value={option.value}>
