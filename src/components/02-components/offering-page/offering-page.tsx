@@ -352,10 +352,12 @@ export default function OfferingPage({
               <dt>Areas: </dt>
               <dd>{focusAreas}</dd>
             </div>
-            <div>
-              <dt>Sub focus areas: </dt>
-              <dd>{subFocusAreas}</dd>
-            </div>
+            {subFocusAreas && (
+              <div>
+                <dt>Sub focus areas: </dt>
+                <dd>{subFocusAreas}</dd>
+              </div>
+            )}
           </Box>
         </Paper>
         <Paper sx={{ ...paperStyles, ...rightColumnContainerStyles }}>

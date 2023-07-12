@@ -32,6 +32,12 @@ export {
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
 export {
+  default as ExperienceTimeEntriesTable,
+  type ExperienceTimeEntriesTableProps,
+  type TimeEntryProps,
+  type TimeEntryRevisionProps,
+} from './components/02-components/experience-time-entry-table/experience-time-entry-table';
+export {
   default as OfferingCard,
   type OfferingCardProps,
 } from './components/02-components/offering-card/offering-card';
@@ -54,6 +60,11 @@ export {
   type OrganizationPageProps,
 } from './components/02-components/organization-page/organization-page';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
+export { default as CardPendingTasks } from './components/02-components/card-pending-tasks/card-pending-tasks';
+export {
+  default as PastExperiencesList,
+  type PastExpericiencesListProps,
+} from './components/02-components/past-experiences-list/past-experiences-list';
 export {
   default as SidebarMenu,
   type SidebarMenuProps,

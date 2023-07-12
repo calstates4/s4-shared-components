@@ -1,4 +1,5 @@
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 export type CardExperiencesListProps = {
@@ -11,23 +12,22 @@ export default function CardExperiencesList({
   const theme = useTheme();
 
   // Styles.
-  const containerStyle = {
-    p: theme.spacing(5),
+  const containerStyles = {
+    pt: theme.spacing(5),
     mb: theme.spacing(5),
+    px: theme.spacing(0.5),
+    overflowX: 'auto',
+    width: '100%',
   };
 
-  const listStyle = {
+  const listStyles = {
     display: 'flex',
-    listStyle: 'none',
-    overflowX: 'scroll',
     gap: theme.spacing(2),
   };
 
   return (
-    <Box sx={containerStyle}>
-      <Box sx={listStyle} content="ul">
-        {children}
-      </Box>
+    <Box sx={containerStyles}>
+      <Box sx={listStyles}>{children}</Box>
     </Box>
   );
 }
