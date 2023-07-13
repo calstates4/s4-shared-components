@@ -19,6 +19,10 @@ import {
   useState,
 } from 'react';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
+import AddressField, { type AddressType } from '../address-field/address-field';
+import AutocompleteField, {
+  AutocompleteOptionType,
+} from '../autocomplete-field/autocomplete-field';
 
 const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
@@ -48,50 +52,18 @@ export type OfferingFormProps = {
   }[];
   title: string;
   id: string | number;
-  departments?: {
-    id: string;
-    name: string;
-  }[];
-  primaryContacts?: {
-    id: string;
-    name: string;
-  }[];
-  timeApprovers?: {
-    id: string;
-    name: string;
-  }[];
-  formSigners?: {
-    id: string;
-    name: string;
-  }[];
-  observers?: {
-    id: string;
-    name: string;
-  }[];
-  preferredLanguages?: {
-    id: string;
-    name: string;
-  }[];
-  requiredLanguages?: {
-    id: string;
-    name: string;
-  }[];
-  focusPopulations?: {
-    id: string;
-    name: string;
-  }[];
-  focusAreas?: {
-    id: string;
-    name: string;
-  }[];
-  subFocusAreas?: {
-    id: string;
-    name: string;
-  }[];
-  activities?: {
-    id: string;
-    name: string;
-  }[];
+  departments?: AutocompleteOptionType[];
+  address?: AddressType;
+  primaryContacts?: AutocompleteOptionType[];
+  timeApprovers?: AutocompleteOptionType[];
+  formSigners?: AutocompleteOptionType[];
+  observers?: AutocompleteOptionType[];
+  preferredLanguages?: AutocompleteOptionType[];
+  requiredLanguages?: AutocompleteOptionType[];
+  focusPopulations?: AutocompleteOptionType[];
+  focusAreas?: AutocompleteOptionType[];
+  subFocusAreas?: AutocompleteOptionType[];
+  activities?: AutocompleteOptionType[];
   FormElement?: ElementType;
   submitButtonText: string;
   defaultName?: string;
@@ -158,6 +130,7 @@ export default function OfferingForm({
   title,
   id,
   departments,
+  address,
   primaryContacts,
   timeApprovers,
   formSigners,
@@ -197,15 +170,6 @@ export default function OfferingForm({
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
   const [startDate, setStartDate] = useState(defaultStartDate);
-  const [selectedFocusPopulations, setSelectedFocusPopulations] = useState(
-    defaultFocusPopulations,
-  );
-  const [selectedFocusAreas, setSelectedFocusAreas] =
-    useState(defaultFocusAreas);
-  const [selectedSubFocusAreas, setSelectedSubFocusAreas] =
-    useState(defaultSubFocusAreas);
-  const [selectedActivities, setSelectedActivities] =
-    useState(defaultActivities);
 
   // Styles.
   const paperStyles = {
@@ -230,19 +194,6 @@ export default function OfferingForm({
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
-  }
-
-  function handleMultipleSelectOnChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    const { options } = event.target as unknown as HTMLSelectElement;
-    const selectedValues: string[] = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    return selectedValues;
   }
 
   function onClickHandler(event: FormEvent<HTMLButtonElement>) {
@@ -283,7 +234,6 @@ export default function OfferingForm({
 
       <TabPanel value={activeTab} index={0}>
         <input name="offering-id" type="hidden" value={id} />
-
         <TextField
           autoFocus
           required
@@ -311,27 +261,14 @@ export default function OfferingForm({
         />
 
         {departments && (
-          <TextField
-            select
+          <AutocompleteField
             id="offering-deparment"
-            name="offering-department"
-            label="Deparment"
-            defaultValue={defaultDepartment ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-            }}
-            sx={formFieldStyles}
-          >
-            <option value="">Select a value</option>
-            {departments.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </TextField>
+            name="offering-deparment"
+            label="Department"
+            options={departments}
+            selected={defaultDepartment}
+            sx={{ mb: theme.spacing(3) }}
+          />
         )}
 
         <TextField
@@ -409,19 +346,79 @@ export default function OfferingForm({
           />
         )}
 
-        {/* Autocomplete for Primary contact */}
+        <AddressField address={address} mb={3} />
 
-        {/* Autocomplete for Time approvers */}
+        {primaryContacts && (
+          <AutocompleteField
+            required
+            id="offering-primary-contact"
+            name="offering-primary-contact"
+            label="Primary contact"
+            options={primaryContacts}
+            selected={defaultPrimaryContact}
+            sx={{ mb: theme.spacing(3) }}
+          />
+        )}
 
-        {/* Autocomplete for Form signers */}
+        {timeApprovers && (
+          <AutocompleteField
+            multiple
+            required
+            id="offering-time-approvers"
+            name="offering-time-approvers"
+            label="Time approver(s)"
+            options={timeApprovers}
+            selected={defaultTimeApprovers}
+            sx={{ mb: theme.spacing(3) }}
+          />
+        )}
 
-        {/* Autocomplete for Observers */}
-
-        {/* Autocomplete for Preferred languages */}
-
-        {/* Autocomplete for Required languages */}
-
-        {/* Address */}
+        {formSigners && (
+          <AutocompleteField
+            multiple
+            required
+            id="offering-form-signers"
+            name="offering-form-signers"
+            label="Form sirner(s)"
+            options={formSigners}
+            selected={defaultFormSigners}
+            sx={{ mb: theme.spacing(3) }}
+          />
+        )}
+        {observers && (
+          <AutocompleteField
+            multiple
+            required
+            id="offering-observers"
+            name="offering-observers"
+            label="Observer(s)"
+            options={observers}
+            selected={defaultObservers}
+            sx={{ mb: theme.spacing(3) }}
+          />
+        )}
+        {preferredLanguages && (
+          <AutocompleteField
+            multiple
+            id="offering-preferred-languages"
+            name="offering-preferred-languages"
+            label="Preferred langauge(s)"
+            options={preferredLanguages}
+            selected={defaultPreferredLanguages}
+            sx={{ mb: theme.spacing(3) }}
+          />
+        )}
+        {requiredLanguages && (
+          <AutocompleteField
+            multiple
+            id="offering-required-languages"
+            name="offering-required-languages"
+            label="Required language(s)"
+            options={requiredLanguages}
+            selected={defaultRequiredLanguages}
+            sx={{ mb: theme.spacing(3) }}
+          />
+        )}
 
         <FormControlLabel
           control={
@@ -469,114 +466,55 @@ export default function OfferingForm({
 
       <TabPanel value={activeTab} index={2}>
         {focusPopulations && (
-          <TextField
-            select
+          <AutocompleteField
+            multiple
             required
-            value={selectedFocusPopulations}
             id="offering-focus-populations"
             name="offering-focus-populations"
             label="Focus Population(s)"
-            onChange={(event) =>
-              setSelectedFocusPopulations(handleMultipleSelectOnChange(event))
-            }
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-              multiple: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {focusPopulations.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </TextField>
+            options={focusPopulations}
+            selected={defaultFocusPopulations}
+            sx={{ mb: theme.spacing(3) }}
+          />
         )}
 
         {focusAreas && (
-          <TextField
-            select
+          <AutocompleteField
+            multiple
             required
-            value={selectedFocusAreas}
             id="offering-focus-areas"
             name="offering-focus-areas"
             label="Focus Area(s)"
-            onChange={(event) =>
-              setSelectedFocusAreas(handleMultipleSelectOnChange(event))
-            }
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-              multiple: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {focusAreas.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </TextField>
+            options={focusAreas}
+            selected={defaultFocusAreas}
+            sx={{ mb: theme.spacing(3) }}
+          />
         )}
 
         {subFocusAreas && (
-          <TextField
-            select
-            value={selectedSubFocusAreas}
+          <AutocompleteField
+            multiple
+            required
             id="offering-sub-focus-areas"
             name="offering-sub-focus-areas"
             label="Sub focus Area(s)"
-            onChange={(event) =>
-              setSelectedSubFocusAreas(handleMultipleSelectOnChange(event))
-            }
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-              multiple: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {subFocusAreas.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </TextField>
+            options={subFocusAreas}
+            selected={defaultSubFocusAreas}
+            sx={{ mb: theme.spacing(3) }}
+          />
         )}
 
         {activities && (
-          <TextField
-            select
+          <AutocompleteField
+            multiple
             required
-            value={selectedActivities}
             id="offering-activities"
             name="offering-activities"
             label="Activities"
-            onChange={(event) =>
-              setSelectedActivities(handleMultipleSelectOnChange(event))
-            }
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-              multiple: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {activities.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </TextField>
+            options={activities}
+            selected={defaultActivities}
+            sx={{ mb: theme.spacing(3) }}
+          />
         )}
       </TabPanel>
 

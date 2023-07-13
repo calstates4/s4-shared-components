@@ -21,67 +21,74 @@ Plura mihi bona sunt, inclinet, amari petere vellent. Me non paenitet nullum fes
 `;
 
 const users = [
-  { id: '1', name: 'Emily Parker' },
-  { id: '2', name: 'Mathew Ross' },
-  { id: '3', name: 'Carlos Smith' },
-  { id: '4', name: 'Robert Thomsom' },
-  { id: '5', name: 'Marcus Rivers' },
-  { id: '6', name: 'Peter Mask' },
-  { id: '7', name: 'David Paz' },
-  { id: '8', name: 'Martin Lopéz' },
-  { id: '9', name: 'Christopher James' },
-  { id: '10', name: 'Harry Brown' },
+  { id: '1', label: 'Emily Parker' },
+  { id: '2', label: 'Mathew Ross' },
+  { id: '3', label: 'Carlos Smith' },
+  { id: '4', label: 'Robert Thomsom' },
+  { id: '5', label: 'Marcus Rivers' },
+  { id: '6', label: 'Peter Mask' },
+  { id: '7', label: 'David Paz' },
+  { id: '8', label: 'Martin Lopéz' },
+  { id: '9', label: 'Christopher James' },
+  { id: '10', label: 'Harry Brown' },
+];
+
+const departments = [
+  { id: '1', label: 'Design' },
+  { id: '2', label: 'Human Resources' },
+  { id: '3', label: 'Sales' },
 ];
 
 const focusPopulations = [
-  { id: '1', name: 'People Experiencing Addiction' },
-  { id: '2', name: 'Seniors' },
-  { id: '3', name: 'Veterans, Active Military and/or Military Families' },
-  { id: '4', name: 'Veterans, People Experiencing Homelessness' },
-  { id: '5', name: 'People Experiencing Material Poverty' },
-  { id: '6', name: 'Adults' },
-  { id: '7', name: 'Formerly Incarcerated People' },
-  { id: '8', name: 'Children/Youth' },
-  { id: '9', name: 'Immigrants/Refugees' },
+  { id: '1', label: 'People Experiencing Addiction' },
+  { id: '2', label: 'Seniors' },
+  { id: '3', label: 'Veterans, Active Military and/or Military Families' },
+  { id: '4', label: 'Veterans, People Experiencing Homelessness' },
+  { id: '5', label: 'People Experiencing Material Poverty' },
+  { id: '6', label: 'Adults' },
+  { id: '7', label: 'Formerly Incarcerated People' },
+  { id: '8', label: 'Children/Youth' },
+  { id: '9', label: 'Immigrants/Refugees' },
 ];
 
 const focusAreas = [
-  { id: '1', name: 'Emergency Services & Public Safety' },
-  { id: '2', name: 'International Service Experiences' },
-  { id: '3', name: 'Arts, Culture, and Humanities' },
-  { id: '4', name: 'Construction' },
-  { id: '5', name: 'Restorative Justice' },
-  { id: '6', name: 'Transportation & Tourism' },
-  { id: '7', name: 'Migration & Naturalization Services' },
+  { id: '1', label: 'Emergency Services & Public Safety' },
+  { id: '2', label: 'International Service Experiences' },
+  { id: '3', label: 'Arts, Culture, and Humanities' },
+  { id: '4', label: 'Construction' },
+  { id: '5', label: 'Restorative Justice' },
+  { id: '6', label: 'Transportation & Tourism' },
+  { id: '7', label: 'Migration & Naturalization Services' },
 ];
 
 const subFocusAreas = [
-  { id: '1', name: 'Legal Assistance' },
-  { id: '2', name: 'Human Rights and Liberties' },
-  { id: '3', name: 'Political Engagement' },
-  { id: '4', name: 'Cultural Programs' },
-  { id: '5', name: 'Fine Arts' },
+  { id: '1', label: 'Legal Assistance' },
+  { id: '2', label: 'Human Rights and Liberties' },
+  { id: '3', label: 'Political Engagement' },
+  { id: '4', label: 'Cultural Programs' },
+  { id: '5', label: 'Fine Arts' },
 ];
 
 const activities = [
   {
     id: '1',
-    name: 'Support or assist with an event, program, or community project',
+    label: 'Support or assist with an event, program, or community project',
   },
-  { id: '2', name: 'Prepare and/or serve food' },
-  { id: '3', name: 'Serve in a coaching role' },
-  { id: '4', name: 'Provide translation and/or transcription services' },
+  { id: '2', label: 'Prepare and/or serve food' },
+  { id: '3', label: 'Serve in a coaching role' },
+  { id: '4', label: 'Provide translation and/or transcription services' },
   {
     id: '5',
-    name: 'Participate in a painting, building, renovation or construction activity (such as, neighborhood/housing restoration or building theater props or playgrounds, etc)',
+    label:
+      'Participate in a painting, building, renovation or construction activity (such as, neighborhood/housing restoration or building theater props or playgrounds, etc)',
   },
 ];
 
 const languages = [
-  { id: '1', name: 'Spanish' },
-  { id: '2', name: 'French' },
-  { id: '3', name: 'German' },
-  { id: '4', name: 'English' },
+  { id: '1', label: 'Spanish' },
+  { id: '2', label: 'French' },
+  { id: '3', label: 'German' },
+  { id: '4', label: 'English' },
 ];
 
 export const AddOffering: StoryObj<typeof OfferingForm> = {
@@ -97,11 +104,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     title: 'Add Offering',
-    departments: [
-      { id: '1', name: 'Design' },
-      { id: '2', name: 'Human Resources' },
-      { id: '3', name: 'Sales' },
-    ],
+    departments,
     primaryContacts: users,
     timeApprovers: users,
     formSigners: users,
@@ -133,11 +136,14 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     title: 'Hi omnes lingua, institutis, legibus inter se differunt.',
-    departments: [
-      { id: '1', name: 'Design' },
-      { id: '2', name: 'Human Resources' },
-      { id: '3', name: 'Sales' },
-    ],
+    departments,
+    address: {
+      country: 'US',
+      streetAddress1: '30 Rockefeller Plaza',
+      city: 'New York',
+      state: 'NY',
+      zipCode: '10112',
+    },
     primaryContacts: users,
     timeApprovers: users,
     formSigners: users,
