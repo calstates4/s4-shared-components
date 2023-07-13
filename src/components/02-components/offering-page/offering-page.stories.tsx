@@ -99,10 +99,10 @@ export const NoExperiences: StoryObj<typeof OfferingPage> = {
     ...offeringData,
     children: (
       <OfferingRelatedExperiencesTable
-        url="#"
+        url="http://localhost:6006/"
+        itemsPerPage={5}
         totalItems={0}
-        itemsPerPage={0}
-        currentPage={0}
+        currentPage={1}
       />
     ),
   },
