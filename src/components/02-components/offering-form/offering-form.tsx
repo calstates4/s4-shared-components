@@ -42,7 +42,6 @@ export type OfferingFormProps = {
     title: string;
     url: string;
   }[];
-  id: string | number;
   departments?: AutocompleteOptionType[];
   address?: AddressType;
   primaryContacts?: AutocompleteOptionType[];
@@ -84,7 +83,6 @@ export type OfferingFormProps = {
 export default function OfferingForm({
   isEdit = false,
   breadcrumb,
-  id,
   departments,
   address,
   primaryContacts,
@@ -179,7 +177,6 @@ export default function OfferingForm({
             name: 'Metadata',
             content: (
               <>
-                <input name="offering-id" type="hidden" value={id} />
                 <TextField
                   autoFocus
                   required
