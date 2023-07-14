@@ -4,7 +4,7 @@ import Tabs from './tabs';
 import React from 'react';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Elements/Tabs',
+  title: 'Components/Tabs',
   component: Tabs,
   render: () => (
     <Tabs
@@ -45,11 +45,7 @@ const meta: Meta<typeof Tabs> = {
           ),
         },
       ]}
-    >
-      <Box>
-        <h1>Hi</h1>
-      </Box>
-    </Tabs>
+    />
   ),
 };
 

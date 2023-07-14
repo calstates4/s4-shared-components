@@ -312,13 +312,13 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         Address
       </Typography>
       <FormControl fullWidth>
-        <InputLabel id="org-form-address-country-label">Country</InputLabel>
+        <InputLabel id="address-country-label">Country</InputLabel>
         <Select
-          labelId="org-form-address-country-label"
-          id="org-form-address-country"
+          labelId="address-country-label"
+          id="address-country"
           label="Country"
           native={true}
-          name="address_country"
+          name="address-country"
           defaultValue={address?.country ?? 'none'}
           onChange={countryChangeHandler}
         >
@@ -330,19 +330,18 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         <TextField
           required
           fullWidth
-          id="org-form-streetaddress1"
+          id="street-address1"
           variant="outlined"
-          name="address_street_address1"
+          name="address-street-address1"
           label="Street address"
           defaultValue={address?.streetAddress1}
           sx={{ ...fieldBaseStyles, mt: theme.spacing(3) }}
         />
         <TextField
-          required
           fullWidth
-          id="org-form-streetaddress2"
+          id="street-address2"
           variant="outlined"
-          name="address_street_address2"
+          name="address-street-address2"
           label="Street address 2"
           defaultValue={address?.streetAddress2}
           sx={fieldBaseStyles}
@@ -351,22 +350,22 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           <TextField
             required
             fullWidth
-            id="org-form-city"
+            id="city"
             variant="outlined"
-            name="address_city"
+            name="address-city"
             label="City"
             defaultValue={address?.city}
             sx={fieldBaseStyles}
           />
           <FormControl fullWidth required sx={fieldBaseStyles}>
-            <InputLabel id="org-form-address-state-label">State</InputLabel>
+            <InputLabel id="address-state-label">State</InputLabel>
             <Select
               required
-              labelId="org-form-address-state-label"
-              id="org-form-address-state"
+              labelId="address-state-label"
+              id="address-state"
               label="State"
               native={true}
-              name="address_state"
+              name="address-state"
               defaultValue={address?.state ?? 'none'}
             >
               <option value="none">Select state…</option>
@@ -380,9 +379,9 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         </Box>
         <TextField
           required
-          id="org-form-zipcode"
+          id="zipcode"
           variant="outlined"
-          name="address_zipcode"
+          name="address-zipcode"
           label="Zip code"
           defaultValue={address?.zipCode}
         />
