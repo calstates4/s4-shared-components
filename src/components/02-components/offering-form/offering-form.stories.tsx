@@ -141,6 +141,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     address: {
       country: 'US',
       streetAddress1: '30 Rockefeller Plaza',
+      streetAddress2: 'Mercedem aut nummos unde',
       city: 'New York',
       state: 'NY',
       zipCode: '10112',

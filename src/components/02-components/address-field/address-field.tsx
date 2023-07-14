@@ -328,7 +328,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
       </FormControl>
       <Collapse in={expanded}>
         <TextField
-          required
+          required={expanded}
           fullWidth
           id="street-address1"
           variant="outlined"
@@ -348,7 +348,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         />
         <Box sx={twoColStyles}>
           <TextField
-            required
+            required={expanded}
             fullWidth
             id="city"
             variant="outlined"
@@ -360,7 +360,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           <FormControl fullWidth required sx={fieldBaseStyles}>
             <InputLabel id="address-state-label">State</InputLabel>
             <Select
-              required
+              required={expanded}
               labelId="address-state-label"
               id="address-state"
               label="State"
@@ -378,7 +378,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           </FormControl>
         </Box>
         <TextField
-          required
+          required={expanded}
           id="zipcode"
           variant="outlined"
           name="address-zipcode"

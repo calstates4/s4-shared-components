@@ -11,9 +11,9 @@ import { ChangeEvent, ElementType, FormEvent, useRef, useState } from 'react';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import AddressField, { AddressType } from '../address-field/address-field';
 import AutocompleteField, {
-  AutocompleteOptionType,
+  type AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
-import Tabs, { RefHandler } from '../tabs/tabs';
+import Tabs, { type RefHandler } from '../tabs/tabs';
 
 const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
@@ -173,6 +173,7 @@ export default function OfferingForm({
         ref={tabRef}
         name="Offering form tabs"
         id="offering-form"
+        tabPanelClassName="offering-form"
         tabs={[
           {
             name: 'Metadata',
@@ -207,8 +208,8 @@ export default function OfferingForm({
 
                 {departments && (
                   <AutocompleteField
-                    id="offering-deparment"
-                    name="offering-deparment"
+                    id="offering-department"
+                    name="offering-department"
                     label="Department"
                     options={departments}
                     selected={defaultDepartment}
@@ -447,7 +448,6 @@ export default function OfferingForm({
                 {subFocusAreas && (
                   <AutocompleteField
                     multiple
-                    required
                     id="offering-sub-focus-areas"
                     name="offering-sub-focus-areas"
                     label="Sub focus Area(s)"
