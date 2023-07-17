@@ -12,15 +12,15 @@ import { useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-export type PastExpericiencesListProps = {
+export type PastExperiencesListProps = {
   experienceInfo: { experience: string; status: string }[];
   ctaLink: string;
 };
 
-export default function PastExpericiencesList({
+export default function PastExperiencesList({
   experienceInfo,
   ctaLink,
-}: PastExpericiencesListProps) {
+}: PastExperiencesListProps) {
   const theme = useTheme();
 
   const headingStyles = {

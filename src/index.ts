@@ -58,7 +58,7 @@ export { default as Placeholder } from './components/02-components/placeholder/p
 export { default as CardPendingTasks } from './components/02-components/card-pending-tasks/card-pending-tasks';
 export {
   default as PastExperiencesList,
-  type PastExpericiencesListProps,
+  type PastExperiencesListProps,
 } from './components/02-components/past-experiences-list/past-experiences-list';
 export {
   default as SidebarMenu,

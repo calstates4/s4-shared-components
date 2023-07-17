@@ -11,13 +11,12 @@ import CardExperienceHours from '../card-experience-hours/card-experience-hours'
 export type CardExperienceProps = {
   heading: string;
   state: string;
-  description: string;
+  description?: string;
   program: string;
   dateStart: string;
   dateEnd: string;
   location: string;
   cta: string;
-  ctaTitle: string;
   hours: number;
   hoursCtaUrl: string;
   cardCount: number;
@@ -31,7 +30,6 @@ export default function CardExperience({
   dateStart,
   dateEnd,
   location,
-  ctaTitle,
   cta,
   hours,
   hoursCtaUrl,
@@ -261,14 +259,14 @@ export default function CardExperience({
           />
           {cardCount >= 2 && (
             <Button sx={{ ...buttonStyles, width: '100%' }} href={cta}>
-              {ctaTitle}
+              More Details
             </Button>
           )}
         </Box>
       </Box>
       {cardCount === 1 && (
         <Button sx={{ ...buttonStyles, alignSelf: 'flex-start' }} href={cta}>
-          {ctaTitle}
+          More Details
         </Button>
       )}
     </Paper>
