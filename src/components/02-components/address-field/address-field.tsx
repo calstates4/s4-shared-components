@@ -22,6 +22,7 @@ export type AddressType = {
 };
 
 interface AddressFieldProps extends BoxProps {
+  id?: string;
   address?: AddressType;
 }
 
@@ -276,7 +277,11 @@ const usStates = [
   },
 ];
 
-export default function AddressField({ address, ...props }: AddressFieldProps) {
+export default function AddressField({
+  id,
+  address,
+  ...props
+}: AddressFieldProps) {
   const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
 
@@ -306,16 +311,18 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
     },
   };
 
+  const idPrefix = typeof id !== 'undefined' ? `${id}-` : '';
+
   return (
     <Box sx={containerStyles} {...props}>
       <Typography variant="h3" mb={4}>
         Address
       </Typography>
       <FormControl fullWidth>
-        <InputLabel id="address-country-label">Country</InputLabel>
+        <InputLabel id={`${idPrefix}address-country-label`}>Country</InputLabel>
         <Select
-          labelId="address-country-label"
-          id="address-country"
+          labelId={`${idPrefix}address-country-label`}
+          id={`${idPrefix}address-country`}
           label="Country"
           native={true}
           name="address_country"
@@ -330,7 +337,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         <TextField
           required={expanded}
           fullWidth
-          id="street-address1"
+          id={`${idPrefix}street-address1`}
           variant="outlined"
           name="address_street_address1"
           label="Street address"
@@ -339,7 +346,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         />
         <TextField
           fullWidth
-          id="street-address2"
+          id={`${idPrefix}street-address2`}
           variant="outlined"
           name="address_street_address2"
           label="Street address 2"
@@ -350,7 +357,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           <TextField
             required={expanded}
             fullWidth
-            id="city"
+            id={`${idPrefix}city`}
             variant="outlined"
             name="address_city"
             label="City"
@@ -358,11 +365,11 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
             sx={fieldBaseStyles}
           />
           <FormControl fullWidth required sx={fieldBaseStyles}>
-            <InputLabel id="address-state-label">State</InputLabel>
+            <InputLabel id={`${idPrefix}address-state-label`}>State</InputLabel>
             <Select
               required={expanded}
               labelId="address-state-label"
-              id="address-state"
+              id={`${idPrefix}address-state`}
               label="State"
               native={true}
               name="address_state"
@@ -379,7 +386,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
         </Box>
         <TextField
           required={expanded}
-          id="zipcode"
+          id={`${idPrefix}zipcode`}
           variant="outlined"
           name="address_zipcode"
           label="Zip code"
