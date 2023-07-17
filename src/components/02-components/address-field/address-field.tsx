@@ -318,7 +318,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           id="address-country"
           label="Country"
           native={true}
-          name="address-country"
+          name="address_country"
           defaultValue={address?.country ?? 'none'}
           onChange={countryChangeHandler}
         >
@@ -332,7 +332,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           fullWidth
           id="street-address1"
           variant="outlined"
-          name="address-street-address1"
+          name="address_street_address1"
           label="Street address"
           defaultValue={address?.streetAddress1}
           sx={{ ...fieldBaseStyles, mt: theme.spacing(3) }}
@@ -341,7 +341,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           fullWidth
           id="street-address2"
           variant="outlined"
-          name="address-street-address2"
+          name="address_street_address2"
           label="Street address 2"
           defaultValue={address?.streetAddress2}
           sx={fieldBaseStyles}
@@ -352,7 +352,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
             fullWidth
             id="city"
             variant="outlined"
-            name="address-city"
+            name="address_city"
             label="City"
             defaultValue={address?.city}
             sx={fieldBaseStyles}
@@ -365,7 +365,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
               id="address-state"
               label="State"
               native={true}
-              name="address-state"
+              name="address_state"
               defaultValue={address?.state ?? 'none'}
             >
               <option value="none">Select state…</option>
@@ -381,7 +381,7 @@ export default function AddressField({ address, ...props }: AddressFieldProps) {
           required={expanded}
           id="zipcode"
           variant="outlined"
-          name="address-zipcode"
+          name="address_zipcode"
           label="Zip code"
           defaultValue={address?.zipCode}
         />
