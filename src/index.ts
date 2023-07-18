@@ -45,6 +45,7 @@ export {
   type TimeEntryProps,
   type TimeEntryRevisionProps,
 } from './components/02-components/experience-time-entry-table/experience-time-entry-table';
+export { default as Loader } from './components/01-elements/loader/loader';
 export {
   default as OfferingCard,
   type OfferingCardProps,
