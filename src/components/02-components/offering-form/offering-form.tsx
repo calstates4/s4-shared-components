@@ -7,7 +7,8 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import { ChangeEvent, ElementType, FormEvent, useRef, useState } from 'react';
+import { ChangeEvent, ElementType, useRef, useState } from 'react';
+import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import AddressField, { AddressType } from '../address-field/address-field';
 import AutocompleteField, {
@@ -145,32 +146,13 @@ export default function OfferingForm({
     setStartDate(event.target.value);
   }
 
-  function onClickHandler(event: FormEvent<HTMLButtonElement>) {
-    const form = event.currentTarget.closest('form');
-    if (form && form.elements.length) {
-      for (let i = 0; i < form?.elements.length; i++) {
-        const element = form.elements[i] as HTMLInputElement;
-        if (element && !element.checkValidity()) {
-          const tab = element.closest('.offering-form');
-          if (tab) {
-            const tabIndex = tab.getAttribute('data-panel-index');
-            if (tabIndex && tabRef.current) {
-              tabRef.current.setActiveTab(parseInt(tabIndex));
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-
   // Render.
   const formInner = (
     <>
       <Tabs
         name="Offering form tabs"
         id="offering-form"
-        tabPanelClassName="offering-form"
+        tabPanelClassName="offering-form-panel"
         ref={tabRef}
       >
         <div title="Metadata">
@@ -516,7 +498,13 @@ export default function OfferingForm({
         </div>
       </Tabs>
 
-      <Button variant="contained" type="submit" onClick={onClickHandler}>
+      <Button
+        variant="contained"
+        type="submit"
+        onClick={(event) =>
+          onClickHandler(event, 'offering-form-panel', tabRef)
+        }
+      >
         {isEdit ? 'Update' : 'Create'} offering
       </Button>
     </>

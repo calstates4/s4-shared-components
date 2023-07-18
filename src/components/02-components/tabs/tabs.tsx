@@ -78,12 +78,13 @@ const Tabs = forwardRef<RefHandler, TabsProps>(function Tabs(
   const renderedTabPanels: ReactNode[] = [];
 
   Children.forEach(children, (child, index) => {
-    if (child) {
+    if (child && child.props.title) {
       renderedTabs.push(
-        <Tab label={child.props.title} {...a11yProps(id, index)} />,
+        <Tab key={index} label={child.props.title} {...a11yProps(id, index)} />,
       );
       renderedTabPanels.push(
         <TabPanel
+          key={index}
           id={id}
           value={activeTabIndex}
           index={index}
