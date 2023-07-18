@@ -8,7 +8,6 @@ const meta: Meta<typeof Tabs> = {
   component: Tabs,
   render: () => (
     <Tabs id="custom-tabs" name="Custom Tabs">
-      <div title="hola">Hi</div>
       <Box title="Tab 1">
         <h1>Tab 1</h1>
       </Box>
