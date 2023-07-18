@@ -9,5 +9,7 @@ const meta: Meta<typeof Loader> = {
 export default meta;
 
 export const Default: StoryObj<typeof Loader> = {
-  args: {},
+  args: {
+    title: 'Loading...',
+  },
 };
