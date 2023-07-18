@@ -1,20 +1,24 @@
 import {
-  forwardRef,
-  useImperativeHandle,
+  Children,
+  ReactElement,
   ReactNode,
   SyntheticEvent,
+  forwardRef,
+  useImperativeHandle,
   useState,
 } from 'react';
 import { Box, Tab, Tabs as MuiTabs, useTheme } from '@mui/material';
 
+export type RefHandler = {
+  setActiveTab: (index: number) => void;
+};
+
 type TabsProps = {
   name: string;
   id: string;
-  tabs: {
-    name: string;
-    content: ReactNode;
-  }[];
+  children?: ReactElement<{ title: string }>[];
   tabPanelClassName?: string;
+  activeTab?: number;
 };
 
 type TabPanelProps = {
@@ -25,16 +29,12 @@ type TabPanelProps = {
   className?: string;
 };
 
-export type RefHandler = {
-  setActiveTab: (index: number) => void;
-};
-
 function TabPanel({ id, children, value, index, className }: TabPanelProps) {
   const theme = useTheme();
 
   return (
     <Box
-      data-index={index}
+      data-panel-index={index}
       className={className}
       role="tabpanel"
       hidden={value !== index}
@@ -55,7 +55,7 @@ function a11yProps(id: string, index: number) {
 }
 
 const Tabs = forwardRef<RefHandler, TabsProps>(function Tabs(
-  { name, id, tabs, tabPanelClassName }: TabsProps,
+  { name, id, tabPanelClassName, children }: TabsProps,
   ref,
 ) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -74,20 +74,27 @@ const Tabs = forwardRef<RefHandler, TabsProps>(function Tabs(
     setActiveTabIndex(index);
   }
 
-  const renderedTabs = tabs.map((tab, index) => (
-    <Tab label={tab.name} {...a11yProps(id, index)} />
-  ));
+  const renderedTabs: ReactNode[] = [];
+  const renderedTabPanels: ReactNode[] = [];
 
-  const renderedTabPanels = tabs.map((tab, index) => (
-    <TabPanel
-      id={id}
-      value={activeTabIndex}
-      index={index}
-      className={tabPanelClassName}
-    >
-      {tab.content}
-    </TabPanel>
-  ));
+  Children.forEach(children, (child, index) => {
+    if (child) {
+      renderedTabs.push(
+        <Tab label={child.props.title} {...a11yProps(id, index)} />,
+      );
+      renderedTabPanels.push(
+        <TabPanel
+          id={id}
+          value={activeTabIndex}
+          index={index}
+          className={tabPanelClassName}
+        >
+          {child}
+        </TabPanel>,
+      );
+    }
+  });
+
   return (
     <>
       <MuiTabs

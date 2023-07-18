@@ -7,45 +7,18 @@ const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs,
   render: () => (
-    <Tabs
-      id="custom-tabs"
-      name="Custom Tabs"
-      tabs={[
-        {
-          name: 'Metadata',
-          content: (
-            <Box>
-              <h1>Tab 1</h1>
-            </Box>
-          ),
-        },
-        {
-          name: 'Content',
-          content: (
-            <Box>
-              <h1>Tab 2</h1>
-            </Box>
-          ),
-        },
-        {
-          name: 'Focus',
-          content: (
-            <Box>
-              <h1>Tab 3</h1>
-            </Box>
-          ),
-        },
-
-        {
-          name: 'Commitment',
-          content: (
-            <Box>
-              <h1>Tab 4</h1>
-            </Box>
-          ),
-        },
-      ]}
-    />
+    <Tabs id="custom-tabs" name="Custom Tabs">
+      <div title="hola">Hi</div>
+      <Box title="Tab 1">
+        <h1>Tab 1</h1>
+      </Box>
+      <Box title="Tab 2">
+        <h1>Tab 2</h1>
+      </Box>
+      <Box title="Tab 3">
+        <h1>Tab 2</h1>
+      </Box>
+    </Tabs>
   ),
 };
 
