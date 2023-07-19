@@ -76,6 +76,9 @@ export const AddOrganization: StoryObj<typeof OrganizationForm> = {
     organizationTypeOptions: options,
     focusAreaOptions: options,
     focusPopulationOptions: options,
+    mainHeadingLevel: 'h2',
+    subHeadingLevel: 'h3',
+    byline: 'In order to complete your registration process please create an Organization.',
   },
 };
 

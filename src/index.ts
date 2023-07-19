@@ -62,6 +62,9 @@ export {
   default as OrganizationCard,
   type OrganizationCardProps,
 } from './components/02-components/organization-card/organization-card';
+export {
+  default as OrganizationForm
+} from './components/02-components/organization-form/organization-form';
 export { default as OrganizationList } from './components/02-components/organization-list/organization-list';
 export {
   default as OrganizationPage,
