@@ -21,7 +21,7 @@ export default function Loader({ title }: LoaderProps) {
 
   return (
     <Box sx={containerStyles}>
-      <Typography variant="h1" sx={titleStyles}>
+      <Typography component="p" variant="h3" sx={titleStyles}>
         {title ? title : 'Loading...'}
       </Typography>
       <CircularProgress />
