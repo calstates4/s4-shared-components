@@ -301,7 +301,7 @@ export default function OfferingForm({
               required
               id="offering-form-signers"
               name="offering-form-signers"
-              label="Form sirner(s)"
+              label="Form signer(s)"
               options={formSigners}
               selected={defaultFormSigners}
               sx={formFieldStyles}
@@ -324,7 +324,7 @@ export default function OfferingForm({
               multiple
               id="offering-preferred-languages"
               name="offering-preferred-languages"
-              label="Preferred langauge(s)"
+              label="Preferred language(s)"
               options={preferredLanguages}
               selected={defaultPreferredLanguages}
               sx={formFieldStyles}
