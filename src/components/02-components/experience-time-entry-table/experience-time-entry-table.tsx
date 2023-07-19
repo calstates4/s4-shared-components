@@ -70,6 +70,7 @@ export default function ExperienceTimeEntriesTable({
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [dialogData, setDialogData] = useState<DialogData>({});
+  const pagerCount = Math.ceil(totalItems / itemsPerPage);
 
   function handleClickOpen() {
     setOpen(true);
@@ -92,7 +93,7 @@ export default function ExperienceTimeEntriesTable({
                 dialogFormData: {
                   formId: id,
                   formAction: 'approve',
-                  submitButtonText: 'Save and appove',
+                  submitButtonText: 'Save and approve',
                 },
               });
               handleClickOpen();
@@ -204,6 +205,19 @@ export default function ExperienceTimeEntriesTable({
     },
   };
 
+  const renderedPager = pagerCount > 1 && (
+    <Pager
+      baseUrl={url}
+      count={pagerCount}
+      page={currentPage}
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        pt: theme.spacing(3),
+      }}
+    />
+  );
+
   // Render elements.
   const renderedTable =
     items && items.length ? (
@@ -252,16 +266,7 @@ export default function ExperienceTimeEntriesTable({
             ))}
           </TableBody>
         </Table>
-        <Pager
-          baseUrl={url}
-          count={Math.ceil(totalItems / itemsPerPage)}
-          page={currentPage}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pt: theme.spacing(3),
-          }}
-        />
+        {renderedPager}
       </TableContainer>
     ) : (
       <Paper sx={paperStyles}>

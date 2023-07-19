@@ -316,7 +316,7 @@ export default function OfferingPage({
         <Typography component="h2" variant="h2">
           Description
         </Typography>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
+        <p dangerouslySetInnerHTML={{ __html: description }} />
       </Paper>
       {healthSafety && (
         <>
@@ -324,7 +324,7 @@ export default function OfferingPage({
             <Typography component="h2" variant="h2">
               Health & Safety
             </Typography>
-            <div dangerouslySetInnerHTML={{ __html: healthSafety }} />
+            <p dangerouslySetInnerHTML={{ __html: healthSafety }} />
           </Paper>
         </>
       )}
@@ -334,7 +334,7 @@ export default function OfferingPage({
             <Typography component="h2" variant="h2">
               Training
             </Typography>
-            <div dangerouslySetInnerHTML={{ __html: training }} />
+            <p dangerouslySetInnerHTML={{ __html: training }} />
           </Paper>
         </>
       )}

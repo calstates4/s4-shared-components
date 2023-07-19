@@ -33,7 +33,7 @@ const healthSafety = `<p>
 export const Default: StoryObj<typeof OrganizationPage> = {
   args: {
     title: 'Action VC',
-    url: '#',
+    url: 'https://localhost:6006/',
     description,
     healthSafety,
     programs: 'Service Learning, Curricular Cmty Eng Lrng',
