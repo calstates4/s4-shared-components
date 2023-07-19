@@ -64,6 +64,14 @@ export {
   type OfferingRelatedExperiencesTableRowProps,
 } from './components/02-components/offering-related-experiences-table/offering-related-experiences-table';
 export {
+  default as OpportunityCard,
+  type OpportunityCardProps,
+} from './components/02-components/opportunity-card/opportunity-card';
+export {
+  default as OpportunityList,
+  type OpportunityListProps,
+} from './components/02-components/opportunity-list/opportunity-list';
+export {
   default as OrganizationCard,
   type OrganizationCardProps,
 } from './components/02-components/organization-card/organization-card';

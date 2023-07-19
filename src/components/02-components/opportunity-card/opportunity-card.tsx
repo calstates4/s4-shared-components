@@ -1,19 +1,18 @@
-import { ElementType, useState } from 'react';
+import { ElementType } from 'react';
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Box,
   Button,
-  Collapse,
-  Paper,
   Typography,
   useTheme,
 } from '@mui/material';
 import Link from '../../01-elements/link/link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PlaceIcon from '@mui/icons-material/Place';
 
-type OpportunityCardProps = {
+export type OpportunityCardProps = {
   id: string | number;
   title: string;
   url: string;
@@ -39,12 +38,16 @@ export default function OpportunityCard({
   FormElement,
 }: OpportunityCardProps) {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
 
   // Styles.
   const buttonsContainerSyles = {
     display: 'flex',
+    mt: theme.spacing(2),
     gap: theme.spacing(1),
+  };
+
+  const textStyles = {
+    mb: theme.spacing(1),
   };
 
   const innerForm = (
@@ -66,17 +69,41 @@ export default function OpportunityCard({
     <article>
       <Accordion>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+          expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />}
+          aria-controls={`opportunity-content-${id}`}
+          id={`opportunity-header-${id}`}
         >
           <Typography component="h3" variant="h2">
             {title}
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
+          {location && (
+            <Typography sx={textStyles}>
+              <PlaceIcon />
+              {location}
+            </Typography>
+          )}
+          {type && (
+            <Typography sx={textStyles}>
+              <strong>Type: </strong>
+              {type}
+            </Typography>
+          )}
+          {timeCommitment && (
+            <Typography sx={textStyles}>
+              <strong>Time commitment: </strong>
+              {timeCommitment}
+            </Typography>
+          )}
+          {termPeriod && (
+            <Typography sx={textStyles}>
+              <strong>Term: </strong>
+              {termPeriod}
+            </Typography>
+          )}
           {program && (
-            <Typography>
+            <Typography sx={textStyles}>
               <strong>Program: </strong>
               {program}
             </Typography>
