@@ -317,11 +317,15 @@ export const Default: StoryObj<typeof OpportunityList> = {
     courseFilterValues: [
       {
         id: '1',
-        label: 'Course 1',
+        label: 'UNIV 100 (07): FRESHMAN SEMINAR',
       },
       {
         id: '2',
-        label: 'Course 2',
+        label: 'UNIV 100 (04): FRESHMAN SEMINAR',
+      },
+      {
+        id: '3',
+        label: 'UNIV 100 (03): FRESHMAN SEMINAR',
       },
     ],
     typeFilterValues: [
