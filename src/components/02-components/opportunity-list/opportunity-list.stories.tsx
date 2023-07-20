@@ -299,10 +299,21 @@ export const Default: StoryObj<typeof OpportunityList> = {
         url: '#',
       },
     ],
+    url: 'http://localhost:6006/',
     children: opportunities,
-    totalItems: 50,
-    itemsPerPage: 7,
-    currentPage: 1,
+    totalItems: 30,
+    itemsPerPage: 6,
+    currentPage: 3,
+    programFilterValues: [
+      {
+        id: 'all',
+        label: 'All Campus programs',
+      },
+      {
+        id: '1',
+        label: 'My programs',
+      },
+    ],
     courseFilterValues: [
       {
         id: '1',
@@ -313,14 +324,19 @@ export const Default: StoryObj<typeof OpportunityList> = {
         label: 'Course 2',
       },
     ],
+    typeFilterValues: [
+      { id: 'on-site', label: 'On-site' },
+      { id: 'remote', label: 'Remote' },
+      { id: 'hybrid', label: 'Hybrid' },
+    ],
     termFilterValues: [
       {
         id: '1',
-        label: 'Term 1',
+        label: 'Fall 2023',
       },
       {
         id: '2',
-        label: 'Term 2',
+        label: 'Winter 2023',
       },
     ],
 
@@ -330,7 +346,8 @@ export const Default: StoryObj<typeof OpportunityList> = {
     currentFilters: {
       program: '1',
       course: null,
-      opportunityType: null,
+      type: null,
+      term: null,
       focusPopulation: null,
       focusArea: null,
       city: null,

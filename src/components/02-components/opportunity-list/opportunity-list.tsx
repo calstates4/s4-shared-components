@@ -15,23 +15,6 @@ import AutocompleteField, {
 import Pager from '../../01-elements/pager/pager';
 import { ElementType, ReactNode } from 'react';
 
-const PROGRAM_FILTER_VALUES = [
-  {
-    id: 'all',
-    label: 'All Campus programs',
-  },
-  {
-    id: '1',
-    label: 'My programs',
-  },
-];
-
-const OPPORTUNITY_TYPES = [
-  { id: 'on-site', label: 'On-site' },
-  { id: 'remote', label: 'Remote' },
-  { id: 'hybrid', label: 'Hybrid' },
-];
-
 export type OpportunityListProps = {
   breadcrumb: {
     title: string;
@@ -44,7 +27,9 @@ export type OpportunityListProps = {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
+  programFilterValues?: AutocompleteOptionType[];
   courseFilterValues?: AutocompleteOptionType[];
+  typeFilterValues?: AutocompleteOptionType[];
   termFilterValues: AutocompleteOptionType[];
   focusPopulationFilterValues?: AutocompleteOptionType[];
   focusAreaFilterValues?: AutocompleteOptionType[];
@@ -52,7 +37,8 @@ export type OpportunityListProps = {
   currentFilters: {
     program: string | null;
     course: string | null;
-    opportunityType: string | null;
+    type: string | null;
+    term: string | null;
     focusPopulation: string | null;
     focusArea: string | null;
     city: string | null;
@@ -69,7 +55,9 @@ export default function OpportunityList({
   totalItems,
   itemsPerPage,
   currentPage,
+  programFilterValues,
   courseFilterValues,
+  typeFilterValues,
   termFilterValues,
   focusPopulationFilterValues,
   focusAreaFilterValues,
@@ -102,46 +90,48 @@ export default function OpportunityList({
   };
 
   const listStyles = {
-    borderTop: `1px solid ${theme.palette.secondary.light}`,
+    borderTop: `1px solid ${theme.palette.secondary.main}`,
     pt: theme.spacing(4),
     mt: theme.spacing(4),
     '& article + article': {
       mt: theme.spacing(3),
     },
   };
+
   const formItemStyles = {
     mb: theme.spacing(2),
     display: 'flex',
-    minWidth: '8rem',
+    minWidth: '12rem',
     [theme.breakpoints.up('sm')]: {
       display: 'inline-flex',
-      mb: 0,
       mr: theme.spacing(2),
     },
   };
 
   const formInner = (
     <>
-      <TextField
-        select
-        id="opportunity-program"
-        name="opportunity-program"
-        label="Programs"
-        defaultValue={currentFilters.program ?? undefined}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        SelectProps={{
-          native: true,
-        }}
-        sx={formItemStyles}
-      >
-        {PROGRAM_FILTER_VALUES.map((option) => (
-          <option key={option.id} value={option.id}>
-            {option.label}
-          </option>
-        ))}
-      </TextField>
+      {programFilterValues && (
+        <TextField
+          select
+          id="opportunity-program"
+          name="opportunity-program"
+          label="Programs"
+          defaultValue={currentFilters.program ?? undefined}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          SelectProps={{
+            native: true,
+          }}
+          sx={formItemStyles}
+        >
+          {programFilterValues.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </TextField>
+      )}
 
       {courseFilterValues && (
         <AutocompleteField
@@ -154,28 +144,75 @@ export default function OpportunityList({
         />
       )}
 
-      <TextField
-        select
-        id="opportunity-type"
-        name="opportunity-type"
-        label="Opportunity Type"
-        defaultValue={currentFilters.opportunityType ?? undefined}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        SelectProps={{
-          native: true,
-        }}
-        sx={formItemStyles}
-      >
-        {OPPORTUNITY_TYPES.map((option) => (
-          <option key={option.id} value={option.id}>
-            {option.label}
-          </option>
-        ))}
-      </TextField>
+      {typeFilterValues && (
+        <AutocompleteField
+          id="opportunity-type"
+          name="opportunity-type"
+          label="Opportunity Type"
+          options={typeFilterValues}
+          selected={currentFilters.type}
+          sx={formItemStyles}
+        />
+      )}
 
-      <Button variant="contained" type="submit">
+      {termFilterValues && (
+        <AutocompleteField
+          id="opportunity-term"
+          name="opportunity-term"
+          label="Term"
+          options={termFilterValues}
+          selected={currentFilters.term}
+          sx={formItemStyles}
+        />
+      )}
+
+      {focusPopulationFilterValues && (
+        <AutocompleteField
+          id="opportunity-focus-population"
+          name="opportunity-focus-population"
+          label="Focus Population"
+          options={focusPopulationFilterValues}
+          selected={currentFilters.focusPopulation}
+          sx={formItemStyles}
+        />
+      )}
+
+      {focusAreaFilterValues && (
+        <AutocompleteField
+          id="opportunity-focus-area"
+          name="opportunity-focus-area"
+          label="Focus Area"
+          options={focusAreaFilterValues}
+          selected={currentFilters.focusArea}
+          sx={formItemStyles}
+        />
+      )}
+
+      {cityFilterValues && (
+        <AutocompleteField
+          id="opportunity-city"
+          name="opportunity-city"
+          label="City"
+          options={cityFilterValues}
+          selected={currentFilters.city}
+          sx={formItemStyles}
+        />
+      )}
+
+      <TextField
+        id="opportunity-keyword"
+        name="opportunity-keyword"
+        label="Keyword"
+        defaultValue={currentFilters.keyword ?? undefined}
+        sx={formItemStyles}
+      />
+
+      <Button
+        size="large"
+        variant="contained"
+        type="submit"
+        sx={{ display: 'block' }}
+      >
         Apply Filters
       </Button>
     </>
@@ -215,7 +252,7 @@ export default function OpportunityList({
         </Button>
       </Box>
       <Paper elevation={0} sx={containerStyles}>
-        <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
+        <Box>{form}</Box>
         <Box sx={listStyles}>{children}</Box>
         {totalItems > itemsPerPage && (
           <Pager

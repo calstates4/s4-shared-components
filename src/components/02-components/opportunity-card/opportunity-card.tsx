@@ -73,9 +73,7 @@ export default function OpportunityCard({
           aria-controls={`opportunity-content-${id}`}
           id={`opportunity-header-${id}`}
         >
-          <Typography component="h3" variant="h2">
-            {title}
-          </Typography>
+          <Typography variant="h2">{title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {location && (
