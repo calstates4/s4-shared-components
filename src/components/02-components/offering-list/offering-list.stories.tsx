@@ -27,7 +27,7 @@ export const Default: StoryObj<typeof OfferingList> = {
       },
     ],
     children: offerings,
-    url: '#',
+    url: 'http://localhost:6006/',
     addUrl: '#',
     totalItems: 38,
     itemsPerPage: 5,
@@ -54,7 +54,7 @@ export const Default: StoryObj<typeof OfferingList> = {
     ],
     currentFilters: {
       category: 'all',
-      departmentId: '1',
+      department: '1',
     },
   },
 };

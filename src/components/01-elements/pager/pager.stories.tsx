@@ -11,7 +11,7 @@ export default meta;
 
 export const Default: StoryObj<typeof Pager> = {
   args: {
-    baseUrl: '#',
+    baseUrl: 'http://localhost:6006?name=test',
     count: 24,
     page: 9,
   },

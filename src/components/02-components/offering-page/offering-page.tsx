@@ -9,7 +9,6 @@ export type OfferingPageProps = {
     url: string;
   }[];
   title: string;
-  url: string;
   editUrl: string;
   department?: string;
   description: string;
@@ -38,7 +37,6 @@ export type OfferingPageProps = {
 export default function OfferingPage({
   breadcrumb,
   title,
-  url,
   editUrl,
   department,
   description,
@@ -318,7 +316,7 @@ export default function OfferingPage({
         <Typography component="h2" variant="h2">
           Description
         </Typography>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
+        <p dangerouslySetInnerHTML={{ __html: description }} />
       </Paper>
       {healthSafety && (
         <>
@@ -326,7 +324,7 @@ export default function OfferingPage({
             <Typography component="h2" variant="h2">
               Health & Safety
             </Typography>
-            <div dangerouslySetInnerHTML={{ __html: healthSafety }} />
+            <p dangerouslySetInnerHTML={{ __html: healthSafety }} />
           </Paper>
         </>
       )}
@@ -336,7 +334,7 @@ export default function OfferingPage({
             <Typography component="h2" variant="h2">
               Training
             </Typography>
-            <div dangerouslySetInnerHTML={{ __html: training }} />
+            <p dangerouslySetInnerHTML={{ __html: training }} />
           </Paper>
         </>
       )}
@@ -354,10 +352,12 @@ export default function OfferingPage({
               <dt>Areas: </dt>
               <dd>{focusAreas}</dd>
             </div>
-            <div>
-              <dt>Sub focus areas: </dt>
-              <dd>{subFocusAreas}</dd>
-            </div>
+            {subFocusAreas && (
+              <div>
+                <dt>Sub focus areas: </dt>
+                <dd>{subFocusAreas}</dd>
+              </div>
+            )}
           </Box>
         </Paper>
         <Paper sx={{ ...paperStyles, ...rightColumnContainerStyles }}>
