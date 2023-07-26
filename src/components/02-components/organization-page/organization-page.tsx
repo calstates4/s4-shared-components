@@ -188,6 +188,7 @@ export default function OrganizationPage({
     gap: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       flexWrap: 'nowrap',
+      justifyContent: 'space-between',
     },
   };
 
@@ -196,6 +197,16 @@ export default function OrganizationPage({
     [theme.breakpoints.up('md')]: {
       flex: 'initial',
       mr: theme.spacing(5),
+    },
+  };
+
+  const deptsItemActionStyles = {
+    display: 'flex',
+    gap: theme.spacing(2),
+    flexWrap: 'wrap',
+    [theme.breakpoints.up('md')]: {
+      flexShrink: 0,
+      flexWrap: 'nowrap',
     },
   };
 
@@ -325,22 +336,24 @@ export default function OrganizationPage({
                 </Typography>
                 <Box sx={deptsItemContentStyles}>
                   <Box sx={deptsItemDescStyles}>{item.description}</Box>
-                  <Button
-                    variant="outlined"
-                    component={Link}
-                    href={`/organization/offerings?department=${item.id}`}
-                    sx={{ flexShrink: 0 }}
-                  >
-                    See Offerings
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    component={Link}
-                    href={`/organization/staff?department=${item.id}`}
-                    sx={{ flexShrink: 0 }}
-                  >
-                    See Staff
-                  </Button>
+                  <Box sx={deptsItemActionStyles}>
+                    <Button
+                      variant="outlined"
+                      component={Link}
+                      href={`/organization/offerings?department=${item.id}`}
+                      sx={{ flexShrink: 0 }}
+                    >
+                      See Offerings
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      component={Link}
+                      href={`/organization/staff?department=${item.id}`}
+                      sx={{ flexShrink: 0 }}
+                    >
+                      See Staff
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
             ))}
