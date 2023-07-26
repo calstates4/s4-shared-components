@@ -1,3 +1,6 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 import {
   Box,
   Button,
@@ -5,14 +8,12 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   Typography,
   useTheme,
 } from '@mui/material';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
 export type TimeLogTableProps = {
   timeLogInfo: {
@@ -29,25 +30,32 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
   const theme = useTheme();
 
   // Style
-  const contentStyle = {
+  const contentStyles = {
     p: theme.spacing(5),
   };
 
-  const headerWrapper = {
+  const headerWrapperStyles = {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
   };
 
-  const iconWrapperStyle = {
+  const iconWrapperStyles = {
     display: 'flex',
+    gap: theme.spacing(2),
   };
 
-  const iconStyle = {
-    mr: theme.spacing(1),
+  const iconStyles = {
     color: theme.palette.secondary.dark,
   };
 
-  const tableStyle = {
+  const tableStyles = {
     td: {
       p: theme.spacing(3),
 
@@ -66,17 +74,6 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
   };
 
   // Components
-  const renderedHeader = [
-    'Date/Time',
-    'Hours alculated',
-    'How have you contributed to the goals/mission of the organization?',
-    'Learning outcomes',
-    'status',
-    ' ',
-  ].map((label) => {
-    return <TableCell>{label}</TableCell>;
-  });
-
   const renderedBody = timeLogInfo.map((row) => {
     return (
       <TableRow>
@@ -86,10 +83,10 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
         <TableCell>{row.learningOutcomes}</TableCell>
         <TableCell>{row.status}</TableCell>
         <TableCell>
-          <Box sx={iconWrapperStyle}>
-            <FileCopyIcon sx={iconStyle} />
-            <DeleteIcon sx={iconStyle} />
-            <EditIcon sx={iconStyle} />
+          <Box sx={iconWrapperStyles}>
+            <FileCopyIcon sx={iconStyles} />
+            <DeleteIcon sx={iconStyles} />
+            <EditIcon sx={iconStyles} />
           </Box>
         </TableCell>
       </TableRow>
@@ -97,17 +94,28 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
   });
 
   const renderTable = (
-    <Table sx={tableStyle}>
-      <TableHead>
-        <TableRow>{renderedHeader}</TableRow>
-      </TableHead>
-      <TableBody>{renderedBody}</TableBody>
-    </Table>
+    <TableContainer>
+      <Table sx={tableStyles}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Date/Time</TableCell>
+            <TableCell>Hours Calculated</TableCell>
+            <TableCell>
+              How have you contributed to the goals/mission of the organization?
+            </TableCell>
+            <TableCell>Learning outcomes</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>{renderedBody}</TableBody>
+      </Table>
+    </TableContainer>
   );
 
   return (
-    <Paper sx={contentStyle}>
-      <Box sx={headerWrapper}>
+    <Paper sx={contentStyles}>
+      <Box sx={headerWrapperStyles}>
         <Typography variant="h2">Time log</Typography>
         <Button variant="outlined" href={cta}>
           Request approval of hours
