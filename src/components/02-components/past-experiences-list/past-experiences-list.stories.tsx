@@ -13,12 +13,16 @@ export const Default: StoryObj<typeof PastExperiencesList> = {
   args: {
     experienceInfo: [
       {
+        id: '1',
         experience: 'Experience 1',
         status: 'State 1',
+        url: '/experiences/1',
       },
       {
+        id: '2',
         experience: 'Experience 2',
         status: 'State 2',
+        url: '/experiences/2',
       },
     ],
     ctaLink: '/opportunities',

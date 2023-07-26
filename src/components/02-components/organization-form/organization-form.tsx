@@ -1,6 +1,6 @@
-import { Switch } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
-import { Box, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, FormControlLabel, Paper, Switch, TextField, Typography, useTheme } from '@mui/material';
+import { ElementType } from 'react';
+import Link from '../../01-elements/link/link';
 import AddressField, { type AddressType } from '../address-field/address-field';
 import AutocompleteField, {
   AutocompleteOptionType,
@@ -50,6 +50,10 @@ type OrganizationFormProps = {
   organizationTypeOptions: AutocompleteOptionType[];
   focusAreaOptions: AutocompleteOptionType[];
   focusPopulationOptions: AutocompleteOptionType[];
+  FormElement: ElementType;
+  mainHeadingLevel?: 'h1' | 'h2';
+  subHeadingLevel?: 'h2' | 'h3';
+  byline?: string;
 };
 
 export default function OrganizationForm({
@@ -75,14 +79,48 @@ export default function OrganizationForm({
   organizationTypeOptions,
   focusAreaOptions,
   focusPopulationOptions,
+  FormElement,
+  mainHeadingLevel = 'h1',
+  subHeadingLevel = 'h2',
+  byline,
 }: OrganizationFormProps) {
-  return (
-    <Paper>
-      <Typography variant="h1">
-        {isEdit ? 'Edit' : 'Create an'} organization
-      </Typography>
-      <Box>
-        <Typography variant="h2">Metadata</Typography>
+  const theme = useTheme();
+
+  // Styles.
+  const containerStyles = {
+    p: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      p: theme.spacing(3),
+    },
+  };
+
+  const formSectionStyles = {
+    mb: theme.spacing(4),
+  };
+
+  const sectionTitleStyles = {
+    mb: theme.spacing(3),
+  };
+
+  const baseFormItemStyles = {
+    mb: theme.spacing(3),
+  };
+  
+  const buttonContainerStyles = {
+    display: 'flex',
+    gap: theme.spacing(2),
+    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+    },
+  };
+
+  const innerForm = (
+    <>
+      <Box sx={formSectionStyles}>
+        <Typography variant={subHeadingLevel} sx={sectionTitleStyles}>
+          Metadata
+        </Typography>
         <TextField
           required
           fullWidth
@@ -91,8 +129,9 @@ export default function OrganizationForm({
           name="label"
           label="Name"
           defaultValue={name}
+          sx={baseFormItemStyles}
         />
-        <AddressField address={address} mb={3} />
+        <AddressField address={address} sx={baseFormItemStyles} />
         <FormControlLabel
           control={
             <Switch
@@ -103,8 +142,10 @@ export default function OrganizationForm({
           label="Offering requires approval"
         />
       </Box>
-      <Box>
-        <Typography variant="h2">Content</Typography>
+      <Box sx={formSectionStyles}>
+        <Typography variant={subHeadingLevel} sx={sectionTitleStyles}>
+          Content
+        </Typography>
         <TextField
           fullWidth
           multiline
@@ -114,6 +155,7 @@ export default function OrganizationForm({
           name="field_body"
           label="Description"
           defaultValue={description}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -124,6 +166,7 @@ export default function OrganizationForm({
           name="field_admin_notes"
           label="Administrative Notes"
           defaultValue={adminNotes}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -136,8 +179,10 @@ export default function OrganizationForm({
           defaultValue={healthSafetyInfo}
         />
       </Box>
-      <Box>
-        <Typography variant="h2">Main Contact Info (Campus Staff)</Typography>
+      <Box sx={formSectionStyles}>
+        <Typography variant={subHeadingLevel} sx={sectionTitleStyles}>
+          Main Contact Info (Campus Staff)
+        </Typography>
         <TextField
           required
           fullWidth
@@ -146,6 +191,7 @@ export default function OrganizationForm({
           name="field_main_contact_first"
           label="First Name"
           defaultValue={mainContactInfo?.firstName}
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -155,6 +201,7 @@ export default function OrganizationForm({
           name="field_main_contact_last"
           label="Last Name"
           defaultValue={mainContactInfo?.lastName}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -163,6 +210,7 @@ export default function OrganizationForm({
           name="field_main_contact_title"
           label="Job Title"
           defaultValue={mainContactInfo?.jobTitle}
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -172,6 +220,7 @@ export default function OrganizationForm({
           name="field_main_contact_phone"
           label="Phone"
           defaultValue={mainContactInfo?.phone}
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -181,8 +230,10 @@ export default function OrganizationForm({
           name="field_main_contact_email"
           label="Email"
           defaultValue={mainContactInfo?.email}
+          sx={baseFormItemStyles}
         />
         <AutocompleteField
+          required
           id="org-form-main-contact-user"
           name="field_main_contact_user"
           label="User"
@@ -190,8 +241,10 @@ export default function OrganizationForm({
           selected={mainContactInfo?.user}
         />
       </Box>
-      <Box>
-        <Typography variant="h2">Public Contact Info (Students)</Typography>
+      <Box sx={formSectionStyles}>
+        <Typography variant={subHeadingLevel} sx={sectionTitleStyles}>
+          Public Contact Info (Students)
+        </Typography>
         <TextField
           fullWidth
           id="org-form-public-contact-phone"
@@ -199,6 +252,7 @@ export default function OrganizationForm({
           name="field_general_phone"
           label="Phone"
           defaultValue={publicContactInfo?.phone}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -207,6 +261,7 @@ export default function OrganizationForm({
           name="field_general_email"
           label="Email"
           defaultValue={publicContactInfo?.email}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -215,6 +270,7 @@ export default function OrganizationForm({
           name="field_website"
           label="Website"
           defaultValue={publicContactInfo?.website}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -223,6 +279,7 @@ export default function OrganizationForm({
           name="field_linkedin"
           label="Linkedin"
           defaultValue={publicContactInfo?.linkedin}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -231,6 +288,7 @@ export default function OrganizationForm({
           name="field_instagram"
           label="Instagram"
           defaultValue={publicContactInfo?.instagram}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -239,6 +297,7 @@ export default function OrganizationForm({
           name="field_twitter"
           label="Twitter"
           defaultValue={publicContactInfo?.twitter}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -249,13 +308,16 @@ export default function OrganizationForm({
           defaultValue={publicContactInfo?.facebook}
         />
       </Box>
-      <Box>
-        <Typography variant="h2">Legal Contact Info</Typography>
+      <Box sx={formSectionStyles}>
+        <Typography variant={subHeadingLevel} sx={sectionTitleStyles}>
+          Legal Contact Info
+        </Typography>
         <FormControlLabel
           control={
             <Switch name="NAME" defaultChecked={legalContactSameAsMain} />
           }
           label="Same as main contact"
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -265,6 +327,7 @@ export default function OrganizationForm({
           name="field_legal_contact_first"
           label="First Name"
           defaultValue={legalContactInfo?.firstName}
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -274,6 +337,7 @@ export default function OrganizationForm({
           name="field_legal_contact_last"
           label="Last Name"
           defaultValue={legalContactInfo?.lastName}
+          sx={baseFormItemStyles}
         />
         <TextField
           fullWidth
@@ -282,6 +346,7 @@ export default function OrganizationForm({
           name="field_legal_contact_title"
           label="Job Title"
           defaultValue={legalContactInfo?.jobTitle}
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -291,6 +356,7 @@ export default function OrganizationForm({
           name="field_legal_contact_phone"
           label="Phone"
           defaultValue={legalContactInfo?.phone}
+          sx={baseFormItemStyles}
         />
         <TextField
           required
@@ -302,37 +368,47 @@ export default function OrganizationForm({
           defaultValue={legalContactInfo?.email}
         />
       </Box>
-      <Box>
-        <Typography variant="h2">Focus</Typography>
+      <Box sx={formSectionStyles}>
+        <Typography variant={subHeadingLevel} sx={sectionTitleStyles}>
+          Focus
+        </Typography>
         <AutocompleteField
+          required
           id="org-form-industry"
           name="field_industry"
           label="Industry"
           options={industryOptions}
           selected={industry}
+          sx={baseFormItemStyles}
         />
         <AutocompleteField
+          required
           id="org-form-org-type"
           name="field_type"
           label="Organization Type"
           options={organizationTypeOptions}
           selected={orgType}
+          sx={baseFormItemStyles}
         />
         <AutocompleteField
           multiple
+          required
           id="org-form-focus-population"
           name="field_focus_populations"
           label="Focus Population(s)"
           options={focusPopulationOptions}
           selected={focusPopulation}
+          sx={baseFormItemStyles}
         />
         <AutocompleteField
           multiple
+          required
           id="org-form-focus-areas"
           name="field_focus_areas"
           label="Focus Area(s)"
           options={focusAreaOptions}
           selected={focusAreas}
+          sx={baseFormItemStyles}
         />
         <AutocompleteField
           multiple
@@ -341,8 +417,10 @@ export default function OrganizationForm({
           label="Sub Focus Area(s)"
           options={focusAreaOptions}
           selected={subFocusAreas}
+          sx={baseFormItemStyles}
         />
         <TextField
+          fullWidth
           id="org-form-focus-population"
           variant="outlined"
           name="NAME"
@@ -350,6 +428,32 @@ export default function OrganizationForm({
           defaultValue={populationSize}
         />
       </Box>
+      <Box sx={buttonContainerStyles}>
+        <Button type="submit" variant="contained">
+          {isEdit ? 'Update' : 'Create'} Organization
+        </Button>
+        {isEdit && (
+          <Button component={Link} href="/organization" variant="outlined">
+            Cancel
+          </Button>
+        )}
+      </Box>
+    </>
+  );
+
+  const form = FormElement ? (
+    <FormElement method="post">{innerForm}</FormElement>
+  ) : (
+    <form method="post">{innerForm}</form>
+  );
+
+  return (
+    <Paper sx={containerStyles}>
+      <Typography variant={mainHeadingLevel} mb={byline ? 0 : 3} color="primary.main">
+        {isEdit ? 'Edit' : 'Create an'} organization
+      </Typography>
+      <Typography mb={3}>{byline}</Typography>
+      {form}
     </Paper>
   );
 }
