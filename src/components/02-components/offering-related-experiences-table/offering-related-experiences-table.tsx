@@ -39,6 +39,7 @@ export default function OfferingRelatedExperiencesTable({
   items,
 }: OfferingRelatedExperiencesTableProps) {
   const theme = useTheme();
+  const pagerCount = Math.ceil(totalItems / itemsPerPage);
 
   // Styles.
   const paperStyles = {
@@ -53,6 +54,19 @@ export default function OfferingRelatedExperiencesTable({
       fontWeight: 700,
     },
   };
+
+  const renderedPager = pagerCount > 1 && (
+    <Pager
+      baseUrl={url}
+      count={pagerCount}
+      page={currentPage}
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        pt: theme.spacing(3),
+      }}
+    />
+  );
 
   // Render funtions.
   const renderedTable =
@@ -100,16 +114,7 @@ export default function OfferingRelatedExperiencesTable({
             ))}
           </TableBody>
         </Table>
-        <Pager
-          baseUrl={url}
-          count={Math.ceil(totalItems / itemsPerPage)}
-          page={currentPage}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pt: theme.spacing(3),
-          }}
-        />
+        {renderedPager}
       </TableContainer>
     ) : (
       <Paper sx={paperStyles}>
