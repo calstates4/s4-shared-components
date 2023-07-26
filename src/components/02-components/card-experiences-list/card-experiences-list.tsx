@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-import { useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 export type CardExperiencesListProps = {
@@ -14,8 +13,8 @@ export default function CardExperiencesList({
   // Styles.
   const containerStyles = {
     pt: theme.spacing(5),
-    mb: theme.spacing(5),
     px: theme.spacing(0.5),
+    pb: theme.spacing(0.5),
     overflowX: 'auto',
     width: '100%',
   };

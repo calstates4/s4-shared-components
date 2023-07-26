@@ -218,14 +218,14 @@ export default function OrganizationPage({
       <Paper sx={paperStyles}>
         <Box sx={{ flex: '1 1 67%' }}>
           {description && (
-            <div dangerouslySetInnerHTML={{ __html: description }} />
+            <p dangerouslySetInnerHTML={{ __html: description }} />
           )}
           {healthSafety && (
             <>
               <Typography component="h2" variant="h3">
                 Additional requirements and/or considerations
               </Typography>
-              <div dangerouslySetInnerHTML={{ __html: healthSafety }} />
+              <p dangerouslySetInnerHTML={{ __html: healthSafety }} />
             </>
           )}
         </Box>
