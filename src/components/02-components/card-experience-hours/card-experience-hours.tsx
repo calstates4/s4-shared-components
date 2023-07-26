@@ -1,4 +1,4 @@
-import { Button, Paper, Typography, useTheme } from '@mui/material';
+import { Button, Box, Paper, Typography, useTheme } from '@mui/material';
 
 export type CardExperienceHoursProps = {
   hours: number;
@@ -14,36 +14,54 @@ export default function CardExperienceHours({
   const theme = useTheme();
 
   // Variables according to the variant of position
-  const positionOrientation = position == 'row' ? 'row' : 'column';
+  const positionOrientation = position === 'row' ? 'row' : 'column';
   const bodySize =
-    position == 'row' ? theme.typography.h3 : theme.typography.h4;
-  const spacingText = position == 'row' ? '0' : theme.spacing(2);
-  const spacingRight = position == 'row' ? theme.spacing(2) : '0';
-  const paddingSize = position == 'row' ? theme.spacing(2) : theme.spacing(5);
+    position === 'row' ? theme.typography.h3 : theme.typography.h4;
+  const spacingText = position === 'row' ? '0' : theme.spacing(2);
+  const spacingRight = position === 'row' ? theme.spacing(2) : '0';
+  const paddingSize = position === 'row' ? theme.spacing(2) : theme.spacing(5);
 
   // Styles.
-  const contentStyle = {
+  const contentStyles = {
     display: 'flex',
-    flexDirection: positionOrientation,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     p: paddingSize,
     mb: theme.spacing(5),
     backgroundColor: 'primary.light',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: positionOrientation,
+    },
+  };
+
+  const textStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: positionOrientation,
+    },
   };
 
   const hoursStyles = {
     fontWeight: '700',
     mb: spacingText,
-    mr: spacingRight,
+    [theme.breakpoints.up('sm')]: {
+      mr: spacingRight,
+    },
   };
 
   const subHeadingStyles = {
-    mb: spacingText,
-    mr: spacingRight,
+    mb: theme.spacing(2),
     fontSize: bodySize,
     fontWeight: '700',
     textTransform: 'uppercase',
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      mb: spacingText,
+      mr: spacingRight,
+    },
   };
 
   const buttonStyles = {
@@ -67,9 +85,11 @@ export default function CardExperienceHours({
   );
 
   return (
-    <Paper sx={contentStyle}>
-      {renderedHours}
-      {renderedHoursText}
+    <Paper sx={contentStyles}>
+      <Box sx={textStyles}>
+        {renderedHours}
+        {renderedHoursText}
+      </Box>
       <Button sx={buttonStyles} href={cta}>
         Log Time
       </Button>

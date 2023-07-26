@@ -1,27 +1,36 @@
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {
   Box,
   Paper,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   Typography,
+  useTheme,
 } from '@mui/material';
-import { useTheme } from '@mui/material';
+import { experienceStatusInfo } from '../../../lib/utils';
 import Link from '../../01-elements/link/link';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-export type PastExpericiencesListProps = {
-  experienceInfo: { experience: string; status: string }[];
+export type PastExperiencesListProps = {
+  experienceInfo: {
+    id: string;
+    experience: string;
+    status: string;
+    url: string;
+  }[];
   ctaLink: string;
 };
 
-export default function PastExpericiencesList({
+export default function PastExperiencesList({
   experienceInfo,
   ctaLink,
-}: PastExpericiencesListProps) {
+}: PastExperiencesListProps) {
   const theme = useTheme();
+
+  const states = experienceStatusInfo(theme);
 
   const headingStyles = {
     mb: theme.spacing(1),
@@ -29,13 +38,13 @@ export default function PastExpericiencesList({
     color: 'primary.main',
   };
 
-  const tableStyle = {
+  const tableStyles = {
     th: {
       fontWeight: 700,
     },
   };
 
-  const linkStyle = {
+  const linkStyles = {
     display: 'flex',
     alignItems: 'center',
     mb: theme.spacing(2),
@@ -44,20 +53,18 @@ export default function PastExpericiencesList({
     textDecoration: 'none',
   };
 
-  const iconStyle = {
+  const iconStyles = {
     ml: theme.spacing(2),
   };
 
   // Components
-  const renderedHeader = ['Experience', 'Status'].map((label) => {
-    return <TableCell>{label}</TableCell>;
-  });
-
   const renderedBody = experienceInfo.map((row) => {
     return (
-      <TableRow>
-        <TableCell>{row.experience}</TableCell>
-        <TableCell>{row.status}</TableCell>
+      <TableRow key={row.id}>
+        <TableCell>
+          <Link href={row.url}>{row.experience}</Link>
+        </TableCell>
+        <TableCell>{states[row.status].label}</TableCell>
       </TableRow>
     );
   });
@@ -65,7 +72,10 @@ export default function PastExpericiencesList({
   const renderTable = (
     <Table>
       <TableHead>
-        <TableRow sx={tableStyle}>{renderedHeader}</TableRow>
+        <TableRow sx={tableStyles}>
+          <TableCell>Experience</TableCell>
+          <TableCell>Status</TableCell>
+        </TableRow>
       </TableHead>
       <TableBody>{renderedBody}</TableBody>
     </Table>
@@ -76,11 +86,13 @@ export default function PastExpericiencesList({
       <Typography sx={headingStyles} variant="h2">
         Past experiences
       </Typography>
-      <Link href={ctaLink} sx={linkStyle}>
+      <Link href={ctaLink} sx={linkStyles}>
         See all
-        <ArrowForwardIcon sx={iconStyle} />
+        <ArrowForwardIcon sx={iconStyles} />
       </Link>
-      <Paper>{renderTable}</Paper>
+      <TableContainer component={Paper} sx={{ p: theme.spacing(3) }}>
+        {renderTable}
+      </TableContainer>
     </Box>
   );
 }

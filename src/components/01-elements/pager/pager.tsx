@@ -9,18 +9,32 @@ interface PagerProps extends PaginationProps {
 }
 
 export default function Pager({ baseUrl, count, page, ...props }: PagerProps) {
-  return (
-    <Pagination
-      count={count}
-      page={page}
-      renderItem={(item) => (
-        <PaginationItem
-          component={Link}
-          to={`${baseUrl}${item.page === 1 ? '' : `?page=${item.page}`}`}
-          {...item}
-        />
-      )}
-      {...props}
-    />
-  );
+  try {
+    const parsedUrl = new URL(baseUrl);
+    const searchParams = parsedUrl.searchParams;
+    if (searchParams.has('page')) searchParams.delete('page');
+    const search = searchParams.size ? `?${searchParams.toString()}` : '';
+    const separator = search ? '&' : '?';
+    return (
+      <Pagination
+        count={count}
+        page={page}
+        renderItem={(item) => {
+          const pageParam = item.page === 1 ? '' : `page=${item.page}`;
+          return (
+            <PaginationItem
+              component={Link}
+              to={`${parsedUrl.pathname}${search}${
+                pageParam ? `${separator}${pageParam}` : ''
+              }`}
+              {...item}
+            />
+          );
+        }}
+        {...props}
+      />
+    );
+  } catch {
+    return null;
+  }
 }
