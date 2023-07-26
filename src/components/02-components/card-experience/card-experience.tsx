@@ -2,10 +2,11 @@ import {
   Box,
   Button,
   Paper,
-  type SxProps,
   Typography,
   useTheme,
+  type SxProps,
 } from '@mui/material';
+import { experienceStatusInfo } from '../../../lib/utils';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type CardExperienceProps = {
@@ -50,54 +51,11 @@ export default function CardExperience({
   const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
   const containerPosition = cardCount >= 2 ? 'row' : 'column';
 
-  // Variables to manage workflow status
-  const states: { [index: string]: { color: string; label: string } } = {
-    draft: {
-      color: theme.palette.warning.light,
-      label: 'Risk Acknowledgment',
-    },
-    pending: {
-      color: theme.palette.warning.main,
-      label: 'Pending',
-    },
-    approved: {
-      color: theme.palette.success.main,
-      label: 'Approved',
-    },
-    declined: {
-      color: theme.palette.secondary.main,
-      label: 'Declined',
-    },
-    site_staff: {
-      color: theme.palette.error.light,
-      label: 'Site Staff',
-    },
-    duration: {
-      color: theme.palette.teal.main,
-      label: 'Duration',
-    },
-    grace_period: {
-      color: theme.palette.blue.main,
-      label: 'Grace Period',
-    },
-    published: {
-      color: theme.palette.success.light,
-      label: 'Active',
-    },
-    success: {
-      color: theme.palette.success.dark,
-      label: 'Success',
-    },
-    incomplete: {
-      color: theme.palette.error.main,
-      label: 'Incomplete',
-    },
-  };
+  const states = experienceStatusInfo(theme);
 
   // Styles.
   const containerStyles: SxProps = {
     p: theme.spacing(3),
-    mb: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     minWidth: '100%',

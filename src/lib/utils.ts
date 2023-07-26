@@ -1,5 +1,6 @@
 import { FormEvent, RefObject } from 'react';
 import { type RefHandler } from '../components/02-components/tabs/tabs';
+import { type Theme } from '@mui/material';
 
 export function checkRequiredFormFieldsTabs(
   event: FormEvent<HTMLButtonElement>,
@@ -22,4 +23,51 @@ export function checkRequiredFormFieldsTabs(
       }
     }
   }
+}
+
+export function experienceStatusInfo(
+  theme: Theme,
+): Record<string, { color: string; label: string }> {
+  return {
+    draft: {
+      color: theme.palette.warning.light,
+      label: 'Risk Acknowledgment',
+    },
+    pending: {
+      color: theme.palette.warning.main,
+      label: 'Pending',
+    },
+    approved: {
+      color: theme.palette.success.main,
+      label: 'Approved',
+    },
+    declined: {
+      color: theme.palette.secondary.main,
+      label: 'Declined',
+    },
+    site_staff: {
+      color: theme.palette.error.light,
+      label: 'Site Staff',
+    },
+    duration: {
+      color: theme.palette.teal.main,
+      label: 'Duration',
+    },
+    grace_period: {
+      color: theme.palette.blue.main,
+      label: 'Grace Period',
+    },
+    published: {
+      color: theme.palette.success.light,
+      label: 'Active',
+    },
+    success: {
+      color: theme.palette.success.dark,
+      label: 'Success',
+    },
+    incomplete: {
+      color: theme.palette.error.main,
+      label: 'Incomplete',
+    },
+  };
 }
