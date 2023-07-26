@@ -10,6 +10,7 @@ import { experienceStatusInfo } from '../../../lib/utils';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type CardExperienceProps = {
+  id: string;
   heading: string;
   state: string;
   description?: string;
