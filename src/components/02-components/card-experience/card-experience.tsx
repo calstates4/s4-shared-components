@@ -194,7 +194,7 @@ export default function CardExperience({
   );
 
   return (
-    <Paper sx={containerStyles}>
+    <Paper sx={containerStyles} component="article">
       <Box sx={contentStyles}>
         <Box sx={bodyWrapperStyles}>
           <Box sx={headingWrapperStyles}>

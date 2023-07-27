@@ -1,4 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import TimeLogTable, {
+  type TimeLogTableProps,
+} from '../time-log-table/time-log-table';
+import { Default as TimeLogTableStory } from '../time-log-table/time-log-table.stories';
 
 import ExperiencePage from './experience-page';
 
@@ -7,16 +12,7 @@ const meta: Meta<typeof ExperiencePage> = {
   component: ExperiencePage,
 };
 
-const goalsText = `
-Researching Walmart’s in the Kern county area will help locate how many stores will gift funding for the Ronald McDonald House located in Bakersfield.
-`;
-
-const LearningText = `
-  Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt. 
-  Platea sapien vel laoreet pellentesque urna. Sollicitudin sem sed sed eu porttitor ornare elit.
-`;
-
-const dummyText = `
+const experienceDetails = `
   Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt. 
   Platea sapien vel laoreet pellentesque urna. Sollicitudin sem sed sed eu porttitor ornare elit.
 `;
@@ -25,12 +21,13 @@ export default meta;
 
 export const Default: StoryObj<typeof ExperiencePage> = {
   args: {
+    id: '123',
     experienceName: 'Experience Name',
     url: '#',
     opportunityName: 'Opportunity Name',
     state: 'approved',
     courseName: 'HLTH 492 (01): Service Learning In Health Sci',
-    experienceDetails: dummyText,
+    experienceDetails,
     organizationName: 'Buen Vecino',
     programName: 'Program',
     location: 'Location',
@@ -75,21 +72,10 @@ export const Default: StoryObj<typeof ExperiencePage> = {
         },
       ],
     },
-    timeLogInfo: [
-      {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
-        goals: goalsText,
-        learningOutcomes: LearningText,
-        status: 'Submitted',
-      },
-      {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
-        goals: goalsText,
-        learningOutcomes: LearningText,
-        status: 'Submitted',
-      },
-    ],
   },
+  render: (args) => (
+    <ExperiencePage {...args}>
+      <TimeLogTable {...(TimeLogTableStory.args as TimeLogTableProps)} />
+    </ExperiencePage>
+  ),
 };

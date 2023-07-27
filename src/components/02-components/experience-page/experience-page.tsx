@@ -3,24 +3,20 @@ import {
   Button,
   Divider,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   Typography,
   useTheme,
 } from '@mui/material';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import { experienceStatusInfo } from '../../../lib/utils';
+import { ReactNode } from 'react';
 
 export type ExperiencePageProps = {
+  children?: ReactNode;
+  id: string;
   experienceName: string;
   opportunityName: string;
   state: string;
@@ -55,16 +51,10 @@ export type ExperiencePageProps = {
       urlForm: string;
     }[];
   };
-  timeLogInfo: {
-    dateTime: string;
-    hour: number;
-    goals: string;
-    learningOutcomes: string;
-    status: string;
-  }[];
 };
 
 export default function ExperiencePage({
+  children,
   experienceName,
   url,
   opportunityName,
@@ -80,7 +70,6 @@ export default function ExperiencePage({
   hoursCtaUrl,
   formsBegining,
   formsDuring,
-  timeLogInfo,
   primaryContact,
   formSigner,
   timeApprover,
@@ -90,48 +79,7 @@ export default function ExperiencePage({
   const theme = useTheme();
 
   // Variables to manage workflow status
-  const states: { [index: string]: { color: string; label: string } } = {
-    draft: {
-      color: theme.palette.warning.light,
-      label: 'Risk Acknowledgment',
-    },
-    pending: {
-      color: theme.palette.warning.main,
-      label: 'Pending',
-    },
-    approved: {
-      color: theme.palette.success.main,
-      label: 'Approved',
-    },
-    declined: {
-      color: theme.palette.secondary.main,
-      label: 'Declined',
-    },
-    site_staff: {
-      color: theme.palette.error.light,
-      label: 'Site Staff',
-    },
-    duration: {
-      color: theme.palette.teal.main,
-      label: 'Duration',
-    },
-    grace_period: {
-      color: theme.palette.blue.main,
-      label: 'Grace Period',
-    },
-    published: {
-      color: theme.palette.success.light,
-      label: 'Active',
-    },
-    success: {
-      color: theme.palette.success.dark,
-      label: 'Success',
-    },
-    incomplete: {
-      color: theme.palette.error.main,
-      label: 'Incomplete',
-    },
-  };
+  const states = experienceStatusInfo(theme);
 
   // Styles
   const experienceNameStyles = {
@@ -142,7 +90,7 @@ export default function ExperiencePage({
     fontWeight: '700',
   };
 
-  const headingFormItemStyle = {
+  const headingFormItemStyles = {
     fontWeight: '700',
     marginTop: theme.spacing(3),
   };
@@ -175,21 +123,21 @@ export default function ExperiencePage({
     },
   };
 
-  const formItemName = {
+  const formItemNameStyles = {
     flexBasis: '30%',
   };
 
-  const formItemStatus = {
+  const formItemStatusStyles = {
     display: 'flex',
     flexBasis: '20%',
   };
 
-  const descriptionStyle = {
+  const descriptionStyles = {
     display: 'flex',
     flexDirection: 'column',
   };
 
-  const stateStyle = {
+  const stateStyles = {
     marginTop: theme.spacing(2),
     backgroundColor: states[state].color,
     px: theme.spacing(1),
@@ -200,7 +148,7 @@ export default function ExperiencePage({
     },
   };
 
-  const containerStyle = {
+  const containerStyles = {
     display: 'flex',
     p: theme.spacing(3),
     mb: theme.spacing(5),
@@ -213,7 +161,7 @@ export default function ExperiencePage({
     },
   };
 
-  const contentStyle = {
+  const contentStyles = {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
@@ -223,11 +171,11 @@ export default function ExperiencePage({
     },
   };
 
-  const bodyWrapperStyle = {
+  const bodyWrapperStyles = {
     flex: '1 0 70%',
   };
 
-  const infoStyle = {
+  const infoStyles = {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: theme.spacing(4),
@@ -237,7 +185,7 @@ export default function ExperiencePage({
     },
   };
 
-  const headingWrapperStyle = {
+  const headingWrapperStyles = {
     display: 'flex',
     alignItems: 'flex-start',
     marginBottom: theme.spacing(1),
@@ -248,47 +196,38 @@ export default function ExperiencePage({
     },
   };
 
-  const descriptionContainerStyle = {
+  const descriptionContainerStyles = {
     flexBasis: '60%',
     marginRight: theme.spacing(5),
   };
 
-  const programInfoStyle = {
+  const programInfoStyles = {
     flexBasis: '40%',
   };
 
-  const cardHoursStyle = {
+  const cardHoursStyles = {
     flex: '1 0 25%',
   };
 
-  const iconSubmittedStyle = {
+  const iconSubmittedStyles = {
     color: theme.palette.success.main,
     marginRight: theme.spacing(1),
   };
 
-  const iconPendingStyle = {
+  const iconPendingStyles = {
     color: theme.palette.warning.main,
     marginRight: theme.spacing(1),
   };
 
-  const tableStyle = {
-    td: {
-      padding: theme.spacing(5),
-    },
-    th: {
-      padding: theme.spacing(5),
-    },
-  };
-
-  const dividerStyle = {
+  const dividerStyles = {
     width: '100%',
   };
 
-  const staffWrapperStyle = {
+  const staffWrapperStyles = {
     marginTop: theme.spacing(3),
   };
 
-  const listStaffStyle = {
+  const listStaffStyles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(1, 1fr)',
     [theme.breakpoints.up('md')]: {
@@ -297,7 +236,7 @@ export default function ExperiencePage({
     },
   };
 
-  const pendingFormStyle = {
+  const pendingFormStyles = {
     display: 'flex',
     marginBottom: theme.spacing(3),
     border: `1px solid ${theme.palette.warning.main}`,
@@ -305,79 +244,44 @@ export default function ExperiencePage({
     borderRadius: theme.spacing(1),
   };
 
-  // Components
-  const renderedHeader = [
-    'Date/Time',
-    'Hours alculated',
-    'How have you contributed to the goals/mission of the organization?',
-    'Learning outcomes',
-    'status',
-    ' ',
-  ].map((label) => {
-    return <TableCell>{label}</TableCell>;
-  });
-
-  const renderedBody = timeLogInfo.map((row) => {
-    return (
-      <TableRow>
-        <TableCell>{row.dateTime}</TableCell>
-        <TableCell>{row.hour}</TableCell>
-        <TableCell>{row.goals}</TableCell>
-        <TableCell>{row.learningOutcomes}</TableCell>
-        <TableCell>{row.status}</TableCell>
-        <TableCell>
-          <Box>
-            <FileCopyIcon />
-            <DeleteIcon />
-            <EditIcon />
-          </Box>
-        </TableCell>
-      </TableRow>
-    );
-  });
-
-  const renderTable = (
-    <Table sx={tableStyle}>
-      <TableHead>
-        <TableRow>{renderedHeader}</TableRow>
-      </TableHead>
-      <TableBody>{renderedBody}</TableBody>
-    </Table>
-  );
-
   const renderedDescription = experienceDetails && (
-    <Box sx={descriptionStyle}>
+    <Box sx={descriptionStyles}>
       <strong>Experience Details:</strong>
-      {experienceDetails}
+      <div dangerouslySetInnerHTML={{ __html: experienceDetails }} />
     </Box>
   );
 
   const renderedState = state && (
-    <Typography sx={stateStyle} variant="body2">
+    <Typography sx={stateStyles} variant="body2">
       {states[state].label}
     </Typography>
   );
 
   return (
     <article>
-      <Breadcrumbs items={[{ title: 'Experiences', url }]} />
+      <Breadcrumbs
+        items={[
+          { title: 'Experiences', url: '/experiences' },
+          { title: experienceName, url },
+        ]}
+      />
       <Box>
         <Typography variant="h1" color="primary.main" sx={experienceNameStyles}>
           {experienceName}
         </Typography>
 
-        <Paper sx={containerStyle}>
-          <Box sx={contentStyle}>
-            <Box sx={bodyWrapperStyle}>
-              <Box sx={headingWrapperStyle}>
+        <Paper sx={containerStyles}>
+          <Box sx={contentStyles}>
+            <Box sx={bodyWrapperStyles}>
+              <Box sx={headingWrapperStyles}>
                 <Typography sx={headingStyles} variant="h2">
                   {opportunityName}
                 </Typography>
                 {renderedState}
               </Box>
-              <Box sx={infoStyle}>
-                <Box sx={descriptionContainerStyle}>{renderedDescription}</Box>
-                <Box sx={programInfoStyle}>
+              <Box sx={infoStyles}>
+                <Box sx={descriptionContainerStyles}>{renderedDescription}</Box>
+                <Box sx={programInfoStyles}>
                   <Box>
                     <strong>Program: </strong>
                     {programName}
@@ -398,14 +302,16 @@ export default function ExperiencePage({
                     <strong>Time Commitment: </strong>
                     {timeCommitment}
                   </Box>
-                  <Box>
-                    <strong>Location: </strong>
-                    {location}
-                  </Box>
+                  {location && (
+                    <Box>
+                      <strong>Location: </strong>
+                      {location}
+                    </Box>
+                  )}
                 </Box>
               </Box>
             </Box>
-            <Box sx={cardHoursStyle}>
+            <Box sx={cardHoursStyles}>
               <CardExperienceHours
                 hours={hours}
                 cta={hoursCtaUrl}
@@ -414,8 +320,8 @@ export default function ExperiencePage({
             </Box>
           </Box>
           {hasPendingForm && (
-            <Box sx={pendingFormStyle}>
-              <ErrorOutlineIcon sx={iconPendingStyle} />
+            <Box sx={pendingFormStyles}>
+              <ErrorOutlineIcon sx={iconPendingStyles} />
               <Box>
                 <Typography sx={headingStyles} variant="h4">
                   Pending forms
@@ -427,14 +333,14 @@ export default function ExperiencePage({
               </Box>
             </Box>
           )}
-          <Divider sx={dividerStyle} />
-          <Box sx={staffWrapperStyle}>
+          <Divider sx={dividerStyles} />
+          <Box sx={staffWrapperStyles}>
             <Typography sx={headingStyles} variant="h3">
               Site Staff
             </Typography>
-            <Box sx={listStaffStyle}>
+            <Box sx={listStaffStyles}>
               <Box>
-                <strong>Primary contac(s): </strong>
+                <strong>Primary contact(s): </strong>
                 {primaryContact}
               </Box>
               <Box>
@@ -453,76 +359,82 @@ export default function ExperiencePage({
           </Box>
         </Paper>
 
-        <Paper sx={formWrapperStyle}>
-          <Typography sx={headingFormStyles} variant="h2">
-            Forms
-          </Typography>
-          {formsBegining && (
-            <Box>
-              <Typography sx={headingFormItemStyle} variant="h4">
-                Beginning of Term
-              </Typography>
-              <Box component="ul" sx={formListStyles}>
-                {formsBegining.items.map((item) => (
-                  <Box component="li" key={item.id} sx={formItemStyles}>
-                    <Typography sx={formItemName}>{item.formName}</Typography>
-                    <Typography variant="body2" sx={formItemStatus}>
-                      {item.statusFoms === 'Submitted' ? (
-                        <CheckCircleOutlineOutlinedIcon
-                          sx={iconSubmittedStyle}
-                        />
-                      ) : (
-                        <ErrorOutlineIcon sx={iconPendingStyle} />
-                      )}
-                      {item.statusFoms}
-                    </Typography>
-                    <Button
-                      variant="outlined"
-                      component={Link}
-                      href={item.urlForm}
-                      sx={{ flexShrink: 0 }}
-                    >
-                      Complete form
-                    </Button>
-                  </Box>
-                ))}
+        {formsBegining || formsDuring ? (
+          <Paper sx={formWrapperStyle}>
+            <Typography sx={headingFormStyles} variant="h2">
+              Forms
+            </Typography>
+            {formsBegining && (
+              <Box>
+                <Typography sx={headingFormItemStyles} variant="h4">
+                  Beginning of Term
+                </Typography>
+                <Box component="ul" sx={formListStyles}>
+                  {formsBegining.items.map((item) => (
+                    <Box component="li" key={item.id} sx={formItemStyles}>
+                      <Typography sx={formItemNameStyles}>
+                        {item.formName}
+                      </Typography>
+                      <Typography variant="body2" sx={formItemStatusStyles}>
+                        {item.statusFoms === 'Submitted' ? (
+                          <CheckCircleOutlineOutlinedIcon
+                            sx={iconSubmittedStyles}
+                          />
+                        ) : (
+                          <ErrorOutlineIcon sx={iconPendingStyles} />
+                        )}
+                        {item.statusFoms}
+                      </Typography>
+                      <Button
+                        variant="outlined"
+                        component={Link}
+                        href={item.urlForm}
+                        sx={{ flexShrink: 0 }}
+                      >
+                        Complete form
+                      </Button>
+                    </Box>
+                  ))}
+                </Box>
               </Box>
-            </Box>
-          )}
-          {formsDuring && (
-            <Box>
-              <Typography sx={headingFormItemStyle} variant="h4">
-                During Term
-              </Typography>
-              <Box component="ul" sx={formListStyles}>
-                {formsDuring.items.map((item) => (
-                  <Box component="li" key={item.id} sx={formItemStyles}>
-                    <Typography sx={formItemName}>{item.formName}</Typography>
-                    <Typography variant="body2" sx={formItemStatus}>
-                      {item.statusFoms === 'Submitted' ? (
-                        <CheckCircleOutlineOutlinedIcon
-                          sx={iconSubmittedStyle}
-                        />
-                      ) : (
-                        <ErrorOutlineIcon sx={iconPendingStyle} />
-                      )}
-                      {item.statusFoms}
-                    </Typography>
-                    <Button
-                      variant="outlined"
-                      component={Link}
-                      href={item.urlForm}
-                      sx={{ flexShrink: 0 }}
-                    >
-                      Complete form
-                    </Button>
-                  </Box>
-                ))}
+            )}
+            {formsDuring && (
+              <Box>
+                <Typography sx={headingFormItemStyles} variant="h4">
+                  During Term
+                </Typography>
+                <Box component="ul" sx={formListStyles}>
+                  {formsDuring.items.map((item) => (
+                    <Box component="li" key={item.id} sx={formItemStyles}>
+                      <Typography sx={formItemNameStyles}>
+                        {item.formName}
+                      </Typography>
+                      <Typography variant="body2" sx={formItemStatusStyles}>
+                        {item.statusFoms === 'Submitted' ? (
+                          <CheckCircleOutlineOutlinedIcon
+                            sx={iconSubmittedStyles}
+                          />
+                        ) : (
+                          <ErrorOutlineIcon sx={iconPendingStyles} />
+                        )}
+                        {item.statusFoms}
+                      </Typography>
+                      <Button
+                        variant="outlined"
+                        component={Link}
+                        href={item.urlForm}
+                        sx={{ flexShrink: 0 }}
+                      >
+                        Complete form
+                      </Button>
+                    </Box>
+                  ))}
+                </Box>
               </Box>
-            </Box>
-          )}
-        </Paper>
-        <Paper>{renderTable}</Paper>
+            )}
+          </Paper>
+        ) : null}
+        {children}
       </Box>
     </article>
   );
