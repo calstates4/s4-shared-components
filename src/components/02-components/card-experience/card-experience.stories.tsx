@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import CardExperience from './card-experience';
 
@@ -20,7 +21,6 @@ export const Default: StoryObj<typeof CardExperience> = {
     state: 'approved',
     description: dummyText,
     cta: '/opportunities',
-    ctaTitle: 'More Details',
     program: 'Program',
     dateStart: '05/03/2023',
     dateEnd: '05/03/2023',
@@ -38,7 +38,6 @@ export const MoreElements: StoryObj<typeof CardExperience> = {
     state: 'approved',
     description: dummyText,
     cta: '/opportunities',
-    ctaTitle: 'MORE DETAILS',
     program: 'Program',
     dateStart: '05/03/2023',
     dateEnd: '05/03/2023',
