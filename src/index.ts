@@ -39,6 +39,8 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
+export { default as ExperiencesList } from './components/02-components/experiences-list/experiences-list';
+export { default as ExperiencePage } from './components/02-components/experience-page/experience-page';
 export {
   default as ExperienceTimeEntriesTable,
   type ExperienceTimeEntriesTableProps,
@@ -67,9 +69,7 @@ export {
   default as OrganizationCard,
   type OrganizationCardProps,
 } from './components/02-components/organization-card/organization-card';
-export {
-  default as OrganizationForm
-} from './components/02-components/organization-form/organization-form';
+export { default as OrganizationForm } from './components/02-components/organization-form/organization-form';
 export { default as OrganizationList } from './components/02-components/organization-list/organization-list';
 export {
   default as OrganizationPage,
