@@ -7,8 +7,8 @@ import {
   useTheme,
 } from '@mui/material';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
-import Link from '../../01-elements/link/link';
 import AutocompleteField, {
   type AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
@@ -23,6 +23,8 @@ export type OpportunityListProps = {
   children: ReactNode;
   url: string;
   viewAsMapUrl: string;
+  listView: boolean;
+  onClickHandler: () => void;
   FormElement?: ElementType;
   totalItems: number;
   itemsPerPage: number;
@@ -50,7 +52,8 @@ export default function OpportunityList({
   breadcrumb,
   children,
   url,
-  viewAsMapUrl,
+  listView,
+  onClickHandler,
   FormElement,
   totalItems,
   itemsPerPage,
@@ -98,6 +101,8 @@ export default function OpportunityList({
     },
   };
 
+  const listIconStyles = { fontSize: '1rem', mr: theme.spacing(0.5) };
+
   const formItemStyles = {
     mb: theme.spacing(2),
     display: 'flex',
@@ -107,6 +112,8 @@ export default function OpportunityList({
       mr: theme.spacing(2),
     },
   };
+
+  // Render.
 
   const formInner = (
     <>
@@ -224,6 +231,12 @@ export default function OpportunityList({
     <form>{formInner}</form>
   );
 
+  const renderedViewIcon = listView ? (
+    <MapOutlinedIcon sx={listIconStyles} />
+  ) : (
+    <ListAltOutlinedIcon sx={listIconStyles} />
+  );
+
   return (
     <div>
       <Breadcrumbs items={breadcrumb} />
@@ -233,28 +246,20 @@ export default function OpportunityList({
         </Typography>
         <Button
           variant="outlined"
-          component={Link}
-          href={viewAsMapUrl}
-          endIcon={
-            <MapOutlinedIcon
-              sx={{
-                fontSize: '1rem',
-                mr: theme.spacing(0.5),
-              }}
-            />
-          }
+          onClick={onClickHandler}
+          endIcon={renderedViewIcon}
           sx={{
             flexShrink: 0,
             fontWeight: 700,
           }}
         >
-          View as map
+          {`View as ${listView ? 'map' : 'list'}`}
         </Button>
       </Box>
       <Paper elevation={0} sx={containerStyles}>
         <Box>{form}</Box>
         <Box sx={listStyles}>{children}</Box>
-        {totalItems > itemsPerPage && (
+        {listView && totalItems > itemsPerPage && (
           <Pager
             baseUrl={url}
             count={Math.ceil(totalItems / itemsPerPage)}
