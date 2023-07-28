@@ -53,7 +53,7 @@ export default function OpportunityCard({
   const innerForm = (
     <>
       <input type="hidden" name="action" value="selectOpportunity" />
-      <input type="hidden" name="opportunityId " value={id} />
+      <input type="hidden" name="opportunityId" value={id} />
       <Button type="submit" variant="contained">
         Select
       </Button>

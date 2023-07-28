@@ -30,7 +30,7 @@ export type OpportunityListProps = {
   programFilterValues?: AutocompleteOptionType[];
   courseFilterValues?: AutocompleteOptionType[];
   typeFilterValues?: AutocompleteOptionType[];
-  termFilterValues: AutocompleteOptionType[];
+  termFilterValues?: AutocompleteOptionType[];
   focusPopulationFilterValues?: AutocompleteOptionType[];
   focusAreaFilterValues?: AutocompleteOptionType[];
   cityFilterValues?: AutocompleteOptionType[];
