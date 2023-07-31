@@ -22,7 +22,6 @@ export type OpportunityListProps = {
   }[];
   children: ReactNode;
   url: string;
-  viewAsMapUrl: string;
   listView: boolean;
   onClickHandler: () => void;
   FormElement?: ElementType;

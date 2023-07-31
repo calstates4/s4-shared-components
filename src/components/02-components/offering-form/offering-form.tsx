@@ -55,9 +55,11 @@ export type OfferingFormProps = {
   focusAreas?: AutocompleteOptionType[];
   subFocusAreas?: AutocompleteOptionType[];
   activities?: AutocompleteOptionType[];
+  requirements?: AutocompleteOptionType[];
   FormElement?: ElementType;
   defaultName?: string;
   defaultRequiresApproval?: boolean;
+  defaultApplicationInstructions?: string;
   defaultDepartment?: string;
   defaultOfferingType?: string;
   defaultMaxStudents?: number;
@@ -70,11 +72,14 @@ export type OfferingFormProps = {
   defaultPreferredLanguages?: string[];
   defaultRequiredLanguages?: string[];
   defaultDescription?: string;
+  defaultHealthSafetyInformation?: string;
   defaultTraining?: string;
   defaultFocusPopulations?: string[];
   defaultFocusAreas?: string[];
   defaultSubFocusAreas?: string[];
   defaultActivities?: string[];
+  defaultRequirements?: string[];
+  defaultSupervision?: string;
   defaultTimeAmount?: number;
   defaultTimeUnit?: string;
   defaultTimeFrequency?: string;
@@ -96,9 +101,11 @@ export default function OfferingForm({
   focusAreas,
   subFocusAreas,
   activities,
+  requirements,
   FormElement,
   defaultName,
   defaultRequiresApproval,
+  defaultApplicationInstructions,
   defaultDepartment,
   defaultPrimaryContact,
   defaultTimeApprovers,
@@ -111,11 +118,14 @@ export default function OfferingForm({
   defaultStartDate,
   defaultEndDate,
   defaultDescription,
+  defaultHealthSafetyInformation,
   defaultTraining,
   defaultFocusPopulations,
   defaultFocusAreas,
   defaultSubFocusAreas,
   defaultActivities,
+  defaultRequirements,
+  defaultSupervision,
   defaultTimeAmount,
   defaultTimeUnit,
   defaultTimeFrequency,
@@ -124,6 +134,9 @@ export default function OfferingForm({
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
   const [startDate, setStartDate] = useState(defaultStartDate);
+  const [requiresApproval, setRequiresApproval] = useState(
+    defaultRequiresApproval,
+  );
 
   // Styles.
   const paperStyles = {
@@ -144,6 +157,12 @@ export default function OfferingForm({
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
+  }
+
+  function onChangeRequiresApprovalHandler(
+    event: ChangeEvent<HTMLInputElement>,
+  ) {
+    setRequiresApproval(event.target.checked);
   }
 
   // Render.
@@ -173,6 +192,8 @@ export default function OfferingForm({
           <FormControlLabel
             control={
               <Switch
+                checked={requiresApproval}
+                onChange={onChangeRequiresApprovalHandler}
                 id="offering-requires-approval"
                 name="offering-requires-approval"
                 defaultChecked={defaultRequiresApproval}
@@ -181,6 +202,23 @@ export default function OfferingForm({
             label="Requires approval"
             sx={formFieldStyles}
           />
+
+          {requiresApproval && (
+            <TextField
+              required
+              fullWidth
+              multiline
+              maxRows={4}
+              id="offering-application-instructions"
+              name="offering-application-instructions"
+              label="Application Instructions"
+              defaultValue={defaultApplicationInstructions ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={formFieldStyles}
+            />
+          )}
 
           {departments && (
             <AutocompleteField
@@ -310,7 +348,6 @@ export default function OfferingForm({
           {observers && (
             <AutocompleteField
               multiple
-              required
               id="offering-observers"
               name="offering-observers"
               label="Observer(s)"
@@ -369,6 +406,19 @@ export default function OfferingForm({
             }}
             sx={formFieldStyles}
           />
+          <TextField
+            fullWidth
+            multiline
+            maxRows={4}
+            id="offering-health-safety"
+            name="offering-health-safety"
+            label="Health and safety information"
+            defaultValue={defaultHealthSafetyInformation ?? undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={formFieldStyles}
+          />
 
           <TextField
             fullWidth
@@ -378,6 +428,32 @@ export default function OfferingForm({
             name="offering-training"
             label="Offering training"
             defaultValue={defaultTraining ?? undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={formFieldStyles}
+          />
+
+          {requirements && (
+            <AutocompleteField
+              multiple
+              id="offering-requirements"
+              name="offering-requirements"
+              label="Requirements"
+              options={requirements}
+              selected={defaultRequirements}
+              sx={formFieldStyles}
+            />
+          )}
+
+          <TextField
+            fullWidth
+            multiline
+            maxRows={4}
+            id="offering-supervision"
+            name="offering-supervision"
+            label="Supervision"
+            defaultValue={defaultSupervision ?? undefined}
             InputLabelProps={{
               shrink: true,
             }}
