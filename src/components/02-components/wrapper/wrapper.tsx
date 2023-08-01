@@ -2,7 +2,7 @@ import { Paper, Typography, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 export type WrapperProps = {
-  title: string;
+  title?: string;
   description?: string;
   children: ReactNode;
 };
