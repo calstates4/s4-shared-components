@@ -196,7 +196,6 @@ export default function OfferingForm({
                 onChange={onChangeRequiresApprovalHandler}
                 id="offering-requires-approval"
                 name="offering-requires-approval"
-                defaultChecked={defaultRequiresApproval}
               />
             }
             label="Requires approval"

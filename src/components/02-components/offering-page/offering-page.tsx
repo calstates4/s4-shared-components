@@ -28,7 +28,7 @@ export type OfferingPageProps = {
   primaryContact: string;
   timeApprovers: string;
   formSigners: string;
-  observers: string;
+  observers?: string;
   training?: string;
   published: boolean;
   children?: ReactNode;
@@ -304,10 +304,12 @@ export default function OfferingPage({
                 <dt>Form Signer(s): </dt>
                 <dd>{formSigners}</dd>
               </div>
-              <div>
-                <dt>Observer(s): </dt>
-                <dd>{observers}</dd>
-              </div>
+              {observers && (
+                <div>
+                  <dt>Observer(s): </dt>
+                  <dd>{observers}</dd>
+                </div>
+              )}
             </Box>
           </Box>
         </Box>
