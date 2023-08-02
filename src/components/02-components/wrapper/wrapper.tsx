@@ -19,13 +19,17 @@ export default function Wrapper({
     display: 'flex',
     flexDirection: 'column',
     p: theme.spacing(3),
+    mt: theme.spacing(3),
   };
+
+  let header_title;
+  if (title) {
+    header_title = <Typography component="h3" variant="h2" mb={3} color="primary.main">{title}</Typography>
+  }
 
   return (
     <Paper elevation={0} sx={containerStyles} component="article">
-      <Typography component="h3" variant="h2" mb={3} color="primary.main">
-        {title}
-      </Typography>
+      {header_title}
       {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
       {children}
     </Paper>
