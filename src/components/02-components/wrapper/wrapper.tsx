@@ -1,10 +1,11 @@
+import React from 'react';
 import { Paper, Typography, useTheme } from '@mui/material';
-import { type ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
 export type WrapperProps = {
   title?: string;
   description?: string;
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
 export default function Wrapper({
@@ -18,20 +19,27 @@ export default function Wrapper({
   const containerStyles = {
     display: 'flex',
     flexDirection: 'column',
-    p: theme.spacing(3),
-    mt: theme.spacing(3),
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(3),
   };
 
-  let header_title;
-  if (title) {
-    header_title = <Typography component="h3" variant="h2" mb={3} color="primary.main">{title}</Typography>
-  }
+  const headerTitle = title && (
+    <Typography component="h3" variant="h2" mb={3} color="primary.main">
+      {title}
+    </Typography>
+  );
 
   return (
     <Paper elevation={0} sx={containerStyles} component="article">
-      {header_title}
+      {headerTitle}
       {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
       {children}
     </Paper>
   );
 }
+
+Wrapper.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
