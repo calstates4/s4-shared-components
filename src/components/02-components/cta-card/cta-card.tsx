@@ -1,6 +1,6 @@
 import { Button, Paper, Typography, useTheme } from '@mui/material';
 
-export type BrandProps = {
+export type CTACardProps = {
   heading?: string;
   subHeading?: string;
   description?: string;
@@ -14,7 +14,7 @@ export default function CtaCard({
   description,
   cta,
   ctaTitle,
-}: BrandProps) {
+}: CTACardProps) {
   const theme = useTheme();
 
   // Styles.
@@ -39,7 +39,7 @@ export default function CtaCard({
     '&:focus, &:hover, &:active': { backgroundColor: 'primary.dark' },
   };
 
-  // Render funtions.
+  // Render functions.
 
   const renderedHeading = heading && (
     <Typography sx={headingStyles} variant="h1">
