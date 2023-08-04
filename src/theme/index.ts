@@ -15,7 +15,10 @@ declare module '@mui/material/styles' {
 
 const theme = createTheme({
   typography: {
-    fontFamily: '"Albert Sans", sans-serif',
+    fontFamily: [
+      'Albert Sans',
+      'sans-serif'
+    ].join(','),
     h1: {
       fontSize: 32,
       fontWeight: 700,
