@@ -135,7 +135,7 @@ export default function OpportunityCard({
             <Button
               variant="contained"
               component={Link}
-              href={`${destinationUrl}/${id}`}
+              href={destinationUrl}
               sx={{ flexShrink: 0 }}
             >
               Select
