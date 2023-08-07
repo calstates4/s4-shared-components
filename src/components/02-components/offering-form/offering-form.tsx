@@ -1,17 +1,17 @@
 import {
-  Button,
   Box,
-  Switch,
+  Button,
   FormControlLabel,
   Paper,
+  Switch,
   TextField,
   Typography,
   useTheme,
 } from '@mui/material';
-import Link from '../../01-elements/link/link';
 import { ChangeEvent, ElementType, useRef, useState } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
+import Link from '../../01-elements/link/link';
 import AddressField, { AddressType } from '../address-field/address-field';
 import AutocompleteField, {
   type AutocompleteOptionType,
