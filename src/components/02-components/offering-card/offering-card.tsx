@@ -1,5 +1,4 @@
-import { Box, Button, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material';
+import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
 
 export type OfferingCardProps = {

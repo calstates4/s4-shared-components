@@ -23,6 +23,18 @@ const defaultTraining = `<p>
   Tu quoque, Brute, fili mi, nihil timor populi, nihil!
 </p>`;
 
+const defaultApplicationInstructions = `<p>
+  Quid securi etiam tamquam eu fugiat nulla pariatur. Magna pars studiorum, prodita quaerimus.
+</p>`;
+
+const defaultHealthSafetyInformation = `<p>
+  Inmensae subtilitatis, obscuris et malesuada fames. Cum ceteris in veneratione tui montes, nascetur mus. At nos hinc posthac, sitientis piros Afros. Curabitur est gravida et libero vitae dictum. Non equidem invideo, miror magis posuere velit aliquet. Plura mihi bona sunt, inclinet, amari petere vellent.
+</p>`;
+
+const defaultSupervision = `<p>
+  Ullamco laboris nisi ut aliquid ex ea commodi consequat. Hi omnes lingua, institutis, legibus inter se differunt.
+</p>`;
+
 const users = [
   { id: '1', label: 'Emily Parker' },
   { id: '2', label: 'Mathew Ross' },
@@ -87,6 +99,21 @@ const activities = [
   },
 ];
 
+const requirements = [
+  {
+    id: '1',
+    label: 'Support or assist with an event, program, or community project',
+  },
+  { id: '2', label: 'Prepare and/or serve food' },
+  { id: '3', label: 'Serve in a coaching role' },
+  { id: '4', label: 'Provide translation and/or transcription services' },
+  {
+    id: '5',
+    label:
+      'Participate in a painting, building, renovation or construction activity (such as, neighborhood/housing restoration or building theater props or playgrounds, etc)',
+  },
+];
+
 const languages = [
   { id: '1', label: 'Spanish' },
   { id: '2', label: 'French' },
@@ -123,6 +150,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
 export const EditOffering: StoryObj<typeof OfferingForm> = {
   args: {
     isEdit: true,
+    cancelUrl: '#',
     breadcrumb: [
       {
         title: 'Offerings',
@@ -156,6 +184,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     focusAreas,
     subFocusAreas,
     activities,
+    requirements,
     defaultPrimaryContact: '1',
     defaultTimeApprovers: ['1', '4'],
     defaultFormSigners: ['5', '8'],
@@ -166,8 +195,12 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     defaultFocusAreas: ['5', '7'],
     defaultSubFocusAreas: ['2', '4'],
     defaultActivities: ['1'],
+    defaultRequirements: ['2'],
     defaultName: 'Hi omnes lingua, institutis, legibus inter se differunt.',
     defaultRequiresApproval: true,
+    defaultApplicationInstructions,
+    defaultHealthSafetyInformation,
+    defaultSupervision,
     defaultDepartment: '2',
     defaultOfferingType: 'remote',
     defaultMaxStudents: 2,

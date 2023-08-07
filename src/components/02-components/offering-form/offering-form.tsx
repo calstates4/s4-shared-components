@@ -1,8 +1,9 @@
 import {
+  Box,
   Button,
-  Switch,
   FormControlLabel,
   Paper,
+  Switch,
   TextField,
   Typography,
   useTheme,
@@ -10,6 +11,7 @@ import {
 import { ChangeEvent, ElementType, useRef, useState } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
+import Link from '../../01-elements/link/link';
 import AddressField, { AddressType } from '../address-field/address-field';
 import AutocompleteField, {
   type AutocompleteOptionType,
@@ -39,6 +41,7 @@ const OFFERING_TIME_FREQUENCY = [
 
 export type OfferingFormProps = {
   isEdit?: boolean;
+  cancelUrl?: string;
   breadcrumb: {
     title: string;
     url: string;
@@ -55,9 +58,11 @@ export type OfferingFormProps = {
   focusAreas?: AutocompleteOptionType[];
   subFocusAreas?: AutocompleteOptionType[];
   activities?: AutocompleteOptionType[];
+  requirements?: AutocompleteOptionType[];
   FormElement?: ElementType;
   defaultName?: string;
   defaultRequiresApproval?: boolean;
+  defaultApplicationInstructions?: string;
   defaultDepartment?: string;
   defaultOfferingType?: string;
   defaultMaxStudents?: number;
@@ -70,11 +75,14 @@ export type OfferingFormProps = {
   defaultPreferredLanguages?: string[];
   defaultRequiredLanguages?: string[];
   defaultDescription?: string;
+  defaultHealthSafetyInformation?: string;
   defaultTraining?: string;
   defaultFocusPopulations?: string[];
   defaultFocusAreas?: string[];
   defaultSubFocusAreas?: string[];
   defaultActivities?: string[];
+  defaultRequirements?: string[];
+  defaultSupervision?: string;
   defaultTimeAmount?: number;
   defaultTimeUnit?: string;
   defaultTimeFrequency?: string;
@@ -83,6 +91,7 @@ export type OfferingFormProps = {
 
 export default function OfferingForm({
   isEdit = false,
+  cancelUrl,
   breadcrumb,
   departments,
   address,
@@ -96,9 +105,11 @@ export default function OfferingForm({
   focusAreas,
   subFocusAreas,
   activities,
+  requirements,
   FormElement,
   defaultName,
   defaultRequiresApproval,
+  defaultApplicationInstructions,
   defaultDepartment,
   defaultPrimaryContact,
   defaultTimeApprovers,
@@ -111,11 +122,14 @@ export default function OfferingForm({
   defaultStartDate,
   defaultEndDate,
   defaultDescription,
+  defaultHealthSafetyInformation,
   defaultTraining,
   defaultFocusPopulations,
   defaultFocusAreas,
   defaultSubFocusAreas,
   defaultActivities,
+  defaultRequirements,
+  defaultSupervision,
   defaultTimeAmount,
   defaultTimeUnit,
   defaultTimeFrequency,
@@ -124,6 +138,9 @@ export default function OfferingForm({
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
   const [startDate, setStartDate] = useState(defaultStartDate);
+  const [requiresApproval, setRequiresApproval] = useState(
+    defaultRequiresApproval,
+  );
 
   // Styles.
   const paperStyles = {
@@ -142,8 +159,20 @@ export default function OfferingForm({
     display: 'block',
   };
 
+  const actionButtonsContainerStyles = {
+    display: 'flex',
+    gap: theme.spacing(1),
+    flexWrap: 'wrap',
+  };
+
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
+  }
+
+  function onChangeRequiresApprovalHandler(
+    event: ChangeEvent<HTMLInputElement>,
+  ) {
+    setRequiresApproval(event.target.checked);
   }
 
   // Render.
@@ -173,14 +202,32 @@ export default function OfferingForm({
           <FormControlLabel
             control={
               <Switch
+                checked={requiresApproval}
+                onChange={onChangeRequiresApprovalHandler}
                 id="offering-requires-approval"
                 name="offering-requires-approval"
-                defaultChecked={defaultRequiresApproval}
               />
             }
             label="Requires approval"
             sx={formFieldStyles}
           />
+
+          {requiresApproval && (
+            <TextField
+              required
+              fullWidth
+              multiline
+              maxRows={4}
+              id="offering-application-instructions"
+              name="offering-application-instructions"
+              label="Application Instructions"
+              defaultValue={defaultApplicationInstructions ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={formFieldStyles}
+            />
+          )}
 
           {departments && (
             <AutocompleteField
@@ -310,7 +357,6 @@ export default function OfferingForm({
           {observers && (
             <AutocompleteField
               multiple
-              required
               id="offering-observers"
               name="offering-observers"
               label="Observer(s)"
@@ -369,6 +415,19 @@ export default function OfferingForm({
             }}
             sx={formFieldStyles}
           />
+          <TextField
+            fullWidth
+            multiline
+            maxRows={4}
+            id="offering-health-safety"
+            name="offering-health-safety"
+            label="Health and safety information"
+            defaultValue={defaultHealthSafetyInformation ?? undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={formFieldStyles}
+          />
 
           <TextField
             fullWidth
@@ -378,6 +437,32 @@ export default function OfferingForm({
             name="offering-training"
             label="Offering training"
             defaultValue={defaultTraining ?? undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={formFieldStyles}
+          />
+
+          {requirements && (
+            <AutocompleteField
+              multiple
+              id="offering-requirements"
+              name="offering-requirements"
+              label="Requirements"
+              options={requirements}
+              selected={defaultRequirements}
+              sx={formFieldStyles}
+            />
+          )}
+
+          <TextField
+            fullWidth
+            multiline
+            maxRows={4}
+            id="offering-supervision"
+            name="offering-supervision"
+            label="Supervision"
+            defaultValue={defaultSupervision ?? undefined}
             InputLabelProps={{
               shrink: true,
             }}
@@ -498,15 +583,29 @@ export default function OfferingForm({
         </div>
       </Tabs>
 
-      <Button
-        variant="contained"
-        type="submit"
-        onClick={(event) =>
-          onClickHandler(event, 'offering-form-panel', tabRef)
-        }
-      >
-        {isEdit ? 'Update' : 'Create'} offering
-      </Button>
+      <Box sx={actionButtonsContainerStyles}>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ flexShrink: 0 }}
+          onClick={(event) =>
+            onClickHandler(event, 'offering-form-panel', tabRef)
+          }
+        >
+          {isEdit ? 'Update' : 'Create'} offering
+        </Button>
+
+        {isEdit && cancelUrl && (
+          <Button
+            variant="outlined"
+            component={Link}
+            href={cancelUrl}
+            sx={{ flexShrink: 0 }}
+          >
+            Cancel
+          </Button>
+        )}
+      </Box>
     </>
   );
 
