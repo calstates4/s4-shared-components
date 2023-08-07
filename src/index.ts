@@ -86,6 +86,7 @@ export {
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
+export { default as StatWithIcon } from './components/02-components/stat-with-icon/stat-with-icon';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
