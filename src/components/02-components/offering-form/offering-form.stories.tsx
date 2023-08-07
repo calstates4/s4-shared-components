@@ -150,6 +150,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
 export const EditOffering: StoryObj<typeof OfferingForm> = {
   args: {
     isEdit: true,
+    cancelUrl: '#',
     breadcrumb: [
       {
         title: 'Offerings',

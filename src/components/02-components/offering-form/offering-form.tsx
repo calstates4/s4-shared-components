@@ -1,5 +1,6 @@
 import {
   Button,
+  Box,
   Switch,
   FormControlLabel,
   Paper,
@@ -7,6 +8,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import Link from '../../01-elements/link/link';
 import { ChangeEvent, ElementType, useRef, useState } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
@@ -39,6 +41,7 @@ const OFFERING_TIME_FREQUENCY = [
 
 export type OfferingFormProps = {
   isEdit?: boolean;
+  cancelUrl?: string;
   breadcrumb: {
     title: string;
     url: string;
@@ -88,6 +91,7 @@ export type OfferingFormProps = {
 
 export default function OfferingForm({
   isEdit = false,
+  cancelUrl,
   breadcrumb,
   departments,
   address,
@@ -153,6 +157,12 @@ export default function OfferingForm({
   const formFieldStyles = {
     mb: theme.spacing(3),
     display: 'block',
+  };
+
+  const actionButtonsContainerStyles = {
+    display: 'flex',
+    gap: theme.spacing(1),
+    flexWrap: 'wrap',
   };
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -573,15 +583,29 @@ export default function OfferingForm({
         </div>
       </Tabs>
 
-      <Button
-        variant="contained"
-        type="submit"
-        onClick={(event) =>
-          onClickHandler(event, 'offering-form-panel', tabRef)
-        }
-      >
-        {isEdit ? 'Update' : 'Create'} offering
-      </Button>
+      <Box sx={actionButtonsContainerStyles}>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ flexShrink: 0 }}
+          onClick={(event) =>
+            onClickHandler(event, 'offering-form-panel', tabRef)
+          }
+        >
+          {isEdit ? 'Update' : 'Create'} offering
+        </Button>
+
+        {isEdit && cancelUrl && (
+          <Button
+            variant="outlined"
+            component={Link}
+            href={cancelUrl}
+            sx={{ flexShrink: 0 }}
+          >
+            Cancel
+          </Button>
+        )}
+      </Box>
     </>
   );
 
