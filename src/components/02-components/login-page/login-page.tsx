@@ -1,20 +1,22 @@
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import { ElementType } from 'react';
 import Link from '../../01-elements/link/link';
-export type LoginProps = {
+
+export type LoginPageProps = {
   title: string;
   loginTitle?: string;
   description?: string;
   guestAccountUrl?: string;
   FormElement?: ElementType;
 };
-export default function Login({
+
+export default function LoginPage({
   title,
   loginTitle,
   description,
   guestAccountUrl,
   FormElement,
-}: LoginProps) {
+}: LoginPageProps) {
   const theme = useTheme();
 
   // Styles.
