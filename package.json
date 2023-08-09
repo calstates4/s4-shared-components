@@ -11,7 +11,8 @@
     "watch-typescript": "tsc --watch",
     "storybook": "storybook dev -p 6006",
     "dev": "run-p watch-typescript storybook",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build -o .out",
+    "deploy-storybook": "storybook-to-ghpages -o .out",
     "link-all": "./scripts/link-all.sh"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
     "@remix-run/react": "^1.16.0",
+    "@storybook/storybook-deployer": "^2.8.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
