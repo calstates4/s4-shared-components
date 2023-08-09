@@ -6,6 +6,7 @@ export type LoginPageProps = {
   title: string;
   loginTitle?: string;
   description?: string;
+  loginButtonText?: string;
   guestAccountUrl?: string;
   FormElement?: ElementType;
 };
@@ -13,6 +14,7 @@ export type LoginPageProps = {
 export default function LoginPage({
   title,
   loginTitle,
+  loginButtonText,
   description,
   guestAccountUrl,
   FormElement,
@@ -49,7 +51,7 @@ export default function LoginPage({
         type="submit"
         sx={{ display: 'block', my: theme.spacing(4), mx: 'auto' }}
       >
-        Login
+        {loginButtonText ? loginButtonText : 'Login'}
       </Button>
     </>
   );
@@ -75,7 +77,7 @@ export default function LoginPage({
         {form}
         {guestAccountUrl && (
           <Typography textAlign="center">
-            Are you a new student that doesn't have a campus account yet?
+            Are you a new user that doesn't have an account yet?
             <Link href={guestAccountUrl} sx={{ ml: theme.spacing(1) }}>
               Create a guest account
             </Link>
