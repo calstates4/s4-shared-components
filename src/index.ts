@@ -86,6 +86,10 @@ export {
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
+export {
+  default as TimeLogTable,
+  type TimeLogTableProps,
+} from './components/02-components/time-log-table/time-log-table';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
