@@ -1,0 +1,7 @@
+import{S as i}from"./sidebar-toggle-635db0a7.js";import"./jsx-runtime-94f6e698.js";import"./index-8db94870.js";import"./_commonjsHelpers-042e6b4d.js";import"./createSvgIcon-884c9325.js";import"./createSvgIcon-d4492962.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-4abd396b.js";import"./useThemeProps-cab738f2.js";import"./styled-b0d0b538.js";import"./createChainedFunction-0bab83cf.js";import"./useForkRef-2674f3de.js";import"./useId-42d0e615.js";import"./ownerWindow-fbe9f185.js";import"./isMuiElement-08f54e3c.js";import"./useEventCallback-3abb6c00.js";import"./useControlled-1e5e8cad.js";import"./useIsFocusVisible-bbf13f29.js";import"./Menu-35d883ac.js";import"./useMediaQuery-df32f542.js";import"./ButtonBase-0aa3f0f9.js";import"./emotion-react.browser.esm-eec9360d.js";import"./assertThisInitialized-081f9914.js";import"./inheritsLoose-c82a83d4.js";import"./TransitionGroupContext-1e5fd21a.js";import"./useTheme-a5a02c1a.js";const v={title:"Elements/SidebarToggle",component:i,argTypes:{setSidebarOpen:{action:"clicked"}}},r={args:{sidebarOpen:!1,sidebarWidth:25}};var t,o,e;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  args: {
+    sidebarOpen: false,
+    sidebarWidth: 25
+  }
+}`,...(e=(o=r.parameters)==null?void 0:o.docs)==null?void 0:e.source}}};const w=["Default"];export{r as Default,w as __namedExportsOrder,v as default};
+//# sourceMappingURL=sidebar-toggle.stories-a7d6d656.js.map

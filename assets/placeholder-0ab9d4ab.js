@@ -1,0 +1,2 @@
+import{j as o}from"./jsx-runtime-94f6e698.js";import{B as l}from"./Box-99d005d7.js";function d({children:a,bgDark:r=!1}){return o.jsx(l,{sx:{margin:e=>e.spacing(2),padding:e=>e.spacing(2),border:e=>`3px dashed ${e.palette.grey[r?50:800]}`,color:e=>r?e.palette.grey[50]:null},children:a})}try{placeholder.displayName="placeholder",placeholder.__docgenInfo={description:"",displayName:"placeholder",props:{bgDark:{defaultValue:{value:"false"},description:"",name:"bgDark",required:!1,type:{name:"boolean"}}}}}catch{}export{d as P};
+//# sourceMappingURL=placeholder-0ab9d4ab.js.map

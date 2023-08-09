@@ -1,0 +1,15 @@
+import{j as e}from"./jsx-runtime-94f6e698.js";import{P as C}from"./Paper-d9053942.js";import{B as S}from"./Button-2efb617b.js";import{T as i}from"./Typography-595f51a8.js";import{u as _}from"./useTheme-a5a02c1a.js";import"./index-8db94870.js";import"./_commonjsHelpers-042e6b4d.js";import"./useThemeProps-cab738f2.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-4abd396b.js";import"./styled-b0d0b538.js";import"./ButtonBase-0aa3f0f9.js";import"./emotion-react.browser.esm-eec9360d.js";import"./assertThisInitialized-081f9914.js";import"./inheritsLoose-c82a83d4.js";import"./TransitionGroupContext-1e5fd21a.js";import"./useForkRef-2674f3de.js";import"./useIsFocusVisible-bbf13f29.js";import"./useEventCallback-3abb6c00.js";import"./extendSxProp-98dee475.js";function m({heading:r,subHeading:s,description:o,cta:u,ctaTitle:l}){const a=_(),g={fontWeight:"700",mb:a.spacing(4)},h={fontWeight:"700",mb:a.spacing(1)},f={mb:a.spacing(2)},y={backgroundColor:"primary.main",color:"white",fontWeight:"700","&:focus, &:hover, &:active":{backgroundColor:"primary.dark"}},x=r&&e.jsx(i,{sx:g,variant:"h1",children:r}),T=s&&e.jsx(i,{sx:h,variant:"h2",children:s}),b=o&&e.jsx(i,{sx:f,children:o});return e.jsxs(C,{sx:{padding:n=>n.spacing(5),mb:n=>n.spacing(5)},children:[x,T,b,e.jsx(S,{sx:y,href:u,children:l})]})}try{ctacard.displayName="ctacard",ctacard.__docgenInfo={description:"",displayName:"ctacard",props:{heading:{defaultValue:null,description:"",name:"heading",required:!1,type:{name:"string"}},subHeading:{defaultValue:null,description:"",name:"subHeading",required:!1,type:{name:"string"}},description:{defaultValue:null,description:"",name:"description",required:!1,type:{name:"string"}},cta:{defaultValue:null,description:"",name:"cta",required:!0,type:{name:"string"}},ctaTitle:{defaultValue:null,description:"",name:"ctaTitle",required:!0,type:{name:"string"}}}}}catch{}const F={title:"Components/CTA Card",component:m},j=`
+  The Create an Experience process is a personalized, interactive road map that allows you to search for an experiential 
+  learning opportunity and connect it with a specific program and/or course. The easy, step-by-step process walks you through 
+  any requirements, forms and approvals that may be needed. Let’s get started!
+`,t={args:{heading:"Let’s create your first experience!",subHeading:"What is an experience?",description:j,cta:"/opportunities",ctaTitle:"BROWSE ALL OPPORTUNITIES"},render:r=>e.jsx(m,{...r})};var c,p,d;t.parameters={...t.parameters,docs:{...(c=t.parameters)==null?void 0:c.docs,source:{originalSource:`{
+  args: {
+    heading: 'Let’s create your first experience!',
+    subHeading: 'What is an experience?',
+    description: dummyText,
+    cta: '/opportunities',
+    ctaTitle: 'BROWSE ALL OPPORTUNITIES'
+  },
+  render: args => <CtaCard {...args} />
+}`,...(d=(p=t.parameters)==null?void 0:p.docs)==null?void 0:d.source}}};const G=["Default"];export{t as Default,G as __namedExportsOrder,F as default};
+//# sourceMappingURL=cta-card.stories-0bd9b32f.js.map

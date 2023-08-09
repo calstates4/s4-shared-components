@@ -1,0 +1,14 @@
+import{j as r}from"./jsx-runtime-94f6e698.js";import{P as x}from"./placeholder-0ab9d4ab.js";import{B as f,D as b}from"./brand.stories-cba8a727.js";import{C as h,U as B}from"./context.stories-97386d86.js";import{B as j,D as S}from"./branding-bar.stories-e23a6492.js";import{S as P,D as _}from"./sidebar-menu.stories-417f9229.js";import{r as L}from"./index-8db94870.js";import{S as T}from"./sidebar-toggle-635db0a7.js";import{M as C}from"./main-content-50bd971e.js";import{S as D}from"./sidebar-6caf7592.js";import{T as M}from"./topbar-323bab8a.js";import{B as s}from"./Box-99d005d7.js";import{T as k}from"./Typography-595f51a8.js";function p({children:a,brandingBarLinks:l,sidebarLinks:u,brand:m,context:c}){const[n,g]=L.useState(!1),t=23;return r.jsxs(s,{children:[r.jsxs(s,{position:"fixed",sx:{left:0,right:0,top:0,zIndex:y=>y.zIndex.drawer+1},children:[r.jsx(j,{...l}),r.jsxs(M,{children:[m,c]})]}),r.jsxs(s,{display:"flex",children:[r.jsx(D,{sidebarOpen:n,sidebarWidth:t,children:r.jsx(P,{...u})}),r.jsx(C,{sidebarOpen:n,sidebarWidth:t,children:a})]}),r.jsx(T,{sidebarOpen:n,setSidebarOpen:g,sidebarWidth:t})]})}try{pagelayout.displayName="pagelayout",pagelayout.__docgenInfo={description:"",displayName:"pagelayout",props:{brandingBarLinks:{defaultValue:null,description:"",name:"brandingBarLinks",required:!0,type:{name:"BrandingBarProps"}},sidebarLinks:{defaultValue:null,description:"",name:"sidebarLinks",required:!0,type:{name:"SidebarMenuProps"}},brand:{defaultValue:null,description:"",name:"brand",required:!0,type:{name:"ReactNode"}},context:{defaultValue:null,description:"",name:"context",required:!0,type:{name:"ReactNode"}}}}}catch{}const O={title:"Layouts/Page Layout",component:p},e={render:a=>r.jsx(p,{...a,children:r.jsx(x,{children:r.jsx(k,{variant:"body1",children:"This is the Main Content."})})}),args:{brandingBarLinks:S.args,sidebarLinks:_.args,brand:r.jsx(f,{...b.args}),context:r.jsx(h,{...B.args})}};var o,i,d;e.parameters={...e.parameters,docs:{...(o=e.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  render: args => <PageLayout {...args}>
+      <Placeholder>
+        <Typography variant="body1">This is the Main Content.</Typography>
+      </Placeholder>
+    </PageLayout>,
+  args: {
+    brandingBarLinks: (BrandingBarStory.args as BrandingBarProps),
+    sidebarLinks: (SidebarMenuStory.args as SidebarMenuProps),
+    brand: <Brand {...(BrandStory.args as BrandProps)} />,
+    context: <Context {...(ContextStory.args as ContextProps)} />
+  }
+}`,...(d=(i=e.parameters)==null?void 0:i.docs)==null?void 0:d.source}}};const q=["Default"],G=Object.freeze(Object.defineProperty({__proto__:null,Default:e,__namedExportsOrder:q,default:O},Symbol.toStringTag,{value:"Module"}));export{e as D,p as P,G as p};
+//# sourceMappingURL=page-layout.stories-f066a8a9.js.map

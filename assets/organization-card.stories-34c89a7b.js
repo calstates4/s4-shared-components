@@ -1,0 +1,13 @@
+import{j as e}from"./jsx-runtime-94f6e698.js";import{P as x}from"./Paper-d9053942.js";import{T as f}from"./Typography-595f51a8.js";import{B as h}from"./Box-99d005d7.js";import{B as y}from"./Button-2efb617b.js";import{u as j}from"./useTheme-a5a02c1a.js";function m({id:a,name:c,description:n,FormElement:o}){const r=j(),p={display:"flex",flexDirection:"column",p:r.spacing(3),border:`1px solid ${r.palette.secondary.main}`},u={textAlign:"right",pt:r.spacing(2),mt:"auto"},i=e.jsxs(e.Fragment,{children:[e.jsx("input",{type:"hidden",name:"action",value:"joinOrganization"}),e.jsx("input",{type:"hidden",name:"orgId",value:a}),e.jsx(y,{type:"submit",variant:"contained",children:"Select"})]}),g=o?e.jsx(o,{method:"post",children:i}):e.jsx("form",{children:i});return e.jsxs(x,{sx:p,component:"article",children:[e.jsx(f,{component:"h3",variant:"h2",mb:3,children:c}),n&&e.jsx("div",{dangerouslySetInnerHTML:{__html:n}}),e.jsx(h,{sx:u,children:g})]})}try{organizationcard.displayName="organizationcard",organizationcard.__docgenInfo={description:"",displayName:"organizationcard",props:{id:{defaultValue:null,description:"",name:"id",required:!0,type:{name:"string"}},name:{defaultValue:null,description:"",name:"name",required:!0,type:{name:"string"}},description:{defaultValue:null,description:"",name:"description",required:!1,type:{name:"string"}},FormElement:{defaultValue:null,description:"",name:"FormElement",required:!1,type:{name:"ElementType"}}}}}catch{}const _={title:"Components/OrganizationCard",component:m},t={args:{id:"34",name:"Tempor dolor eu esse in",description:"Et cillum aute voluptate et anim aute aliqua commodo dolor quis mollit sit. Nisi labore reprehenderit sint ad. Laboris aliquip excepteur fugiat minim nulla cupidatat cupidatat commodo tempor occaecat dolor voluptate."},render:a=>e.jsx("div",{style:{maxWidth:"400px"},children:e.jsx(m,{...a})})};var s,d,l;t.parameters={...t.parameters,docs:{...(s=t.parameters)==null?void 0:s.docs,source:{originalSource:`{
+  args: {
+    id: '34',
+    name: 'Tempor dolor eu esse in',
+    description: 'Et cillum aute voluptate et anim aute aliqua commodo dolor quis mollit sit. Nisi labore reprehenderit sint ad. Laboris aliquip excepteur fugiat minim nulla cupidatat cupidatat commodo tempor occaecat dolor voluptate.'
+  },
+  render: args => <div style={{
+    maxWidth: '400px'
+  }}>
+      <OrganizationCard {...args} />
+    </div>
+}`,...(l=(d=t.parameters)==null?void 0:d.docs)==null?void 0:l.source}}};const v=["Default"],C=Object.freeze(Object.defineProperty({__proto__:null,Default:t,__namedExportsOrder:v,default:_},Symbol.toStringTag,{value:"Module"}));export{t as D,m as O,C as o};
+//# sourceMappingURL=organization-card.stories-34c89a7b.js.map

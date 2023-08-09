@@ -1,0 +1,2 @@
+import{r,i as t}from"./createSvgIcon-884c9325.js";import{j as a}from"./jsx-runtime-94f6e698.js";var e={},u=t;Object.defineProperty(e,"__esModule",{value:!0});var o=e.default=void 0,s=u(r()),i=a,v=(0,s.default)((0,i.jsx)("path",{d:"M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm0 14H5V8h14v10z"}),"WebAsset");o=e.default=v;export{o as d};
+//# sourceMappingURL=WebAsset-3ac65838.js.map

@@ -1,0 +1,2 @@
+import{r,i as a}from"./createSvgIcon-884c9325.js";import{j as t}from"./jsx-runtime-94f6e698.js";var e={},u=a;Object.defineProperty(e,"__esModule",{value:!0});var o=e.default=void 0,i=u(r()),s=t,l=(0,i.default)((0,s.jsx)("path",{d:"M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"}),"Place");o=e.default=l;export{o as d};
+//# sourceMappingURL=Place-784d8ce2.js.map
