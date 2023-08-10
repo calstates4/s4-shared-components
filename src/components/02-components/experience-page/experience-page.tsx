@@ -162,6 +162,7 @@ export default function ExperiencePage({
   };
 
   const contentStyles = {
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
@@ -351,10 +352,12 @@ export default function ExperiencePage({
                 <strong>Time approver(s): </strong>
                 {timeApprover}
               </Box>
-              <Box>
-                <strong>Observer(s): </strong>
-                {obverser}
-              </Box>
+              {obverser && (
+                <Box>
+                  <strong>Observer(s): </strong>
+                  {obverser}
+                </Box>
+              )}
             </Box>
           </Box>
         </Paper>
