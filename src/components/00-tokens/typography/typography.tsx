@@ -1,58 +1,51 @@
-import { Box, Divider, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Typography, useTheme } from '@mui/material';
+import Wrapper from '../../02-components/wrapper/wrapper';
 
 export default function TypographyDemo() {
+  const theme = useTheme();
+  const typographyVariants = Object.keys(theme.typography);
+
   return (
     <Box>
-      <Typography variant="h1" gutterBottom>
-        h1. Heading
-      </Typography>
-      <Typography variant="h2" gutterBottom>
-        h2. Heading
-      </Typography>
-      <Typography variant="h3" gutterBottom>
-        h3. Heading
-      </Typography>
-      <Typography variant="h4" gutterBottom>
-        h4. Heading
-      </Typography>
-      <Typography variant="h5" gutterBottom>
-        h5. Heading
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        h6. Heading
-      </Typography>
-      <Divider />
-      <Typography variant="subtitle1" gutterBottom>
-        subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Quos blanditiis tenetur
-      </Typography>
-      <Typography variant="subtitle2" gutterBottom>
-        subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Quos blanditiis tenetur
-      </Typography>
-      <Divider />
-      <Typography variant="body1" gutterBottom>
-        body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-        blanditiis tenetur unde suscipit, quam beatae rerum inventore
-        consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-        fugiat deleniti? Eum quasi quidem quibusdam.
-      </Typography>
-      <Typography variant="body2" gutterBottom>
-        body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-        blanditiis tenetur unde suscipit, quam beatae rerum inventore
-        consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-        fugiat deleniti? Eum quasi quidem quibusdam.
-      </Typography>
-      <Divider />
-      <Typography variant="button" display="block" gutterBottom>
-        button text
-      </Typography>
-      <Typography variant="caption" display="block" gutterBottom>
-        caption text
-      </Typography>
-      <Typography variant="overline" display="block" gutterBottom>
-        overline text
-      </Typography>
+      {typographyVariants.map((variant) => {
+        // @ts-ignore
+        const variantTypography = theme.typography[variant];
+
+        return (
+          <Wrapper key={variant} title={variant}>
+            <Typography variant={variant as any} gutterBottom>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Quos blanditiis tenetur
+            </Typography>
+            {variant === 'fontFamily' ? (
+              <Typography variant="body2">
+                <div style={{ fontWeight: 'bold', margin: theme.spacing(2, 0, 2, 0) }}>Attributes:</div>
+                <div>{variantTypography}</div>
+              </Typography>
+            ) : typeof variantTypography === 'function' ? (
+              <Typography variant="body2">
+                This variant is a function.
+              </Typography>
+            ) : (
+              <Typography variant="body2">
+                {Object.entries(variantTypography).length === 0 ? (
+                  <div>This variant has no properties</div>
+                ) : (
+                  <>
+                    <div style={{ fontWeight: 'bold', margin: theme.spacing(2, 0, 2, 0) }}>Attributes:</div>
+                    {Object.entries(variantTypography).map(([property, value]) => (
+                      <div key={property}>
+                        {property}: {value as any}
+                      </div>
+                    ))}
+                  </>
+                )}
+              </Typography>
+            )}
+          </Wrapper>
+        );
+      })}
     </Box>
   );
 }
