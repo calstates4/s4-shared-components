@@ -39,6 +39,8 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export { default as MainContent } from './components/02-components/main-content/main-content';
+export { default as ExperiencesList } from './components/02-components/experiences-list/experiences-list';
+export { default as ExperiencePage } from './components/02-components/experience-page/experience-page';
 export {
   default as ExperienceTimeEntriesTable,
   type ExperienceTimeEntriesTableProps,
@@ -64,12 +66,18 @@ export {
   type OfferingRelatedExperiencesTableRowProps,
 } from './components/02-components/offering-related-experiences-table/offering-related-experiences-table';
 export {
+  default as OpportunityCard,
+  type OpportunityCardProps,
+} from './components/02-components/opportunity-card/opportunity-card';
+export {
+  default as OpportunityList,
+  type OpportunityListProps,
+} from './components/02-components/opportunity-list/opportunity-list';
+export {
   default as OrganizationCard,
   type OrganizationCardProps,
 } from './components/02-components/organization-card/organization-card';
-export {
-  default as OrganizationForm
-} from './components/02-components/organization-form/organization-form';
+export { default as OrganizationForm } from './components/02-components/organization-form/organization-form';
 export { default as OrganizationList } from './components/02-components/organization-list/organization-list';
 export {
   default as OrganizationPage,
@@ -87,6 +95,10 @@ export {
 } from './components/02-components/sidebar-menu/sidebar-menu';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as StatWithIcon } from './components/02-components/stat-with-icon/stat-with-icon';
+export {
+  default as TimeLogTable,
+  type TimeLogTableProps,
+} from './components/02-components/time-log-table/time-log-table';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
