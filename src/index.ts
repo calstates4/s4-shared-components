@@ -94,6 +94,7 @@ export {
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
+export { default as StatWithIcon } from './components/02-components/stat-with-icon/stat-with-icon';
 export {
   default as TimeLogTable,
   type TimeLogTableProps,

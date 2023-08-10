@@ -1,22 +1,31 @@
+import React from "react";
 import MaterialIconsDemo from "./material-icons";
 
 export default {
-  title: 'Elements/Material Icons',
+  title: 'Tokens/Material Icons',
   component: MaterialIconsDemo,
 };
 
 // Defined here: https://mui.com/material-ui/material-icons/
 const MaterialIconsData = {
   iconList: [
-    'SwitchAccount',
     'AccountCircle',
-    'Help',
+    'BusinessRounded',
     'CircleNotifications',
     'Close',
-    'Menu',
+    'Dashboard',
     'ExitToApp',
+    'Help',
+    'InsertEmoticon',
     'KeyboardArrowDown',
     'KeyboardArrowUp',
+    'LibraryBooks',
+    'LocationCity',
+    'Menu',
+    'Mood',
+    'Schedule',
+    'SwitchAccount',
+    'PeopleAlt',
   ],
 }
 
