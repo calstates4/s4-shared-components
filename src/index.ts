@@ -51,6 +51,10 @@ export {
   type TimeEntryRevisionProps,
 } from './components/02-components/experience-time-entry-table/experience-time-entry-table';
 export { default as ExperiencesList } from './components/02-components/experiences-list/experiences-list';
+export {
+  default as LoginPage,
+  type LoginPageProps,
+} from './components/02-components/login-page/login-page';
 export { default as MainContent } from './components/02-components/main-content/main-content';
 export {
   default as OfferingCard,
