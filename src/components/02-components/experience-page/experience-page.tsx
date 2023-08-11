@@ -33,7 +33,7 @@ export type ExperiencePageProps = {
   primaryContact: string;
   formSigner: string;
   timeApprover: string;
-  obverser: string;
+  observer: string;
   hasPendingForm: boolean;
   formsBegining?: {
     items: {
@@ -73,7 +73,7 @@ export default function ExperiencePage({
   primaryContact,
   formSigner,
   timeApprover,
-  obverser,
+  observer,
   hasPendingForm,
 }: ExperiencePageProps) {
   const theme = useTheme();
@@ -352,10 +352,10 @@ export default function ExperiencePage({
                 <strong>Time approver(s): </strong>
                 {timeApprover}
               </Box>
-              {obverser && (
+              {observer && (
                 <Box>
                   <strong>Observer(s): </strong>
-                  {obverser}
+                  {observer}
                 </Box>
               )}
             </Box>
