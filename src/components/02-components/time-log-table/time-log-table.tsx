@@ -14,8 +14,12 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import Pager from '../../01-elements/pager/pager';
 
 export type TimeLogTableProps = {
+  cta: string;
+  currentPage: number;
+  itemsPerPage: number;
   timeLogInfo: {
     dateTime: string;
     hour: number;
@@ -23,10 +27,18 @@ export type TimeLogTableProps = {
     learningOutcomes: string;
     status: string;
   }[];
-  cta: string;
+  totalItems: number;
+  url: string;
 };
 
-export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
+export default function TimeLogTable({
+  cta,
+  currentPage,
+  itemsPerPage,
+  timeLogInfo,
+  totalItems,
+  url,
+}: TimeLogTableProps) {
   const theme = useTheme();
 
   // Style
@@ -122,6 +134,18 @@ export default function TimeLogTable({ timeLogInfo, cta }: TimeLogTableProps) {
         </Button>
       </Box>
       {renderTable}
+      {totalItems > itemsPerPage && (
+        <Pager
+          baseUrl={url}
+          count={Math.ceil(totalItems / itemsPerPage)}
+          page={currentPage}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            pt: theme.spacing(3),
+          }}
+        />
+      )}
     </Paper>
   );
 }

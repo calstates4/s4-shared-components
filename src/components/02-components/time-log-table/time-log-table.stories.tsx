@@ -20,6 +20,9 @@ export default meta;
 
 export const Default: StoryObj<typeof TimeLogTable> = {
   args: {
+    cta: '/logtime',
+    currentPage: 1,
+    itemsPerPage: 5,
     timeLogInfo: [
       {
         dateTime: '08/31/2022 6:00pm to 8:00pm',
@@ -35,7 +38,29 @@ export const Default: StoryObj<typeof TimeLogTable> = {
         learningOutcomes: LearningText,
         status: 'Submitted',
       },
+      {
+        dateTime: '08/31/2022 6:00pm to 8:00pm',
+        hour: 2,
+        goals: goalsText,
+        learningOutcomes: LearningText,
+        status: 'Submitted',
+      },
+      {
+        dateTime: '08/31/2022 6:00pm to 8:00pm',
+        hour: 2,
+        goals: goalsText,
+        learningOutcomes: LearningText,
+        status: 'Submitted',
+      },
+      {
+        dateTime: '08/31/2022 6:00pm to 8:00pm',
+        hour: 2,
+        goals: goalsText,
+        learningOutcomes: LearningText,
+        status: 'Submitted',
+      },
     ],
-    cta: '/logtime',
+    totalItems: 6,
+    url: 'http://localhost:6006/',
   },
 };
