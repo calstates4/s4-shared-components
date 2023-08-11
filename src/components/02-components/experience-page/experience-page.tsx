@@ -1,3 +1,5 @@
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {
   Box,
   Button,
@@ -6,13 +8,11 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import CardExperienceHours from '../card-experience-hours/card-experience-hours';
+import { ReactNode } from 'react';
+import { experienceStatusInfo } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import { experienceStatusInfo } from '../../../lib/utils';
-import { ReactNode } from 'react';
+import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type ExperiencePageProps = {
   children?: ReactNode;
@@ -33,7 +33,7 @@ export type ExperiencePageProps = {
   primaryContact: string;
   formSigner: string;
   timeApprover: string;
-  obverser: string;
+  observer: string;
   hasPendingForm: boolean;
   formsBegining?: {
     items: {
@@ -73,7 +73,7 @@ export default function ExperiencePage({
   primaryContact,
   formSigner,
   timeApprover,
-  obverser,
+  observer,
   hasPendingForm,
 }: ExperiencePageProps) {
   const theme = useTheme();
@@ -162,6 +162,7 @@ export default function ExperiencePage({
   };
 
   const contentStyles = {
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
@@ -351,10 +352,12 @@ export default function ExperiencePage({
                 <strong>Time approver(s): </strong>
                 {timeApprover}
               </Box>
-              <Box>
-                <strong>Observer(s): </strong>
-                {obverser}
-              </Box>
+              {observer && (
+                <Box>
+                  <strong>Observer(s): </strong>
+                  {observer}
+                </Box>
+              )}
             </Box>
           </Box>
         </Paper>

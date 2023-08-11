@@ -1,7 +1,8 @@
+import React from 'react';
 import TypographyDemo from './typography';
 
 export default {
-  title: 'Elements/Typography',
+  title: 'Tokens/Typography',
   component: TypographyDemo,
 };
 
