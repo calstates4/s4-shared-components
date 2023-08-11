@@ -1,3 +1,5 @@
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {
   Box,
   Button,
@@ -6,13 +8,11 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import CardExperienceHours from '../card-experience-hours/card-experience-hours';
+import { ReactNode } from 'react';
+import { experienceStatusInfo } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import { experienceStatusInfo } from '../../../lib/utils';
-import { ReactNode } from 'react';
+import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 
 export type ExperiencePageProps = {
   children?: ReactNode;
