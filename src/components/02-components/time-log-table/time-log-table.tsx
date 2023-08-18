@@ -4,6 +4,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import {
   Box,
   Button,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -16,25 +17,36 @@ import {
 } from '@mui/material';
 import Pager from '../../01-elements/pager/pager';
 
+export type TimeLogEntryProps = {
+  dateTime: string;
+  goals: string;
+  hour: number;
+  id: string;
+  learningOutcomes: string;
+  status: string;
+};
+
 export type TimeLogTableProps = {
   cta: string;
   currentPage: number;
   itemsPerPage: number;
-  timeLogInfo: {
-    dateTime: string;
-    hour: number;
-    goals: string;
-    learningOutcomes: string;
-    status: string;
-  }[];
+  onClickHandler: (type: string, id: string) => void;
+  timeLogInfo: TimeLogEntryProps[];
   totalItems: number;
   url: string;
 };
+
+export enum TimeLogTableActions {
+  Edit = 'EDIT',
+  Delete = 'DELETE',
+  Duplicate = 'DUPLICATE',
+}
 
 export default function TimeLogTable({
   cta,
   currentPage,
   itemsPerPage,
+  onClickHandler,
   timeLogInfo,
   totalItems,
   url,
@@ -96,9 +108,23 @@ export default function TimeLogTable({
         <TableCell>{row.status}</TableCell>
         <TableCell>
           <Box sx={iconWrapperStyles}>
-            <FileCopyIcon sx={iconStyles} />
-            <DeleteIcon sx={iconStyles} />
-            <EditIcon sx={iconStyles} />
+            <IconButton
+              onClick={() =>
+                onClickHandler(TimeLogTableActions.Duplicate, row.id)
+              }
+            >
+              <FileCopyIcon sx={iconStyles} />
+            </IconButton>
+            <IconButton
+              onClick={() => onClickHandler(TimeLogTableActions.Delete, row.id)}
+            >
+              <DeleteIcon sx={iconStyles} />
+            </IconButton>
+            <IconButton
+              onClick={() => onClickHandler(TimeLogTableActions.Edit, row.id)}
+            >
+              <EditIcon sx={iconStyles} />
+            </IconButton>
           </Box>
         </TableCell>
       </TableRow>

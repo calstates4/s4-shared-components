@@ -8,7 +8,7 @@ const meta: Meta<typeof TimeLogTable> = {
 };
 
 const goalsText = `
-Researching Walmart’s in the Kern county area will help locate how many stores will gift funding for the Ronald McDonald House located in Bakersfield.
+  Researching Walmart’s in the Kern county area will help locate how many stores will gift funding for the Ronald McDonald House located in Bakersfield.
 `;
 
 const LearningText = `
@@ -26,36 +26,41 @@ export const Default: StoryObj<typeof TimeLogTable> = {
     timeLogInfo: [
       {
         dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
         goals: goalsText,
+        hour: 2,
+        id: '1',
         learningOutcomes: LearningText,
         status: 'Submitted',
       },
       {
         dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
         goals: goalsText,
+        hour: 2,
+        id: '2',
         learningOutcomes: LearningText,
         status: 'Submitted',
       },
       {
         dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
         goals: goalsText,
+        hour: 2,
+        id: '3',
         learningOutcomes: LearningText,
         status: 'Submitted',
       },
       {
         dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
         goals: goalsText,
+        hour: 2,
+        id: '4',
         learningOutcomes: LearningText,
         status: 'Submitted',
       },
       {
         dateTime: '08/31/2022 6:00pm to 8:00pm',
-        hour: 2,
         goals: goalsText,
+        hour: 2,
+        id: '5',
         learningOutcomes: LearningText,
         status: 'Submitted',
       },
