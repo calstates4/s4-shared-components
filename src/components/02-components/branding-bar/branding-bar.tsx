@@ -1,17 +1,12 @@
 import AccountIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/ExitToApp';
 import HelpIcon from '@mui/icons-material/Help';
-import ArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Box,
   Button,
-  Collapse,
   IconButton,
-  List,
-  ListItem,
   Menu,
   MenuItem,
   Toolbar,
@@ -32,66 +27,33 @@ type BrandingBarLink = {
 };
 
 export type BrandingBarProps = {
-  homeLinks: BrandingBarLink[];
   siteLinks: BrandingBarLink[];
   helpLink: string;
-  myAccountLink: string;
-  logoutLink: string;
+  myAccountLink?: string;
+  logoutLink?: string;
 };
 
 export default function BrandingBar({
-  homeLinks,
   siteLinks,
   helpLink,
   myAccountLink,
   logoutLink,
 }: BrandingBarProps) {
-  // Anchor element (toggle button) for the Home menu.
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   // Anchor element (toggle button) for the mobile menu.
   const [anchorElMobile, setAnchorElMobile] = useState<null | HTMLElement>(
     null,
   );
-  const homeMenuOpen = Boolean(anchorEl);
   const mobileMenuOpen = Boolean(anchorElMobile);
 
-  // State of the Home mobile menu.
-  const [homeMenuMobileOpen, setHomeMenuMobileOpen] = useState(false);
-
   const theme = useTheme();
-
-  // Event handler for Home menu (desktop version).
-  function handleHomeMenuToggle(
-    event: MouseEvent<HTMLButtonElement | HTMLLIElement>,
-  ) {
-    setAnchorEl(event.currentTarget);
-  }
 
   // Event handler for the mobile menu.
   function handleMobileMenuToggle(event: MouseEvent<HTMLButtonElement>) {
     setAnchorElMobile(event.currentTarget);
   }
 
-  // Generate Home menu links.
-  function homeMenu(isMobile: boolean = false): ReactNode[] {
-    const Element: ElementType = isMobile ? ListItem : MenuItem;
-    return homeLinks.map((item, index) => (
-      <li key={index}>
-        <Element
-          component={Link}
-          href={item.url}
-          sx={{
-            '&:focus, &:hover, &:active': { backgroundColor: 'primary.light' },
-          }}
-        >
-          {item.title}
-        </Element>
-      </li>
-    ));
-  }
-
   // Generate Site menu links.
-  function siteMenu(isMobile: boolean = false): ReactNode[] {
+  function siteMenu(isMobile = false): ReactNode[] {
     const styles = isMobile
       ? { '&:focus, &.is-active': { backgroundColor: 'primary.light' } }
       : buttonStyles;
@@ -113,24 +75,30 @@ export default function BrandingBar({
   }
 
   // Generate User menu links.
-  function userMenu(isMobile: boolean = false): ReactNode[] {
+  function userMenu(isMobile = false): ReactNode[] {
     const userLinks = [
       {
         title: 'Help',
         url: helpLink,
         icon: HelpIcon,
       },
-      {
+    ];
+
+    if (myAccountLink) {
+      userLinks.push({
         title: 'My Account',
         url: myAccountLink,
         icon: AccountIcon,
-      },
-      {
+      });
+    }
+
+    if (logoutLink) {
+      userLinks.push({
         title: 'Log Out',
         url: logoutLink,
         icon: LogoutIcon,
-      },
-    ];
+      });
+    }
 
     const Element: ElementType = isMobile ? MenuItem : Button;
     const styles = isMobile ? null : buttonStyles;
@@ -194,7 +162,7 @@ export default function BrandingBar({
         >
           <MenuIcon />
         </IconButton>
-        {/* Home and Site menus (desktop). */}
+        {/* Site menus (desktop). */}
         <Box
           component="ul"
           sx={{
@@ -204,35 +172,6 @@ export default function BrandingBar({
             listStyleType: 'none',
           }}
         >
-          <li>
-            <Button
-              id="home-menu-toggle"
-              aria-controls={homeMenuOpen ? 'home-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={homeMenuOpen ? 'true' : undefined}
-              onClick={handleHomeMenuToggle}
-              color="inherit"
-              sx={buttonStyles}
-              className={homeMenuOpen ? 'is-active' : undefined}
-            >
-              Home
-              {homeMenuOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
-            </Button>
-            <Menu
-              id="home-menu"
-              anchorEl={anchorEl}
-              open={homeMenuOpen}
-              onClose={() => {
-                setAnchorEl(null);
-              }}
-              MenuListProps={{
-                'aria-labelledby': 'home-menu',
-              }}
-              sx={{ display: { xs: 'none', md: 'block' } }}
-            >
-              {homeMenu()}
-            </Menu>
-          </li>
           {siteMenu()}
         </Box>
         {/* User menu (desktop) */}
@@ -269,27 +208,6 @@ export default function BrandingBar({
             },
           }}
         >
-          {/* Home menu (mobile). */}
-          <MenuItem
-            onClick={() => {
-              setHomeMenuMobileOpen(!homeMenuMobileOpen);
-            }}
-            sx={{ justifyContent: 'space-between' }}
-          >
-            Home
-            {homeMenuMobileOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
-          </MenuItem>
-          <Collapse
-            in={homeMenuMobileOpen}
-            timeout="auto"
-            component={List}
-            sx={{
-              p: 0,
-              borderBottom: `1px solid ${theme.palette.secondary.main}`,
-            }}
-          >
-            {homeMenu(true)}
-          </Collapse>
           {/* Site and User menus (mobile). */}
           {siteMenu(true)}
           {userMenu(true)}

@@ -11,13 +11,8 @@ export default meta;
 
 export const Default: StoryObj<typeof BrandingBar> = {
   args: {
-    homeLinks: [
-      { title: 'Personal Information', url: '#' },
-      { title: 'Forms', url: '#' },
-      { title: 'Tasks', url: '#' },
-      { title: 'Docs', url: '#' },
-    ],
     siteLinks: [
+      { title: 'Staff', url: '#' },
       { title: 'Student', url: '#' },
       { title: 'Faculty', url: '#', isActive: true },
       { title: 'Partner', url: '#' },
