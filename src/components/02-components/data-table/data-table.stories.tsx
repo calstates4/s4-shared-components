@@ -3,10 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import DataTable from './data-table';
 import React from 'react';
 
-import {
-
-} from '@mui/x-data-grid';
-
 const meta: Meta<typeof DataTable> = {
   title: 'Components/Data Table',
   component: DataTable,
