@@ -6,6 +6,9 @@ import {
   AppBar,
   Box,
   Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Menu,
   MenuItem,
@@ -28,24 +31,35 @@ type BrandingBarLink = {
 
 export type BrandingBarProps = {
   siteLinks: BrandingBarLink[];
-  helpLink: string;
   myAccountLink?: string;
   logoutLink?: string;
+  dialogTitle?: string;
+  dialogText?: string;
 };
 
 export default function BrandingBar({
   siteLinks,
-  helpLink,
   myAccountLink,
   logoutLink,
+  dialogTitle,
+  dialogText,
 }: BrandingBarProps) {
   // Anchor element (toggle button) for the mobile menu.
   const [anchorElMobile, setAnchorElMobile] = useState<null | HTMLElement>(
     null,
   );
   const mobileMenuOpen = Boolean(anchorElMobile);
+  const [open, setOpen] = useState(false);
 
   const theme = useTheme();
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
 
   // Event handler for the mobile menu.
   function handleMobileMenuToggle(event: MouseEvent<HTMLButtonElement>) {
@@ -76,13 +90,8 @@ export default function BrandingBar({
 
   // Generate User menu links.
   function userMenu(isMobile = false): ReactNode[] {
-    const userLinks = [
-      {
-        title: 'Help',
-        url: helpLink,
-        icon: HelpIcon,
-      },
-    ];
+    const userLinks = [];
+    const renderedUserMenuItems = [];
 
     if (myAccountLink) {
       userLinks.push({
@@ -103,19 +112,38 @@ export default function BrandingBar({
     const Element: ElementType = isMobile ? MenuItem : Button;
     const styles = isMobile ? null : buttonStyles;
 
-    return userLinks.map((item, index) => (
-      <li key={index}>
-        <Element
-          component={Link}
-          href={item.url}
+    renderedUserMenuItems.push(
+      <li>
+        <Button
+          fullWidth
+          size="large"
+          onClick={handleClickOpen}
+          sx={helpDialogButton}
           color="inherit"
-          underline="none"
-          sx={styles}
+          startIcon={<HelpIcon />}
         >
-          <item.icon sx={iconStyles} /> {item.title}
-        </Element>
-      </li>
-    ));
+          Help
+        </Button>
+      </li>,
+    );
+
+    userLinks.forEach((item, index) =>
+      renderedUserMenuItems.push(
+        <li key={index}>
+          <Element
+            component={Link}
+            href={item.url}
+            color="inherit"
+            underline="none"
+            sx={styles}
+          >
+            <item.icon sx={iconStyles} /> {item.title}
+          </Element>
+        </li>,
+      ),
+    );
+
+    return renderedUserMenuItems;
   }
 
   // Styles.
@@ -127,9 +155,38 @@ export default function BrandingBar({
     },
   };
 
+  const helpDialogButton = {
+    textTransform: 'none',
+    justifyContent: 'flex-start',
+    '.MuiButton-startIcon': {
+      ml: 0,
+    },
+  };
+
   const iconStyles = {
     mr: theme.spacing(1),
   };
+
+  const dialogContentStyles = {
+    '& p': { my: 0, a: { color: 'inherit' } },
+  };
+
+  const renderedDialog =
+    dialogTitle && dialogText ? (
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="sm"
+        scroll="paper"
+        fullWidth
+      >
+        <DialogTitle variant="h3">{dialogTitle}</DialogTitle>
+        <DialogContent
+          sx={dialogContentStyles}
+          dangerouslySetInnerHTML={{ __html: dialogText }}
+        />
+      </Dialog>
+    ) : undefined;
 
   return (
     <AppBar
@@ -146,6 +203,7 @@ export default function BrandingBar({
           minHeight: 0,
         }}
       >
+        {renderedDialog}
         {/* Mobile menu toggle. */}
         <IconButton
           id="mobile-menu-toggle"
