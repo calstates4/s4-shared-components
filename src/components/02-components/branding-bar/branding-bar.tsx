@@ -113,7 +113,7 @@ export default function BrandingBar({
     const styles = isMobile ? null : buttonStyles;
 
     renderedUserMenuItems.push(
-      <li>
+      <li key="item-help">
         <Button
           fullWidth
           size="large"
