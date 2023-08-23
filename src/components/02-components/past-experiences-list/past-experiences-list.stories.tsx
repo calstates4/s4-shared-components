@@ -15,13 +15,13 @@ export const Default: StoryObj<typeof PastExperiencesList> = {
       {
         id: '1',
         experience: 'Experience 1',
-        status: 'State 1',
+        status: 'draft',
         url: '/experiences/1',
       },
       {
         id: '2',
         experience: 'Experience 2',
-        status: 'State 2',
+        status: 'pending',
         url: '/experiences/2',
       },
     ],
