@@ -84,42 +84,50 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
 
   function GridToolbar() {
     const theme = useTheme();
+    const breakpoint = 'sm';
+
+    // Styles.
+    const buttonToolbarStyles = {
+      border: '1px solid',
+      minWidth: '100%',
+      [theme.breakpoints.up(breakpoint)]: {
+        minWidth: 'min-content',
+        marginRight: theme.spacing(3),
+      }
+    }
 
     return (
       <GridToolbarContainer sx={{
         display: 'flex',
-        justifyContent: 'right',
+        justifyContent: 'left',
         pt: theme.spacing(3),
+        [theme.breakpoints.up(breakpoint)]: {
+          justifyContent: 'right',
+        }
       }}>
-        <Typography component="h2" variant="h2" sx={{marginRight: 'auto'}}>Experiences</Typography>
-        <GridToolbarColumnsButton sx={{
-          border: '1px solid',
-          marginRight: theme.spacing(3),
-        }} />
-        <GridToolbarFilterButton sx={{
-          border: '1px solid',
-          marginRight: theme.spacing(3),
-        }} />
-        <GridToolbarDensitySelector sx={{
-          border: '1px solid',
-          marginRight: theme.spacing(3),
-        }} />
+        <Typography component="h2" variant="h2" sx={{
+          minWidth: '100%',
+          [theme.breakpoints.up(breakpoint)]: {
+            minWidth: 'min-content',
+            marginRight: 'auto',
+          }
+        }}>Experiences</Typography>
+        <GridToolbarColumnsButton sx={ buttonToolbarStyles } />
+        <GridToolbarFilterButton sx={ buttonToolbarStyles } />
+        <GridToolbarDensitySelector sx={ buttonToolbarStyles } />
         <GridToolbarExport
           printOptions={{
             hideFooter: true,
             hideToolbar: true,
           }}
-          sx={{
-            border: '1px solid',
-            marginRight: theme.spacing(3),
-          }}
+          sx={ buttonToolbarStyles }
         />
       </GridToolbarContainer>
     );
   }
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div>
       <DataGrid
         rows={initialRows}
         columns={columns}
