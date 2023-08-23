@@ -18,12 +18,12 @@ import {
 
 export type Row = {
   id: GridRowId;
-  col1: string;
-  col2: string;
-  col3: string;
-  col4: string;
-  col5: string;
-  col6: string;
+  col1?: string;
+  col2?: string;
+  col3?: string;
+  col4?: string;
+  col5?: string;
+  col6?: string;
 };
 
 interface DataTableProps {
@@ -33,7 +33,7 @@ interface DataTableProps {
 export default function DataTableExperiences({ initialRows }: DataTableProps) {
   const theme = useTheme();
 
-  function emailUser(col3: string) {
+  function emailUser(col3?: string) {
     return () => {
       window.location.href = 'mailto:' + col3;
     };
