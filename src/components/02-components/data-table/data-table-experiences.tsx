@@ -46,6 +46,11 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
     };
   }
 
+  // Styles.
+  const buttonStyles = {
+    textTransform: 'uppercase',
+  }
+
   const columns: GridColDef<Row>[] = [
     { field: 'col1', headerName: 'First Name', width: 150 },
     { field: 'col2', headerName: 'Last Name', width: 150 },
@@ -62,14 +67,16 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
       getActions: (params) => [
         <GridActionsCellItem
           icon={<EmailIcon />}
-          label="EMAIL USER"
+          label="Email user"
           onClick={emailUser(params.row.col3)}
+          sx={ buttonStyles }
           showInMenu
         />,
         <GridActionsCellItem
           icon={<OpenInBrowserIcon />}
-          label="VIEW DETAILS"
+          label="View details"
           onClick={viewExperience(params.row.id)}
+          sx={ buttonStyles }
           showInMenu
         />,
       ],
