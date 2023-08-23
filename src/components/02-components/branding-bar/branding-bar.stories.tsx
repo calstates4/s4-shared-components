@@ -21,6 +21,6 @@ export const Default: StoryObj<typeof BrandingBar> = {
     logoutLink: '#',
     dialogTitle: 'Students',
     dialogText:
-      '<p>For assistance please contact the campus program office(s) with which you are working. If you are having technical issues, please contact the <a href="mailto:s4help@calstate.edu ">Help Desk</a></p>',
+      '<p>For assistance please contact the campus program office(s) with which you are working. If you are having technical issues, please contact the <a href="mailto:s4help@calstate.edu">Help Desk</a></p>',
   },
 };
