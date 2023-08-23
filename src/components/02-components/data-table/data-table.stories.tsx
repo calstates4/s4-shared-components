@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import DataTable from './data-table';
+import DataTableExperiences from './data-table-experiences';
 import React from 'react';
 
 const meta: Meta<typeof DataTable> = {
@@ -82,5 +83,14 @@ export const Default: StoryObj<typeof DataTable> = {
   },
   render: (args) => (
     <DataTable {...args} />
+  ),
+};
+
+export const Experiences: StoryObj<typeof DataTable> = {
+  args: {
+    initialRows: initialRows,
+  },
+  render: (args) => (
+    <DataTableExperiences {...args} />
   ),
 };

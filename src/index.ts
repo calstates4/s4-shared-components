@@ -40,7 +40,10 @@ export {
   type ContextProps,
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
-export { default as DataTable } from './components/02-components/data-table/data-table';
+export {
+  default as DataTableExperiences,
+  type Row,
+} from './components/02-components/data-table/data-table-experiences';
 export {
   default as ExperiencePage,
   type ExperiencePageProps,

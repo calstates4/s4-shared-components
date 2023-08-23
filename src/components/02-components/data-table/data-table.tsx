@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   Typography,
   useTheme,
@@ -36,7 +36,7 @@ interface DataTableProps {
 export default function DataTable({ initialRows }: DataTableProps) {
   const theme = useTheme();
 
-  const [rows, setRows] = React.useState<Row[]>(initialRows);
+  const [rows, setRows] = useState<Row[]>(initialRows);
 
   const emailUser = React.useCallback(
     (col3: string) => () => {
@@ -102,7 +102,7 @@ export default function DataTable({ initialRows }: DataTableProps) {
         ],
       },
     ],
-    [deleteUser, duplicateUser],
+    [emailUser, deleteUser, duplicateUser],
   );
 
   function GridToolbar() {
