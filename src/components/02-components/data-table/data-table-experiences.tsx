@@ -1,19 +1,18 @@
 import {
+  Button,
   Typography,
   useTheme,
 } from '@mui/material';
-import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
-import EmailIcon from '@mui/icons-material/Email';
+import Link from '../../01-elements/link/link';
 import {
   DataGrid,
   GridColDef,
-  GridToolbarContainer,
-  GridToolbarExport,
-  GridToolbarColumnsButton,
-  GridToolbarFilterButton,
-  GridToolbarDensitySelector,
   GridRowId,
-  GridActionsCellItem,
+  GridRenderCellParams,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
 } from '@mui/x-data-grid';
 
 export type Row = {
@@ -33,18 +32,6 @@ interface DataTableProps {
 export default function DataTableExperiences({ initialRows }: DataTableProps) {
   const theme = useTheme();
 
-  function emailUser(col3?: string) {
-    return () => {
-      window.location.href = 'mailto:' + col3;
-    };
-  }
-
-  function viewExperience(id: GridRowId) {
-    return () => {
-      window.location.href = '/organization/experiences/' + id;
-    };
-  }
-
   // Styles.
   const buttonStyles = {
     textTransform: 'uppercase',
@@ -59,26 +46,23 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
     { field: 'col6', headerName: 'Status', width: 150 },
     {
       field: 'col7',
-      headerName: 'Actions',
       width: 150,
       type: 'actions',
       disableExport: true,
-      getActions: (params) => [
-        <GridActionsCellItem
-          icon={<EmailIcon />}
-          label="Email user"
-          onClick={emailUser(params.row.col3)}
-          sx={ buttonStyles }
-          showInMenu
-        />,
-        <GridActionsCellItem
-          icon={<OpenInBrowserIcon />}
-          label="View details"
-          onClick={viewExperience(params.row.id)}
-          sx={ buttonStyles }
-          showInMenu
-        />,
-      ],
+      renderCell: (params: GridRenderCellParams) => (
+        <strong>
+          <Button
+            component={Link}
+            href={'/organization/experiences/' + params.row.id}
+            sx={{
+              flexShrink: 0,
+              fontWeight: 700,
+            }}
+          >
+            View details
+          </Button>
+        </strong>
+      ),
     },
   ];
 
@@ -113,7 +97,6 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
           }
         }}>Experiences</Typography>
         <GridToolbarColumnsButton sx={ buttonToolbarStyles } />
-        <GridToolbarFilterButton sx={ buttonToolbarStyles } />
         <GridToolbarDensitySelector sx={ buttonToolbarStyles } />
         <GridToolbarExport
           printOptions={{
@@ -138,7 +121,7 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        pageSizeOptions={[5, 10, 25, 50, { value: -1, label: 'All' }]}
+        pageSizeOptions={[5, 10, 25, 50, 100]}
         sx={{ paddingLeft: theme.spacing(3) }}
       />
     </div>
