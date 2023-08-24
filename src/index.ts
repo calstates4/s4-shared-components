@@ -95,6 +95,7 @@ export {
   default as OrganizationPage,
   type OrganizationPageProps,
 } from './components/02-components/organization-page/organization-page';
+export { default as PartnerOnboardingConfirm } from './components/02-components/partner-onboarding-confirm/partner-onboarding-confirm';
 export {
   default as PastExperiencesList,
   type PastExperiencesListProps,
@@ -108,9 +109,9 @@ export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as StatWithIcon } from './components/02-components/stat-with-icon/stat-with-icon';
 export {
   default as TimeLogTable,
-  type TimeLogTableProps,
-  type TimeLogEntryProps,
   TimeLogTableActions,
+  type TimeLogEntryProps,
+  type TimeLogTableProps,
 } from './components/02-components/time-log-table/time-log-table';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
