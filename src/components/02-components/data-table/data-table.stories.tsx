@@ -11,7 +11,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-export const initialRows: ExperienceRow[] = [
+const initialRows: ExperienceRow[] = [
   {
     id: 1,
     col1: 'Emily',

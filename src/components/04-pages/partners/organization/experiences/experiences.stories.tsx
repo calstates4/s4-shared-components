@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { Default as DataTableExperiencePageStory, initialRows } from '../../../../02-components/data-table/data-table.stories';
+import { Experiences as DataTableExperiencePageStory } from '../../../../02-components/data-table/data-table.stories';
 import PartnerExperiencePage, {
   type PartnerExperiencePageProps,
 } from './experiences';
@@ -19,13 +19,13 @@ export default meta;
 
 const args: PartnerExperiencePageProps = {
   title: 'Experiences',
-  items: initialRows,
+  items: DataTableExperiencePageStory.args?.initialRows,
 };
 
 export const Default: StoryObj<typeof PageLayout> = {
   render: () => (
     <PageLayout {...(PageLayoutStories.args as PageLayoutProps)}>
-      <PartnerExperiencePage {...(DataTableExperiencePageStory.args as PartnerExperiencePageProps)} />
+      <PartnerExperiencePage {...(args as PartnerExperiencePageProps)} />
     </PageLayout>
   ),
 };

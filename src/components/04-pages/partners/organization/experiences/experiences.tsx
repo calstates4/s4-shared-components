@@ -4,7 +4,7 @@ import DataTableExperiences, { ExperienceRow } from '../../../../02-components/d
 
 export type PartnerExperiencePageProps = {
   title: string;
-  items: ExperienceRow[],
+  items: ExperienceRow[] | any,
 };
 
 const data = {
