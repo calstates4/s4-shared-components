@@ -21,12 +21,12 @@ import {
 
 export type Row = {
   id: GridRowId;
-  col1: string;
-  col2: string;
-  col3: string;
-  col4: string;
-  col5: string;
-  col6: string;
+  col1?: string;
+  col2?: string;
+  col3?: string;
+  col4?: string;
+  col5?: string;
+  col6?: string;
 };
 
 interface DataTableProps {
@@ -39,7 +39,7 @@ export default function DataTable({ initialRows }: DataTableProps) {
   const [rows, setRows] = useState<Row[]>(initialRows);
 
   const emailUser = React.useCallback(
-    (col3: string) => () => {
+    (col3?: string) => () => {
       window.location.href = 'mailto:' + col3;
     },
     [],

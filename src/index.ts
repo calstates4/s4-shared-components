@@ -42,7 +42,7 @@ export {
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export {
   default as DataTableExperiences,
-  type Row,
+  type ExperienceRow,
 } from './components/02-components/data-table/data-table-experiences';
 export {
   default as ExperiencePage,
@@ -117,3 +117,8 @@ export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
+// Pages
+export {
+  default as PartnerExperiencePage,
+  type PartnerExperiencePageProps,
+} from './components/04-pages/partners/organization/experiences/experiences';

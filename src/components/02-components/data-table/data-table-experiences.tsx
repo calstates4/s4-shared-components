@@ -15,7 +15,7 @@ import {
   GridToolbarExport,
 } from '@mui/x-data-grid';
 
-export type Row = {
+export type ExperienceRow = {
   id: GridRowId;
   col1?: string;
   col2?: string;
@@ -25,8 +25,8 @@ export type Row = {
   col6?: string;
 };
 
-interface DataTableProps {
-  initialRows: Row[];
+export interface DataTableProps {
+  initialRows: ExperienceRow[];
 }
 
 export default function DataTableExperiences({ initialRows }: DataTableProps) {
@@ -37,7 +37,7 @@ export default function DataTableExperiences({ initialRows }: DataTableProps) {
     textTransform: 'uppercase',
   }
 
-  const columns: GridColDef<Row>[] = [
+  const columns: GridColDef<ExperienceRow>[] = [
     { field: 'col1', headerName: 'First Name', width: 150 },
     { field: 'col2', headerName: 'Last Name', width: 150 },
     { field: 'col3', headerName: 'Email', width: 150 },

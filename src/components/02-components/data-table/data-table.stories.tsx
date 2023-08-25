@@ -1,8 +1,8 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import DataTable from './data-table';
-import DataTableExperiences from './data-table-experiences';
-import React from 'react';
+import DataTableExperiences, { type ExperienceRow } from './data-table-experiences';
 
 const meta: Meta<typeof DataTable> = {
   title: 'Components/Data Table',
@@ -11,7 +11,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-const initialRows = [
+export const initialRows: ExperienceRow[] = [
   {
     id: 1,
     col1: 'Emily',
@@ -86,7 +86,7 @@ export const Default: StoryObj<typeof DataTable> = {
   ),
 };
 
-export const Experiences: StoryObj<typeof DataTable> = {
+export const Experiences: StoryObj<typeof DataTableExperiences> = {
   args: {
     initialRows: initialRows,
   },
