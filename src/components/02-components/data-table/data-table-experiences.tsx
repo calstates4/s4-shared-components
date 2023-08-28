@@ -32,11 +32,6 @@ export interface DataTableProps {
 export default function DataTableExperiences({ initialRows }: DataTableProps) {
   const theme = useTheme();
 
-  // Styles.
-  const buttonStyles = {
-    textTransform: 'uppercase',
-  }
-
   const columns: GridColDef<ExperienceRow>[] = [
     { field: 'col1', headerName: 'First Name', width: 150 },
     { field: 'col2', headerName: 'Last Name', width: 150 },
