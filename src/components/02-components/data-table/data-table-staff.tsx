@@ -46,6 +46,7 @@ export default function DataTableStaff({ initialRows }: DataTableProps) {
           <Button
             component={Link}
             href={'/organization/staff/edit/' + params.row.id}
+            disabled
             sx={{
               flexShrink: 0,
               fontWeight: 700,
@@ -67,6 +68,7 @@ export default function DataTableStaff({ initialRows }: DataTableProps) {
           <Button
             component={Link}
             href={'/organization/staff/archive/' + params.row.id}
+            disabled
             sx={{
               flexShrink: 0,
               fontWeight: 700,
