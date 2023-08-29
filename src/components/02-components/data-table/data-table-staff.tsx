@@ -66,7 +66,7 @@ export default function DataTableStaff({ initialRows }: DataTableProps) {
         <strong>
           <Button
             component={Link}
-            href={'/organization/staff/archive' + params.row.id}
+            href={'/organization/staff/archive/' + params.row.id}
             sx={{
               flexShrink: 0,
               fontWeight: 700,
