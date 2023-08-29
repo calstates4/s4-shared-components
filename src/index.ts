@@ -45,6 +45,10 @@ export {
   type ExperienceRow,
 } from './components/02-components/data-table/data-table-experiences';
 export {
+  default as DataTableStaff,
+  type StaffRow,
+} from './components/02-components/data-table/data-table-staff';
+export {
   default as ExperiencePage,
   type ExperiencePageProps,
 } from './components/02-components/experience-page/experience-page';
@@ -122,3 +126,7 @@ export {
   default as PartnerExperiencePage,
   type PartnerExperiencePageProps,
 } from './components/04-pages/partners/organization/experiences/experiences';
+export {
+  default as PartnerStaffPage,
+  type PartnerStaffPageProps,
+} from './components/04-pages/partners/organization/staff/staff';
