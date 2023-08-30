@@ -58,26 +58,27 @@ export default function PartnerStaffPage({
         <Typography variant="h1" sx={titleStyles}>
           { title }
         </Typography>
-        <Button
-          variant="outlined"
-          component={Link}
-          href={addUrl}
-          disabled
-          startIcon={
-            <AddIcon
-              sx={{
-                fontSize: '1rem',
-                mr: theme.spacing(0.5),
-              }}
-            />
-          }
-          sx={{
-            flexShrink: 0,
-            fontWeight: 700,
-          }}
-        >
-          Invite a staff member
-        </Button>
+{/*        <Button
+//          variant="outlined"
+//          component={Link}
+//          href={addUrl}
+//          disabled
+//          startIcon={
+//            <AddIcon
+//              sx={{
+//                fontSize: '1rem',
+//                mr: theme.spacing(0.5),
+//              }}
+//            />
+//          }
+//          sx={{
+//            flexShrink: 0,
+//            fontWeight: 700,
+//          }}
+//        >
+//          Invite a staff member
+//        </Button>
+  */}
       </Box>
       <FormStaff
         {...formStaff}
