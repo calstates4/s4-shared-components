@@ -1,9 +1,14 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import DataTable from './data-table';
+import DataTable, {type DataTableProps, type DataTableRowProp} from './data-table';
 import DataTableExperiences, { type ExperienceRow } from './data-table-experiences';
 import DataTableStaff, { type StaffRow } from './data-table-staff';
+
+import {
+  GridRowId,
+  GridColDef,
+} from '@mui/x-data-grid';
 
 const meta: Meta<typeof DataTable> = {
   title: 'Components/Data Table',
@@ -123,9 +128,35 @@ const initialStaffRows: StaffRow[] = [
   }
 ];
 
+type Row = {
+  id: GridRowId;
+  col1?: string;
+  col2?: string;
+  col3?: string;
+  col4?: string;
+  col5?: string;
+  col6?: string;
+};
+
+const columns: GridColDef[] = [
+  { field: 'firstName', headerName: 'First Name', width: 150 },
+  { field: 'lastName', headerName: 'Last Name', width: 150 },
+  { field: 'email', headerName: 'Email', width: 150 },
+];
+
+
+const dataRow: DataTableRowProp = {
+  id: 1,
+  firstName: 'Chris',
+  lastName: 'Martin',
+  email: 'ccjjmartin@test.com',
+  url: "/experiences/experience/1"
+}
+
 export const Default: StoryObj<typeof DataTable> = {
   args: {
-    initialRows: initialRows,
+    rows: [dataRow, dataRow],
+    columns
   },
   render: (args) => (
     <DataTable {...args} />

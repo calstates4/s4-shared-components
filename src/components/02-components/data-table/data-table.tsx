@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
 import {
+  Button,
+  GridRenderCellParams,
   Typography,
   useTheme,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import EmailIcon from '@mui/icons-material/Email';
-import EditIcon from '@mui/icons-material/Edit';
 import {
   DataGrid,
   GridColDef,
@@ -15,95 +12,27 @@ import {
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
   GridToolbarDensitySelector,
-  GridRowId,
-  GridActionsCellItem,
 } from '@mui/x-data-grid';
+import Link from '../../01-elements/link/link';
 
-export type Row = {
-  id: GridRowId;
-  col1?: string;
-  col2?: string;
-  col3?: string;
-  col4?: string;
-  col5?: string;
-  col6?: string;
-};
-
-interface DataTableProps {
-  initialRows: Row[];
+export type DataTableRowProp = {
+  id: string | number,
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  campus?: string;
+  offering?: string;
+  status?: string;
+  url?: string;
 }
 
-export default function DataTable({ initialRows }: DataTableProps) {
+export type DataTableProps = {
+  rows?: DataTableRowProp[];
+  columns?: GridColDef[];
+}
+
+export default function DataTable({ rows, columns }: DataTableProps) {
   const theme = useTheme();
-
-  const [rows, setRows] = useState<Row[]>(initialRows);
-
-  const emailUser = React.useCallback(
-    (col3?: string) => () => {
-      window.location.href = 'mailto:' + col3;
-    },
-    [],
-  );
-
-  const deleteUser = React.useCallback(
-    (id: GridRowId) => () => {
-      setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-      });
-    },
-    [],
-  );
-
-  const duplicateUser = React.useCallback(
-    (id: GridRowId) => () => {
-      setRows((prevRows) => {
-        const rowToDuplicate = prevRows.find((row) => row.id === id)!;
-        return [...prevRows, { ...rowToDuplicate, id: Date.now() }];
-      });
-    },
-    [],
-  );
-
-  const columns = React.useMemo<GridColDef<Row>[]>(
-    () => [
-      { field: 'col1', headerName: 'First Name', width: 150 },
-      { field: 'col2', headerName: 'Last Name', width: 150 },
-      { field: 'col3', headerName: 'Email', width: 150 },
-      { field: 'col4', headerName: 'Campus', width: 150 },
-      { field: 'col5', headerName: 'Offering', width: 150 },
-      { field: 'col6', headerName: 'Status', width: 150 },
-      {
-        field: 'col7',
-        headerName: 'Actions',
-        width: 150,
-        type: 'actions',
-        disableExport: true,
-        getActions: (params) => [
-          <GridActionsCellItem
-            icon={<EmailIcon />}
-            label="Email user"
-            onClick={emailUser(params.row.col3)}
-          />,
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteUser(params.id)}
-          />,
-          <GridActionsCellItem
-            icon={<FileCopyIcon />}
-            label="Duplicate User"
-            onClick={duplicateUser(params.id)}
-            showInMenu
-          />,
-        ],
-      },
-    ],
-    [emailUser, deleteUser, duplicateUser],
-  );
 
   function GridToolbar() {
     const theme = useTheme();
@@ -141,21 +70,44 @@ export default function DataTable({ initialRows }: DataTableProps) {
     );
   }
 
+  columns?.push({
+    field: 'col7',
+    width: 150,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'/organization/experiences/' + params.row.id}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+          }}
+        >
+          View details
+        </Button>
+      </strong>
+    ),
+  },)
+
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        checkboxSelection
-        slots={{ toolbar: GridToolbar }}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10, 25, 50, { value: -1, label: 'All' }]}
-        sx={{ paddingLeft: theme.spacing(3) }}
-      />
+      {rows && columns && (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          checkboxSelection
+          slots={{ toolbar: GridToolbar }}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10, 25, 50, { value: -1, label: 'All' }]}
+          sx={{ paddingLeft: theme.spacing(3) }}
+        />)}
+
     </div>
   );
 }
