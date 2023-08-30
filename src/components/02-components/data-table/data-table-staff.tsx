@@ -111,7 +111,7 @@ export default function DataTableStaff({ initialRows, department }: DataTablePro
             minWidth: 'min-content',
             marginRight: 'auto',
           }
-        }}>Experiences</Typography>
+        }}>Staff</Typography>
         <GridToolbarColumnsButton sx={ buttonToolbarStyles } />
         <GridToolbarDensitySelector sx={ buttonToolbarStyles } />
         <GridToolbarExport
