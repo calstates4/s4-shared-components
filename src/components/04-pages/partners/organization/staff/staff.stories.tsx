@@ -3,6 +3,7 @@ import { Staff as DataTablePageStory } from '../../../../02-components/data-tabl
 import PartnerStaffPage, {
   type PartnerStaffPageProps,
 } from './staff';
+import { Staff as FormStaffStories } from '../../../../02-components/form/form.stories';
 
 import { Default as PageLayoutStories } from '../../../../03-layouts/page-layout/page-layout.stories';
 import PageLayout, {
@@ -18,8 +19,11 @@ const meta: Meta<typeof PageLayout> = {
 export default meta;
 
 const args: PartnerStaffPageProps = {
-  title: 'Staff',
+  title: 'Staff at {Organization Name}',
   items: DataTablePageStory.args?.initialRows,
+  formStaff: FormStaffStories.args,
+  department: 'Education',
+  addUrl: '/organization/staff/add'
 };
 
 export const Default: StoryObj<typeof PageLayout> = {

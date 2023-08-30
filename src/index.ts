@@ -60,6 +60,10 @@ export {
 } from './components/02-components/experience-time-entry-table/experience-time-entry-table';
 export { default as ExperiencesList } from './components/02-components/experiences-list/experiences-list';
 export {
+  default as FormStaff,
+  type FormStaffProps,
+} from './components/02-components/form/form-staff'
+export {
   default as LoginPage,
   type LoginPageProps,
 } from './components/02-components/login-page/login-page';

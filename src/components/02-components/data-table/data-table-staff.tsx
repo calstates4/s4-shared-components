@@ -13,6 +13,8 @@ import {
   GridToolbarContainer,
   GridToolbarDensitySelector,
   GridToolbarExport,
+  GridFilterModel,
+  GridLogicOperator,
 } from '@mui/x-data-grid';
 
 export type StaffRow = {
@@ -20,16 +22,14 @@ export type StaffRow = {
   col1?: string;
   col2?: string;
   col3?: string;
-  col4?: string;
-  col5?: string;
-  col6?: string;
 };
 
 export interface DataTableProps {
   initialRows: StaffRow[];
+  department: string | null;
 }
 
-export default function DataTableStaff({ initialRows }: DataTableProps) {
+export default function DataTableStaff({ initialRows, department }: DataTableProps) {
   const theme = useTheme();
 
   const columns: GridColDef<StaffRow>[] = [
@@ -125,6 +125,13 @@ export default function DataTableStaff({ initialRows }: DataTableProps) {
     );
   }
 
+  const filterModel: GridFilterModel = {
+    items: [
+      { field: 'col3', operator: 'contains', value: department }
+    ],
+    logicOperator: GridLogicOperator.Or,
+  };
+
   return (
     <div>
       <DataGrid
@@ -137,6 +144,7 @@ export default function DataTableStaff({ initialRows }: DataTableProps) {
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
+        filterModel={filterModel}
         pageSizeOptions={[5, 10, 25, 50, 100]}
         sx={{ paddingLeft: theme.spacing(3) }}
       />

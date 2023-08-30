@@ -144,6 +144,7 @@ export const Experiences: StoryObj<typeof DataTableExperiences> = {
 export const Staff: StoryObj<typeof DataTableStaff> = {
   args: {
     initialRows: initialStaffRows,
+    department: 'Education'
   },
   render: (args) => (
     <DataTableStaff {...args} />
