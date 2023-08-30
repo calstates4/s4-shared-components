@@ -29,12 +29,12 @@ export default function PartnerExperiencePage({
   };
 
   return (
-    <div>
+    <>
       <Breadcrumbs items={data.breadcrumb}></Breadcrumbs>
       <Typography variant="h1" sx={titleStyles}>
         { title }
       </Typography>
       <DataTableExperiences initialRows={ items } />
-    </div>
+    </>
   );
 }
