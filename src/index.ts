@@ -127,6 +127,10 @@ export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 // Pages
 export {
+  default as PartnerExperienceDetailsPage,
+  type PartnerExperienceDetailsPageProps,
+} from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
+export {
   default as PartnerExperiencePage,
   type PartnerExperiencePageProps,
 } from './components/04-pages/partners/organization/experiences/experiences';
