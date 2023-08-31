@@ -1,8 +1,84 @@
 import { Button, Link } from '@mui/material';
-import { GridRenderCellParams } from '@mui/x-data-grid';
-import { type StaffRow } from './data-table-staff';
+import {
+  GridRenderCellParams,
+  GridFilterModel,
+  GridLogicOperator,
+} from '@mui/x-data-grid';
 
-export const initialStaffRows: StaffRow[] = [
+export const genericTableColumns = [
+  { field: 'firstName', headerName: 'First Name', width: 150 },
+  { field: 'lastName', headerName: 'Last Name', width: 150 },
+  { field: 'email', headerName: 'Email', width: 150 },
+  {
+    field: 'url',
+    width: 150,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={
+            'http://localhost:6006/?path=/story/components-data-table--default/organization/experiences/' +
+            params.row.id
+          }
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          View details
+        </Button>
+      </strong>
+    ),
+  },
+];
+
+export const genericTableRows = [
+  {
+    id: 1,
+    firstName: 'Emily',
+    lastName: 'Parker',
+    email: 'emily@test.com',
+  },
+  {
+    id: 2,
+    firstName: 'Mathew',
+    lastName: 'Ross',
+    email: 'csmit@test.com',
+  },
+  {
+    id: 3,
+    firstName: 'Carlos',
+    lastName: 'Smith',
+    email: 'csmit@test.com',
+  },
+  {
+    id: 4,
+    firstName: 'Robert',
+    lastName: 'Thomsom',
+    email: 'csmit@test.com',
+  },
+  {
+    id: 5,
+    firstName: 'Peter',
+    lastName: 'Brown',
+    email: 'csmit@test.com',
+  },
+  {
+    id: 6,
+    firstName: 'David',
+    lastName: 'Mask',
+    email: 'csmit@test.com',
+  },
+  {
+    id: 7,
+    firstName: 'Martin',
+    lastName: 'James',
+    email: 'csmit@test.com',
+  },
+];
+
+export const staffTableRows = [
   {
     id: 1,
     col1: 'Emily',
@@ -47,77 +123,54 @@ export const initialStaffRows: StaffRow[] = [
   },
 ];
 
-export const dataTableColumns = [
-  { field: 'firstName', headerName: 'First Name', width: 150 },
-  { field: 'lastName', headerName: 'Last Name', width: 150 },
-  { field: 'email', headerName: 'Email', width: 150 },
-  {
-    field: 'url',
-    width: 150,
-    type: 'actions',
-    disableExport: true,
-    renderCell: (params: GridRenderCellParams) => (
-      <strong>
-        <Button
-          component={Link}
-          href={
-            'http://localhost:6006/?path=/story/components-data-table--default/organization/experiences/' +
-            params.row.id
-          }
-          sx={{
-            fontWeight: 700,
-          }}
-        >
-          View details
-        </Button>
-      </strong>
-    ),
-  },
-];
-
-export const dataTableRows = [
-  {
-    id: 1,
-    firstName: 'Emily',
-    lastName: 'Parker',
-    email: 'emily@test.com',
-  },
-  {
-    id: 2,
-    firstName: 'Mathew',
-    lastName: 'Ross',
-    email: 'csmit@test.com',
-  },
-  {
-    id: 3,
-    firstName: 'Carlos',
-    lastName: 'Smith',
-    email: 'csmit@test.com',
-  },
-  {
-    id: 4,
-    firstName: 'Robert',
-    lastName: 'Thomsom',
-    email: 'csmit@test.com',
-  },
-  {
-    id: 5,
-    firstName: 'Peter',
-    lastName: 'Brown',
-    email: 'csmit@test.com',
-  },
-  {
-    id: 6,
-    firstName: 'David',
-    lastName: 'Mask',
-    email: 'csmit@test.com',
-  },
-  {
-    id: 7,
-    firstName: 'Martin',
-    lastName: 'James',
-    email: 'csmit@test.com',
-  },
+export const staffTableColumns = [
+  { field: 'col1', headerName: 'First Name', width: 150 },
+  { field: 'col2', headerName: 'Last Name', width: 150 },
+  { field: 'col3', headerName: 'Department', width: 250 },
+//    {
+//      field: 'col4',
+//      width: 200,
+//      type: 'actions',
+//      disableExport: true,
+//      renderCell: (params: GridRenderCellParams) => (
+//        <strong>
+//          <Button
+//            component={Link}
+//            href={'/organization/staff/edit/' + params.row.id}
+//            disabled
+//            sx={{
+//              flexShrink: 0,
+//              fontWeight: 700,
+//              border: '1px solid',
+//            }}
+//          >
+//            Assign Department
+//          </Button>
+//        </strong>
+//      ),
+//    },
+//    {
+//      field: 'col5',
+//      width: 150,
+//      type: 'actions',
+//      disableExport: true,
+//      renderCell: (params: GridRenderCellParams) => (
+//        <strong>
+//          <Button
+//            component={Link}
+//            href={'/organization/staff/archive/' + params.row.id}
+//            disabled
+//            sx={{
+//              flexShrink: 0,
+//              fontWeight: 700,
+//              border: '1px solid',
+//            }}
+//          >
+//            Archive
+//          </Button>
+//        </strong>
+//      ),
+//    },
 ];
 
 export const experiencesTableColumns = [
@@ -216,3 +269,10 @@ export const experiencesTableRows = [
     status: 'Completed',
   },
 ];
+
+export const staffFilterModel: GridFilterModel = {
+  items: [
+    { field: 'col3', operator: 'contains', value: 'Education' }
+  ],
+  logicOperator: GridLogicOperator.Or,
+};

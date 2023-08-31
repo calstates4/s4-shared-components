@@ -45,10 +45,6 @@ export {
   type DataTableProps,
 } from './components/02-components/data-table/data-table';
 export {
-  default as DataTableStaff,
-  type StaffRow,
-} from './components/02-components/data-table/data-table-staff';
-export {
   default as ExperiencePage,
   type ExperiencePageProps,
 } from './components/02-components/experience-page/experience-page';
@@ -60,9 +56,9 @@ export {
 } from './components/02-components/experience-time-entry-table/experience-time-entry-table';
 export { default as ExperiencesList } from './components/02-components/experiences-list/experiences-list';
 export {
-  default as FormStaff,
-  type FormStaffProps,
-} from './components/02-components/form/form-staff';
+  default as ExposedForm,
+  type ExposedFormProps,
+} from './components/02-components/form/form';
 export {
   default as LoginPage,
   type LoginPageProps,
@@ -127,10 +123,6 @@ export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 // Pages
 export {
-  default as PartnerExperiencePage,
-  type PartnerExperiencePageProps,
-} from './components/04-pages/partners/organization/experiences/experiences';
-export {
-  default as PartnerStaffPage,
-  type PartnerStaffPageProps,
-} from './components/04-pages/partners/organization/staff/staff';
+  default as DataTablePage,
+  type DataTablePageProps,
+} from './components/04-pages/generic/data-table-page';
