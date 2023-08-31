@@ -1,26 +1,23 @@
 import { Typography, useTheme } from '@mui/material';
 import Breadcrumbs from '../../../../01-elements/breadcrumbs/breadcrumbs';
-import DataTableExperiences, { ExperienceRow } from '../../../../02-components/data-table/data-table-experiences';
+import DataTable, {
+  DataTableProps,
+} from '../../../../02-components/data-table/data-table';
 
 export type PartnerExperiencePageProps = {
+  breadcrumb: {
+    title: string;
+    url: string;
+  }[];
   title: string;
-  items: ExperienceRow[] | any,
-};
-
-const data = {
-  breadcrumb: [
-    {
-      title: 'Experiences',
-      url: '/organization/experiences',
-    },
-  ],
+  tableData: DataTableProps;
 };
 
 export default function PartnerExperiencePage({
   title = 'Experiences',
-  items,
+  breadcrumb,
+  tableData,
 }: PartnerExperiencePageProps) {
-
   const theme = useTheme();
 
   const titleStyles = {
@@ -29,12 +26,12 @@ export default function PartnerExperiencePage({
   };
 
   return (
-    <div>
-      <Breadcrumbs items={data.breadcrumb}></Breadcrumbs>
+    <>
+      <Breadcrumbs items={breadcrumb}></Breadcrumbs>
       <Typography variant="h1" sx={titleStyles}>
-        { title }
+        {title}
       </Typography>
-      <DataTableExperiences initialRows={ items } />
-    </div>
+      <DataTable rows={tableData.rows} columns={tableData.columns} />
+    </>
   );
 }

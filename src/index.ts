@@ -41,9 +41,9 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export {
-  default as DataTableExperiences,
-  type ExperienceRow,
-} from './components/02-components/data-table/data-table-experiences';
+  default as DataTable,
+  type DataTableProps,
+} from './components/02-components/data-table/data-table';
 export {
   default as DataTableStaff,
   type StaffRow,
@@ -62,7 +62,7 @@ export { default as ExperiencesList } from './components/02-components/experienc
 export {
   default as FormStaff,
   type FormStaffProps,
-} from './components/02-components/form/form-staff'
+} from './components/02-components/form/form-staff';
 export {
   default as LoginPage,
   type LoginPageProps,
