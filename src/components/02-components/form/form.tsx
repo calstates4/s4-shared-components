@@ -1,4 +1,5 @@
-import React, { ElementType } from 'react';
+import { ElementType } from 'react';
+import Link from '../../01-elements/link/link';
 import {
   Box,
   Button,
@@ -13,20 +14,19 @@ interface Control {
   label: string;
   name: string;
   options?: { id: string; name: string }[];
+  defaultValue?: string;
 }
 
 export interface ExposedFormProps {
   controls: Control[];
   FormElement?: ElementType;
-  onSubmit: () => void;
-  onReset: () => void;
+  resetUrl: string;
 }
 
 export default function ExposedForm({
   controls,
   FormElement,
-  onSubmit,
-  onReset,
+  resetUrl,
 }: ExposedFormProps) {
   const theme = useTheme();
 
@@ -58,7 +58,7 @@ export default function ExposedForm({
               label={control.label}
               native={true}
               name={control.name}
-              defaultValue=""
+              defaultValue={control.defaultValue || ''}
             >
               {control.options.map((item) => (
                 <option key={item.id} value={item.name}>
@@ -69,10 +69,16 @@ export default function ExposedForm({
           </FormControl>
         ) : null
       )}
-      <Button variant="contained" type="submit" onClick={onSubmit}>
+      <Button variant="contained" type="submit">
         Apply Filters
       </Button>
-      <Button variant="outlined" onClick={onReset} sx={{ ml: 2 }}>
+      <Button
+        variant="outlined"
+        type="reset"
+        component={Link}
+        href={resetUrl}
+        sx={{ ml: 2 }}
+      >
         Reset Filters
       </Button>
     </>

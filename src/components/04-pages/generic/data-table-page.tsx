@@ -60,7 +60,6 @@ export default function DataTablePage({
           variant="outlined"
           component={Link}
           href={addUrl}
-          disabled
           startIcon={
             <AddIcon
               sx={{

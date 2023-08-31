@@ -55,7 +55,7 @@ const experienceArgs: DataTablePageProps = {
     },
   ],
   title: 'Experiences',
-  tableData: { rows: experiencesTableRows, columns: experiencesTableColumns, toolbar: () => <GridToolbar title="Staff" />, filters: staffFilterModel },
+  tableData: { rows: experiencesTableRows, columns: experiencesTableColumns, toolbar: () => <GridToolbar title="Experiences" />, filters: staffFilterModel },
 };
 
 export const ExperienceTable: StoryObj<typeof PageLayout> = {

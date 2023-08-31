@@ -45,6 +45,13 @@ export {
   type DataTableProps,
 } from './components/02-components/data-table/data-table';
 export {
+  staffTableColumns,
+  experiencesTableColumns,
+} from './components/02-components/data-table/data-table.data';
+export {
+  default as GridToolbar,
+} from './components/02-components/data-table/data-table-toolbar.generic';
+export {
   default as ExperiencePage,
   type ExperiencePageProps,
 } from './components/02-components/experience-page/experience-page';
