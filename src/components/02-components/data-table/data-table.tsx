@@ -38,12 +38,6 @@ export default function DataTable({ rows, columns }: DataTableProps) {
             marginRight: theme.spacing(3),
           }}
         />
-        <GridToolbarFilterButton
-          sx={{
-            border: '1px solid',
-            marginRight: theme.spacing(3),
-          }}
-        />
         <GridToolbarDensitySelector
           sx={{
             border: '1px solid',
