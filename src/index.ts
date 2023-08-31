@@ -133,3 +133,7 @@ export {
   default as DataTablePage,
   type DataTablePageProps,
 } from './components/04-pages/generic/data-table-page';
+export {
+  default as PartnerExperienceDetailsPage,
+  type PartnerExperienceDetailsPageProps,
+} from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
