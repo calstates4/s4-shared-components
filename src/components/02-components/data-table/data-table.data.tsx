@@ -190,7 +190,7 @@ export const experiencesTableColumns = [
         <Button
           component={Link}
           href={
-            'http://localhost:6006/?path=/story/components-data-table--default/organization/experiences/' +
+            '/organization/experiences/' +
             params.row.id
           }
           sx={{
