@@ -67,7 +67,6 @@ const dataTableColumns = [
     field: 'url',
     width: 150,
     type: 'actions',
-    headerName: 'Action',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <strong>
