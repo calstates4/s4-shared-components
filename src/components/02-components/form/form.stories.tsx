@@ -1,28 +1,35 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import ExposedForm from './form'; // Make sure to import the correct path
+import React from 'react';
 
-import FormStaff from './form-staff';
-
-const meta: Meta<typeof FormStaff> = {
+const meta: Meta<typeof ExposedForm> = {
   title: 'Components/Form',
-  component: FormStaff,
+  component: ExposedForm,
 };
 
 export default meta;
 
-export const Staff: StoryObj<typeof FormStaff> = {
+export const Staff: StoryObj<typeof ExposedForm> = {
   args: {
-    departmentFilterValues: [
+    controls: [
       {
-        id: '1',
-        name: 'Education',
-      },
-      {
-        id: '2',
-        name: 'Administration',
+        id: 'department',
+        label: 'Department',
+        name: 'department',
+        options: [
+          {
+            id: '1',
+            name: 'Education',
+          },
+          {
+            id: '2',
+            name: 'Administration',
+          },
+        ],
       },
     ],
-    currentFilters: {
-      department: '1',
-    },
   },
+  render: (args) => (
+    <ExposedForm {...args} onSubmit={() => console.log('Filters submitted')} onReset={() => console.log('Filters reset')} />
+  ),
 };
