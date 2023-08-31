@@ -41,9 +41,9 @@ export {
 } from './components/02-components/context/context';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export {
-  default as DataTableExperiences,
-  type ExperienceRow,
-} from './components/02-components/data-table/data-table-experiences';
+  default as DataTable,
+  type DataTableProps,
+} from './components/02-components/data-table/data-table';
 export {
   default as ExperiencePage,
   type ExperiencePageProps,
@@ -55,6 +55,10 @@ export {
   type TimeEntryRevisionProps,
 } from './components/02-components/experience-time-entry-table/experience-time-entry-table';
 export { default as ExperiencesList } from './components/02-components/experiences-list/experiences-list';
+export {
+  default as ExposedForm,
+  type ExposedFormProps,
+} from './components/02-components/form/form';
 export {
   default as LoginPage,
   type LoginPageProps,
@@ -119,6 +123,6 @@ export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 // Pages
 export {
-  default as PartnerExperiencePage,
-  type PartnerExperiencePageProps,
-} from './components/04-pages/partners/organization/experiences/experiences';
+  default as DataTablePage,
+  type DataTablePageProps,
+} from './components/04-pages/generic/data-table-page';
