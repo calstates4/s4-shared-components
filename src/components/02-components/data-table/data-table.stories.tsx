@@ -2,16 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import DataTable from './data-table';
+import GridToolbar from './data-table-toolbar.generic';
 import {
-  genericTableRows,
-  genericTableColumns,
   experiencesTableColumns,
   experiencesTableRows,
-  staffTableRows,
+  genericTableColumns,
+  genericTableRows,
+  staffFilterModel,
   staffTableColumns,
-  staffFilterModel
+  staffTableRows,
 } from './data-table.data';
-import GridToolbar from './data-table-toolbar.generic';
 
 const meta: Meta<typeof DataTable> = {
   title: 'Components/Data Table',
@@ -41,6 +41,6 @@ export const Staff: StoryObj<typeof DataTable> = {
     rows: staffTableRows,
     columns: staffTableColumns,
     toolbar: () => <GridToolbar title="Staff" />,
-    filters: staffFilterModel
+    filters: staffFilterModel,
   },
 };

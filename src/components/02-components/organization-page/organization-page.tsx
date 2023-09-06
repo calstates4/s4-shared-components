@@ -348,7 +348,7 @@ export default function OrganizationPage({
                     <Button
                       variant="outlined"
                       component={Link}
-                      href={`/organization/staff?department=${item.name}`}
+                      href={`/organization/staff?department=${item.id}`}
                       sx={{ flexShrink: 0 }}
                     >
                       See Staff

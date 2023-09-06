@@ -1,13 +1,13 @@
-import React from 'react';
 import { type Meta, type StoryObj } from '@storybook/react';
+import React from 'react';
 import PartnerExperienceDetailsPage, {
   type PartnerExperienceDetailsPageProps,
 } from './experience-details';
 
-import { Default as PageLayoutStories } from '../../../../../03-layouts/page-layout/page-layout.stories';
 import PageLayout, {
   type PageLayoutProps,
 } from '../../../../../03-layouts/page-layout/page-layout';
+import { Default as PageLayoutStories } from '../../../../../03-layouts/page-layout/page-layout.stories';
 
 import TimeLogTable, {
   type TimeLogTableProps,

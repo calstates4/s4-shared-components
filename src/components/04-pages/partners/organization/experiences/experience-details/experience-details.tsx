@@ -317,10 +317,7 @@ export default function PartnerExperienceDetailsPage({
               </Box>
             </Box>
             <Box sx={cardHoursStyles}>
-              <CardExperienceHours
-                hours={hours}
-                position="column"
-              />
+              <CardExperienceHours hours={hours} position="column" />
             </Box>
           </Box>
           {hasPendingForm && (

@@ -1,10 +1,10 @@
 import { Button } from '@mui/material';
-import Link from '../../01-elements/link/link';
 import {
-  GridRenderCellParams,
   GridFilterModel,
   GridLogicOperator,
+  GridRenderCellParams,
 } from '@mui/x-data-grid';
+import Link from '../../01-elements/link/link';
 
 export const genericTableColumns = [
   { field: 'firstName', headerName: 'First Name', width: 150 },
@@ -128,50 +128,6 @@ export const staffTableColumns = [
   { field: 'col1', headerName: 'First Name', width: 150 },
   { field: 'col2', headerName: 'Last Name', width: 150 },
   { field: 'col3', headerName: 'Department', width: 250 },
-//    {
-//      field: 'col4',
-//      width: 200,
-//      type: 'actions',
-//      disableExport: true,
-//      renderCell: (params: GridRenderCellParams) => (
-//        <strong>
-//          <Button
-//            component={Link}
-//            href={'/organization/staff/edit/' + params.row.id}
-//            disabled
-//            sx={{
-//              flexShrink: 0,
-//              fontWeight: 700,
-//              border: '1px solid',
-//            }}
-//          >
-//            Assign Department
-//          </Button>
-//        </strong>
-//      ),
-//    },
-//    {
-//      field: 'col5',
-//      width: 150,
-//      type: 'actions',
-//      disableExport: true,
-//      renderCell: (params: GridRenderCellParams) => (
-//        <strong>
-//          <Button
-//            component={Link}
-//            href={'/organization/staff/archive/' + params.row.id}
-//            disabled
-//            sx={{
-//              flexShrink: 0,
-//              fontWeight: 700,
-//              border: '1px solid',
-//            }}
-//          >
-//            Archive
-//          </Button>
-//        </strong>
-//      ),
-//    },
 ];
 
 export const experiencesTableColumns = [
@@ -190,10 +146,7 @@ export const experiencesTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={
-            '/organization/experiences/' +
-            params.row.id
-          }
+          href={'/organization/experiences/' + params.row.id}
           sx={{
             fontWeight: 700,
           }}
@@ -272,8 +225,6 @@ export const experiencesTableRows = [
 ];
 
 export const staffFilterModel: GridFilterModel = {
-  items: [
-    { field: 'col3', operator: 'contains', value: 'Education' }
-  ],
+  items: [{ field: 'col3', operator: 'contains', value: 'Education' }],
   logicOperator: GridLogicOperator.Or,
 };

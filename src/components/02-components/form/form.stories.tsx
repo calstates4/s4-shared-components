@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExposedForm from './form'; // Make sure to import the correct path
-import React from 'react';
 
 const meta: Meta<typeof ExposedForm> = {
   title: 'Components/Form',
@@ -19,17 +18,14 @@ export const Staff: StoryObj<typeof ExposedForm> = {
         options: [
           {
             id: '1',
-            name: 'Education',
+            label: 'Education',
           },
           {
             id: '2',
-            name: 'Administration',
+            label: 'Administration',
           },
         ],
       },
     ],
   },
-  render: (args) => (
-    <ExposedForm {...args} onSubmit={() => console.log('Filters submitted')} onReset={() => console.log('Filters reset')} />
-  ),
 };

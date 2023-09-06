@@ -8,7 +8,7 @@ import {
 
 type GridToolbarProps = {
   title: string;
-}
+};
 
 const GridToolbar: React.FC<GridToolbarProps> = ({ title }) => {
   const theme = useTheme();
@@ -21,8 +21,8 @@ const GridToolbar: React.FC<GridToolbarProps> = ({ title }) => {
     [theme.breakpoints.up(breakpoint)]: {
       minWidth: 'min-content',
       marginRight: theme.spacing(3),
-    }
-  }
+    },
+  };
 
   return (
     <GridToolbarContainer
@@ -32,29 +32,33 @@ const GridToolbar: React.FC<GridToolbarProps> = ({ title }) => {
         pt: theme.spacing(3),
         [theme.breakpoints.up(breakpoint)]: {
           justifyContent: 'right',
-        }
+        },
       }}
     >
-      <Typography component="h2" variant="h2" sx={{
-        minWidth: '100%',
-        [theme.breakpoints.up(breakpoint)]: {
-          minWidth: 'min-content',
-          marginRight: 'auto',
-        }
-       }}>
-        { title }
+      <Typography
+        component="h2"
+        variant="h2"
+        sx={{
+          minWidth: '100%',
+          [theme.breakpoints.up(breakpoint)]: {
+            minWidth: 'min-content',
+            marginRight: 'auto',
+          },
+        }}
+      >
+        {title}
       </Typography>
-      <GridToolbarColumnsButton sx={ buttonToolbarStyles }/>
-      <GridToolbarDensitySelector sx={ buttonToolbarStyles }/>
+      <GridToolbarColumnsButton sx={buttonToolbarStyles} />
+      <GridToolbarDensitySelector sx={buttonToolbarStyles} />
       <GridToolbarExport
         printOptions={{
           hideFooter: true,
           hideToolbar: true,
         }}
-        sx={ buttonToolbarStyles }
+        sx={buttonToolbarStyles}
       />
     </GridToolbarContainer>
   );
-}
+};
 
 export default GridToolbar;

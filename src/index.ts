@@ -44,13 +44,11 @@ export {
   default as DataTable,
   type DataTableProps,
 } from './components/02-components/data-table/data-table';
+export { default as GridToolbar } from './components/02-components/data-table/data-table-toolbar.generic';
 export {
-  staffTableColumns,
   experiencesTableColumns,
+  staffTableColumns,
 } from './components/02-components/data-table/data-table.data';
-export {
-  default as GridToolbar,
-} from './components/02-components/data-table/data-table-toolbar.generic';
 export {
   default as ExperiencePage,
   type ExperiencePageProps,

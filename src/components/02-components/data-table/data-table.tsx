@@ -1,12 +1,11 @@
-import React from 'react';
 import { useTheme } from '@mui/material';
 import {
   DataGrid,
-  GridColDef,
-  GridRowsProp,
   GridFilterModel,
+  type GridColDef,
+  type GridRowsProp,
 } from '@mui/x-data-grid';
-
+import React from 'react';
 
 export type DataTableProps = {
   rows: GridRowsProp;
@@ -15,7 +14,12 @@ export type DataTableProps = {
   filters?: GridFilterModel;
 };
 
-export default function DataTable({ rows, columns, toolbar: CustomToolbar, filters }: DataTableProps) {
+export default function DataTable({
+  rows,
+  columns,
+  toolbar: CustomToolbar,
+  filters,
+}: DataTableProps) {
   const theme = useTheme();
 
   return (
@@ -23,7 +27,7 @@ export default function DataTable({ rows, columns, toolbar: CustomToolbar, filte
       rows={rows}
       columns={columns}
       checkboxSelection
-      slots={{ toolbar: () => <CustomToolbar/> }}
+      slots={{ toolbar: () => <CustomToolbar /> }}
       initialState={{
         pagination: {
           paginationModel: { page: 0, pageSize: 5 },

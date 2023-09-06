@@ -1,27 +1,23 @@
+import { Box, Button, useTheme } from '@mui/material';
 import { ElementType } from 'react';
 import Link from '../../01-elements/link/link';
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  useTheme,
-} from '@mui/material';
+import AutocompleteField, {
+  type AutocompleteOptionType,
+} from '../autocomplete-field/autocomplete-field';
 
-interface Control {
+type Control = {
   id: string;
   label: string;
   name: string;
-  options?: { id: string; name: string }[];
+  options: AutocompleteOptionType[];
   defaultValue?: string;
-}
+};
 
-export interface ExposedFormProps {
+export type ExposedFormProps = {
   controls: Control[];
   FormElement?: ElementType;
   resetUrl: string;
-}
+};
 
 export default function ExposedForm({
   controls,
@@ -33,10 +29,9 @@ export default function ExposedForm({
   const formItemStyles = {
     mb: theme.spacing(2),
     display: 'flex',
-    minWidth: '8rem',
+    minWidth: '12rem',
     [theme.breakpoints.up('sm')]: {
       display: 'inline-flex',
-      mb: 0,
       mr: theme.spacing(2),
     },
   };
@@ -45,30 +40,20 @@ export default function ExposedForm({
     mb: theme.spacing(4),
   };
 
+  const renderedControls = controls.map((control) => (
+    <AutocompleteField
+      id={control.id}
+      name={control.name}
+      label={control.label}
+      options={control.options}
+      selected={control.defaultValue}
+      sx={formItemStyles}
+    />
+  ));
+
   const formInner = (
     <>
-      {controls.map((control) =>
-        control.options ? (
-          <FormControl size="small" sx={formItemStyles} key={control.id}>
-            <InputLabel id={`${control.name}-select-label`}>
-              {control.label}
-            </InputLabel>
-            <Select
-              labelId={`${control.name}-select-label`}
-              label={control.label}
-              native={true}
-              name={control.name}
-              defaultValue={control.defaultValue || ''}
-            >
-              {control.options.map((item) => (
-                <option key={item.id} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
-        ) : null
-      )}
+      {renderedControls}
       <Button variant="contained" type="submit">
         Apply Filters
       </Button>
@@ -85,7 +70,7 @@ export default function ExposedForm({
   );
 
   const form = FormElement ? (
-    <FormElement>{formInner}</FormElement>
+    <FormElement method="post">{formInner}</FormElement>
   ) : (
     <form>{formInner}</form>
   );

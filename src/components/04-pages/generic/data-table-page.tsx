@@ -1,16 +1,11 @@
-import {
-  Box,
-  Button,
-  Typography,
-  useTheme
-} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
-import ExposedForm, { ExposedFormProps } from '../../02-components/form/form';
 import Link from '../../01-elements/link/link';
 import DataTable, {
   DataTableProps,
 } from '../../02-components/data-table/data-table';
+import ExposedForm, { ExposedFormProps } from '../../02-components/form/form';
 
 export type DataTablePageProps = {
   breadcrumb: {
@@ -32,7 +27,6 @@ export default function DataTablePage({
   addUrl,
   addTitle,
 }: DataTablePageProps) {
-
   const theme = useTheme();
 
   const titleStyles = {
@@ -54,32 +48,37 @@ export default function DataTablePage({
       <Breadcrumbs items={breadcrumb}></Breadcrumbs>
       <Box sx={titleContainerStyles}>
         <Typography variant="h1" sx={titleStyles}>
-          { title }
+          {title}
         </Typography>
-        {addUrl && addTitle && <Button
-          variant="outlined"
-          component={Link}
-          href={addUrl}
-          startIcon={
-            <AddIcon
-              sx={{
-                fontSize: '1rem',
-                mr: theme.spacing(0.5),
-              }}
-            />
-          }
-          sx={{
-            flexShrink: 0,
-            fontWeight: 700,
-          }}
-        >
-          { addTitle }
-        </Button>}
+        {addUrl && addTitle && (
+          <Button
+            variant="outlined"
+            component={Link}
+            href={addUrl}
+            startIcon={
+              <AddIcon
+                sx={{
+                  fontSize: '1rem',
+                  mr: theme.spacing(0.5),
+                }}
+              />
+            }
+            sx={{
+              flexShrink: 0,
+              fontWeight: 700,
+            }}
+          >
+            {addTitle}
+          </Button>
+        )}
       </Box>
-      {form && <ExposedForm
-        {...form}
-      ></ExposedForm>}
-      <DataTable rows={ tableData.rows } columns={ tableData.columns } toolbar={ tableData.toolbar } filters={ tableData.filters } />
+      {form && <ExposedForm {...form}></ExposedForm>}
+      <DataTable
+        rows={tableData.rows}
+        columns={tableData.columns}
+        toolbar={tableData.toolbar}
+        filters={tableData.filters}
+      />
     </>
   );
 }
