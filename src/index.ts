@@ -114,3 +114,4 @@ export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
+export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
