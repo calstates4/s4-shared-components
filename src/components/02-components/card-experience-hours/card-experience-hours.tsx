@@ -2,7 +2,7 @@ import { Button, Box, Paper, Typography, useTheme } from '@mui/material';
 
 export type CardExperienceHoursProps = {
   hours: number;
-  cta: string;
+  cta?: string;
   position: string;
 };
 
@@ -90,9 +90,11 @@ export default function CardExperienceHours({
         {renderedHours}
         {renderedHoursText}
       </Box>
+      {cta ? (
       <Button sx={buttonStyles} href={cta}>
         Log Time
       </Button>
+    ) : null}
     </Paper>
   );
 }
