@@ -23,22 +23,17 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Pager from '../../01-elements/pager/pager';
 import { ElementType, useState } from 'react';
+import Link from '../../01-elements/link/link';
+import { TimeEntryProps } from '../experience-time-entry-table/experience-time-entry-table';
 
-export type TimeLogEntryProps = {
-  dateTime: string;
-  goals: string;
-  hour: number;
-  id: string;
-  learningOutcomes: string;
-  status: string;
-};
+export type TimeLogEntryProps = TimeEntryProps & {editUrl: string}
 
 export type TimeLogTableProps = {
   cta: string;
   currentPage: number;
   FormElement?: ElementType;
   itemsPerPage: number;
-  timeLogInfo: TimeLogEntryProps[];
+  items: TimeLogEntryProps[];
   totalItems: number;
   url: string;
 };
@@ -66,7 +61,7 @@ export default function TimeLogTable({
   currentPage,
   FormElement,
   itemsPerPage,
-  timeLogInfo,
+  items,
   totalItems,
   url,
 }: TimeLogTableProps) {
@@ -109,6 +104,13 @@ export default function TimeLogTable({
     color: theme.palette.secondary.dark,
   };
 
+  const editButtonStyles = {
+    flexShrink: 0,
+    minWidth: '40px',
+    borderRadius: '50%',
+    padding: theme.spacing(1),
+  };
+
   const tableStyles = {
     td: {
       p: theme.spacing(3),
@@ -141,54 +143,66 @@ export default function TimeLogTable({
   );
 
   // Components
-  const renderedBody = timeLogInfo.map((row) => {
+  const renderedBody = items?.map((item) => {
     return (
-      <TableRow>
-        <TableCell>{row.dateTime}</TableCell>
-        <TableCell>{row.hour}</TableCell>
-        <TableCell>{row.goals}</TableCell>
-        <TableCell>{row.learningOutcomes}</TableCell>
-        <TableCell>{row.status}</TableCell>
+      <TableRow key={item.id}>
+        <TableCell>{item.date}</TableCell>
+        <TableCell>{item.calculatedHours}</TableCell>
         <TableCell>
-          <Box sx={iconWrapperStyles}>
-            <IconButton
-              onClick={() => {
-                setDialogData({
-                  dialogType: 'form',
-                  dialogTitle: 'Duplicate time entry',
-                  dialogMessage: 'Do you want to continue?',
-                  dialogFormData: {
-                    formId: row.id,
-                    formAction: 'duplicate',
-                    submitButtonText: 'Duplicate',
-                  },
-                });
-                handleClickOpen();
-              }}
-            >
-              <FileCopyIcon sx={iconStyles} />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setDialogData({
-                  dialogType: 'form',
-                  dialogTitle: 'Delete time entry',
-                  dialogMessage: 'This action cannot be undone',
-                  dialogFormData: {
-                    formId: row.id,
-                    formAction: 'delete',
-                    submitButtonText: 'Delete',
-                  },
-                });
-                handleClickOpen();
-              }}
-            >
-              <DeleteIcon sx={iconStyles} />
-            </IconButton>
-            <IconButton onClick={() => {}}>
-              <EditIcon sx={iconStyles} />
-            </IconButton>
-          </Box>
+          {item.description && (
+            <div
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
+          )}
+        </TableCell>
+        <TableCell>{item.learningOutcomes}</TableCell>
+        <TableCell>{item.state}</TableCell>
+        <TableCell>
+          {item.state !== 'Submitted' && (
+            <Box sx={iconWrapperStyles}>
+              <IconButton
+                onClick={() => {
+                  setDialogData({
+                    dialogType: 'form',
+                    dialogTitle: 'Duplicate time entry',
+                    dialogMessage: 'Do you want to continue?',
+                    dialogFormData: {
+                      formId: item.id,
+                      formAction: 'duplicate',
+                      submitButtonText: 'Duplicate',
+                    },
+                  });
+                  handleClickOpen();
+                }}
+              >
+                <FileCopyIcon sx={iconStyles} />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  setDialogData({
+                    dialogType: 'form',
+                    dialogTitle: 'Delete time entry',
+                    dialogMessage: 'This action cannot be undone',
+                    dialogFormData: {
+                      formId: item.id,
+                      formAction: 'delete',
+                      submitButtonText: 'Delete',
+                    },
+                  });
+                  handleClickOpen();
+                }}
+              >
+                <DeleteIcon sx={iconStyles} />
+              </IconButton>
+              <Button
+                component={Link}
+                sx={editButtonStyles}
+                href={item.editUrl}
+              >
+                <EditIcon sx={iconStyles} />
+              </Button>
+            </Box>
+          )}
         </TableCell>
       </TableRow>
     );
@@ -271,6 +285,19 @@ export default function TimeLogTable({
       fullWidth
     >
       <DialogTitle variant="h3">{dialogData.dialogTitle}</DialogTitle>
+      <Button
+        startIcon={<HighlightOffIcon />}
+        onClick={handleClose}
+        sx={{
+          position: 'absolute',
+          right: theme.spacing(1),
+          top: theme.spacing(1),
+          color: '',
+          textTransform: 'capitalize',
+        }}
+      >
+        Close
+      </Button>
       {renderedDialogFormContent}
     </Dialog>
   );
