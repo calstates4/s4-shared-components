@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
-import { useState, type ReactElement, type ReactNode } from 'react';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import SidebarToggle from '../../01-elements/sidebar-toggle/sidebar-toggle';
 import BrandingBar, {
   type BrandingBarProps,
@@ -26,7 +26,16 @@ export default function PageLayout({
   brand,
   context,
 }: PageLayoutProps): ReactElement {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean | undefined>(
+    undefined,
+  );
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  useEffect(() => {
+    // Set initial value of sidebarOpen based on breakpoint when the app is initialized.
+    if (typeof sidebarOpen === 'undefined') setSidebarOpen(isDesktop);
+  }, [isDesktop, sidebarOpen]);
 
   const sidebarWidth = 23;
 
@@ -48,15 +57,21 @@ export default function PageLayout({
         </TopBar>
       </Box>
       <Box display="flex">
-        <Sidebar sidebarOpen={sidebarOpen} sidebarWidth={sidebarWidth}>
+        <Sidebar
+          sidebarOpen={sidebarOpen as boolean}
+          sidebarWidth={sidebarWidth}
+        >
           <SidebarMenu {...sidebarLinks} />
         </Sidebar>
-        <MainContent sidebarOpen={sidebarOpen} sidebarWidth={sidebarWidth}>
+        <MainContent
+          sidebarOpen={sidebarOpen as boolean}
+          sidebarWidth={sidebarWidth}
+        >
           {children}
         </MainContent>
       </Box>
       <SidebarToggle
-        sidebarOpen={sidebarOpen}
+        sidebarOpen={sidebarOpen as boolean}
         setSidebarOpen={setSidebarOpen}
         sidebarWidth={sidebarWidth}
       />
