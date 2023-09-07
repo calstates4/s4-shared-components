@@ -42,6 +42,7 @@ export default function ExposedForm({
 
   const renderedControls = controls.map((control) => (
     <AutocompleteField
+      key={control.id}
       id={control.id}
       name={control.name}
       label={control.label}
@@ -70,7 +71,7 @@ export default function ExposedForm({
   );
 
   const form = FormElement ? (
-    <FormElement method="post">{formInner}</FormElement>
+    <FormElement>{formInner}</FormElement>
   ) : (
     <form>{formInner}</form>
   );
