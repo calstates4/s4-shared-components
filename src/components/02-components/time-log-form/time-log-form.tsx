@@ -1,15 +1,21 @@
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Paper,
   TextField,
   Typography,
   useTheme,
 } from '@mui/material';
-import { ChangeEvent, ElementType, useMemo, useState } from 'react';
-import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
-import { differenceInHours } from 'date-fns';
 import AutocompleteField, { AutocompleteOptionType } from '../autocomplete-field/autocomplete-field';
+import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
+import { ChangeEvent, ElementType, useMemo, useRef, useState } from 'react';
+import { differenceInMinutes } from 'date-fns';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 export type TimeLogFormProps = {
   activities?: AutocompleteOptionType[];
@@ -23,6 +29,7 @@ export type TimeLogFormProps = {
   focusPopulations?: AutocompleteOptionType[];
   learningOutcomes?: AutocompleteOptionType[];
   FormElement?: ElementType;
+  formSubmit: (a: HTMLFormElement) => void;
   defaultActivity?: string;
   defaultActivities?: string;
   defaultEndDate?: string;
@@ -41,6 +48,7 @@ export default function TimeLogForm({
   focusAreas,
   focusPopulations,
   FormElement,
+  formSubmit,
   learningOutcomes,
   defaultActivity,
   defaultEndDate,
@@ -49,12 +57,13 @@ export default function TimeLogForm({
   defaultFocusPopulation,
   defaultActivities,
   defaultLearningOutcomes,
-  defaultState,
 }: TimeLogFormProps) {
   const theme = useTheme();
+  const formRef = useRef<HTMLFormElement>(null);
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(defaultEndDate);
-  const [workflow, setWorkflow] = useState(defaultState);
+  const [state, setState] = useState('submitted');
+  const [open, setOpen] = useState(false);
 
   const paperStyles = {
     p: theme.spacing(3),
@@ -143,17 +152,81 @@ export default function TimeLogForm({
     setEndDate(event.target.value);
   }
 
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+  function handleConfirm() {
+    if (formSubmit && formRef.current) {
+      formSubmit(formRef.current);
+    }
+    handleClose();
+  }
+
   const calculatedHours = useMemo<string>(() => {
     if (startDate && endDate) {
-      return differenceInHours(
-        new Date(endDate),
-        new Date(startDate),
-      ).toString();
+      try {
+        const diff = (differenceInMinutes(
+          new Date(endDate),
+          new Date(startDate),
+        ) / 60).toString();
+        return diff.substring(0, diff.indexOf('.') + 2);
+      } catch {
+        return '';
+      }
     }
     return '';
   }, [startDate, endDate]);
 
   // Render.
+  const renderedDialog = (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="sm"
+      scroll="paper"
+      fullWidth
+    >
+      <DialogTitle variant="h3">
+        Are you sure to submit?
+      </DialogTitle>
+      <Button
+        startIcon={<HighlightOffIcon />}
+        onClick={handleClose}
+        sx={{
+          position: 'absolute',
+          right: theme.spacing(1),
+          top: theme.spacing(1),
+          color: '',
+          textTransform: 'capitalize',
+        }}
+      >
+        Close
+      </Button>
+      <DialogContent>
+        <DialogContentText sx={{ mb: theme.spacing(1) }}>
+          Once submitted, the time entry cannot be edited.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button sx={{ fontWeight: 700 }} onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button
+          sx={{ fontWeight: 700 }}
+          onClick={handleConfirm}
+          variant="contained"
+        >
+          Confirm
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+
   const formInner = (
     <>
       <Paper sx={paperStyles}>
@@ -284,14 +357,14 @@ export default function TimeLogForm({
             <TextField
               fullWidth
               multiline
-              rows={5}
+              maxRows={4}
+              id="time-log-activities"
+              name="time-log-activities"
+              defaultValue={defaultActivities}
               InputLabelProps={{
                 shrink: true,
               }}
               sx={formFieldStyles}
-              id="time-log-activities"
-              name="time-log-activities"
-              defaultValue={defaultActivities}
             />
           </Box>
         </Box>
@@ -325,22 +398,22 @@ export default function TimeLogForm({
           Please share any self-reflections or observations you have regarding your experience and its connection to your course work/major
         </Typography>
         <TextField
-          rows={8}
-          multiline
           fullWidth
+          multiline
+          maxRows={4}
+          id="time-log-description"
+          name="time-log-description"
+          defaultValue={description || ''}
           InputLabelProps={{
             shrink: true,
           }}
           sx={formFieldStyles}
-          id="time-log-description"
-          name="time-log-description"
-          defaultValue={description || ''}
         />
       </Paper>
       <input
         type="hidden"
-        value={workflow}
-        name="time-log-workflow"
+        value={state}
+        name="time-log-state"
       />
       <Box sx={actionButtonsContainerStyles}>
         <Button
@@ -348,18 +421,15 @@ export default function TimeLogForm({
           variant="outlined"
           sx={{ flexShrink: 0 }}
           onClick={() => {
-            setWorkflow('draft');
+            setState('draft');
           }}
         >
           Save as draft
         </Button>
         <Button
-          type="submit"
           variant="contained"
           sx={{ flexShrink: 0 }}
-          onClick={() => {
-            setWorkflow('submit');
-          }}
+          onClick={handleClickOpen}
         >
           Submit
         </Button>
@@ -367,8 +437,8 @@ export default function TimeLogForm({
     </>
   );
 
-  const form = FormElement ? (
-    <FormElement method="post">{formInner}</FormElement>
+  const renderedForm = FormElement ? (
+    <FormElement method="post" ref={formRef}>{formInner}</FormElement>
   ) : (
     <form>{formInner}</form>
   );
@@ -379,7 +449,8 @@ export default function TimeLogForm({
       <Typography variant="h1" sx={titleStyles}>
         Log time for {experienceName}
       </Typography>
-      {form}
+      {renderedForm}
+      {renderedDialog}
     </article>
   );
 }
