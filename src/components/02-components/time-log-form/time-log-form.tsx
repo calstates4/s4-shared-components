@@ -29,7 +29,7 @@ export type TimeLogFormProps = {
   focusPopulations?: AutocompleteOptionType[];
   learningOutcomes?: AutocompleteOptionType[];
   FormElement?: ElementType;
-  formSubmit: (a: HTMLFormElement) => void;
+  formSubmit?: (a: HTMLFormElement) => void;
   defaultActivity?: string;
   defaultActivities?: string;
   defaultEndDate?: string;

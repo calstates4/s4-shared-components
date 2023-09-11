@@ -143,7 +143,7 @@ export default function TimeLogTable({
   );
 
   // Components
-  const renderedBody = items?.map((item) => {
+  const renderedBody = items.map((item) => {
     return (
       <TableRow key={item.id}>
         <TableCell>{item.date}</TableCell>
