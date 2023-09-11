@@ -254,26 +254,24 @@ export default function TimeLogForm({
             />
           </Box>
           <Box sx={endDateFieldStyles}>
-            {startDate && (
-              <TextField
-                required
-                label="Time Out"
-                type="datetime-local"
-                id="time-log-end-date"
-                name="time-log-end-date"
-                onChange={handleEndDateOnChange}
-                defaultValue={defaultEndDate ?? undefined}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                inputProps={{
-                  min: startDate,
-                  pattern: 'd{4}-d{2}-d{2}',
-                }}
-                sx={formFieldStyles}
-                fullWidth
-              />
-            )}
+            <TextField
+              required
+              label="Time Out"
+              type="datetime-local"
+              id="time-log-end-date"
+              name="time-log-end-date"
+              onChange={handleEndDateOnChange}
+              defaultValue={defaultEndDate ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                min: startDate,
+                pattern: 'd{4}-d{2}-d{2}',
+              }}
+              sx={formFieldStyles}
+              fullWidth
+            />
           </Box>
           <Box sx={calculatedHoursStyles}>
             <Typography mb={3} variant="h3">

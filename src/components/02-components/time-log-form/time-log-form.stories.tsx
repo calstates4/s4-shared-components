@@ -76,6 +76,7 @@ export const AddTimeLog: StoryObj<typeof TimeLogForm> = {
     focusPopulations,
     focusAreas,
     activities,
+    learningOutcomes: learningOutcomes,
   },
 };
 
