@@ -11,7 +11,7 @@ import {
 import { ElementType, ReactNode } from 'react';
 import PropTypes from "prop-types";
 
-type ExperienceCourseProps = {
+export type ExperienceCourseProps = {
   FormElement?: ElementType;
   courseFilterValues: {
     id: string;
@@ -62,6 +62,9 @@ export default function ExperienceForm({
   };
 
   const containerStyles = {
+    [theme.breakpoints.down('md')]: {
+      pt: theme.spacing(2),
+    },
     [theme.breakpoints.up('md')]: {
       width: '100%',
       display: 'flex',
@@ -73,6 +76,12 @@ export default function ExperienceForm({
   };
 
   const formItemStyles = {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      mr: theme.spacing(0),
+      pt: theme.spacing(2),
+      pb: theme.spacing(2),
+    },
     [theme.breakpoints.up('sm')]: {
       flex: '0 0 25%',
       mr: theme.spacing(2),
@@ -93,6 +102,12 @@ export default function ExperienceForm({
       alignItems: 'flex-start',
       justifyContent: 'space-between',
     },
+    'button': {
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        mb: theme.spacing(2),
+      }
+    }
   };
 
   const formInner = (
@@ -167,6 +182,9 @@ export default function ExperienceForm({
             name="organization"
             defaultValue={currentFilters.course}
           >
+            <option key={0} value={0}>
+              Organization name
+            </option>
             {organizationFilterValues.map((item) => (
               <option key={item.id} value={item.id}>
                 {item.label}
@@ -183,6 +201,9 @@ export default function ExperienceForm({
             name="opportunity"
             defaultValue={currentFilters.program}
           >
+            <option key={0} value={0}>
+              Opportunity name
+            </option>
             {opportunityFilterValues.map((item) => (
               <option key={item.id} value={item.id}>
                 {item.label}
