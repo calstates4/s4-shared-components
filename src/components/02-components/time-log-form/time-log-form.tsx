@@ -79,13 +79,14 @@ export default function TimeLogForm({
   const formFieldStyles = {
     mb: theme.spacing(3),
     display: 'block',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       minWidth: '300px',
     },
   };
 
   const startDateFieldStyles = {
-    ...formFieldStyles,
+    mb: theme.spacing(3),
+    display: 'block',
     [theme.breakpoints.up('md')]: {
       mr: theme.spacing(3),
       pr: theme.spacing(6),
@@ -94,7 +95,8 @@ export default function TimeLogForm({
   };
 
   const endDateFieldStyles = {
-    ...formFieldStyles,
+    mb: theme.spacing(3),
+    display: 'block',
     [theme.breakpoints.up('md')]: {
       ml: theme.spacing(3),
       pr: theme.spacing(6),
@@ -116,7 +118,8 @@ export default function TimeLogForm({
   };
 
   const calculatedHoursLabelStyles = {
-    ...formFieldStyles,
+    mb: theme.spacing(3),
+    display: 'block',
     borderRadius: theme.spacing(0.5),
     backgroundColor: 'white',
     overflow: 'hidden',
