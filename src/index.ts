@@ -48,6 +48,7 @@ export { default as GridToolbar } from './components/02-components/data-table/da
 export {
   experiencesTableColumns,
   staffTableColumns,
+  enrolledStudentsTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
@@ -135,3 +136,7 @@ export {
   default as PartnerExperienceDetailsPage,
   type PartnerExperienceDetailsPageProps,
 } from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
+export {
+  default as CourseDetailsPage,
+  type CourseDetailsPageProps,
+} from './components/04-pages/faculty/courses/course-details/course-details';

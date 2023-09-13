@@ -11,6 +11,8 @@ import {
   staffFilterModel,
   staffTableColumns,
   staffTableRows,
+  enrolledStudentsTableColumns,
+  enrolledStudentsTableRows,
 } from './data-table.data';
 
 const meta: Meta<typeof DataTable> = {
@@ -42,5 +44,13 @@ export const Staff: StoryObj<typeof DataTable> = {
     columns: staffTableColumns,
     toolbar: () => <GridToolbar title="Staff" />,
     filters: staffFilterModel,
+  },
+};
+
+export const EnrolledStudents: StoryObj<typeof DataTable> = {
+  args: {
+    rows: enrolledStudentsTableRows,
+    columns: enrolledStudentsTableColumns,
+    toolbar: () => <GridToolbar title="Enrolled Students" />,
   },
 };

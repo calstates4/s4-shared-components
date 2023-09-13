@@ -228,3 +228,31 @@ export const staffFilterModel: GridFilterModel = {
   items: [{ field: 'col3', operator: 'contains', value: 'Education' }],
   logicOperator: GridLogicOperator.Or,
 };
+
+
+export const enrolledStudentsTableRows = [
+  {
+    id: 1,
+    firstName: 'Emily',
+    lastName: 'Parker',
+    lastlogin: '09/12/2023 - 10:10am',
+    experiences: '2',
+    opportunity: 'Community Roots Garden',
+  },
+  {
+    id: 2,
+    firstName: 'Mathew',
+    lastName: 'Ross',
+    lastlogin: '03/28/2023 - 11:16am',
+    experiences: '1',
+    opportunity: 'Community Roots Garden',
+  },
+];
+
+export const enrolledStudentsTableColumns = [
+  { field: 'firstName', headerName: 'Name', width: 150 },
+  { field: 'lastName', headerName: 'Last Name', width: 150 },
+  { field: 'lastlogin', headerName: 'last login', width: 150 },
+  { field: 'experiences', headerName: 'Experiences', width: 150 },
+  { field: 'opportunity', headerName: 'Opportunity', width: 150 },
+];
