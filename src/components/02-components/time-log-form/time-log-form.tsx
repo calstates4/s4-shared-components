@@ -173,16 +173,16 @@ export default function TimeLogForm({
   const calculatedHours = useMemo<string>(() => {
     if (startDate && endDate) {
       try {
-        const diff = (differenceInMinutes(
+        const diff = differenceInMinutes(
           new Date(endDate),
           new Date(startDate),
-        ) / 60).toString();
-        return diff.substring(0, diff.indexOf('.') + 2);
+        );
+        return (Math.round((diff / 60 * 100)) / 100).toString();
       } catch {
-        return '';
+        return '0';
       }
     }
-    return '';
+    return '0';
   }, [startDate, endDate]);
 
   // Render.

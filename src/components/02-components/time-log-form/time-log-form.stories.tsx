@@ -77,6 +77,8 @@ export const AddTimeLog: StoryObj<typeof TimeLogForm> = {
     focusAreas,
     activities,
     learningOutcomes: learningOutcomes,
+    defaultEndDate: '2023-08-10T13:30:00',
+    defaultStartDate: '2023-08-10T08:30:00',
   },
 };
 
