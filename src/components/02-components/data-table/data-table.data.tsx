@@ -236,23 +236,29 @@ export const enrolledStudentsTableRows = [
     firstName: 'Emily',
     lastName: 'Parker',
     lastlogin: '09/12/2023 - 10:10am',
-    experiences: '2',
-    opportunity: 'Community Roots Garden',
+    experiences: '#2 - Community Roots Garden',
   },
   {
     id: 2,
     firstName: 'Mathew',
     lastName: 'Ross',
     lastlogin: '03/28/2023 - 11:16am',
-    experiences: '1',
-    opportunity: 'Community Roots Garden',
+    experiences: '#1 - Community Roots Garden',
   },
 ];
 
 export const enrolledStudentsTableColumns = [
-  { field: 'firstName', headerName: 'Name', width: 150 },
-  { field: 'lastName', headerName: 'Last Name', width: 150 },
-  { field: 'lastlogin', headerName: 'last login', width: 150 },
-  { field: 'experiences', headerName: 'Experiences', width: 150 },
-  { field: 'opportunity', headerName: 'Opportunity', width: 150 },
+  { field: 'firstName', headerName: 'Name', width: 200 },
+  { field: 'lastName', headerName: 'Last Name', width: 200 },
+  { field: 'lastlogin', headerName: 'last login', width: 200 },
+  {
+    field: 'url',
+    headerName: 'Experiences',
+    width: 250,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={'/course/experience/' + params.row.id}>{params.row.experiences}</Link>
+    ),
+  },
 ];
