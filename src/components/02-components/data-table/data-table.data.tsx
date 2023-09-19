@@ -229,7 +229,6 @@ export const staffFilterModel: GridFilterModel = {
   logicOperator: GridLogicOperator.Or,
 };
 
-
 export const enrolledStudentsTableRows = [
   {
     id: 1,
