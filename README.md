@@ -16,6 +16,11 @@ automatically switch to the correct Node version
 - Run `npm install`
 - Run `npm run dev` to start storybook and the Typescript compiler.
 
+## Troubleshooting
+
+- If you hit `Importing a module script failed.`
+- Then try `rm -rf node_modules` and all of the steps above again.
+
 ## Local development on a Remix FE site that uses the shared components:
 
 - Clone the repository
