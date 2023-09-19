@@ -247,8 +247,8 @@ export const enrolledStudentsTableRows = [
 ];
 
 export const enrolledStudentsTableColumns = [
-  { field: 'firstName', headerName: 'Name', width: 200 },
-  { field: 'lastName', headerName: 'Last Name', width: 200 },
+  { field: 'firstName', headerName: 'First name', width: 200 },
+  { field: 'lastName', headerName: 'Last name', width: 200 },
   { field: 'lastlogin', headerName: 'Last login', width: 200 },
   {
     field: 'url',
