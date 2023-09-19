@@ -117,23 +117,6 @@ export default function ExperienceForm({
       </Typography>
       <Box sx={containerStyles}>
         <FormControl size="small" sx={formItemStyles}>
-          <InputLabel id="course-select-label">Course</InputLabel>
-          <Select
-            id="course-select"
-            label="Course"
-            native={true}
-            name="course"
-            defaultValue={currentFilters.course}
-            disabled
-          >
-            {courseFilterValues.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.label}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl size="small" sx={formItemStyles}>
           <InputLabel id="program-select-label">Program</InputLabel>
           <Select
             id="program-select"
@@ -144,6 +127,23 @@ export default function ExperienceForm({
             disabled
           >
             {programFilterValues.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.label}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl size="small" sx={formItemStyles}>
+          <InputLabel id="course-select-label">Course</InputLabel>
+          <Select
+            id="course-select"
+            label="Course"
+            native={true}
+            name="course"
+            defaultValue={currentFilters.course}
+            disabled
+          >
+            {courseFilterValues.map((item) => (
               <option key={item.id} value={item.id}>
                 {item.label}
               </option>
