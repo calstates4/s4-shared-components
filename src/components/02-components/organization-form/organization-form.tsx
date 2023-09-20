@@ -312,7 +312,10 @@ export default function OrganizationForm({
         <div title="Legal Contact Info">
           <FormControlLabel
             control={
-              <Switch name="NAME" defaultChecked={legalContactSameAsMain} />
+              <Switch
+                name="field_legal_is_main"
+                defaultChecked={legalContactSameAsMain}
+              />
             }
             label="Same as main contact"
             sx={baseFormItemStyles}
