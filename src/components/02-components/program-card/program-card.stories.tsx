@@ -1,0 +1,30 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
+import ProgramCard from './program-card';
+
+const meta: Meta<typeof ProgramCard> = {
+  title: 'Components/Program Card',
+  component: ProgramCard,
+};
+
+export default meta;
+
+const programData = {
+  title: 'Teacher Credentialing Programs',
+  description: 'Through service learning programs, students have the opportunity to develop important skills such as teamwork, communication, leadership, and problem-solving.',
+  url: '#',
+  editUrl: '#',
+  published: true,
+  type: 'Hybrid',
+  department: 'Finance',
+  startDate: '04/04/2023',
+  endDate: '04/10/2023',
+  timeCommitment: '20 hours per week',
+};
+
+export const Default: StoryObj<typeof ProgramCard> = {
+  args: {
+    ...programData,
+  },
+};
+
