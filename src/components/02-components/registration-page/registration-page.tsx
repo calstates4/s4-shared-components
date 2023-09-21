@@ -10,7 +10,7 @@ import {
 import { ElementType } from 'react';
 import Link from '../../01-elements/link/link';
 
-export type RegistrationPagePros = {
+export type RegistrationPageProps = {
   goBackUrl?: string;
   goBackText?: string;
   title: string;
@@ -29,7 +29,7 @@ export default function RegistrationPage({
   accountUrl,
   assistanceUrl,
   FormElement,
-}: RegistrationPagePros) {
+}: RegistrationPageProps) {
   const theme = useTheme();
 
   // Styles.
