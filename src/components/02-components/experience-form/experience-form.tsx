@@ -2,6 +2,9 @@ import {
   Paper,
   Box,
   Button,
+  List,
+  ListItem,
+  ListItemText,
   FormControl,
   InputLabel,
   Select,
@@ -13,6 +16,10 @@ import PropTypes from "prop-types";
 
 export type ExperienceCourseProps = {
   FormElement?: ElementType;
+  studentsListValues: {
+    id: string;
+    fullname: string;
+  }[];
   courseFilterValues: {
     id: string;
     label: string;
@@ -45,6 +52,7 @@ export type ExperienceCourseProps = {
 
 export default function ExperienceForm({
    FormElement,
+   studentsListValues,
    courseFilterValues,
    programFilterValues,
    termFilterValues,
@@ -112,6 +120,17 @@ export default function ExperienceForm({
 
   const formInner = (
     <>
+      <Typography variant="h2" mb={0} color="primary.main">
+        You are creating an experience for the following student(s):
+      </Typography>
+      <List sx={{ listStyleType: 'disc', pl: 2 }}>
+        {studentsListValues.map((item) => (
+          <ListItem sx={{ display: 'list-item' }} key={item.id} disablePadding>
+            <ListItemText>{item.fullname}</ListItemText>
+          </ListItem>
+        ))}
+      </List>
+      <Divider sx={dividerStyles}/>
       <Typography variant="h4" color="primary.main">
         General details
       </Typography>
@@ -254,12 +273,6 @@ export default function ExperienceForm({
   return (
     <Paper sx={contentContainerStyles} component="article">
       <Box>
-        <Typography variant="h2" mb={2} color="primary.main">
-          You are creating an experience for the following student(s):
-        </Typography>
-      </Box>
-      <Divider sx={dividerStyles} />
-      <Box>
         {form}
       </Box>
     </Paper>
@@ -268,6 +281,7 @@ export default function ExperienceForm({
 
 ExperienceForm.propTypes = {
   FormElement: PropTypes.element,
+  studentsListValues: PropTypes.array,
   courseFilterValues: PropTypes.array,
   programFilterValues: PropTypes.array,
   termFilterValues: PropTypes.array,
