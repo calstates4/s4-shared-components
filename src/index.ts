@@ -45,6 +45,7 @@ export {
   type DataTableProps,
 } from './components/02-components/data-table/data-table';
 export { default as GridToolbar } from './components/02-components/data-table/data-table-toolbar.generic';
+export { default as GridToolbarExtraButton } from './components/02-components/data-table/data-table-toolbar.extra-button';
 export {
   experiencesTableColumns,
   staffTableColumns,

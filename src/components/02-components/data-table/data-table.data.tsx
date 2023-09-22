@@ -236,14 +236,19 @@ export const enrolledStudentsTableRows = [
     firstName: 'Emily',
     lastName: 'Parker',
     lastlogin: '09/12/2023 - 10:10am',
-    experiences: '#2 - Community Roots Garden',
+    experienceData: [
+      {cid: 6, eid: 3, oppName: 'Community Roots Garden'}
+    ],
   },
   {
     id: 2,
     firstName: 'Mathew',
     lastName: 'Ross',
     lastlogin: '03/28/2023 - 11:16am',
-    experiences: '#1 - Community Roots Garden',
+    experienceData: [
+      {cid: 6, eid: 1, oppName: 'Community Roots Garden'},
+      {cid: 6, eid: 3, oppName: 'Community Garden Solcial'},
+    ],
   },
 ];
 
@@ -258,7 +263,17 @@ export const enrolledStudentsTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <Link href={'/course/experience/' + params.row.id}>{params.row.experiences}</Link>
+      <ul>
+        {params.row.experienceData.map((item: any, index: string) => (
+          <li key={index}>
+            <Link
+              href={'http://localhost:6006/course/' + item.cid + '/experience/' + item.eid}
+            >
+              #{item.eid} - {item.oppName}
+            </Link>
+          </li>
+        ))}
+      </ul>
     ),
   },
 ];

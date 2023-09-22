@@ -3,6 +3,7 @@ import React from 'react';
 
 import DataTable from './data-table';
 import GridToolbar from './data-table-toolbar.generic';
+import GridToolbarExtraButton from './data-table-toolbar.extra-button';
 import {
   experiencesTableColumns,
   experiencesTableRows,
@@ -51,6 +52,6 @@ export const EnrolledStudents: StoryObj<typeof DataTable> = {
   args: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
-    toolbar: () => <GridToolbar title="Enrolled Students" />,
+    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Esperience" btnUrl="#sample" />,
   },
 };

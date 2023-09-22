@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import React from 'react';
-import GridToolbar from '../../../../02-components/data-table/data-table-toolbar.generic'
+import GridToolbar from '../../../../02-components/data-table/data-table-toolbar.generic';
+import GridToolbarExtraButton from '../../../../02-components/data-table/data-table-toolbar.extra-button';
 import {
   enrolledStudentsTableColumns,
   enrolledStudentsTableRows,
@@ -29,7 +30,7 @@ const courseDetailsArgs: CourseDetailsPageProps = {
   tableData: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
-    toolbar: () => <GridToolbar title="Enrolled Students" />,
+    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Esperience" btnUrl="#sample" />,
   },
 };
 
