@@ -100,7 +100,7 @@ export default function RegistrationPage({
         fullWidth
         id="register-form-last-name"
         variant="outlined"
-        name="field-last-name"
+        name="last-name"
         label="Last Name"
         sx={baseFormItemStyles}
       />
