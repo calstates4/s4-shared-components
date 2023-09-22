@@ -14,7 +14,6 @@ export type RegistrationPageProps = {
   goBackUrl?: string;
   goBackText?: string;
   title: string;
-  registrationForm: string;
   description?: string;
   accountUrl?: string;
   assistanceUrl?: string;
