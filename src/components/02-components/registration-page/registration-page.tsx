@@ -83,6 +83,7 @@ export default function RegistrationPage({
         name="email"
         label="Email"
         sx={baseFormItemStyles}
+        type="email"
         helperText="The email address is not made public. It will only be used if you need to be contacted about your account or for opted-in notifications."
       />
       <TextField
