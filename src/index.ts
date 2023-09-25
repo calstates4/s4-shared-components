@@ -138,3 +138,5 @@ export {
   default as PartnerExperienceDetailsPage,
   type PartnerExperienceDetailsPageProps,
 } from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
+
+export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
