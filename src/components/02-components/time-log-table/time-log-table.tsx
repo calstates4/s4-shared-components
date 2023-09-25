@@ -158,7 +158,7 @@ export default function TimeLogTable({
         <TableCell>{item.learningOutcomes}</TableCell>
         <TableCell>{item.state}</TableCell>
         <TableCell>
-          {item.state !== 'Submitted' && (
+          {item.state !== 'Approved' && item.state !== 'Submitted' && (
             <Box sx={iconWrapperStyles}>
               <IconButton
                 onClick={() => {
