@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # List of dependencies.
-packages="react react-dom @emotion/react @emotion/styled @mui/icons-material @mui/material @mui/x-data-grid @remix-run/react"
-
+packages="react react-dom date-fns @emotion/react @emotion/styled @mui/icons-material @mui/material @mui/x-data-grid @remix-run/react"
 if [ $# -ne 1 ]; then
   echo "Please provide the path to the FE app (e.g. '../s4-app')"
   exit 1
