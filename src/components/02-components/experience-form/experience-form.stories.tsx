@@ -78,10 +78,6 @@ export const Default: StoryObj<typeof ExperienceForm> = {
     ],
     organizationFilterValues: [
       {
-        id: 'all',
-        label: 'All',
-      },
-      {
         id: '1',
         label: 'Organization 1',
       },
@@ -91,10 +87,6 @@ export const Default: StoryObj<typeof ExperienceForm> = {
       },
     ],
     opportunityFilterValues: [
-      {
-        id: 'all',
-        label: 'All',
-      },
       {
         id: '1',
         label: 'Opportunity 1',
@@ -108,8 +100,8 @@ export const Default: StoryObj<typeof ExperienceForm> = {
       course: '1',
       program: '2',
       term: '3',
-      organization: 'all',
-      opportunity: 'all',
+      organization: '0',
+      opportunity: '0',
       estimated: '',
     },
   },
