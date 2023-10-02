@@ -50,6 +50,7 @@ export {
   experiencesTableColumns,
   staffTableColumns,
   enrolledStudentsTableColumns,
+  reportStudentsTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,

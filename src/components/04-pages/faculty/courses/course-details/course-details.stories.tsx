@@ -5,6 +5,8 @@ import GridToolbarExtraButton from '../../../../02-components/data-table/data-ta
 import {
   enrolledStudentsTableColumns,
   enrolledStudentsTableRows,
+  reportStudentsTableColumns,
+  reportStudentsTableRows,
 } from '../../../../02-components/data-table/data-table.data';
 import PageLayout, {
   type PageLayoutProps,
@@ -23,14 +25,23 @@ const courseDetailsArgs: CourseDetailsPageProps = {
   breadcrumb: [
     {
       title: 'Courses',
-      url: '/courses',
+      url: '#courses',
+    },
+    {
+      title: 'Course Name',
+      url: '#',
     },
   ],
-  title: 'Enrolled Students',
+  title: 'Course Title',
   tableData: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
     toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Esperience" btnUrl="#sample" />,
+  },
+  reportTableData: {
+    rows: reportStudentsTableRows,
+    columns: reportStudentsTableColumns,
+    toolbar: () => <GridToolbar title="Student Report" />,
   },
 };
 

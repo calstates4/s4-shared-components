@@ -14,6 +14,8 @@ import {
   staffTableRows,
   enrolledStudentsTableColumns,
   enrolledStudentsTableRows,
+  reportStudentsTableColumns,
+  reportStudentsTableRows
 } from './data-table.data';
 
 const meta: Meta<typeof DataTable> = {
@@ -53,5 +55,13 @@ export const EnrolledStudents: StoryObj<typeof DataTable> = {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
     toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Esperience" btnUrl="#sample" />,
+  },
+};
+
+export const ReportStudents: StoryObj<typeof DataTable> = {
+  args: {
+    rows: reportStudentsTableRows,
+    columns: reportStudentsTableColumns,
+    toolbar: () => <GridToolbar title="Report Students" />,
   },
 };
