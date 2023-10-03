@@ -29,6 +29,7 @@ export {
   type CampusCardProps,
 } from './components/02-components/campus-card/campus-card';
 export { default as CampusList } from './components/02-components/campus-list/campus-list';
+export { default as CardBasicLinks } from './components/02-components/card-basic-links/card-basic-links';
 export {
   default as CardExperience,
   type CardExperienceProps,
@@ -39,6 +40,7 @@ export {
   default as Context,
   type ContextProps,
 } from './components/02-components/context/context';
+export { default as CardQuickLinks } from './components/02-components/card-quick-links/card-quick-links';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export {
   default as DataTable,
@@ -129,6 +131,7 @@ export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
+export { default as TwoColumnLayout } from './components/03-layouts/two-column-layout/two-column-layout';
 // Pages
 export {
   default as DataTablePage,
