@@ -54,7 +54,9 @@ export default function ProgramList({
   const listStyles = {
     display: 'grid',
     gap: theme.spacing(2),
-    gridTemplateColumns: 'repeat(2, 1fr)',
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    }
   };
 
   const formInner = (
@@ -120,7 +122,7 @@ export default function ProgramList({
         </Typography>
         <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
         <Box sx={listStyles}>
-          {items?.map((item, index) => (
+          {items?.map((item, _index) => (
             <ProgramCard
               id={item.id}
               url={item.url}
