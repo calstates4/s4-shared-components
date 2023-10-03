@@ -10,16 +10,11 @@ const meta: Meta<typeof ProgramCard> = {
 export default meta;
 
 const programData = {
+  id: '001',
   title: 'Teacher Credentialing Programs',
   description: 'Through service learning programs, students have the opportunity to develop important skills such as teamwork, communication, leadership, and problem-solving.',
   url: '#',
-  editUrl: '#',
-  published: true,
-  type: 'Hybrid',
-  department: 'Finance',
-  startDate: '04/04/2023',
-  endDate: '04/10/2023',
-  timeCommitment: '20 hours per week',
+  applyUrl: '#',
 };
 
 export const Default: StoryObj<typeof ProgramCard> = {

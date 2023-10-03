@@ -5,14 +5,14 @@ export type ProgramCardProps = {
   id: string;
   title: string;
   url: string;
-  editUrl: string;
+  applyUrl: string;
   description?: string;
 };
 
 export default function ProgramCard({
   title,
   url,
-  editUrl,
+  applyUrl,
   description
 }: ProgramCardProps) {
   const theme = useTheme();
@@ -68,7 +68,7 @@ export default function ProgramCard({
         >
           View
         </Button>
-        <Button variant="contained" sx={{ fontWeight: 700 }} href={editUrl}>
+        <Button variant="contained" sx={{ fontWeight: 700 }} href={applyUrl}>
           Apply
         </Button>
       </Box>

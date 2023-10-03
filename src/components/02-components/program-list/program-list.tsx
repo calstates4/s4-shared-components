@@ -1,20 +1,16 @@
 import { Box, Button, FormControl, InputLabel, Paper, Select, TextField, Typography, useTheme } from '@mui/material';
-import { ProgramCardProps } from '../program-card/program-card';
+import ProgramCard, { ProgramCardProps } from '../program-card/program-card';
 import Pager from '../../01-elements/pager/pager';
 import { ElementType, ReactNode } from 'react';
 
 export type ProgramListProps = {
-  children: ReactNode;
   url: string;
   FormElement?: ElementType;
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
   items?: ProgramCardProps[];
-  currentFilters: {
-    programTag: string | null;
-    programDisplay: string | null;
-  };
+  defaultProgramDisplay?: string;
   displatFilterValues: {
     id: string;
     label: string;
@@ -22,15 +18,14 @@ export type ProgramListProps = {
 };
 
 export default function ProgramList({
-  children,
   url,
   FormElement,
   totalItems,
   itemsPerPage,
   currentPage,
   items,
-  currentFilters,
   displatFilterValues,
+  defaultProgramDisplay,
 }: ProgramListProps) {
   const theme = useTheme();
   const pagerCount = Math.ceil(totalItems / itemsPerPage);
@@ -57,9 +52,9 @@ export default function ProgramList({
   };
 
   const listStyles = {
-    '& article + article': {
-      mt: theme.spacing(3),
-    },
+    display: 'grid',
+    gap: theme.spacing(2),
+    gridTemplateColumns: 'repeat(2, 1fr)',
   };
 
   const formInner = (
@@ -70,7 +65,6 @@ export default function ProgramList({
         name="program-tag"
         label="Program tag"
         sx={formItemStyles}
-        defaultValue={currentFilters.programTag}
       />
       <FormControl size="small" sx={formItemStyles}>
         <InputLabel id="status-select-label">My programs</InputLabel>
@@ -79,7 +73,7 @@ export default function ProgramList({
           label="Status"
           id="program-display"
           name="program-display"
-          defaultValue={currentFilters.programDisplay}
+          defaultValue={defaultProgramDisplay}
         >
           {displatFilterValues.map((item) => (
             <option key={item.id} value={item.id}>
@@ -125,7 +119,17 @@ export default function ProgramList({
           with, use the Initiate Partnership button to begin the process.
         </Typography>
         <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
-        <Box sx={listStyles}>{children}</Box>
+        <Box sx={listStyles}>
+          {items?.map((item, index) => (
+            <ProgramCard
+              id={item.id}
+              url={item.url}
+              title={item.title}
+              applyUrl={item.applyUrl}
+              description={item.description}
+            />
+          ))}
+        </Box>
         {renderedPager}
       </Paper>
     </div>
