@@ -1,4 +1,5 @@
-import { Button } from '@mui/material';
+import { Button, ListItem } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   GridFilterModel,
   GridLogicOperator,
@@ -228,3 +229,81 @@ export const staffFilterModel: GridFilterModel = {
   items: [{ field: 'col3', operator: 'contains', value: 'Education' }],
   logicOperator: GridLogicOperator.Or,
 };
+
+export const coursesTableRows = [
+  {
+    id: 1,
+    term: 'Fall 2022',
+    courseName: 'ENGL 480 (01): Intro To Grantwriting',
+    program: 'Service learning',
+    enrollment: '15',
+    studentExperience: '2',
+    hoursApproved: '4',
+    linkCourse: '#',
+    linkAddOpportunity: '#',
+    LinkEdit: '',
+  },
+  {
+    id: 2,
+    term: 'Fall 2022',
+    courseName: 'ENGL 480 (01): Intro To Grantwriting',
+    program: 'Service learning',
+    enrollment: '15',
+    studentExperience: '2',
+    hoursApproved: '4',
+    linkCourse: '#',
+    linkAddOpportunity: '#',
+    LinkEdit: '#',
+  },
+];
+
+export const coursesTableColumns = [
+  { field: 'term', headerName: 'Term', width: 150 },
+  {
+    field: 'courseName',
+    headerName: 'Course Name',
+    width: 200,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={params.row.linkCourse}>{params.row.courseName}</Link>
+    ),
+  },
+  { field: 'program', headerName: 'Program', width: 150 },
+  { field: 'enrollment', headerName: 'Enrollment', width: 150 },
+  { field: 'studentExperience', headerName: 'Student with experiences', width: 150 },
+  { field: 'hoursApproved', headerName: 'Hours approved', width: 150 },
+  {
+    field: 'url',
+    width: 200,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          variant="outlined"
+          component={Link}
+          href={params.row.linkAddOpportunity}
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          Add Opportunity
+        </Button>
+      </strong>
+    ),
+  },
+  {
+    field: 'urlEdit',
+    width: 50,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={params.row.LinkEdit}>
+        <ListItem>
+          <EditIcon fontSize="small" sx={{ color: 'black' }} />
+        </ListItem>
+      </Link>
+    ),
+  },
+];

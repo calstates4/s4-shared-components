@@ -50,6 +50,7 @@ export { default as GridToolbar } from './components/02-components/data-table/da
 export {
   experiencesTableColumns,
   staffTableColumns,
+  coursesTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
