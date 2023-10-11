@@ -2,6 +2,7 @@ import {Box, Button, Divider, Paper, Typography, useTheme} from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 import { ReactNode } from 'react';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 export type OpportunityPageProps = {
   breadcrumb: {
@@ -56,10 +57,8 @@ export default function OpportunityPage({
 
   const subtitle = {
     mb: theme.spacing(2),
+    mt: theme.spacing(2),
     color: 'primary.main',
-    [theme.breakpoints.down('sm')]: {
-      mt: theme.spacing(2),
-    },
   };
 
   const paperStyles = {
@@ -107,6 +106,13 @@ export default function OpportunityPage({
     }
   };
 
+  const iconStyles = {
+    fontSize: '1rem',
+    color: 'black',
+    verticalAlign: '-4px',
+    mr: theme.spacing(1),
+  };
+
   const dividerStyles = {
     width: '100%',
     mt: theme.spacing(5),
@@ -139,11 +145,9 @@ export default function OpportunityPage({
           </Box>
           <Box sx={style25}>
             <ul>
-              <li>{address}</li>
+              <li><FmdGoodIcon sx={iconStyles} />{address}</li>
               <li>{type}</li>
-              <li>
-                {timeCommitment}
-              </li>
+              <li>{timeCommitment}</li>
               <li>{term}</li>
             </ul>
           </Box>

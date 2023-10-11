@@ -97,7 +97,7 @@ export {
   type OpportunityListProps,
 } from './components/02-components/opportunity-list/opportunity-list';
 export {
-  default as Opportunitypage,
+  default as OpportunityPage,
   type OpportunityPageProps,
 } from './components/02-components/opportunity-page/opportunity-page';
 export {
