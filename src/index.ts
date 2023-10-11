@@ -97,6 +97,10 @@ export {
   type OpportunityListProps,
 } from './components/02-components/opportunity-list/opportunity-list';
 export {
+  default as Opportunitypage,
+  type OpportunityPageProps,
+} from './components/02-components/opportunity-page/opportunity-page';
+export {
   default as OrganizationCard,
   type OrganizationCardProps,
 } from './components/02-components/organization-card/organization-card';
