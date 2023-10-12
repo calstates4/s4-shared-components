@@ -18,7 +18,6 @@ import { differenceInMinutes, parseISO } from 'date-fns';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import {
   DateTimePicker,
-  DateTimeField,
 } from '@mui/x-date-pickers';
 
 export type TimeLogFormProps = {

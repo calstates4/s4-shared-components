@@ -214,9 +214,11 @@ export default function TimeLogTable({
     <TableContainer>
       <Box sx={headerWrapperStyles}>
         <Typography variant="h2">Time log</Typography>
-        <Button variant="outlined" href={cta}>
-          Request approval of hours
-        </Button>
+        { cta && (
+          <Button variant="outlined" href={cta}>
+            Request approval of hours
+          </Button>
+        )}
       </Box>
       <Table sx={tableStyles}>
         <TableHead>
