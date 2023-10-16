@@ -1,4 +1,5 @@
-import { Button } from '@mui/material';
+import { Button, ListItem } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   GridFilterModel,
   GridLogicOperator,
@@ -228,3 +229,129 @@ export const staffFilterModel: GridFilterModel = {
   items: [{ field: 'col3', operator: 'contains', value: 'Education' }],
   logicOperator: GridLogicOperator.Or,
 };
+
+export const coursesTableRows = [
+  {
+    id: 1,
+    term: 'Fall 2022',
+    courseName: 'ENGL 480 (01): Intro To Grantwriting',
+    program: 'Service learning',
+    enrollment: '15',
+    studentExperience: '2',
+    hoursApproved: '4',
+    linkCourse: '#',
+    linkAddOpportunity: '#',
+    LinkEdit: '',
+  },
+  {
+    id: 2,
+    term: 'Fall 2022',
+    courseName: 'ENGL 480 (01): Intro To Grantwriting',
+    program: 'Service learning',
+    enrollment: '15',
+    studentExperience: '2',
+    hoursApproved: '4',
+    linkCourse: '#',
+    linkAddOpportunity: '#',
+    LinkEdit: '#',
+  },
+];
+
+export const coursesTableColumns = [
+  { field: 'term', headerName: 'Term', width: 100 },
+  {
+    field: 'courseName',
+    headerName: 'Course Name',
+    width: 300,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={params.row.linkCourse}>{params.row.courseName}</Link>
+    ),
+  },
+  { field: 'program', headerName: 'Program', width: 200 },
+  { field: 'enrollment', headerName: 'Enrollment', width: 100 },
+  { field: 'studentExperience', headerName: 'Experiences', width: 100 },
+  { field: 'hoursApproved', headerName: 'Hours approved', width: 150 },
+  {
+    field: 'url',
+    width: 200,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={params.row.linkAddOpportunity}
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          Add Opportunity
+        </Button>
+      </strong>
+    ),
+  },
+  {
+    field: 'urlEdit',
+    width: 50,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={params.row.LinkEdit}>
+        <ListItem>
+          <EditIcon fontSize="small" sx={{ color: 'black' }} />
+        </ListItem>
+      </Link>
+    ),
+  },
+];
+
+export const enrolledStudentsTableRows = [
+  {
+    id: 1,
+    firstName: 'Emily',
+    lastName: 'Parker',
+    lastlogin: '09/12/2023 - 10:10am',
+    experienceData: [
+      {cid: 6, eid: 3, oppName: 'Community Roots Garden'}
+    ],
+  },
+  {
+    id: 2,
+    firstName: 'Mathew',
+    lastName: 'Ross',
+    lastlogin: '03/28/2023 - 11:16am',
+    experienceData: [
+      {cid: 6, eid: 1, oppName: 'Community Roots Garden'},
+      {cid: 6, eid: 3, oppName: 'Community Garden Social'},
+      {cid: 6, eid: 3, oppName: 'Community Outreach'},
+    ],
+  },
+];
+
+export const enrolledStudentsTableColumns = [
+  { field: 'firstName', headerName: 'First name', width: 200 },
+  { field: 'lastName', headerName: 'Last name', width: 200 },
+  { field: 'lastlogin', headerName: 'Last login', width: 200 },
+  {
+    field: 'url',
+    headerName: 'Experiences',
+    width: 300,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <ul>
+        {params.row.experienceData.map((item: {cid: string, eid: string, oppName: string}, index: number) => (
+          <li key={index}>
+            <Link
+              href={'/course/' + item.cid + '/experience/' + item.eid}
+            >
+              #{item.eid} - {item.oppName}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+];

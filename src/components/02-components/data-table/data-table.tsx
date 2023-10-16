@@ -25,6 +25,7 @@ export default function DataTable({
   return (
     <DataGrid
       rows={rows}
+      getRowHeight={() => 'auto'}
       columns={columns}
       checkboxSelection
       slots={{ toolbar: () => <CustomToolbar /> }}

@@ -100,10 +100,6 @@ export default function TimeLogTable({
     gap: theme.spacing(2),
   };
 
-  const iconStyles = {
-    color: theme.palette.secondary.dark,
-  };
-
   const editButtonStyles = {
     flexShrink: 0,
     minWidth: '40px',
@@ -144,6 +140,11 @@ export default function TimeLogTable({
 
   // Components
   const renderedBody = items.map((item) => {
+    let disabledButtons = false;
+    if (item.state == 'Approved' || item.state == 'Submitted') {
+      disabledButtons = true;
+    }
+
     return (
       <TableRow key={item.id}>
         <TableCell>{item.date}</TableCell>
@@ -158,51 +159,52 @@ export default function TimeLogTable({
         <TableCell>{item.learningOutcomes}</TableCell>
         <TableCell>{item.state}</TableCell>
         <TableCell>
-          {item.state !== 'Submitted' && (
-            <Box sx={iconWrapperStyles}>
-              <IconButton
-                onClick={() => {
-                  setDialogData({
-                    dialogType: 'form',
-                    dialogTitle: 'Duplicate time entry',
-                    dialogMessage: 'Do you want to continue?',
-                    dialogFormData: {
-                      formId: item.id,
-                      formAction: 'duplicate',
-                      submitButtonText: 'Duplicate',
-                    },
-                  });
-                  handleClickOpen();
-                }}
-              >
-                <FileCopyIcon sx={iconStyles} />
-              </IconButton>
-              <IconButton
-                onClick={() => {
-                  setDialogData({
-                    dialogType: 'form',
-                    dialogTitle: 'Delete time entry',
-                    dialogMessage: 'This action cannot be undone',
-                    dialogFormData: {
-                      formId: item.id,
-                      formAction: 'delete',
-                      submitButtonText: 'Delete',
-                    },
-                  });
-                  handleClickOpen();
-                }}
-              >
-                <DeleteIcon sx={iconStyles} />
-              </IconButton>
-              <Button
-                component={Link}
-                sx={editButtonStyles}
-                href={item.editUrl}
-              >
-                <EditIcon sx={iconStyles} />
-              </Button>
-            </Box>
-          )}
+          <Box sx={iconWrapperStyles}>
+            <IconButton
+              onClick={() => {
+                setDialogData({
+                  dialogType: 'form',
+                  dialogTitle: 'Duplicate time entry',
+                  dialogMessage: 'Do you want to continue?',
+                  dialogFormData: {
+                    formId: item.id,
+                    formAction: 'duplicate',
+                    submitButtonText: 'Duplicate',
+                  },
+                });
+                handleClickOpen();
+              }}
+            >
+              <FileCopyIcon/>
+            </IconButton>
+            <IconButton
+              disabled={disabledButtons}
+              onClick={() => {
+                setDialogData({
+                  dialogType: 'form',
+                  dialogTitle: 'Delete time entry',
+                  dialogMessage: 'This action cannot be undone',
+                  dialogFormData: {
+                    formId: item.id,
+                    formAction: 'delete',
+                    submitButtonText: 'Delete',
+                  },
+                });
+                handleClickOpen();
+              }}
+            >
+              <DeleteIcon/>
+            </IconButton>
+            <Button
+              component={Link}
+              sx={editButtonStyles}
+              href={item.editUrl}
+              disabled={disabledButtons}
+            >
+              <EditIcon/>
+            </Button>
+          </Box>
+
         </TableCell>
       </TableRow>
     );
@@ -212,9 +214,11 @@ export default function TimeLogTable({
     <TableContainer>
       <Box sx={headerWrapperStyles}>
         <Typography variant="h2">Time log</Typography>
-        <Button variant="outlined" href={cta}>
-          Request approval of hours
-        </Button>
+        { cta && (
+          <Button variant="outlined" href={cta}>
+            Request approval of hours
+          </Button>
+        )}
       </Box>
       <Table sx={tableStyles}>
         <TableHead>
