@@ -3,6 +3,8 @@ import { unstable_createRemixStub as createRemixStub } from '@remix-run/testing'
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import theme from '../src/theme';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const preview: Preview = {
   parameters: {
@@ -18,8 +20,10 @@ const preview: Preview = {
     (Story) => {
       const wrappedStory = (
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Story />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <CssBaseline />
+            <Story />
+          </LocalizationProvider>
         </ThemeProvider>
       );
 

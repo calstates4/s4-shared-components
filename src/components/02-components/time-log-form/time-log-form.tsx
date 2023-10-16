@@ -13,9 +13,12 @@ import {
 } from '@mui/material';
 import AutocompleteField, { AutocompleteOptionType } from '../autocomplete-field/autocomplete-field';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
-import { ChangeEvent, ElementType, useMemo, useRef, useState } from 'react';
-import { differenceInMinutes } from 'date-fns';
+import { ElementType, useMemo, useRef, useState } from 'react';
+import { differenceInMinutes, parseISO } from 'date-fns';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import {
+  DateTimePicker,
+} from '@mui/x-date-pickers';
 
 export type TimeLogFormProps = {
   activities?: AutocompleteOptionType[];
@@ -147,12 +150,12 @@ export default function TimeLogForm({
     zIndex: 1,
   };
 
-  function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
-    setStartDate(event.target.value);
+  function handleStartDateOnChange(date: Date | null) {
+    date && setStartDate(date.toISOString());
   }
 
-  function handleEndDateOnChange(event: ChangeEvent<HTMLInputElement>) {
-    setEndDate(event.target.value);
+  function handleEndDateOnChange(date: Date | null) {
+    date && setEndDate(date.toISOString());
   }
 
   function handleClickOpen() {
@@ -173,10 +176,9 @@ export default function TimeLogForm({
   const calculatedHours = useMemo<string>(() => {
     if (startDate && endDate) {
       try {
-        const diff = differenceInMinutes(
-          new Date(endDate),
-          new Date(startDate),
-        );
+        const start = parseISO(startDate);
+        const end = parseISO(endDate);
+        const diff = differenceInMinutes(end, start);
         return (Math.round((diff / 60 * 100)) / 100).toString();
       } catch {
         return '0';
@@ -230,50 +232,53 @@ export default function TimeLogForm({
     </Dialog>
   );
 
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  const stringNow = today.toISOString(); // "2020-06-13T18:30:00.000Z"
+
   const formInner = (
     <>
       <Paper sx={paperStyles}>
-        <Typography variant="h2" mb={5}>
+        <Typography variant="h2" mb={2}>
           Time Details
         </Typography>
         <Box sx={timeDetailsStyles}>
           <Box sx={startDateFieldStyles}>
-            <TextField
-              required
-              label="Time In"
-              type="datetime-local"
-              id="time-log-start-date"
-              name="time-log-start-date"
-              onChange={handleStartDateOnChange}
-              defaultValue={defaultStartDate ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{
-                pattern: 'd{4}-d{2}-d{2}',
+            <Typography variant="h3" mb={2}>
+              Time in
+            </Typography>
+            <DateTimePicker
+              label="Time in"
+              slotProps={{
+                textField: {
+                  name: 'time-log-start-date'
+                },
+                field: {
+                  id: 'time-log-start-date',
+                }
               }}
               sx={formFieldStyles}
-              fullWidth
+              defaultValue={parseISO(startDate ?? stringNow)}
+              onChange={handleStartDateOnChange}
             />
           </Box>
           <Box sx={endDateFieldStyles}>
-            <TextField
-              required
-              label="Time Out"
-              type="datetime-local"
-              id="time-log-end-date"
-              name="time-log-end-date"
-              onChange={handleEndDateOnChange}
-              defaultValue={defaultEndDate ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{
-                min: startDate,
-                pattern: 'd{4}-d{2}-d{2}',
-              }}
+            <Typography variant="h3" mb={2}>
+              Time out
+            </Typography>
+            <DateTimePicker
+              label="Time out"
               sx={formFieldStyles}
-              fullWidth
+              slotProps={{
+                textField: {
+                  name: 'time-log-end-date'
+                },
+                field: {
+                  id: 'time-log-end-date',
+                }
+              }}
+              defaultValue={parseISO(endDate ?? stringNow)}
+              onChange={handleEndDateOnChange}
             />
           </Box>
           <Box sx={calculatedHoursStyles}>
@@ -317,6 +322,7 @@ export default function TimeLogForm({
                   name="time-log-population"
                   label="Focus Population"
                   selected={defaultFocusPopulation}
+                  required
                 />
               </>
             )}
@@ -332,6 +338,7 @@ export default function TimeLogForm({
                   id="time-log-focus-area"
                   name="time-log-focus-area"
                   selected={defaultFocusArea}
+                  required
                 />
               </>
             )}
@@ -347,6 +354,7 @@ export default function TimeLogForm({
                   id="time-log-activity"
                   name="time-log-activity"
                   selected={defaultActivity}
+                  required
                 />
               </>
             )}
@@ -387,6 +395,7 @@ export default function TimeLogForm({
               options={learningOutcomes}
               selected={defaultLearningOutcomes}
               sx={formFieldStyles}
+              required
             />
           )}
         </Box>

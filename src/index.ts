@@ -47,10 +47,12 @@ export {
   type DataTableProps,
 } from './components/02-components/data-table/data-table';
 export { default as GridToolbar } from './components/02-components/data-table/data-table-toolbar.generic';
+export { default as GridToolbarExtraButton } from './components/02-components/data-table/data-table-toolbar.extra-button';
 export {
   experiencesTableColumns,
   staffTableColumns,
   coursesTableColumns,
+  enrolledStudentsTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
@@ -142,5 +144,9 @@ export {
   default as PartnerExperienceDetailsPage,
   type PartnerExperienceDetailsPageProps,
 } from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
-
 export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
+export {
+  default as CourseDetailsPage,
+  type CourseDetailsPageProps,
+} from './components/04-pages/faculty/courses/course-details/course-details';
+
