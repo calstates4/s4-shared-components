@@ -53,7 +53,7 @@ export default function ExposedForm({
   ));
 
   const formInner = (
-    <>
+    <Box sx={{ display: 'flex', alignItems: 'flex-start'}}>
       {renderedControls}
       <Button variant="contained" type="submit">
         Apply Filters
@@ -67,7 +67,7 @@ export default function ExposedForm({
       >
         Reset Filters
       </Button>
-    </>
+    </Box>
   );
 
   const form = FormElement ? (
