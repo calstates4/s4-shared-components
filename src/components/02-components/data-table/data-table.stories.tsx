@@ -3,6 +3,7 @@ import React from 'react';
 
 import DataTable from './data-table';
 import GridToolbar from './data-table-toolbar.generic';
+import GridToolbarExtraButton from './data-table-toolbar.extra-button';
 import {
   experiencesTableColumns,
   experiencesTableRows,
@@ -11,6 +12,8 @@ import {
   staffFilterModel,
   staffTableColumns,
   staffTableRows,
+  enrolledStudentsTableColumns,
+  enrolledStudentsTableRows,
 } from './data-table.data';
 
 const meta: Meta<typeof DataTable> = {
@@ -42,5 +45,13 @@ export const Staff: StoryObj<typeof DataTable> = {
     columns: staffTableColumns,
     toolbar: () => <GridToolbar title="Staff" />,
     filters: staffFilterModel,
+  },
+};
+
+export const EnrolledStudents: StoryObj<typeof DataTable> = {
+  args: {
+    rows: enrolledStudentsTableRows,
+    columns: enrolledStudentsTableColumns,
+    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Experience" btnUrl="#sample" />,
   },
 };

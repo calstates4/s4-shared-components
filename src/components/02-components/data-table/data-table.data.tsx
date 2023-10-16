@@ -228,3 +228,52 @@ export const staffFilterModel: GridFilterModel = {
   items: [{ field: 'col3', operator: 'contains', value: 'Education' }],
   logicOperator: GridLogicOperator.Or,
 };
+
+export const enrolledStudentsTableRows = [
+  {
+    id: 1,
+    firstName: 'Emily',
+    lastName: 'Parker',
+    lastlogin: '09/12/2023 - 10:10am',
+    experienceData: [
+      {cid: 6, eid: 3, oppName: 'Community Roots Garden'}
+    ],
+  },
+  {
+    id: 2,
+    firstName: 'Mathew',
+    lastName: 'Ross',
+    lastlogin: '03/28/2023 - 11:16am',
+    experienceData: [
+      {cid: 6, eid: 1, oppName: 'Community Roots Garden'},
+      {cid: 6, eid: 3, oppName: 'Community Garden Social'},
+      {cid: 6, eid: 3, oppName: 'Community Outreach'},
+    ],
+  },
+];
+
+export const enrolledStudentsTableColumns = [
+  { field: 'firstName', headerName: 'First name', width: 200 },
+  { field: 'lastName', headerName: 'Last name', width: 200 },
+  { field: 'lastlogin', headerName: 'Last login', width: 200 },
+  {
+    field: 'url',
+    headerName: 'Experiences',
+    width: 300,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <ul>
+        {params.row.experienceData.map((item: any, index: string) => (
+          <li key={index}>
+            <Link
+              href={'/course/' + item.cid + '/experience/' + item.eid}
+            >
+              #{item.eid} - {item.oppName}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+];
