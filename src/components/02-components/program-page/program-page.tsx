@@ -2,6 +2,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import PhoneIcon from '@mui/icons-material/Phone';
 import TvIcon from '@mui/icons-material/Tv';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { useState, ElementType } from 'react';
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
@@ -11,10 +12,14 @@ export type ProgramPageProps = {
     title: string;
     url: string;
   }[];
+  id: string;
   title: string;
   description: string;
   opportunitiesUrl: string;
-  joinProgramUrl: string;
+  FormElement?: ElementType;
+  btnDisable: boolean;
+  btnText: string;
+  btnNextStatusText: string;
   phone: string;
   mail: string;
   campusSite: string;
@@ -22,10 +27,14 @@ export type ProgramPageProps = {
 
 export default function ProgramPage({
   breadcrumb,
+  id,
   title,
   description,
   opportunitiesUrl,
-  joinProgramUrl,
+  FormElement,
+  btnDisable,
+  btnText,
+  btnNextStatusText,
   phone,
   mail,
   campusSite,
@@ -90,12 +99,44 @@ export default function ProgramPage({
     flexShrink: 0,
     mr: theme.spacing(2),
     textAlign: 'center',
+    width: 'auto',
+    float: 'left',
     [theme.breakpoints.down('sm')]: {
       mb: theme.spacing(2),
       mr: '0',
       width: '100%',
+      float: 'none',
     }
   };
+
+  const [isDisabled, setDisabled] = useState(btnDisable);
+  const [btnTextB, setTextB] = useState(btnText);
+  const handleSubmit = () => {
+    setDisabled(true);
+    setTextB(btnNextStatusText);
+  }
+
+  const innerForm = (
+    <>
+      <input type="hidden" name="action" value="joinProgram" />
+      <input type="hidden" name="progId" value={id} />
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={isDisabled}
+        onClick={handleSubmit}
+      >
+        {btnTextB}
+      </Button>
+    </>
+  );
+  const form = FormElement ? (
+    <FormElement sx={btnStyles} method="post">{innerForm}</FormElement>
+  ) : (
+    <Box sx={btnStyles}>
+      <form>{innerForm}</form>
+    </Box>
+  );
 
   return (
     <article>
@@ -121,14 +162,7 @@ export default function ProgramPage({
           >
             SEE AVAILABLE OPPORTUNITIES
           </Button>
-          <Button
-            variant="contained"
-            component={Link}
-            href={joinProgramUrl}
-            sx={btnStyles}
-          >
-            JOIN THIS PROGRAM
-          </Button>
+          {form}
         </Box>
         <Box sx={detailsStyles}>
           <Typography component="h2" variant="h3" sx={detailsTitleStyles}>
