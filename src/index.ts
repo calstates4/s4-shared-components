@@ -51,6 +51,7 @@ export { default as GridToolbarExtraButton } from './components/02-components/da
 export {
   experiencesTableColumns,
   staffTableColumns,
+  coursesTableColumns,
   enrolledStudentsTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
