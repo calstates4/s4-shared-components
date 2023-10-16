@@ -258,20 +258,20 @@ export const coursesTableRows = [
 ];
 
 export const coursesTableColumns = [
-  { field: 'term', headerName: 'Term', width: 150 },
+  { field: 'term', headerName: 'Term', width: 100 },
   {
     field: 'courseName',
     headerName: 'Course Name',
-    width: 200,
+    width: 300,
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <Link href={params.row.linkCourse}>{params.row.courseName}</Link>
     ),
   },
-  { field: 'program', headerName: 'Program', width: 150 },
-  { field: 'enrollment', headerName: 'Enrollment', width: 150 },
-  { field: 'studentExperience', headerName: 'Student with experiences', width: 150 },
+  { field: 'program', headerName: 'Program', width: 200 },
+  { field: 'enrollment', headerName: 'Enrollment', width: 100 },
+  { field: 'studentExperience', headerName: 'Experiences', width: 100 },
   { field: 'hoursApproved', headerName: 'Hours approved', width: 150 },
   {
     field: 'url',
@@ -281,7 +281,6 @@ export const coursesTableColumns = [
     renderCell: (params: GridRenderCellParams) => (
       <strong>
         <Button
-          variant="outlined"
           component={Link}
           href={params.row.linkAddOpportunity}
           sx={{
@@ -343,7 +342,7 @@ export const enrolledStudentsTableColumns = [
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <ul>
-        {params.row.experienceData.map((item: any, index: string) => (
+        {params.row.experienceData.map((item: {cid: string, eid: string, oppName: string}, index: number) => (
           <li key={index}>
             <Link
               href={'/course/' + item.cid + '/experience/' + item.eid}
