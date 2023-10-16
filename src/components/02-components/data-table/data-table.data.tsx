@@ -246,7 +246,8 @@ export const enrolledStudentsTableRows = [
     lastlogin: '03/28/2023 - 11:16am',
     experienceData: [
       {cid: 6, eid: 1, oppName: 'Community Roots Garden'},
-      {cid: 6, eid: 3, oppName: 'Community Garden Solcial'},
+      {cid: 6, eid: 3, oppName: 'Community Garden Social'},
+      {cid: 6, eid: 3, oppName: 'Community Outreach'},
     ],
   },
 ];
@@ -258,7 +259,7 @@ export const enrolledStudentsTableColumns = [
   {
     field: 'url',
     headerName: 'Experiences',
-    width: 250,
+    width: 300,
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
@@ -266,7 +267,7 @@ export const enrolledStudentsTableColumns = [
         {params.row.experienceData.map((item: any, index: string) => (
           <li key={index}>
             <Link
-              href={'http://localhost:6006/course/' + item.cid + '/experience/' + item.eid}
+              href={'/course/' + item.cid + '/experience/' + item.eid}
             >
               #{item.eid} - {item.oppName}
             </Link>

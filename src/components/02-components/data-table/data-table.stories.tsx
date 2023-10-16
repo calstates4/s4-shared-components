@@ -52,6 +52,6 @@ export const EnrolledStudents: StoryObj<typeof DataTable> = {
   args: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
-    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Esperience" btnUrl="#sample" />,
+    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Experience" btnUrl="#sample" />,
   },
 };
