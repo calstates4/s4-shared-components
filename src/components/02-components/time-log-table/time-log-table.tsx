@@ -1,9 +1,11 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   IconButton,
   Paper,
   Table,
@@ -15,43 +17,66 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Pager from '../../01-elements/pager/pager';
+import { ElementType, useState } from 'react';
+import Link from '../../01-elements/link/link';
+import { TimeEntryProps } from '../experience-time-entry-table/experience-time-entry-table';
 
-export type TimeLogEntryProps = {
-  dateTime: string;
-  goals: string;
-  hour: number;
-  id: string;
-  learningOutcomes: string;
-  status: string;
-};
+export type TimeLogEntryProps = TimeEntryProps & {editUrl: string}
 
 export type TimeLogTableProps = {
   cta: string;
   currentPage: number;
+  FormElement?: ElementType;
   itemsPerPage: number;
-  onClickHandler: (type: string, id: string) => void;
-  timeLogInfo: TimeLogEntryProps[];
+  items: TimeLogEntryProps[];
   totalItems: number;
   url: string;
 };
 
-export enum TimeLogTableActions {
-  Edit = 'EDIT',
-  Delete = 'DELETE',
-  Duplicate = 'DUPLICATE',
-}
+export type TimeEntryRevisionProps = {
+  date: string;
+  message: string;
+  status: string;
+};
+
+type DialogData = {
+  dialogType?: 'form' | 'list';
+  dialogTitle?: string;
+  dialogMessage?: string;
+  dialogFormData?: {
+    formId: string;
+    formAction: string;
+    submitButtonText: string;
+  };
+  dialogListData?: TimeEntryRevisionProps[];
+};
 
 export default function TimeLogTable({
   cta,
   currentPage,
+  FormElement,
   itemsPerPage,
-  onClickHandler,
-  timeLogInfo,
+  items,
   totalItems,
   url,
 }: TimeLogTableProps) {
   const theme = useTheme();
+  const [open, setOpen] = useState(false);
+  const [dialogData, setDialogData] = useState<DialogData>({});
+  const pagerCount = Math.ceil(totalItems / itemsPerPage);
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
 
   // Style
   const contentStyles = {
@@ -75,8 +100,11 @@ export default function TimeLogTable({
     gap: theme.spacing(2),
   };
 
-  const iconStyles = {
-    color: theme.palette.secondary.dark,
+  const editButtonStyles = {
+    flexShrink: 0,
+    minWidth: '40px',
+    borderRadius: '50%',
+    padding: theme.spacing(1),
   };
 
   const tableStyles = {
@@ -97,42 +125,101 @@ export default function TimeLogTable({
     },
   };
 
+  const renderedPager = pagerCount > 1 && (
+    <Pager
+      baseUrl={url}
+      count={pagerCount}
+      page={currentPage}
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        pt: theme.spacing(3),
+      }}
+    />
+  );
+
   // Components
-  const renderedBody = timeLogInfo.map((row) => {
+  const renderedBody = items.map((item) => {
+    let disabledButtons = false;
+    if (item.state == 'Approved' || item.state == 'Submitted') {
+      disabledButtons = true;
+    }
+
     return (
-      <TableRow>
-        <TableCell>{row.dateTime}</TableCell>
-        <TableCell>{row.hour}</TableCell>
-        <TableCell>{row.goals}</TableCell>
-        <TableCell>{row.learningOutcomes}</TableCell>
-        <TableCell>{row.status}</TableCell>
+      <TableRow key={item.id}>
+        <TableCell>{item.date}</TableCell>
+        <TableCell>{item.calculatedHours}</TableCell>
+        <TableCell>
+          {item.description && (
+            <div
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
+          )}
+        </TableCell>
+        <TableCell>{item.learningOutcomes}</TableCell>
+        <TableCell>{item.state}</TableCell>
         <TableCell>
           <Box sx={iconWrapperStyles}>
             <IconButton
-              onClick={() =>
-                onClickHandler(TimeLogTableActions.Duplicate, row.id)
-              }
+              onClick={() => {
+                setDialogData({
+                  dialogType: 'form',
+                  dialogTitle: 'Duplicate time entry',
+                  dialogMessage: 'Do you want to continue?',
+                  dialogFormData: {
+                    formId: item.id,
+                    formAction: 'duplicate',
+                    submitButtonText: 'Duplicate',
+                  },
+                });
+                handleClickOpen();
+              }}
             >
-              <FileCopyIcon sx={iconStyles} />
+              <FileCopyIcon/>
             </IconButton>
             <IconButton
-              onClick={() => onClickHandler(TimeLogTableActions.Delete, row.id)}
+              disabled={disabledButtons}
+              onClick={() => {
+                setDialogData({
+                  dialogType: 'form',
+                  dialogTitle: 'Delete time entry',
+                  dialogMessage: 'This action cannot be undone',
+                  dialogFormData: {
+                    formId: item.id,
+                    formAction: 'delete',
+                    submitButtonText: 'Delete',
+                  },
+                });
+                handleClickOpen();
+              }}
             >
-              <DeleteIcon sx={iconStyles} />
+              <DeleteIcon/>
             </IconButton>
-            <IconButton
-              onClick={() => onClickHandler(TimeLogTableActions.Edit, row.id)}
+            <Button
+              component={Link}
+              sx={editButtonStyles}
+              href={item.editUrl}
+              disabled={disabledButtons}
             >
-              <EditIcon sx={iconStyles} />
-            </IconButton>
+              <EditIcon/>
+            </Button>
           </Box>
+
         </TableCell>
       </TableRow>
     );
   });
 
-  const renderTable = (
+  const renderedTable = (
     <TableContainer>
+      <Box sx={headerWrapperStyles}>
+        <Typography variant="h2">Time log</Typography>
+        { cta && (
+          <Button variant="outlined" href={cta}>
+            Request approval of hours
+          </Button>
+        )}
+      </Box>
       <Table sx={tableStyles}>
         <TableHead>
           <TableRow>
@@ -148,30 +235,81 @@ export default function TimeLogTable({
         </TableHead>
         <TableBody>{renderedBody}</TableBody>
       </Table>
+      {renderedPager}
     </TableContainer>
+  );
+
+  const renderedDialogFormContentInner = (
+    <>
+      <DialogContent>
+        {dialogData.dialogMessage && (
+          <DialogContentText sx={{ mb: theme.spacing(1) }}>
+            {dialogData.dialogMessage}
+          </DialogContentText>
+        )}
+        <input
+          type="hidden"
+          name="time-entry-id"
+          value={dialogData.dialogFormData?.formId}
+        />
+        <input
+          type="hidden"
+          name="time-entry-action"
+          value={dialogData.dialogFormData?.formAction}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button sx={{ fontWeight: 700 }} onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button
+          sx={{ fontWeight: 700 }}
+          variant="contained"
+          onClick={handleClose}
+          type="submit"
+        >
+          {dialogData.dialogFormData?.submitButtonText}
+        </Button>
+      </DialogActions>
+    </>
+  );
+
+  const renderedDialogFormContent = FormElement ? (
+    <FormElement method="post">{renderedDialogFormContentInner}</FormElement>
+  ) : (
+    <form>{renderedDialogFormContentInner}</form>
+  );
+
+  const renderedDialog = (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="sm"
+      scroll="paper"
+      fullWidth
+    >
+      <DialogTitle variant="h3">{dialogData.dialogTitle}</DialogTitle>
+      <Button
+        startIcon={<HighlightOffIcon />}
+        onClick={handleClose}
+        sx={{
+          position: 'absolute',
+          right: theme.spacing(1),
+          top: theme.spacing(1),
+          color: '',
+          textTransform: 'capitalize',
+        }}
+      >
+        Close
+      </Button>
+      {renderedDialogFormContent}
+    </Dialog>
   );
 
   return (
     <Paper sx={contentStyles}>
-      <Box sx={headerWrapperStyles}>
-        <Typography variant="h2">Time log</Typography>
-        <Button variant="outlined" href={cta}>
-          Request approval of hours
-        </Button>
-      </Box>
-      {renderTable}
-      {totalItems > itemsPerPage && (
-        <Pager
-          baseUrl={url}
-          count={Math.ceil(totalItems / itemsPerPage)}
-          page={currentPage}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pt: theme.spacing(3),
-          }}
-        />
-      )}
+      {renderedTable}
+      {renderedDialog}
     </Paper>
   );
 }

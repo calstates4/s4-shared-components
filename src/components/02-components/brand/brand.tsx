@@ -10,7 +10,7 @@ export type BrandProps = {
 export default function Brand({ title, linkURL = '/' }: BrandProps) {
   return (
     <Link
-      sx={{ display: 'flex', marginLeft: (theme) => theme.spacing(1) }}
+      sx={{ display: 'flex', alignItems: 'center', marginLeft: (theme) => theme.spacing(1) }}
       underline="none"
       href={linkURL}
     >

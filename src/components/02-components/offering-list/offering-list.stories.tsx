@@ -14,7 +14,11 @@ const meta: Meta<typeof OfferingList> = {
 
 export default meta;
 
-const offerings = Array.from({ length: 5 }, (_, i) => i).map(() => (
+const twoOfferings = Array.from({ length: 2 }, (_, i) => i).map(() => (
+  <OfferingCard {...(OfferingCardStories.args as OfferingCardProps)} />
+));
+
+const fiveOfferings = Array.from({ length: 5 }, (_, i) => i).map(() => (
   <OfferingCard {...(OfferingCardStories.args as OfferingCardProps)} />
 ));
 
@@ -26,8 +30,9 @@ export const Default: StoryObj<typeof OfferingList> = {
         url: '#',
       },
     ],
-    children: offerings,
-    url: 'http://localhost:6006/',
+    title: 'Offerings',
+    children: fiveOfferings,
+    pagerUrl: 'http://localhost:6006/',
     addUrl: '#',
     totalItems: 38,
     itemsPerPage: 5,
@@ -56,5 +61,14 @@ export const Default: StoryObj<typeof OfferingList> = {
       category: 'all',
       department: '1',
     },
+  },
+};
+
+export const PartnerDashboard: StoryObj<typeof OfferingList> = {
+  args: {
+    listOnly: true,
+    title: 'Recently created offerings',
+    children: twoOfferings,
+    seeAllUrl: '/organization/offerings',
   },
 };

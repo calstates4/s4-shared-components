@@ -61,6 +61,7 @@ type OrganizationFormProps = {
   industryOptions: AutocompleteOptionType[];
   organizationTypeOptions: AutocompleteOptionType[];
   focusAreaOptions: AutocompleteOptionType[];
+  subFocusAreaOptions: AutocompleteOptionType[];
   focusPopulationOptions: AutocompleteOptionType[];
   FormElement: ElementType;
   mainHeadingLevel?: 'h1' | 'h2';
@@ -90,6 +91,7 @@ export default function OrganizationForm({
   industryOptions,
   organizationTypeOptions,
   focusAreaOptions,
+  subFocusAreaOptions,
   focusPopulationOptions,
   FormElement,
   mainHeadingLevel = 'h1',
@@ -310,7 +312,10 @@ export default function OrganizationForm({
         <div title="Legal Contact Info">
           <FormControlLabel
             control={
-              <Switch name="NAME" defaultChecked={legalContactSameAsMain} />
+              <Switch
+                name="field_legal_is_main"
+                defaultChecked={legalContactSameAsMain}
+              />
             }
             label="Same as main contact"
             sx={baseFormItemStyles}
@@ -404,7 +409,7 @@ export default function OrganizationForm({
             id="org-form-subfocus-areas"
             name="field_sub_focus_areas"
             label="Sub Focus Area(s)"
-            options={focusAreaOptions}
+            options={subFocusAreaOptions}
             selected={subFocusAreas}
             sx={baseFormItemStyles}
           />

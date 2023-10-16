@@ -12,7 +12,7 @@ const goalsText = `
 `;
 
 const LearningText = `
-  Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt. 
+  Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt.
   Platea sapien vel laoreet pellentesque urna. Sollicitudin sem sed sed eu porttitor ornare elit.
 `;
 
@@ -20,49 +20,53 @@ export default meta;
 
 export const Default: StoryObj<typeof TimeLogTable> = {
   args: {
-    cta: '/logtime',
     currentPage: 1,
     itemsPerPage: 5,
-    timeLogInfo: [
+    items: [
       {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        goals: goalsText,
-        hour: 2,
+        date: '08/31/2022 6:00pm to 8:00pm',
+        description: goalsText,
+        calculatedHours: 2,
         id: '1',
         learningOutcomes: LearningText,
-        status: 'Submitted',
+        state: 'Unsubmitted',
+        editUrl: '#',
       },
       {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        goals: goalsText,
-        hour: 2,
+        date: '08/31/2022 6:00pm to 8:00pm',
+        description: goalsText,
+        calculatedHours: 2,
         id: '2',
         learningOutcomes: LearningText,
-        status: 'Submitted',
+        state: 'Submitted',
+        editUrl: '#',
       },
       {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        goals: goalsText,
-        hour: 2,
+        date: '08/31/2022 6:00pm to 8:00pm',
+        description: goalsText,
+        calculatedHours: 2,
         id: '3',
         learningOutcomes: LearningText,
-        status: 'Submitted',
+        state: 'Unsubmitted',
+        editUrl: '#',
       },
       {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        goals: goalsText,
-        hour: 2,
+        date: '08/31/2022 6:00pm to 8:00pm',
+        description: goalsText,
+        calculatedHours: 2,
         id: '4',
         learningOutcomes: LearningText,
-        status: 'Submitted',
+        state: 'Unsubmitted',
+        editUrl: '#',
       },
       {
-        dateTime: '08/31/2022 6:00pm to 8:00pm',
-        goals: goalsText,
-        hour: 2,
+        date: '08/31/2022 6:00pm to 8:00pm',
+        description: goalsText,
+        calculatedHours: 2,
         id: '5',
         learningOutcomes: LearningText,
-        status: 'Submitted',
+        state: 'Unsubmitted',
+        editUrl: '#',
       },
     ],
     totalItems: 6,
