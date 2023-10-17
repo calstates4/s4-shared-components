@@ -2,6 +2,9 @@ import { Paper, Box, Typography, useTheme } from '@mui/material';
 import DataTable, {
   DataTableProps,
 } from '../../../../02-components/data-table/data-table';
+import { useRef } from "react";
+import Tabs, { type RefHandler } from '../../../../02-components/tabs/tabs';
+import Breadcrumbs from '../../../../01-elements/breadcrumbs/breadcrumbs';
 
 export type CourseDetailsPageProps = {
   breadcrumb: {
@@ -10,18 +13,19 @@ export type CourseDetailsPageProps = {
   }[];
   title: string;
   tableData: DataTableProps;
+  reportTableData: DataTableProps;
 };
 
 export default function CourseDetailsPage({
+    breadcrumb,
     title,
     tableData,
+    reportTableData,
   }: CourseDetailsPageProps) {
   const theme = useTheme();
-
+  const tabRef = useRef<RefHandler>(null);
   const contentContainerStyles = {
     width: '100%',
-    padding: theme.spacing(3),
-    marginTop: theme.spacing(3),
   };
 
   const titleStyles = {
@@ -38,20 +42,55 @@ export default function CourseDetailsPage({
     },
   };
 
+  const wrapperTabs = {
+    '.course-detail-panel': {
+      pt: theme.spacing(0),
+      pl: theme.spacing(0),
+      pr: theme.spacing(0),
+    }
+  };
+
   return (
     <>
+      <Breadcrumbs items={breadcrumb} />
       <Box sx={titleContainerStyles}>
         <Typography variant="h1" sx={titleStyles}>
           {title}
         </Typography>
       </Box>
-      <Paper sx={contentContainerStyles}>
-        <DataTable
-          rows={tableData.rows}
-          columns={tableData.columns}
-          toolbar={tableData.toolbar}
-        />
-      </Paper>
+      <Box sx={wrapperTabs}>
+        <Tabs
+          name="Course Details tables"
+          id="course-details-tables"
+          tabPanelClassName="course-detail-panel"
+          ref={tabRef}
+        >
+          <div
+            title="Students"
+            className="tabContainer"
+          >
+            <Paper sx={contentContainerStyles}>
+              <DataTable
+                rows={tableData.rows}
+                columns={tableData.columns}
+                toolbar={tableData.toolbar}
+              />
+            </Paper>
+          </div>
+          <div
+            title="Experiences"
+            className="tab-container"
+          >
+            <Paper sx={contentContainerStyles}>
+              <DataTable
+                rows={reportTableData.rows}
+                columns={reportTableData.columns}
+                toolbar={reportTableData.toolbar}
+              />
+            </Paper>
+          </div>
+        </Tabs>
+      </Box>
     </>
   );
 }

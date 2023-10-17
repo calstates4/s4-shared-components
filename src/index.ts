@@ -53,6 +53,7 @@ export {
   staffTableColumns,
   coursesTableColumns,
   enrolledStudentsTableColumns,
+  reportStudentsTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
@@ -149,4 +150,3 @@ export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,
 } from './components/04-pages/faculty/courses/course-details/course-details';
-
