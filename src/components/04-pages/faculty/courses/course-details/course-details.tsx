@@ -1,5 +1,4 @@
-import { Paper, Box, Button, Typography, useTheme } from '@mui/material';
-import Breadcrumbs from '../../../../01-elements/breadcrumbs/breadcrumbs';
+import { Paper, Box, Typography, useTheme } from '@mui/material';
 import DataTable, {
   DataTableProps,
 } from '../../../../02-components/data-table/data-table';
@@ -17,7 +16,6 @@ export type CourseDetailsPageProps = {
 };
 
 export default function CourseDetailsPage({
-    breadcrumb,
     title,
     tableData,
     reportTableData,
@@ -26,20 +24,6 @@ export default function CourseDetailsPage({
   const tabRef = useRef<RefHandler>(null);
   const contentContainerStyles = {
     width: '100%',
-  };
-
-  const containerStyles = {
-    [theme.breakpoints.down('md')]: {
-      pt: theme.spacing(2),
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'start',
-      pt: theme.spacing(2),
-      pb: theme.spacing(2),
-    },
   };
 
   const titleStyles = {

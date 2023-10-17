@@ -62,6 +62,7 @@ const GridToolbarExtraButton: React.FC<GridToolbarProps> = ({ title, btnTitle, b
       <Button
         variant="outlined"
         href={btnUrl}
+        sx={buttonToolbarStyles}
       >
         {btnTitle}
       </Button>

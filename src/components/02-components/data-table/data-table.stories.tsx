@@ -12,6 +12,8 @@ import {
   staffFilterModel,
   staffTableColumns,
   staffTableRows,
+  coursesTableRows,
+  coursesTableColumns,
   enrolledStudentsTableColumns,
   enrolledStudentsTableRows,
   reportStudentsTableColumns,
@@ -50,11 +52,20 @@ export const Staff: StoryObj<typeof DataTable> = {
   },
 };
 
+
+export const Courses: StoryObj<typeof DataTable> = {
+  args: {
+    rows: coursesTableRows,
+    columns: coursesTableColumns,
+    toolbar: () => <GridToolbar title="Manage Courses" />,
+  },
+};
+
 export const EnrolledStudents: StoryObj<typeof DataTable> = {
   args: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
-    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Esperience" btnUrl="#sample" />,
+    toolbar: () => <GridToolbarExtraButton title="Enrolled Students" btnTitle="Create an Experience" btnUrl="#sample" />,
   },
 };
 
