@@ -2,8 +2,9 @@ import { Paper, Box, Typography, useTheme } from '@mui/material';
 import DataTable, {
   DataTableProps,
 } from '../../../../02-components/data-table/data-table';
-import React, {useRef} from "react";
+import { useRef } from "react";
 import Tabs, { type RefHandler } from '../../../../02-components/tabs/tabs';
+import Breadcrumbs from '../../../../01-elements/breadcrumbs/breadcrumbs';
 
 export type CourseDetailsPageProps = {
   breadcrumb: {
@@ -16,6 +17,7 @@ export type CourseDetailsPageProps = {
 };
 
 export default function CourseDetailsPage({
+    breadcrumb,
     title,
     tableData,
     reportTableData,

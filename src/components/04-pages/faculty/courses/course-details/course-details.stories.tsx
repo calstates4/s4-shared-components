@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import React from 'react';
+import GridToolbar from '../../../../02-components/data-table/data-table-toolbar.generic';
 import GridToolbarExtraButton from '../../../../02-components/data-table/data-table-toolbar.extra-button';
 import {
   enrolledStudentsTableColumns,
