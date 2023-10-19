@@ -36,7 +36,7 @@ export default function DataTable({
       }}
       filterModel={filters}
       pageSizeOptions={[5, 10, 25, 50, 100]}
-      sx={{ paddingLeft: theme.spacing(3) }}
+      sx={{ paddingLeft: theme.spacing(3), height: 'auto' }}
     />
   );
 }

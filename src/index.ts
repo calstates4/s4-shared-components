@@ -53,6 +53,7 @@ export {
   staffTableColumns,
   coursesTableColumns,
   enrolledStudentsTableColumns,
+  reportStudentsTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
@@ -116,6 +117,10 @@ export {
 } from './components/02-components/past-experiences-list/past-experiences-list';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export {
+  default as ProgramPage,
+  type ProgramPageProps,
+} from './components/02-components/program-page/program-page';
+export {
   default as SidebarMenu,
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
@@ -149,4 +154,3 @@ export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,
 } from './components/04-pages/faculty/courses/course-details/course-details';
-

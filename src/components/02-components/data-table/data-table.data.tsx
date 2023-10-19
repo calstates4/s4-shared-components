@@ -355,3 +355,105 @@ export const enrolledStudentsTableColumns = [
     ),
   },
 ];
+
+export const reportStudentsTableRows = [
+  {
+    id: 1,
+    experienceData: {cid: 6, eid: 1, expName: 'Community Roots Garden'},
+    firstName: 'Emily',
+    lastName: 'Parker',
+    organization: {id : 2, orgName: 'Community Roots garden'},
+    opportunity: 'Opportunity Name',
+    formsData: [],
+    forms: 'TBD',
+    estHours: '20',
+    repHours: '16',
+    siteStaff: 'Charles Barkley',
+  },
+  {
+    id: 2,
+    experienceData: {cid: 6, eid: 2, expName: 'Community Roots Garden #2'},
+    firstName: 'Joe',
+    lastName: 'Parker',
+    organization: {id : 2, orgName: 'Community Roots garden'},
+    opportunity: 'Opportunity Name',
+    formsData: [{
+      text: 'Pre-Course Survey [1 of 1 submissions]',
+      lnk: 'http://localhost:6006/'
+    }],
+    forms: 'TBD',
+    estHours: '100',
+    repHours: '50',
+    siteStaff: 'Michael Jordan',
+  },
+  {
+    id: 3,
+    experienceData: {cid: 6, eid: 3, expName: 'Community Roots Garden #3'},
+    firstName: 'James',
+    lastName: 'Parker',
+    organization: {id : 2, orgName: 'Community Roots garden'},
+    opportunity: 'Opportunity Name',
+    formsData: [
+      {
+        text: 'Pre-Course Survey [1 of 1 submissions]',
+        lnk: 'http://localhost:6006/'
+      },
+      {
+        text: 'Post-Course Survey [0 of 1 submissions]',
+        lnk: '#'
+      },
+    ],
+    estHours: '100',
+    repHours: '50',
+    siteStaff: 'Michael Staff',
+  },
+];
+
+export const reportStudentsTableColumns = [
+  {
+    field: 'experienceUrl',
+    headerName: 'Experience',
+    width: 250,
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link
+        href={'/course/' + params.row.experienceData.cid + '/experience/' + params.row.experienceData.eid}
+      >
+        {params.row.experienceData.expName}
+      </Link>
+    ),
+  },
+  { field: 'firstName', headerName: 'First name', width: 100 },
+  { field: 'lastName', headerName: 'Last name', width: 100 },
+  {
+    field: 'organizationUrl',
+    headerName: 'Organization',
+    width: 200,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link
+        href={'/organization/' + params.row.organization.id}
+      >
+        {params.row.organization.orgName}
+      </Link>
+    ),
+  },
+  { field: 'opportunity', headerName: 'Opportunity', width: 200 },
+  { field: 'forms',
+    headerName: 'Forms',
+    width: 350,
+    renderCell: (params: GridRenderCellParams) => (
+      <ul style={{listStyleType: 'none', padding: '0'}}>
+        {params.row.formsData.map((item: { text: string, lnk: string }, index: number) => (
+          <li key={index}>
+            {item.lnk === '#'
+              ? item.text
+              : <Link href={item.lnk} >{item.text}</Link>}
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  { field: 'estHours', headerName: 'Estimated hours', width: 125},
+  { field: 'repHours', headerName: 'Reported hours', width: 125},
+  { field: 'siteStaff', headerName: 'Site staff', width: 200},
+];

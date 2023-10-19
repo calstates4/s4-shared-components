@@ -20,6 +20,7 @@ export default function MainContent({
     theme: Theme;
   }>(({ theme, menuOpen }) => ({
     flexGrow: 1,
+    height: '100vh',
     padding: theme.spacing(2),
     marginLeft: 0,
     paddingTop: '120px', // Space taken by branding bar + topbar + content top padding.
