@@ -12,7 +12,7 @@ const goalsText = `
 `;
 
 const LearningText = `
-  Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt. 
+  Lorem ipsum dolor sit amet consectetur. Risus vitae pretium eget at integer consectetur parturient tincidunt.
   Platea sapien vel laoreet pellentesque urna. Sollicitudin sem sed sed eu porttitor ornare elit.
 `;
 
@@ -20,7 +20,6 @@ export default meta;
 
 export const Default: StoryObj<typeof TimeLogTable> = {
   args: {
-    cta: '/logtime',
     currentPage: 1,
     itemsPerPage: 5,
     items: [
