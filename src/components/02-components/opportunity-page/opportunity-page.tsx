@@ -119,6 +119,8 @@ export default function OpportunityPage({
     mb: theme.spacing(5),
   };
 
+  const capitalizedType = type.charAt(0).toUpperCase() + type.slice(1);
+
   return (
     <article>
       <Breadcrumbs items={breadcrumb} />
@@ -146,7 +148,7 @@ export default function OpportunityPage({
           <Box sx={style25}>
             <ul>
               <li><FmdGoodIcon sx={iconStyles} />{address}</li>
-              <li>{type}</li>
+              <li>{capitalizedType}</li>
               <li>{timeCommitment}</li>
               <li>{term}</li>
             </ul>
