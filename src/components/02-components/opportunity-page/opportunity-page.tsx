@@ -1,7 +1,6 @@
 import {Box, Button, Divider, Paper, Typography, useTheme} from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
-import { ReactNode } from 'react';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 export type OpportunityPageProps = {
@@ -50,6 +49,7 @@ export default function OpportunityPage({
 
   const titleStyles = {
     color: 'primary.main',
+    textTransform: 'uppercase',
     [theme.breakpoints.down('sm')]: {
       mb: theme.spacing(2),
     },
@@ -138,7 +138,7 @@ export default function OpportunityPage({
               variant="contained"
               component={Link}
               href={selectURL}
-              sx={{ flexShrink: 0 }}
+              sx={{ flexShrink: 0, fontWeight: '700' }}
             >
               Select
             </Button>
@@ -178,4 +178,4 @@ export default function OpportunityPage({
       </Paper>
     </article>
   );
-};
+}

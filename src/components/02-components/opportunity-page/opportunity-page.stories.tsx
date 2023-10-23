@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 import OpportunityPage from "../opportunity-page/opportunity-page";
 
 const meta: Meta<typeof OpportunityPage> = {
@@ -10,43 +9,23 @@ const meta: Meta<typeof OpportunityPage> = {
 export default meta;
 
 const description = `<p>
-  We exist to serve the most vulnerable in our communities. We do this by
-  partnering with agencies to give us insight into areas where volunteers can
-  meet the most pressing needs, empowering volunteers to manifest compassion and
-  service as representatives of their communities, and mobilizing churches and
-  businesses to serve in projects in their cities throughout the year!
+  At ACTION VC, we know that the power of a good story has the ability to change
+  lives. Our Impact Storyteller(s) work with volunteers and clients to capture
+  and organize mission moments across the organization. Then they work to
+  disseminate these mission moments to the ACTION VC community across social,
+  web, and mailer channels. The Impact Storyteller(s) will perform duties such
+  as: volunteer site visitations, client interviews, photography/ social media,
+  campaign creation, storytelling and more.
 </p>`;
 
-const healthSafety = `<p>
-  Deserunt mollit incididunt esse reprehenderit tempor deserunt officia culpa
-  ipsum id exercitation consequat. Irure pariatur est ea eiusmod duis quis veniam
-  ipsum id exercitation consequat. Irure pariatur est ea eiusmod duis quis veniam
-  deserunt. Nisi commodo laboris anim mollit dolor. Reprehenderit sint nostrud
-  enim qui.
-  </p>
-  <ul>
-  <li>Cillum mollit Lorem velit commodo exercitation irure deserunt Lorem dolore.</li>
-  <li>Ex eu et reprehenderit laboris.</li><li>Aute non amet magna.</li>
-  <li>Nulla pariatur ad amet eu tempor cillum incididunt enim irure nostrud exercitation elit labore est.</li>
-  <li>Cupidatat sint nulla mollit occaecat.</li>
-</ul>`;
-
-const training = `<p>
-  We exist to serve the most vulnerable in our communities. We do this by
-  partnering with agencies to give us insight into areas where volunteers can
-  meet the most pressing needs, empowering volunteers to manifest compassion and
-  service as representatives of their communities, and mobilizing churches and
-  businesses to serve in projects in their cities throughout the year!
-</p>`;
-
-const OpprtunityData = {
+const OpportunityData = {
   breadcrumb: [
     {
       title: 'Opportunities',
       url: '#/opportunities',
     },
     {
-      title: 'Opportunity page Title.',
+      title: 'Opportunity name',
       url: '#',
     },
   ],
@@ -75,6 +54,6 @@ const OpprtunityData = {
 
 export const Default: StoryObj<typeof OpportunityPage> = {
   args: {
-    ...OpprtunityData,
+    ...OpportunityData,
   },
 };
