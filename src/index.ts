@@ -131,20 +131,24 @@ export {
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as StatWithIcon } from './components/02-components/stat-with-icon/stat-with-icon';
 export {
-  default as TimeLogTable,
-  type TimeLogTableProps,
-  type TimeLogEntryProps,
-} from './components/02-components/time-log-table/time-log-table';
-export {
   default as TimeLogForm,
-  type TimeLogFormProps
+  type TimeLogFormProps,
 } from './components/02-components/time-log-form/time-log-form';
+export {
+  default as TimeLogTable,
+  type TimeLogEntryProps,
+  type TimeLogTableProps,
+} from './components/02-components/time-log-table/time-log-table';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 export { default as TwoColumnLayout } from './components/03-layouts/two-column-layout/two-column-layout';
 // Pages
+export {
+  default as RegistrationPage,
+  type RegistrationPageProps,
+} from './components/02-components/registration-page/registration-page';
 export {
   default as DataTablePage,
   type DataTablePageProps,
