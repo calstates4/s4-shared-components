@@ -1,19 +1,27 @@
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
+import {ElementType, useState} from "react";
 
 export type ProgramCardProps = {
   id: string;
   title: string;
   url: string;
-  applyUrl: string;
+  FormElement: ElementType;
   description?: string;
+  btnDisable?: boolean;
+  btnText?: string;
+  btnNextStatusText?: string;
 };
 
 export default function ProgramCard({
+  id,
   title,
   url,
-  applyUrl,
-  description
+  FormElement,
+  description,
+  btnDisable,
+  btnText,
+  btnNextStatusText,
 }: ProgramCardProps) {
   const theme = useTheme();
 
@@ -45,6 +53,51 @@ export default function ProgramCard({
     },
   };
 
+  const btnStyles = {
+    flexShrink: 0,
+    mr: theme.spacing(2),
+    textAlign: 'center',
+    width: 'auto',
+    float: 'left',
+    [theme.breakpoints.down('sm')]: {
+      mb: theme.spacing(2),
+      mr: '0',
+      width: '100%',
+      float: 'none',
+    }
+  };
+
+  const [isDisabled, setDisabled] = useState(btnDisable);
+  const [btnTextB, setTextB] = useState(btnText);
+
+  const handleSubmit = () => {
+    setDisabled(true);
+    setTextB(btnNextStatusText);
+  }
+
+  const innerForm = (
+    <>
+      <input type="hidden" name="action" value="joinProgram" />
+      <input type="hidden" name="progId" value={id} />
+      <Button
+        id={"program-" + id}
+        type="submit"
+        variant="contained"
+        disabled={isDisabled}
+        onClick={handleSubmit}
+      >
+        {btnTextB}
+      </Button>
+    </>
+  );
+  const form = FormElement ? (
+    <FormElement sx={btnStyles} method="post">{innerForm}</FormElement>
+  ) : (
+    <Box sx={btnStyles}>
+      <form>{innerForm}</form>
+    </Box>
+  );
+
   return (
     <Paper sx={containerStyles} component="article">
       <Box sx={headerContainerStyles}>
@@ -54,7 +107,9 @@ export default function ProgramCard({
       </Box>
       <Box sx={descriptionContainerStyles}>
         <Typography>
-          {description}
+          {description && (
+            <p dangerouslySetInnerHTML={{ __html: description }} />
+          )}
         </Typography>
       </Box>
       <Box sx={{ mt: theme.spacing(2), display: 'flex', justifyContent: 'flex-end' }}>
@@ -68,9 +123,7 @@ export default function ProgramCard({
         >
           View
         </Button>
-        <Button variant="contained" sx={{ fontWeight: 700 }} href={applyUrl}>
-          Apply
-        </Button>
+        {form}
       </Box>
     </Paper>
   );

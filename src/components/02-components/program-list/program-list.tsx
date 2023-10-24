@@ -1,7 +1,9 @@
+import { Form } from '@remix-run/react';
 import { Box, Button, FormControl, InputLabel, Paper, Select, TextField, Typography, useTheme } from '@mui/material';
 import ProgramCard, { ProgramCardProps } from '../program-card/program-card';
 import Pager from '../../01-elements/pager/pager';
 import { ElementType, ReactNode } from 'react';
+
 
 export type ProgramListProps = {
   url: string;
@@ -111,7 +113,7 @@ export default function ProgramList({
 
   return (
     <div>
-      <Typography variant="h1">Campuses</Typography>
+      <Typography variant="h1">Programs</Typography>
       <Paper elevation={0} sx={containerStyles}>
         <Typography>
           This page includes a list of campuses and the programs that are
@@ -125,10 +127,13 @@ export default function ProgramList({
           {items?.map((item, _index) => (
             <ProgramCard
               id={item.id}
-              url={item.url}
               title={item.title}
-              applyUrl={item.applyUrl}
+              url={item.url}
+              FormElement={item.FormElement}
               description={item.description}
+              btnDisable={item.btnDisable}
+              btnText={item.btnText}
+              btnNextStatusText={item.btnNextStatusText}
             />
           ))}
         </Box>

@@ -14,7 +14,9 @@ const programData = {
   title: 'Teacher Credentialing Programs',
   description: 'Through service learning programs, students have the opportunity to develop important skills such as teamwork, communication, leadership, and problem-solving.',
   url: '#',
-  applyUrl: '#',
+  btnDisable: true,
+  btnText: 'Pending',
+  btnNextStatusText: 'Active',
 };
 
 export const Default: StoryObj<typeof ProgramCard> = {
