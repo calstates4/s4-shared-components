@@ -1,18 +1,16 @@
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, Divider, Paper, Typography, useTheme } from '@mui/material';
 import { ReactNode } from 'react';
 import { experienceStatusInfo } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
-import Link from '../../01-elements/link/link';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
+import ExperienceFormList from '../experience-form-list/experience-form-list';
+
+type FormProps = {
+  id: string;
+  name: string;
+  status: string;
+};
 
 export type ExperiencePageProps = {
   children?: ReactNode;
@@ -35,22 +33,10 @@ export type ExperiencePageProps = {
   timeApprover: string;
   observer: string;
   hasPendingForm: boolean;
-  formsBegining?: {
-    items: {
-      id: string;
-      formName: string;
-      statusFoms: string;
-      urlForm: string;
-    }[];
-  };
-  formsDuring?: {
-    items: {
-      id: string;
-      formName: string;
-      statusFoms: string;
-      urlForm: string;
-    }[];
-  };
+  beginningForms?: FormProps[];
+  duringForms?: FormProps[];
+  endForms?: FormProps[];
+  formBaseUrl?: string;
 };
 
 export default function ExperiencePage({
@@ -68,13 +54,15 @@ export default function ExperiencePage({
   location,
   hours,
   hoursCtaUrl,
-  formsBegining,
-  formsDuring,
+  beginningForms,
+  duringForms,
+  endForms,
   primaryContact,
   formSigner,
   timeApprover,
   observer,
   hasPendingForm,
+  formBaseUrl,
 }: ExperiencePageProps) {
   const theme = useTheme();
 
@@ -88,48 +76,6 @@ export default function ExperiencePage({
 
   const headingStyles = {
     fontWeight: '700',
-  };
-
-  const headingFormItemStyles = {
-    fontWeight: '700',
-    marginTop: theme.spacing(3),
-  };
-
-  const headingFormStyles = {
-    mb: theme.spacing(3),
-  };
-
-  const formWrapperStyle = {
-    p: `${theme.spacing(2)} ${theme.spacing(4)} `,
-    mb: theme.spacing(5),
-  };
-
-  const formListStyles = {
-    m: `${theme.spacing(3)} 0 0`,
-    p: 0,
-    listStyleType: 'none',
-  };
-
-  const formItemStyles = {
-    display: 'flex',
-    py: theme.spacing(2),
-    alignItems: 'center',
-    flexDirection: 'column',
-    borderTop: `1px solid ${theme.palette.secondary.light}`,
-    borderBottom: `1px solid ${theme.palette.secondary.light}`,
-    [theme.breakpoints.up('md')]: {
-      alignItems: 'flex-start',
-      flexDirection: 'row',
-    },
-  };
-
-  const formItemNameStyles = {
-    flexBasis: '30%',
-  };
-
-  const formItemStatusStyles = {
-    display: 'flex',
-    flexBasis: '20%',
   };
 
   const descriptionStyles = {
@@ -208,11 +154,6 @@ export default function ExperiencePage({
 
   const cardHoursStyles = {
     flex: '1 0 25%',
-  };
-
-  const iconSubmittedStyles = {
-    color: theme.palette.success.main,
-    marginRight: theme.spacing(1),
   };
 
   const iconPendingStyles = {
@@ -362,80 +303,13 @@ export default function ExperiencePage({
           </Box>
         </Paper>
 
-        {formsBegining || formsDuring ? (
-          <Paper sx={formWrapperStyle}>
-            <Typography sx={headingFormStyles} variant="h2">
-              Forms
-            </Typography>
-            {formsBegining && (
-              <Box>
-                <Typography sx={headingFormItemStyles} variant="h4">
-                  Beginning of Term
-                </Typography>
-                <Box component="ul" sx={formListStyles}>
-                  {formsBegining.items.map((item) => (
-                    <Box component="li" key={item.id} sx={formItemStyles}>
-                      <Typography sx={formItemNameStyles}>
-                        {item.formName}
-                      </Typography>
-                      <Typography variant="body2" sx={formItemStatusStyles}>
-                        {item.statusFoms === 'Submitted' ? (
-                          <CheckCircleOutlineOutlinedIcon
-                            sx={iconSubmittedStyles}
-                          />
-                        ) : (
-                          <ErrorOutlineIcon sx={iconPendingStyles} />
-                        )}
-                        {item.statusFoms}
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        component={Link}
-                        href={item.urlForm}
-                        sx={{ flexShrink: 0 }}
-                      >
-                        Complete form
-                      </Button>
-                    </Box>
-                  ))}
-                </Box>
-              </Box>
-            )}
-            {formsDuring && (
-              <Box>
-                <Typography sx={headingFormItemStyles} variant="h4">
-                  During Term
-                </Typography>
-                <Box component="ul" sx={formListStyles}>
-                  {formsDuring.items.map((item) => (
-                    <Box component="li" key={item.id} sx={formItemStyles}>
-                      <Typography sx={formItemNameStyles}>
-                        {item.formName}
-                      </Typography>
-                      <Typography variant="body2" sx={formItemStatusStyles}>
-                        {item.statusFoms === 'Submitted' ? (
-                          <CheckCircleOutlineOutlinedIcon
-                            sx={iconSubmittedStyles}
-                          />
-                        ) : (
-                          <ErrorOutlineIcon sx={iconPendingStyles} />
-                        )}
-                        {item.statusFoms}
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        component={Link}
-                        href={item.urlForm}
-                        sx={{ flexShrink: 0 }}
-                      >
-                        Complete form
-                      </Button>
-                    </Box>
-                  ))}
-                </Box>
-              </Box>
-            )}
-          </Paper>
+        {beginningForms || duringForms || endForms ? (
+          <ExperienceFormList
+            beginningForms={beginningForms}
+            duringForms={duringForms}
+            endForms={endForms}
+            formBaseUrl={formBaseUrl}
+          />
         ) : null}
         {children}
       </Box>
