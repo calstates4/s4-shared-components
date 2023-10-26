@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { ElementType, useRef } from 'react';
 
-type DepartmentFormProps = {
+export type DepartmentFormProps = {
   isEdit?: boolean;
   id?: string;
   name?: string;
@@ -45,9 +45,9 @@ export default function DepartmentForm({
       <TextField
         required
         fullWidth
-        id="dept-form-name"
+        id="field-name"
         variant="outlined"
-        name="label"
+        name="field-name"
         label="Name"
         defaultValue={name}
         sx={baseFormItemStyles}
@@ -56,9 +56,9 @@ export default function DepartmentForm({
         fullWidth
         multiline
         rows={4}
-        id="dept-form-description"
+        id="field-description"
         variant="outlined"
-        name="field_body"
+        name="field-description"
         label="Description"
         defaultValue={description}
         sx={baseFormItemStyles}
