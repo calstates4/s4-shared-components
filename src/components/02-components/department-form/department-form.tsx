@@ -15,6 +15,7 @@ export type DepartmentFormProps = {
   id?: string;
   name?: string;
   description?: string;
+  departments: string;
   FormElement: ElementType;
 };
 
@@ -23,6 +24,7 @@ export default function DepartmentForm({
   id,
   name,
   description,
+  departments,
   FormElement,
 }: DepartmentFormProps) {
   const theme = useTheme();
@@ -42,6 +44,7 @@ export default function DepartmentForm({
   const innerForm = (
     <>
       {id && <input type="hidden" name="id" value={id} />}
+      <input type="hidden" name="departmentsList" value={departments}/>
       <TextField
         required
         fullWidth
@@ -90,4 +93,4 @@ export default function DepartmentForm({
       {form}
     </Paper>
   );
-};
+}

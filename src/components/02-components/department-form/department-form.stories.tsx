@@ -17,7 +17,10 @@ const description = `<p>
 </p>`;
 
 export const AddDepartment: StoryObj<typeof DepartmentForm> = {
-  args: {},
+  args: {
+    isEdit: false,
+    departments: '1, 2, 3',
+  },
 };
 
 export const EditOrganization: StoryObj<typeof OrganizationForm> = {
@@ -26,5 +29,6 @@ export const EditOrganization: StoryObj<typeof OrganizationForm> = {
     id: '1',
     name: 'Test Department',
     description,
+    departments: '1, 2, 3',
   }
 }
