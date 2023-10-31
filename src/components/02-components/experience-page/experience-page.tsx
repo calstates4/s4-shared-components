@@ -303,7 +303,7 @@ export default function ExperiencePage({
           </Box>
         </Paper>
 
-        {beginningForms || duringForms || endForms ? (
+        {beginningForms?.length || duringForms?.length || endForms?.length ? (
           <ExperienceFormList
             beginningForms={beginningForms}
             duringForms={duringForms}
