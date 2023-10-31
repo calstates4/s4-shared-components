@@ -62,6 +62,7 @@ export default function ExperienceFormList({
 
   const formItemStatusStyles = {
     display: 'flex',
+    alignItems: 'center',
     mb: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       flexBasis: '20%',
@@ -93,14 +94,16 @@ export default function ExperienceFormList({
               )}
               {item.status}
             </Typography>
-            <Button
-              variant="outlined"
-              component={Link}
-              href={`${formBaseUrl}${item.id}`}
-              sx={{ flexShrink: 0 }}
-            >
-              Complete form
-            </Button>
+            {item.status === 'Pending' ? (
+              <Button
+                variant="outlined"
+                component={Link}
+                href={`${formBaseUrl}${item.id}`}
+                sx={{ flexShrink: 0 }}
+              >
+                Complete form
+              </Button>
+            ) : null}
           </Box>
         ))}
       </Box>
@@ -112,34 +115,34 @@ export default function ExperienceFormList({
       <Typography sx={headingFormStyles} variant="h2">
         Forms
       </Typography>
-      {beginningForms && (
+      {beginningForms?.length || duringForms?.length || endForms?.length ? (
         <>
-          {beginningForms && (
+          {beginningForms?.length ? (
             <Box>
               <Typography mt={3} variant="h4" component="h3">
                 Beginning of Term
               </Typography>
               <ListSection items={beginningForms} />
             </Box>
-          )}
-          {duringForms && (
+          ) : null}
+          {duringForms?.length ? (
             <Box>
               <Typography mt={3} variant="h4" component="h3">
                 During Term
               </Typography>
               <ListSection items={duringForms} />
             </Box>
-          )}
-          {endForms && (
+          ) : null}
+          {endForms?.length ? (
             <Box>
               <Typography mt={3} variant="h4" component="h3">
                 End of Term
               </Typography>
               <ListSection items={endForms} />
             </Box>
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
     </Paper>
   );
 }
