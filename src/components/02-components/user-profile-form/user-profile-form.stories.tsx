@@ -9,9 +9,21 @@ const meta: Meta<typeof UserProfileForm> = {
 
 export default meta;
 
+const breadcrumb = [
+  {
+    title: 'My Account',
+    url: '/account',
+  },
+  {
+    title: 'Edit account',
+    url: '/account/edit',
+  },
+];
+
 export const Partner: StoryObj<typeof UserProfileForm> = {
   args: {
     type: 'partner',
+    breadcrumb,
     email: 'email@email.com',
     firstName: 'John',
     lastName: 'Doe',
@@ -24,13 +36,13 @@ export const Partner: StoryObj<typeof UserProfileForm> = {
 export const Student: StoryObj<typeof UserProfileForm> = {
   args: {
     type: 'student',
+    breadcrumb,
     email: 'email@email.com',
     firstName: 'Jane',
     lastName: 'Doe',
     preferredFirstName: 'Jane',
     preferredLastName: 'Doe',
     timezone: 'America/Los_Angeles',
-    universityId: '123456',
     primaryEmergencyContact: {
       name: 'Jannet Doe',
       relationship: 'Mother',
@@ -51,12 +63,12 @@ export const Student: StoryObj<typeof UserProfileForm> = {
 export const Faculty: StoryObj<typeof UserProfileForm> = {
   args: {
     type: 'faculty',
+    breadcrumb,
     email: 'email@email.com',
     firstName: 'John',
     lastName: 'Doe',
     preferredFirstName: 'John',
     preferredLastName: 'Doe',
     timezone: 'America/Los_Angeles',
-    universityId: '123456',
   },
 };
