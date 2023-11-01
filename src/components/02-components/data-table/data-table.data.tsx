@@ -129,6 +129,28 @@ export const staffTableColumns = [
   { field: 'col1', headerName: 'First Name', width: 150 },
   { field: 'col2', headerName: 'Last Name', width: 150 },
   { field: 'col3', headerName: 'Department', width: 250 },
+  {
+    field: 'col4',
+    width: 200,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'/organization/staff/edit/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+          }}
+        >
+          Assign Department
+        </Button>
+      </strong>
+    ),
+  },
 ];
 
 export const experiencesTableColumns = [
