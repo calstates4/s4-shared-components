@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Link from '../../01-elements/link/link';
 
-type emergencyContactType = {
+export type emergencyContactType = {
   name?: string;
   relationship?: string;
   primaryPhone?: string;
@@ -19,8 +19,7 @@ type UserProfileProps = {
   universityId?: string;
   primaryEmergencyContact?: emergencyContactType;
   secondaryEmergencyContact?: emergencyContactType;
-  editProfileLink: string;
-  changePasswordLink: string;
+  editProfileUrl: string;
 };
 
 type EmergencyContactProps = {
@@ -80,27 +79,26 @@ export default function UserProfile({
       display: 'inline',
       ml: theme.spacing(0.5),
     },
-  };
-
-  const multicolListStyles = {
-    ...listStyles,
     [theme.breakpoints.up('sm')]: {
       columnCount: 2,
       columnGap: theme.spacing(3),
     },
     [theme.breakpoints.up('md')]: {
-      columnCount: 3,
+      pr: '20%',
     },
     [theme.breakpoints.up('lg')]: {
-      pr: '30%',
+      pr: '40%',
     },
   };
 
-  const usernamePasswordStyles = {
+  const threeColListStyles = {
+    ...listStyles,
     [theme.breakpoints.up('md')]: {
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: theme.spacing(8),
+      columnCount: 3,
+      pr: 0,
+    },
+    [theme.breakpoints.up('lg')]: {
+      pr: '30%',
     },
   };
 
@@ -110,7 +108,7 @@ export default function UserProfile({
         <Typography variant="h3" component="h2" mb={3}>
           {title}
         </Typography>
-        <Box component="dl" sx={multicolListStyles}>
+        <Box component="dl" sx={threeColListStyles}>
           {contact.name && (
             <div>
               <dt>Name:</dt>
@@ -159,31 +157,26 @@ export default function UserProfile({
           <Typography variant="h3" component="h2" mb={3}>
             Username and password
           </Typography>
-          <Box sx={usernamePasswordStyles}>
-            <Box component="dl" sx={listStyles}>
-              <div>
-                <dt>Email address:</dt>
-                <dd>{email}</dd>
-              </div>
-              <div>
-                <dt>Student/Employee ID:</dt>
-                <dd>{universityId}</dd>
-              </div>
-            </Box>
-            <Button
-              component={Link}
-              variant="outlined"
-              href={changePasswordLink}
-            >
-              Change password
-            </Button>
+          <Box component="dl" sx={listStyles}>
+            <div>
+              <dt>Email address:</dt>
+              <dd>{email}</dd>
+            </div>
+            <div>
+              <dt>Student/Employee ID:</dt>
+              <dd>{universityId}</dd>
+            </div>
+            <div>
+              <dt>Password:</dt>
+              <dd>*********</dd>
+            </div>
           </Box>
         </Box>
         <Box>
           <Typography variant="h3" component="h2" mb={3}>
             Personal Information
           </Typography>
-          <Box component="dl" sx={multicolListStyles}>
+          <Box component="dl" sx={threeColListStyles}>
             <div>
               <dt>First name:</dt>
               <dd>{firstName}</dd>

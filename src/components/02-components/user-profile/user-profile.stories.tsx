@@ -11,19 +11,18 @@ export default meta;
 
 export const Partner: StoryObj<typeof UserProfile> = {
   args: {
-    type: 'partner',
     email: 'email@email.com',
     firstName: 'John',
     lastName: 'Doe',
     preferredFirstName: 'John',
     preferredLastName: 'Doe',
     timezone: 'America/Los_Angeles',
+    editProfileUrl: '#',
   },
 };
 
 export const Student: StoryObj<typeof UserProfile> = {
   args: {
-    type: 'student',
     email: 'email@email.com',
     firstName: 'Jane',
     lastName: 'Doe',
@@ -45,12 +44,12 @@ export const Student: StoryObj<typeof UserProfile> = {
       secondaryPhone: '555-5558',
       email: 'email@email.com',
     },
+    editProfileUrl: '#',
   },
 };
 
 export const Faculty: StoryObj<typeof UserProfile> = {
   args: {
-    type: 'faculty',
     email: 'email@email.com',
     firstName: 'John',
     lastName: 'Doe',
@@ -58,5 +57,6 @@ export const Faculty: StoryObj<typeof UserProfile> = {
     preferredLastName: 'Doe',
     timezone: 'America/Los_Angeles',
     universityId: '123456',
+    editProfileUrl: '#',
   },
 };
