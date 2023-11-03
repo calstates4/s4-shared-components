@@ -161,7 +161,7 @@ export const staffTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={'#/organization/staff/edit/' + params.row.id}
+          href={'/organization/staff/edit/' + params.row.id}
           disabled={false}
           sx={{
             flexShrink: 0,
