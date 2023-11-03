@@ -162,3 +162,7 @@ export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,
 } from './components/04-pages/faculty/courses/course-details/course-details';
+export {
+  default as StaffAssignDepartment,
+  type StaffAssignDepartmentProps,
+} from './components/02-components/staff-assign-department/staff-assign-department';
