@@ -30,6 +30,8 @@ export const Partner: StoryObj<typeof UserProfileForm> = {
     preferredFirstName: 'John',
     preferredLastName: 'Doe',
     timezone: 'America/Los_Angeles',
+    changePasswordUrl: '#',
+    profileUrl: '/account',
   },
 };
 
@@ -57,6 +59,7 @@ export const Student: StoryObj<typeof UserProfileForm> = {
       secondaryPhone: '555-5558',
       email: 'email@email.com',
     },
+    profileUrl: '/account',
   },
 };
 
@@ -70,5 +73,6 @@ export const Faculty: StoryObj<typeof UserProfileForm> = {
     preferredFirstName: 'John',
     preferredLastName: 'Doe',
     timezone: 'America/Los_Angeles',
+    profileUrl: '/account',
   },
 };
