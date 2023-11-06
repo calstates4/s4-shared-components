@@ -37,8 +37,7 @@ export default function UserProfile({
   universityId,
   primaryEmergencyContact,
   secondaryEmergencyContact,
-  editProfileLink,
-  changePasswordLink,
+  editProfileUrl,
 }: UserProfileProps) {
   const theme = useTheme();
   // Styles.
@@ -148,7 +147,7 @@ export default function UserProfile({
     <article>
       <Box sx={headingStyles}>
         <Typography variant="h1">My account</Typography>
-        <Button component={Link} variant="contained" href={editProfileLink}>
+        <Button component={Link} variant="contained" href={editProfileUrl}>
           Edit account info
         </Button>
       </Box>
