@@ -7,18 +7,19 @@ import {
   useTheme,
 } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { ElementType, useRef } from "react";
+import {ElementType, ReactNode, useRef} from "react";
 
 export type StaffAssignDepartmentProps = {
   orgId?: string;
   uid?: string;
   fName?: string;
   lName?: string;
-  departments?: {
+  departments: ReactNode;
+  /*departments?: {
     id: string,
     title: string,
     checked: boolean,
-  }[];
+  }[];*/
   FormElement: ElementType;
 };
 
@@ -38,23 +39,12 @@ export default function StaffAssignDepartment({
       p: theme.spacing(3),
     },
   };
-
+console.log(departments);
   const innerForm = (
     <>
       <input type="hidden" name="userId" value={uid}/>
       <input type="hidden" name="orgId" value={orgId}/>
-      { departments && (
-        departments.map((data) => (
-          <Box>
-            <FormControlLabel
-              value={data.id}
-              control={<Checkbox />}
-              label={data.title}
-              checked={data.checked}
-            />
-          </Box>
-        ))
-      )}
+      {departments}
       <Box sx={{ mt: theme.spacing(4) }}>
         <Button type="submit" variant="contained">
           Assign
@@ -76,7 +66,7 @@ export default function StaffAssignDepartment({
         mb={3}
         color="primary.main"
       >
-        Departments assignation
+        Assignation Departments
       </Typography>
       {(fName && lName) && (
         <Typography
