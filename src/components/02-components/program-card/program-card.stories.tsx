@@ -16,7 +16,6 @@ const programData = {
   url: '#',
   btnDisable: true,
   btnText: 'Pending',
-  btnNextStatusText: 'Active',
 };
 
 export const Default: StoryObj<typeof ProgramCard> = {
