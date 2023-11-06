@@ -125,6 +125,14 @@ export {
   type ProgramPageProps,
 } from './components/02-components/program-page/program-page';
 export {
+  default as ProgramCard,
+  type ProgramCardProps,
+} from './components/02-components/program-card/program-card';
+export {
+  default as ProgramList,
+  type ProgramListProps,
+} from './components/02-components/program-list/program-list';
+export {
   default as SidebarMenu,
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
