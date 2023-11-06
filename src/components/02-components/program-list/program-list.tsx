@@ -6,7 +6,6 @@ import {
   InputLabel,
   Paper,
   Select,
-  TextField,
   Typography,
   useTheme
 } from '@mui/material';
@@ -70,13 +69,6 @@ export default function ProgramList({
 
   const formInner = (
     <>
-      <TextField
-        size="small"
-        id="program-tag"
-        name="program-tag"
-        label="Program tag"
-        sx={formItemStyles}
-      />
       <FormControl size="small" sx={formItemStyles}>
         <InputLabel id="status-select-label">My programs</InputLabel>
         <Select
