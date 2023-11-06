@@ -1,8 +1,18 @@
-import { Form } from '@remix-run/react';
-import { Box, Button, FormControl, InputLabel, Paper, Select, TextField, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  Paper,
+  Select,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material';
 import ProgramCard, { ProgramCardProps } from '../program-card/program-card';
 import Pager from '../../01-elements/pager/pager';
-import { ElementType, ReactNode } from 'react';
+import { ElementType } from 'react';
 
 
 export type ProgramListProps = {
@@ -13,7 +23,7 @@ export type ProgramListProps = {
   currentPage: number;
   items?: ProgramCardProps[];
   defaultProgramDisplay?: string;
-  displatFilterValues: {
+  displayFilterValues: {
     id: string;
     label: string;
   }[];
@@ -26,11 +36,16 @@ export default function ProgramList({
   itemsPerPage,
   currentPage,
   items,
-  displatFilterValues,
+  displayFilterValues,
   defaultProgramDisplay,
 }: ProgramListProps) {
   const theme = useTheme();
   const pagerCount = Math.ceil(totalItems / itemsPerPage);
+
+  const titleStyles = {
+    textTransform: 'uppercase',
+    mb: theme.spacing(2),
+  };
 
   // Styles
   const containerStyles = {
@@ -53,14 +68,6 @@ export default function ProgramList({
     },
   };
 
-  const listStyles = {
-    display: 'grid',
-    gap: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    }
-  };
-
   const formInner = (
     <>
       <TextField
@@ -79,7 +86,7 @@ export default function ProgramList({
           name="program-display"
           defaultValue={defaultProgramDisplay}
         >
-          {displatFilterValues.map((item) => (
+          {displayFilterValues.map((item) => (
             <option key={item.id} value={item.id}>
               {item.label}
             </option>
@@ -113,7 +120,7 @@ export default function ProgramList({
 
   return (
     <div>
-      <Typography variant="h1">Programs</Typography>
+      <Typography variant="h1" sx={titleStyles}>Programs</Typography>
       <Paper elevation={0} sx={containerStyles}>
         <Typography>
           This page includes a list of campuses and the programs that are
@@ -123,20 +130,21 @@ export default function ProgramList({
           with, use the Initiate Partnership button to begin the process.
         </Typography>
         <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
-        <Box sx={listStyles}>
+        <Grid container spacing={5} alignItems='stretch'>
           {items?.map((item, _index) => (
-            <ProgramCard
-              id={item.id}
-              title={item.title}
-              url={item.url}
-              FormElement={item.FormElement}
-              description={item.description}
-              btnDisable={item.btnDisable}
-              btnText={item.btnText}
-              btnNextStatusText={item.btnNextStatusText}
-            />
+            <Grid item xs={12} md={6} key={_index}>
+              <ProgramCard
+                id={item.id}
+                title={item.title}
+                url={item.url}
+                joinUrl={item.joinUrl}
+                description={item.description}
+                btnDisable={item.btnDisable}
+                btnText={item.btnText}
+              />
+            </Grid>
           ))}
-        </Box>
+        </Grid>
         {renderedPager}
       </Paper>
     </div>
