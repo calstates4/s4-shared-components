@@ -39,7 +39,7 @@ export default function StaffAssignDepartment({
       p: theme.spacing(3),
     },
   };
-console.log(departments);
+
   const innerForm = (
     <>
       <input type="hidden" name="userId" value={uid}/>
