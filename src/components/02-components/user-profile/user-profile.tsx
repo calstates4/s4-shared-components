@@ -11,6 +11,7 @@ export type emergencyContactType = {
 };
 
 export type UserProfileDataType = {
+  id: string;
   username: string;
   email: string;
   firstName?: string;

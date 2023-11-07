@@ -25,6 +25,7 @@ export const Partner: StoryObj<typeof UserProfileForm> = {
     type: 'partner',
     breadcrumbs,
     userData: {
+      id: '10',
       username: 'johndoe',
       email: 'email@email.com',
       firstName: 'John',
@@ -43,6 +44,7 @@ export const Student: StoryObj<typeof UserProfileForm> = {
     type: 'student',
     breadcrumbs,
     userData: {
+      id: '11',
       username: 'janedoe',
       email: 'email@email.com',
       firstName: 'Jane',
@@ -74,6 +76,7 @@ export const Faculty: StoryObj<typeof UserProfileForm> = {
     type: 'faculty',
     breadcrumbs,
     userData: {
+      id: '12',
       username: 'johndoe',
       email: 'email@email.com',
       firstName: 'John',
