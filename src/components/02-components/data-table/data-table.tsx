@@ -25,6 +25,7 @@ export default function DataTable({
   return (
     <DataGrid
       rows={rows}
+      autoHeight
       getRowHeight={() => 'auto'}
       columns={columns}
       checkboxSelection
@@ -36,7 +37,7 @@ export default function DataTable({
       }}
       filterModel={filters}
       pageSizeOptions={[5, 10, 25, 50, 100]}
-      sx={{ paddingLeft: theme.spacing(3), height: 'auto' }}
+      sx={{ paddingLeft: theme.spacing(3) }}
     />
   );
 }
