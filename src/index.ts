@@ -158,6 +158,10 @@ export {
   type RegistrationPageProps,
 } from './components/02-components/registration-page/registration-page';
 export {
+  default as DepartmentForm,
+  type DepartmentFormProps
+} from './components/02-components/department-form/department-form';
+export {
   default as DataTablePage,
   type DataTablePageProps,
 } from './components/04-pages/generic/data-table-page';
