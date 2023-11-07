@@ -1,14 +1,11 @@
 import {
-  Box,
   Button,
-  FormControlLabel,
   Paper,
-  Switch,
   TextField,
   Typography,
   useTheme,
 } from '@mui/material';
-import { ElementType, useRef } from 'react';
+import { ElementType } from 'react';
 
 export type DepartmentFormProps = {
   isEdit?: boolean;
