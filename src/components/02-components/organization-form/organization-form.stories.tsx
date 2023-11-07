@@ -75,6 +75,7 @@ export const AddOrganization: StoryObj<typeof OrganizationForm> = {
     industryOptions: options,
     organizationTypeOptions: options,
     focusAreaOptions: options,
+    subFocusAreaOptions: options,
     focusPopulationOptions: options,
     mainHeadingLevel: 'h2',
     byline:
@@ -122,6 +123,7 @@ export const EditOrganization: StoryObj<typeof OrganizationForm> = {
     industryOptions: options,
     organizationTypeOptions: options,
     focusAreaOptions: options,
+    subFocusAreaOptions: options,
     focusPopulationOptions: options,
   },
 };
