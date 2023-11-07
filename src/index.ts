@@ -36,24 +36,24 @@ export {
 } from './components/02-components/card-experience/card-experience';
 export { default as CardExperiencesList } from './components/02-components/card-experiences-list/card-experiences-list';
 export { default as CardPendingTasks } from './components/02-components/card-pending-tasks/card-pending-tasks';
+export { default as CardQuickLinks } from './components/02-components/card-quick-links/card-quick-links';
 export {
   default as Context,
   type ContextProps,
 } from './components/02-components/context/context';
-export { default as CardQuickLinks } from './components/02-components/card-quick-links/card-quick-links';
 export { default as CtaCard } from './components/02-components/cta-card/cta-card';
 export {
   default as DataTable,
   type DataTableProps,
 } from './components/02-components/data-table/data-table';
-export { default as GridToolbar } from './components/02-components/data-table/data-table-toolbar.generic';
 export { default as GridToolbarExtraButton } from './components/02-components/data-table/data-table-toolbar.extra-button';
+export { default as GridToolbar } from './components/02-components/data-table/data-table-toolbar.generic';
 export {
-  experiencesTableColumns,
-  staffTableColumns,
   coursesTableColumns,
   enrolledStudentsTableColumns,
+  experiencesTableColumns,
   reportStudentsTableColumns,
+  staffTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
@@ -139,16 +139,27 @@ export {
   type TimeLogEntryProps,
   type TimeLogTableProps,
 } from './components/02-components/time-log-table/time-log-table';
+export { default as TimezoneField } from './components/02-components/timezone-field/timezone-field';
 export { default as TopBar } from './components/02-components/topbar/topbar';
+export { default as UserProfileForm } from './components/02-components/user-profile-form/user-profile-form';
+export {
+  default as UserProfile,
+  type UserProfileDataType,
+} from './components/02-components/user-profile/user-profile';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 export { default as TwoColumnLayout } from './components/03-layouts/two-column-layout/two-column-layout';
 // Pages
+export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
 export {
   default as RegistrationPage,
   type RegistrationPageProps,
 } from './components/02-components/registration-page/registration-page';
+export {
+  default as CourseDetailsPage,
+  type CourseDetailsPageProps,
+} from './components/04-pages/faculty/courses/course-details/course-details';
 export {
   default as DataTablePage,
   type DataTablePageProps,
@@ -157,8 +168,3 @@ export {
   default as PartnerExperienceDetailsPage,
   type PartnerExperienceDetailsPageProps,
 } from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
-export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
-export {
-  default as CourseDetailsPage,
-  type CourseDetailsPageProps,
-} from './components/04-pages/faculty/courses/course-details/course-details';

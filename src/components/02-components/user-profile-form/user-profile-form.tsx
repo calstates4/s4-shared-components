@@ -12,23 +12,18 @@ import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 import Tabs, { RefHandler } from '../tabs/tabs';
 import TimezoneField from '../timezone-field/timezone-field';
-import { type emergencyContactType } from '../user-profile/user-profile';
+import {
+  UserProfileDataType,
+  type emergencyContactType,
+} from '../user-profile/user-profile';
 
 type UserProfileFormProps = {
   type: string;
-  breadcrumb: {
+  breadcrumbs: {
     title: string;
     url: string;
   }[];
-  username: string;
-  email: string;
-  firstName?: string;
-  lastName?: string;
-  preferredFirstName?: string;
-  preferredLastName?: string;
-  timezone?: string;
-  primaryEmergencyContact?: emergencyContactType;
-  secondaryEmergencyContact?: emergencyContactType;
+  userData: UserProfileDataType;
   profileUrl: string;
   changePasswordUrl?: string;
   FormElement: ElementType;
@@ -36,16 +31,8 @@ type UserProfileFormProps = {
 
 export default function UserProfileForm({
   type,
-  breadcrumb,
-  username,
-  email,
-  firstName,
-  lastName,
-  preferredFirstName,
-  preferredLastName,
-  timezone,
-  primaryEmergencyContact,
-  secondaryEmergencyContact,
+  breadcrumbs,
+  userData,
   profileUrl,
   changePasswordUrl,
   FormElement,
@@ -149,7 +136,7 @@ export default function UserProfileForm({
         variant="outlined"
         name="firstName"
         label="First Name"
-        defaultValue={firstName}
+        defaultValue={userData.firstName}
         sx={baseFormItemStyles}
       />
       <TextField
@@ -158,7 +145,7 @@ export default function UserProfileForm({
         variant="outlined"
         name="lastName"
         label="Last Name"
-        defaultValue={lastName}
+        defaultValue={userData.lastName}
         sx={baseFormItemStyles}
       />
       <TextField
@@ -167,7 +154,7 @@ export default function UserProfileForm({
         variant="outlined"
         name="preferredFirstName"
         label="Preferred First Name"
-        defaultValue={preferredFirstName}
+        defaultValue={userData.preferredFirstName}
         sx={baseFormItemStyles}
         helperText="Preferred name, such as a nickname."
       />
@@ -177,7 +164,7 @@ export default function UserProfileForm({
         variant="outlined"
         name="preferredLastName"
         label="Preferred Last Name"
-        defaultValue={preferredLastName}
+        defaultValue={userData.preferredLastName}
         sx={baseFormItemStyles}
         helperText="Preferred last name."
       />
@@ -185,7 +172,7 @@ export default function UserProfileForm({
         id="timezone"
         name="timezone"
         label="Timezone"
-        defaultValue={timezone || ''}
+        defaultValue={userData.timezone || ''}
         helperText="Select the desired local time and time zone. Dates and times throughout this site will be displayed using this time zone."
       />
     </div>,
@@ -204,7 +191,7 @@ export default function UserProfileForm({
           variant="outlined"
           name="email"
           label="Email address"
-          defaultValue={email}
+          defaultValue={userData.email}
           sx={baseFormItemStyles}
           helperText="The email address is not made public. It will only be used if you need to be contacted about your account or for opted-in notifications."
         />
@@ -215,11 +202,11 @@ export default function UserProfileForm({
           variant="outlined"
           name="username"
           label="Username"
-          defaultValue={username}
+          defaultValue={userData.username}
           sx={baseFormItemStyles}
           helperText="Several special characters are allowed, including space, period (.), hyphen (-), apostrophe ('), underscore (_), and the @ sign."
         />
-        {changePasswordUrl ?? (
+        {changePasswordUrl && (
           <Button component={Link} href={changePasswordUrl} variant="outlined">
             Change password
           </Button>
@@ -234,7 +221,10 @@ export default function UserProfileForm({
         <Typography variant="h2" mb={4}>
           Edit your primary emergency contact
         </Typography>
-        <EmergencyContactForm data={primaryEmergencyContact} isPrimary={true} />
+        <EmergencyContactForm
+          data={userData.primaryEmergencyContact}
+          isPrimary={true}
+        />
       </div>,
     );
     tabs.push(
@@ -242,7 +232,7 @@ export default function UserProfileForm({
         <Typography variant="h2" mb={4}>
           Edit your secondary emergency contact
         </Typography>
-        <EmergencyContactForm data={secondaryEmergencyContact} />
+        <EmergencyContactForm data={userData.secondaryEmergencyContact} />
       </div>,
     );
   }
@@ -282,7 +272,7 @@ export default function UserProfileForm({
 
   return (
     <article>
-      <Breadcrumbs items={breadcrumb} />
+      <Breadcrumbs items={breadcrumbs} />
       <Typography variant="h1" mb={4}>
         Edit account
       </Typography>

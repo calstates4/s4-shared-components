@@ -1,4 +1,5 @@
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
+import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 
 export type emergencyContactType = {
@@ -9,7 +10,8 @@ export type emergencyContactType = {
   email?: string;
 };
 
-type UserProfileProps = {
+export type UserProfileDataType = {
+  username: string;
   email: string;
   firstName?: string;
   lastName?: string;
@@ -19,6 +21,14 @@ type UserProfileProps = {
   universityId?: string;
   primaryEmergencyContact?: emergencyContactType;
   secondaryEmergencyContact?: emergencyContactType;
+};
+
+type UserProfileProps = {
+  breadcrumbs: {
+    title: string;
+    url: string;
+  }[];
+  userData: UserProfileDataType;
   editProfileUrl: string;
 };
 
@@ -28,15 +38,8 @@ type EmergencyContactProps = {
 };
 
 export default function UserProfile({
-  email,
-  firstName,
-  lastName,
-  preferredFirstName,
-  preferredLastName,
-  timezone,
-  universityId,
-  primaryEmergencyContact,
-  secondaryEmergencyContact,
+  breadcrumbs,
+  userData,
   editProfileUrl,
 }: UserProfileProps) {
   const theme = useTheme();
@@ -145,6 +148,7 @@ export default function UserProfile({
 
   return (
     <article>
+      <Breadcrumbs items={breadcrumbs} />
       <Box sx={headingStyles}>
         <Typography variant="h1">My account</Typography>
         <Button component={Link} variant="contained" href={editProfileUrl}>
@@ -158,13 +162,19 @@ export default function UserProfile({
           </Typography>
           <Box component="dl" sx={listStyles}>
             <div>
-              <dt>Email address:</dt>
-              <dd>{email}</dd>
+              <dt>Username:</dt>
+              <dd>{userData.username}</dd>
             </div>
             <div>
-              <dt>Student/Employee ID:</dt>
-              <dd>{universityId}</dd>
+              <dt>Email address:</dt>
+              <dd>{userData.email}</dd>
             </div>
+            {userData.universityId && (
+              <div>
+                <dt>Student/Employee ID:</dt>
+                <dd>{userData.universityId}</dd>
+              </div>
+            )}
             <div>
               <dt>Password:</dt>
               <dd>*********</dd>
@@ -176,35 +186,45 @@ export default function UserProfile({
             Personal Information
           </Typography>
           <Box component="dl" sx={threeColListStyles}>
-            <div>
-              <dt>First name:</dt>
-              <dd>{firstName}</dd>
-            </div>
-            <div>
-              <dt>Last name:</dt>
-              <dd>{lastName}</dd>
-            </div>
-            <div>
-              <dt>Preferred first name:</dt>
-              <dd>{preferredFirstName}</dd>
-            </div>
-            <div>
-              <dt>Preferred last name:</dt>
-              <dd>{preferredLastName}</dd>
-            </div>
-            <div>
-              <dt>Time zone:</dt>
-              <dd>{timezone}</dd>
-            </div>
+            {userData.firstName && (
+              <div>
+                <dt>First name:</dt>
+                <dd>{userData.firstName}</dd>
+              </div>
+            )}
+            {userData.lastName && (
+              <div>
+                <dt>Last name:</dt>
+                <dd>{userData.lastName}</dd>
+              </div>
+            )}
+            {userData.preferredFirstName && (
+              <div>
+                <dt>Preferred first name:</dt>
+                <dd>{userData.preferredFirstName}</dd>
+              </div>
+            )}
+            {userData.preferredLastName && (
+              <div>
+                <dt>Preferred last name:</dt>
+                <dd>{userData.preferredLastName}</dd>
+              </div>
+            )}
+            {userData.timezone && (
+              <div>
+                <dt>Time zone:</dt>
+                <dd>{userData.timezone}</dd>
+              </div>
+            )}
           </Box>
         </Box>
         <EmergencyContact
           title="Primary Emergency Contact"
-          contact={primaryEmergencyContact}
+          contact={userData.primaryEmergencyContact}
         />
         <EmergencyContact
           title="Secondary Emergency Contact"
-          contact={secondaryEmergencyContact}
+          contact={userData.secondaryEmergencyContact}
         />
       </Paper>
     </article>
