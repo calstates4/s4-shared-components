@@ -14,7 +14,7 @@ import Tabs, { RefHandler } from '../tabs/tabs';
 import TimezoneField from '../timezone-field/timezone-field';
 import {
   UserProfileDataType,
-  type emergencyContactType,
+  type EmergencyContactType,
 } from '../user-profile/user-profile';
 
 type UserProfileFormProps = {
@@ -64,7 +64,7 @@ export default function UserProfileForm({
     data,
     isPrimary = false,
   }: {
-    data?: emergencyContactType;
+    data?: EmergencyContactType;
     isPrimary?: boolean;
   }) {
     const labelPrefix = isPrimary ? 'primary' : 'secondary';

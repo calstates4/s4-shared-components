@@ -144,6 +144,7 @@ export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as UserProfileForm } from './components/02-components/user-profile-form/user-profile-form';
 export {
   default as UserProfile,
+  type EmergencyContactType,
   type UserProfileDataType,
 } from './components/02-components/user-profile/user-profile';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';

@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 
-export type emergencyContactType = {
+export type EmergencyContactType = {
   name?: string;
   relationship?: string;
   primaryPhone?: string;
@@ -20,8 +20,8 @@ export type UserProfileDataType = {
   preferredLastName?: string;
   timezone?: string;
   universityId?: string;
-  primaryEmergencyContact?: emergencyContactType;
-  secondaryEmergencyContact?: emergencyContactType;
+  primaryEmergencyContact?: EmergencyContactType;
+  secondaryEmergencyContact?: EmergencyContactType;
 };
 
 type UserProfileProps = {
@@ -35,7 +35,7 @@ type UserProfileProps = {
 
 type EmergencyContactProps = {
   title: string;
-  contact?: emergencyContactType;
+  contact?: EmergencyContactType;
 };
 
 export default function UserProfile({
