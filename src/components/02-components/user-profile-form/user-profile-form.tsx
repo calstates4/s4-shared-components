@@ -239,6 +239,7 @@ export default function UserProfileForm({
 
   const formInner = (
     <>
+      <input name="id" type="hidden" value={userData.id} />
       <Tabs
         name="Edit account form tabs"
         id="user-profile-form"
