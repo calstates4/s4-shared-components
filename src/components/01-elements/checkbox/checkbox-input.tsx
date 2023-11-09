@@ -8,6 +8,7 @@ import {useState} from "react";
 
 export type CheckboxProps = {
   id: string;
+  value: string;
   name: string;
   title: string;
   checked: boolean;
@@ -15,6 +16,7 @@ export type CheckboxProps = {
 
 export default function CheckboxInput({
   id,
+  value,
   name,
   title,
   checked,
@@ -31,6 +33,7 @@ export default function CheckboxInput({
         name={name}
         control={
           <Checkbox
+            value={value}
             onChange={checkboxChangeHandler}
             checked={isChecked}
           />

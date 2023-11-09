@@ -15,21 +15,24 @@ const departments: ReactNode[] = [];
 const departmentsList= [
   {
     id: '1',
+    value: '1',
     name: 'department',
     title: 'Department 1',
     checked: true,
   },
   {
     id: '2',
+    value: '2',
     name: 'department',
     title: 'Department 2',
     checked: false,
   },
   {
     id: '3',
+    value: '3',
     name: 'department',
     title: 'Department 3',
-    checked: false,
+    checked: true,
   },
 ];
 
@@ -43,7 +46,7 @@ export default meta;
 
 export const Default: StoryObj<typeof StaffAssignDepartment> = {
   args: {
-    orgId: '10' as string,
+    orgId: '10',
     uid: '1',
     fName: 'Peter',
     lName: 'parket',

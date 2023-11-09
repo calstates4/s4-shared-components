@@ -15,11 +15,6 @@ export type StaffAssignDepartmentProps = {
   fName?: string;
   lName?: string;
   departments: ReactNode;
-  /*departments?: {
-    id: string,
-    title: string,
-    checked: boolean,
-  }[];*/
   FormElement: ElementType;
 };
 
@@ -42,8 +37,8 @@ export default function StaffAssignDepartment({
 
   const innerForm = (
     <>
-      <input type="hidden" name="userId" value={uid}/>
-      <input type="hidden" name="orgId" value={orgId}/>
+      <input type="hidden" name="userId" value={uid} />
+      <input type="hidden" name="orgId" value={orgId} />
       {departments}
       <Box sx={{ mt: theme.spacing(4) }}>
         <Button type="submit" variant="contained">

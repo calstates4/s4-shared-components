@@ -12,6 +12,7 @@ export default meta;
 export const Default: StoryObj<typeof CheckboxInput> = {
   args: {
     id: '1',
+    value: '1',
     name: 'chb-sample',
     title: 'Sample #1',
     checked: true,
