@@ -126,6 +126,14 @@ export {
   type ProgramPageProps,
 } from './components/02-components/program-page/program-page';
 export {
+  default as ProgramCard,
+  type ProgramCardProps,
+} from './components/02-components/program-card/program-card';
+export {
+  default as ProgramList,
+  type ProgramListProps,
+} from './components/02-components/program-list/program-list';
+export {
   default as SidebarMenu,
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
@@ -150,6 +158,10 @@ export {
   default as RegistrationPage,
   type RegistrationPageProps,
 } from './components/02-components/registration-page/registration-page';
+export {
+  default as DepartmentForm,
+  type DepartmentFormProps
+} from './components/02-components/department-form/department-form';
 export {
   default as DataTablePage,
   type DataTablePageProps,
