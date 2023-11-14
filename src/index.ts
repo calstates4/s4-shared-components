@@ -6,6 +6,7 @@ export { default as Link } from './components/01-elements/link/link';
 export { default as Logo } from './components/01-elements/logo/logo';
 export { default as Pager } from './components/01-elements/pager/pager';
 export { default as SidebarToggle } from './components/01-elements/sidebar-toggle/sidebar-toggle';
+export { default as CheckboxInput, type CheckboxProps } from './components/01-elements/checkbox/checkbox-input';
 // Components.
 export { default as Loader } from './components/01-elements/loader/loader';
 export {
@@ -174,3 +175,7 @@ export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,
 } from './components/04-pages/faculty/courses/course-details/course-details';
+export {
+  default as StaffAssignDepartment,
+  type StaffAssignDepartmentProps,
+} from './components/02-components/staff-assign-department/staff-assign-department';
