@@ -1,7 +1,6 @@
 import {
   Box,
-  Checkbox, SelectChangeEvent,
-  useTheme,
+  Checkbox,
 } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {useState} from "react";

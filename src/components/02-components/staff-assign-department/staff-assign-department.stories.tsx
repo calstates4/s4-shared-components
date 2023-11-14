@@ -4,6 +4,7 @@ import {ReactNode} from "react";
 import CheckboxInput, {
   type CheckboxProps,
 } from "../../01-elements/checkbox/checkbox-input";
+import React from 'react';
 
 const meta: Meta<typeof StaffAssignDepartment> = {
   title: 'Components/Staff Assign Departments',
@@ -16,22 +17,22 @@ const departmentsList= [
   {
     id: '1',
     value: '1',
-    name: 'department',
-    title: 'Department 1',
+    name: 'Education',
+    title: 'Education',
     checked: true,
   },
   {
     id: '2',
     value: '2',
-    name: 'department',
-    title: 'Department 2',
+    name: 'Finance',
+    title: 'Finance',
     checked: false,
   },
   {
     id: '3',
     value: '3',
-    name: 'department',
-    title: 'Department 3',
+    name: 'Administration',
+    title: 'Administration',
     checked: true,
   },
 ];
@@ -49,7 +50,7 @@ export const Default: StoryObj<typeof StaffAssignDepartment> = {
     orgId: '10',
     uid: '1',
     fName: 'Peter',
-    lName: 'parket',
+    lName: 'Parker',
     departments: departments,
   }
 }

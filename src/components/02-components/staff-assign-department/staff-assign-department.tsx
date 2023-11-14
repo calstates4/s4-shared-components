@@ -2,12 +2,10 @@ import {
   Box,
   Button,
   Paper,
-  Checkbox,
   Typography,
   useTheme,
 } from "@mui/material";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import {ElementType, ReactNode, useRef} from "react";
+import { ElementType, ReactNode } from "react";
 
 export type StaffAssignDepartmentProps = {
   orgId?: string;
@@ -61,7 +59,7 @@ export default function StaffAssignDepartment({
         mb={3}
         color="primary.main"
       >
-        Assignation Departments
+        Assign Departments
       </Typography>
       {(fName && lName) && (
         <Typography

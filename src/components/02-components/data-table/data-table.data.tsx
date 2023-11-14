@@ -140,7 +140,6 @@ export const staffTableColumns = [
     field: 'col3',
     headerName: 'Departments',
     width: 150,
-    type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <ul style={{listStyleType: 'none', padding: '0'}}>
@@ -154,7 +153,7 @@ export const staffTableColumns = [
   },
   {
     field: 'col4',
-    width: 200,
+    width: 300,
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
