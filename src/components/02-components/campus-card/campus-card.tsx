@@ -264,7 +264,7 @@ export default function CampusCard({
                   component={Link}
                   href={initiatePartnershipLink}
                 >
-                  Initiate Partnership
+                  Request Partnership
                 </Button>
               )}
             </>
