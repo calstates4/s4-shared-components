@@ -47,6 +47,12 @@ export default meta;
 
 export const Default: StoryObj<typeof StaffAssignDepartment> = {
   args: {
+    breadcrumb: [
+      {
+        title: 'Back to Staff Page',
+        url: '#',
+      },
+    ],
     orgId: '10',
     uid: '1',
     fName: 'Peter',

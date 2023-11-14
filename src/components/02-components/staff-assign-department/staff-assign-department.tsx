@@ -6,8 +6,13 @@ import {
   useTheme,
 } from "@mui/material";
 import { ElementType, ReactNode } from "react";
+import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 
 export type StaffAssignDepartmentProps = {
+  breadcrumb: {
+    title: string;
+    url: string;
+  }[];
   orgId?: string;
   uid?: string;
   fName?: string;
@@ -17,6 +22,7 @@ export type StaffAssignDepartmentProps = {
 };
 
 export default function StaffAssignDepartment({
+  breadcrumb,
   orgId,
   uid,
   fName,
@@ -53,23 +59,26 @@ export default function StaffAssignDepartment({
   );
 
   return (
-    <Paper sx={containerStyles}>
-      <Typography
-        variant={"h1"}
-        mb={3}
-        color="primary.main"
-      >
-        Assign Departments
-      </Typography>
-      {(fName && lName) && (
+    <>
+      <Breadcrumbs items={breadcrumb} />
+      <Paper sx={containerStyles}>
         <Typography
-          variant="h3"
-          mb={4}>
-          Staff member: {fName} {lName}
+          variant={"h1"}
+          mb={3}
+          color="primary.main"
+        >
+          Assign Departments
         </Typography>
-      )}
+        {(fName && lName) && (
+          <Typography
+            variant="h3"
+            mb={4}>
+            Staff member: {fName} {lName}
+          </Typography>
+        )}
 
-      {form}
-    </Paper>
+        {form}
+      </Paper>
+    </>
   );
 }
