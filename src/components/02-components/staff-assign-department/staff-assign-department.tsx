@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { ElementType, ReactNode } from "react";
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
+import { useState } from "react";
 
 export type StaffAssignDepartmentProps = {
   breadcrumb: {
@@ -32,11 +33,22 @@ export default function StaffAssignDepartment({
 }: StaffAssignDepartmentProps ) {
   const theme = useTheme();
 
+  // Add state for the disabled variable
+  const [disabled, setDisabled] = useState<boolean>(false);
+
   const containerStyles = {
     p: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       p: theme.spacing(3),
     },
+  };
+
+  const handleButtonClick = (event: React.FormEvent<HTMLButtonElement>) => {
+    // Update the disabled state when the button is clicked
+    setDisabled(true);
+
+    // Add any other logic you need when the button is clicked
+    event.currentTarget.form?.submit();
   };
 
   const innerForm = (
@@ -45,7 +57,12 @@ export default function StaffAssignDepartment({
       <input type="hidden" name="orgId" value={orgId} />
       {departments}
       <Box sx={{ mt: theme.spacing(4) }}>
-        <Button type="submit" variant="contained">
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={disabled}
+          onClick={handleButtonClick}
+        >
           Assign
         </Button>
       </Box>
