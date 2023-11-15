@@ -6,6 +6,7 @@ type FormProps = {
   id: string;
   name: string;
   status: string;
+  submissionId?: string;
 };
 
 type ExperienceFormListProps = {
@@ -13,6 +14,7 @@ type ExperienceFormListProps = {
   duringForms: FormProps[] | undefined;
   endForms: FormProps[] | undefined;
   formBaseUrl?: string;
+  viewSubmissionBaseUrl?: string;
 };
 
 export default function ExperienceFormList({
@@ -20,6 +22,7 @@ export default function ExperienceFormList({
   duringForms,
   endForms,
   formBaseUrl = '/forms/',
+  viewSubmissionBaseUrl = '/submission/',
 }: ExperienceFormListProps) {
   const theme = useTheme();
 
@@ -103,7 +106,13 @@ export default function ExperienceFormList({
               >
                 Complete form
               </Button>
-            ) : null}
+            ) : (
+              item.submissionId && (
+                <Link href={`${viewSubmissionBaseUrl}${item.submissionId}`}>
+                  Review submission
+                </Link>
+              )
+            )}
           </Box>
         ))}
       </Box>

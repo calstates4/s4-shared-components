@@ -16,6 +16,7 @@ export const Default: StoryObj<typeof ExperienceFormList> = {
         id: 'form-1',
         name: 'Release of Liability - COVID 19',
         status: 'Submitted',
+        submissionId: '24',
       },
     ],
     duringForms: [
@@ -23,6 +24,7 @@ export const Default: StoryObj<typeof ExperienceFormList> = {
         id: 'form-2',
         name: 'Proident mollit nisi id esse eiusmod cillum eiusmod',
         status: 'Submitted',
+        submissionId: '35',
       },
       {
         id: 'form-3',
