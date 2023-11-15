@@ -6,6 +6,7 @@ export { default as Link } from './components/01-elements/link/link';
 export { default as Logo } from './components/01-elements/logo/logo';
 export { default as Pager } from './components/01-elements/pager/pager';
 export { default as SidebarToggle } from './components/01-elements/sidebar-toggle/sidebar-toggle';
+export { default as CheckboxInput, type CheckboxProps } from './components/01-elements/checkbox/checkbox-input';
 // Components.
 export { default as Loader } from './components/01-elements/loader/loader';
 export {
@@ -125,26 +126,42 @@ export {
   type ProgramPageProps,
 } from './components/02-components/program-page/program-page';
 export {
+  default as ProgramCard,
+  type ProgramCardProps,
+} from './components/02-components/program-card/program-card';
+export {
+  default as ProgramList,
+  type ProgramListProps,
+} from './components/02-components/program-list/program-list';
+export {
   default as SidebarMenu,
   type SidebarMenuProps,
 } from './components/02-components/sidebar-menu/sidebar-menu';
 export { default as Sidebar } from './components/02-components/sidebar/sidebar';
 export { default as StatWithIcon } from './components/02-components/stat-with-icon/stat-with-icon';
 export {
-  default as TimeLogTable,
-  type TimeLogTableProps,
-  type TimeLogEntryProps,
-} from './components/02-components/time-log-table/time-log-table';
-export {
   default as TimeLogForm,
-  type TimeLogFormProps
+  type TimeLogFormProps,
 } from './components/02-components/time-log-form/time-log-form';
+export {
+  default as TimeLogTable,
+  type TimeLogEntryProps,
+  type TimeLogTableProps,
+} from './components/02-components/time-log-table/time-log-table';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 export { default as TwoColumnLayout } from './components/03-layouts/two-column-layout/two-column-layout';
 // Pages
+export {
+  default as RegistrationPage,
+  type RegistrationPageProps,
+} from './components/02-components/registration-page/registration-page';
+export {
+  default as DepartmentForm,
+  type DepartmentFormProps
+} from './components/02-components/department-form/department-form';
 export {
   default as DataTablePage,
   type DataTablePageProps,
@@ -158,3 +175,7 @@ export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,
 } from './components/04-pages/faculty/courses/course-details/course-details';
+export {
+  default as StaffAssignDepartment,
+  type StaffAssignDepartmentProps,
+} from './components/02-components/staff-assign-department/staff-assign-department';

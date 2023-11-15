@@ -85,50 +85,94 @@ export const staffTableRows = [
     id: 1,
     col1: 'Emily',
     col2: 'Parker',
-    col3: 'Administration',
+    departments: [
+      'Banking',
+      'Administration'
+    ],
+
   },
   {
     id: 2,
     col1: 'Peter',
     col2: 'Parker',
-    col3: 'Education',
+    departments: [
+      'Education',
+      'Banking',
+      'Administration'
+    ],
   },
   {
     id: 3,
     col1: 'Sarah',
     col2: 'Parker',
-    col3: 'Elementary',
+    departments: ['Elementary']
   },
   {
     id: 4,
     col1: 'John',
     col2: 'Parker',
-    col3: 'Teaching',
+    departments: ['Teaching'],
   },
   {
     id: 5,
     col1: 'Fernando',
     col2: 'Parker',
-    col3: 'Social Work',
+    departments: ['Teaching', 'Social Work'],
   },
   {
     id: 6,
     col1: 'Bob',
     col2: 'Parker',
-    col3: 'Education',
+    departments: ['Education'],
   },
   {
     id: 7,
     col1: 'George',
     col2: 'Parker',
-    col3: 'Banking',
+    departments: [],
   },
 ];
 
 export const staffTableColumns = [
   { field: 'col1', headerName: 'First Name', width: 150 },
   { field: 'col2', headerName: 'Last Name', width: 150 },
-  { field: 'col3', headerName: 'Department', width: 250 },
+  {
+    field: 'col3',
+    headerName: 'Departments',
+    width: 150,
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <ul style={{listStyleType: 'none', padding: '0'}}>
+        {params.row.departments.map((item:string, index: number) => (
+          <li key={index}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  {
+    field: 'col4',
+    width: 300,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'/organization/staff/edit/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+          }}
+        >
+          Assign Department
+        </Button>
+      </strong>
+    ),
+  },
 ];
 
 export const experiencesTableColumns = [
@@ -226,7 +270,7 @@ export const experiencesTableRows = [
 ];
 
 export const staffFilterModel: GridFilterModel = {
-  items: [{ field: 'col3', operator: 'contains', value: 'Education' }],
+  items: [{ field: 'col3', operator: 'contains', value: '' }],
   logicOperator: GridLogicOperator.Or,
 };
 
