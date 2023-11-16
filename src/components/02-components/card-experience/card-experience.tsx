@@ -1,3 +1,4 @@
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {
   Box,
   Button,
@@ -8,6 +9,7 @@ import {
 } from '@mui/material';
 import { experienceStatusInfo } from '../../../lib/utils';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
+import Link from '../../01-elements/link/link';
 
 export type CardExperienceProps = {
   id: string;
@@ -19,6 +21,7 @@ export type CardExperienceProps = {
   dateEnd: string;
   location: string;
   cta: string;
+  hasPendingForm: boolean;
   hours: number;
   hoursCtaUrl: string;
   cardCount: number;
@@ -33,6 +36,7 @@ export default function CardExperience({
   dateEnd,
   location,
   cta,
+  hasPendingForm,
   hours,
   hoursCtaUrl,
   cardCount,
@@ -48,8 +52,8 @@ export default function CardExperience({
   const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
   const bodyMarginBottom = cardCount >= 2 ? theme.spacing(3) : '0';
   const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
-  const bodyWrapper = cardCount >= 2 ? '0' : '1 0 75%';
-  const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
+  const bodyWrapper = cardCount >= 2 ? 'none' : '1 1 75%';
+  const cardHourWrapper = cardCount >= 2 ? 'none' : '0 0 25%';
   const containerPosition = cardCount >= 2 ? 'row' : 'column';
 
   const states = experienceStatusInfo(theme);
@@ -77,9 +81,12 @@ export default function CardExperience({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    flex: 'auto',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
+      gap: cardCount >= 2 ? 0 : theme.spacing(5),
+    },
+    [theme.breakpoints.up('lg')]: {
+      gap: cardCount >= 2 ? 0 : theme.spacing(10),
     },
   };
 
@@ -90,7 +97,7 @@ export default function CardExperience({
   const headingWrapperStyles = {
     display: 'flex',
     alignItems: 'flex-start',
-    marginBottom: theme.spacing(1),
+    mb: theme.spacing(1),
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
@@ -150,6 +157,40 @@ export default function CardExperience({
 
   const cardHoursStyles = {
     flex: cardHourWrapper,
+    mb: theme.spacing(5),
+    [theme.breakpoints.up('md')]: {
+      mb: 0,
+    },
+  };
+
+  const pendingFormStyles = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    my: theme.spacing(3),
+    border: `1px solid ${theme.palette.warning.main}`,
+    p: theme.spacing(2),
+    pr: theme.spacing(3),
+    borderRadius: theme.spacing(1),
+    [theme.breakpoints.up('md')]: {
+      flexWrap: 'nowrap',
+      mb: theme.spacing(5),
+    },
+  };
+
+  const iconPendingStyles = {
+    color: theme.palette.warning.main,
+    marginRight: theme.spacing(1),
+  };
+
+  const pendingFormButtonStyles = {
+    width: '100%',
+    mt: theme.spacing(3),
+    mb: cardCount === 1 ? 0 : theme.spacing(2),
+    [theme.breakpoints.up('md')]: {
+      width: cardCount === 1 ? 'auto' : '100%',
+      mt: 0,
+      ml: 'auto',
+    },
   };
 
   // Render funtions.
@@ -209,6 +250,38 @@ export default function CardExperience({
               {renderedDate}
             </Box>
           </Box>
+          {hasPendingForm &&
+            (cardCount === 1 ? (
+              <Box sx={pendingFormStyles}>
+                <ErrorOutlineIcon sx={iconPendingStyles} />
+                <Box>
+                  <Typography sx={headingStyles} variant="h4">
+                    Pending forms
+                  </Typography>
+                  <Typography variant="body2">
+                    There are pending forms for this experience, please fill all
+                    the forms.
+                  </Typography>
+                </Box>
+                <Button
+                  variant="outlined"
+                  component={Link}
+                  href={`${cta}#experience-forms`}
+                  sx={pendingFormButtonStyles}
+                >
+                  Go to Forms
+                </Button>
+              </Box>
+            ) : (
+              <Button
+                variant="outlined"
+                component={Link}
+                href={`${cta}#experience-forms`}
+                sx={pendingFormButtonStyles}
+              >
+                Fill Pending Form(s)
+              </Button>
+            ))}
         </Box>
         <Box sx={cardHoursStyles}>
           <CardExperienceHours
@@ -217,7 +290,10 @@ export default function CardExperience({
             position={cardNumberVariation}
           />
           {cardCount >= 2 && (
-            <Button sx={{ ...buttonStyles, width: '100%' }} href={cta}>
+            <Button
+              sx={{ ...buttonStyles, width: '100%', mt: theme.spacing(4) }}
+              href={cta}
+            >
               More Details
             </Button>
           )}

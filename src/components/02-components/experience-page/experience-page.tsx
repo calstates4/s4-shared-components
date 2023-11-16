@@ -305,6 +305,7 @@ export default function ExperiencePage({
 
         {beginningForms?.length || duringForms?.length || endForms?.length ? (
           <ExperienceFormList
+            id="experience-forms"
             beginningForms={beginningForms}
             duringForms={duringForms}
             endForms={endForms}

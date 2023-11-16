@@ -28,7 +28,6 @@ export default function CardExperienceHours({
     alignItems: 'center',
     justifyContent: 'center',
     p: paddingSize,
-    mb: theme.spacing(5),
     backgroundColor: 'primary.light',
     [theme.breakpoints.up('sm')]: {
       flexDirection: positionOrientation,
@@ -91,10 +90,10 @@ export default function CardExperienceHours({
         {renderedHoursText}
       </Box>
       {cta ? (
-      <Button sx={buttonStyles} href={cta}>
-        Log Time
-      </Button>
-    ) : null}
+        <Button sx={buttonStyles} href={cta}>
+          Log Time
+        </Button>
+      ) : null}
     </Paper>
   );
 }

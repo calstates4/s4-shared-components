@@ -10,6 +10,7 @@ type FormProps = {
 };
 
 type ExperienceFormListProps = {
+  id?: string;
   beginningForms: FormProps[] | undefined;
   duringForms: FormProps[] | undefined;
   endForms: FormProps[] | undefined;
@@ -18,6 +19,7 @@ type ExperienceFormListProps = {
 };
 
 export default function ExperienceFormList({
+  id,
   beginningForms,
   duringForms,
   endForms,
@@ -119,8 +121,10 @@ export default function ExperienceFormList({
     );
   }
 
+  const containerProps = id ? { id } : {};
+
   return (
-    <Paper sx={formWrapperStyle}>
+    <Paper sx={formWrapperStyle} {...containerProps}>
       <Typography sx={headingFormStyles} variant="h2">
         Forms
       </Typography>

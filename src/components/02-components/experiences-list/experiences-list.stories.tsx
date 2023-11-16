@@ -3,7 +3,7 @@ import React from 'react';
 import CardExperience, {
   type CardExperienceProps,
 } from '../card-experience/card-experience';
-import { Default as CardExperienceStory } from '../card-experience/card-experience.stories';
+import { WideCard as WideCardStory } from '../card-experience/card-experience.stories';
 
 import ExperiencesList from './experiences-list';
 
@@ -15,7 +15,7 @@ const meta: Meta<typeof ExperiencesList> = {
 export default meta;
 
 const experiences = Array.from({ length: 5 }, (_, i) => i).map(() => (
-  <CardExperience {...(CardExperienceStory.args as CardExperienceProps)} />
+  <CardExperience {...(WideCardStory.args as CardExperienceProps)} />
 ));
 
 export const Default: StoryObj<typeof ExperiencesList> = {
