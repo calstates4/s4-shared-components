@@ -115,6 +115,7 @@ export default function ExperiencePage({
     flex: 'auto',
     [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
+      gap: theme.spacing(5),
     },
   };
 
@@ -180,7 +181,7 @@ export default function ExperiencePage({
 
   const pendingFormStyles = {
     display: 'flex',
-    marginBottom: theme.spacing(3),
+    my: theme.spacing(3),
     border: `1px solid ${theme.palette.warning.main}`,
     padding: theme.spacing(1),
     borderRadius: theme.spacing(1),
@@ -252,6 +253,20 @@ export default function ExperiencePage({
                   )}
                 </Box>
               </Box>
+              {hasPendingForm && (
+                <Box sx={pendingFormStyles}>
+                  <ErrorOutlineIcon sx={iconPendingStyles} />
+                  <Box>
+                    <Typography sx={headingStyles} variant="h4">
+                      Pending forms
+                    </Typography>
+                    <Typography variant="body2">
+                      There are pending forms for this experience, please fill
+                      all the forms.
+                    </Typography>
+                  </Box>
+                </Box>
+              )}
             </Box>
             <Box sx={cardHoursStyles}>
               <CardExperienceHours
@@ -261,20 +276,6 @@ export default function ExperiencePage({
               />
             </Box>
           </Box>
-          {hasPendingForm && (
-            <Box sx={pendingFormStyles}>
-              <ErrorOutlineIcon sx={iconPendingStyles} />
-              <Box>
-                <Typography sx={headingStyles} variant="h4">
-                  Pending forms
-                </Typography>
-                <Typography variant="body2">
-                  There are pending forms for this experience, please fill all
-                  the forms.
-                </Typography>
-              </Box>
-            </Box>
-          )}
           <Divider sx={dividerStyles} />
           <Box sx={staffWrapperStyles}>
             <Typography sx={headingStyles} variant="h3">
