@@ -44,17 +44,17 @@ export default function CardExperience({
   const theme = useTheme();
 
   // Variables according to the variant of the number of items
-  const position = cardCount >= 2 ? 'column' : 'row';
-  const contentPadding = cardCount >= 2 ? theme.spacing(4) : theme.spacing(5);
-  const itemsAlignment = cardCount >= 2 ? 'flex-start' : 'center';
-  const stateMarginY = cardCount >= 2 ? theme.spacing(2) : '0';
-  const stateMarginX = cardCount >= 2 ? '0' : theme.spacing(2);
-  const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
-  const bodyMarginBottom = cardCount >= 2 ? theme.spacing(3) : '0';
-  const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
-  const bodyWrapper = cardCount >= 2 ? 'none' : '1 1 75%';
-  const cardHourWrapper = cardCount >= 2 ? 'none' : '0 0 25%';
-  const containerPosition = cardCount >= 2 ? 'row' : 'column';
+  const position = cardCount === 1 ? 'row' : 'column';
+  const contentPadding = cardCount === 1 ? theme.spacing(5) : theme.spacing(4);
+  const itemsAlignment = cardCount === 1 ? 'center' : 'flex-start';
+  const stateMarginY = cardCount === 1 ? 0 : theme.spacing(2);
+  const stateMarginX = cardCount === 1 ? theme.spacing(2) : 0;
+  const bodyMarginLeft = cardCount === 1 ? theme.spacing(5) : 0;
+  const bodyMarginBottom = cardCount === 1 ? 0 : theme.spacing(3);
+  const cardNumberVariation = cardCount === 1 ? 'column' : 'row';
+  const bodyWrapper = cardCount === 1 ? '1 1 75%' : 'none';
+  const cardHourWrapper = cardCount === 1 ? '0 0 25%' : 'none';
+  const containerPosition = cardCount === 1 ? 'column' : 'row';
 
   const states = experienceStatusInfo(theme);
 
@@ -83,10 +83,10 @@ export default function CardExperience({
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
-      gap: cardCount >= 2 ? 0 : theme.spacing(5),
+      gap: cardCount === 1 ? theme.spacing(5) : 0,
     },
     [theme.breakpoints.up('lg')]: {
-      gap: cardCount >= 2 ? 0 : theme.spacing(10),
+      gap: cardCount === 1 ? theme.spacing(10) : 0,
     },
   };
 
@@ -289,7 +289,7 @@ export default function CardExperience({
             cta={hoursCtaUrl}
             position={cardNumberVariation}
           />
-          {cardCount >= 2 && (
+          {cardCount > 1 && (
             <Button
               sx={{ ...buttonStyles, width: '100%', mt: theme.spacing(4) }}
               href={cta}
