@@ -26,6 +26,13 @@ const GridToolbarExtraButton: React.FC<GridToolbarProps> = ({ title, btnTitle, b
     },
   };
 
+  const handleClick = (event: React.MouseEvent<HTMLElement>, url: string) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const idsSeleted = (document.getElementsByName('selectedIds')[0] as HTMLInputElement).value;
+    window.location.href = `${url}&members=${idsSeleted}`;
+  };
+
   return (
     <GridToolbarContainer
       sx={{
@@ -63,9 +70,11 @@ const GridToolbarExtraButton: React.FC<GridToolbarProps> = ({ title, btnTitle, b
         variant="outlined"
         href={btnUrl}
         sx={buttonToolbarStyles}
+        onClick={(e) => handleClick(e, btnUrl)}
       >
         {btnTitle}
       </Button>
+
     </GridToolbarContainer>
   );
 };

@@ -12,6 +12,8 @@ export default meta;
 
 export const Default: StoryObj<typeof ExperienceForm> = {
   args: {
+    course: '1',
+    membersList: '1, 3, 2',
     studentsListValues: [
       {
         id: '1',
