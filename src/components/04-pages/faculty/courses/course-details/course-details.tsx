@@ -18,7 +18,7 @@ export type CourseDetailsPageProps = {
   experience: string;
   max: string;
   lmsLink: string;
-  faculty: string;
+  faculty: [];
   tableData: DataTableProps;
   reportTableData: DataTableProps;
 };
@@ -169,10 +169,12 @@ export default function CourseDetailsPage({
           )}
         </Box>
         <Box sx={[itemCol, leftLine]}>
-          {faculty && (
+          {(faculty && faculty.length > 0) && (
             <>
               <Typography variant="h4" sx={titleBlock}>Faculty</Typography>
-              <Box>{faculty}</Box>
+              {faculty.map((item:any, indexL:number) => (
+                <Box>{item}</Box>
+              ))}
             </>
           )}
         </Box>

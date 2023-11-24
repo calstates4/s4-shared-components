@@ -38,7 +38,7 @@ const courseDetailsArgs: CourseDetailsPageProps = {
   experience: 'Required',
   max: '1',
   lmsLink: '#lms-link',
-  faculty: 'Jordan, Rachel',
+  faculty: [ 'Jordan, Rachel'],
   tableData: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,
