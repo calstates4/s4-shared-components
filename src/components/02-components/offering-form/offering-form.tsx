@@ -6,6 +6,7 @@ import {
   Switch,
   TextField,
   Typography,
+  TextareaAutosize,
   useTheme,
 } from '@mui/material';
 import { ChangeEvent, ElementType, useRef, useState } from 'react';
@@ -22,6 +23,7 @@ const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
   { value: 'remote', label: 'Remote' },
   { value: 'hybrid', label: 'Hybrid' },
+  { value: 'negotiable', label: 'Negotiable' },
 ];
 
 const OFFERING_TIME_UNITS = [
@@ -42,6 +44,7 @@ const OFFERING_TIME_FREQUENCY = [
 export type OfferingFormProps = {
   isEdit?: boolean;
   cancelUrl?: string;
+  duplidateUr?: string;
   breadcrumb: {
     title: string;
     url: string;
@@ -92,6 +95,7 @@ export type OfferingFormProps = {
 export default function OfferingForm({
   isEdit = false,
   cancelUrl,
+  duplidateUr,
   breadcrumb,
   departments,
   address,
@@ -184,15 +188,30 @@ export default function OfferingForm({
         tabPanelClassName="offering-form-panel"
         ref={tabRef}
       >
-        <div title="Metadata">
+        <div title="Offering Details">
           <TextField
             autoFocus
             required
             fullWidth
             id="offering-name"
             name="offering-name"
-            label="Offering name"
+            label="Offering Title"
             defaultValue={defaultName ?? undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={formFieldStyles}
+          />
+
+          <TextField
+            required
+            fullWidth
+            multiline
+            maxRows={4}
+            id="offering-description"
+            name="offering-description"
+            label="Offering Description"
+            defaultValue={defaultDescription ?? undefined}
             InputLabelProps={{
               shrink: true,
             }}
@@ -335,7 +354,7 @@ export default function OfferingForm({
               required
               id="offering-time-approvers"
               name="offering-time-approvers"
-              label="Time approver(s)"
+              label="Time Approver(s)"
               options={timeApprovers}
               selected={defaultTimeApprovers}
               sx={formFieldStyles}
@@ -348,7 +367,7 @@ export default function OfferingForm({
               required
               id="offering-form-signers"
               name="offering-form-signers"
-              label="Form signer(s)"
+              label="Form Signer(s)"
               options={formSigners}
               selected={defaultFormSigners}
               sx={formFieldStyles}
@@ -402,20 +421,6 @@ export default function OfferingForm({
         </div>
         <div title="Content">
           <TextField
-            required
-            fullWidth
-            multiline
-            maxRows={4}
-            id="offering-description"
-            name="offering-description"
-            label="Offering description"
-            defaultValue={defaultDescription ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
-          <TextField
             fullWidth
             multiline
             maxRows={4}
@@ -448,7 +453,7 @@ export default function OfferingForm({
               multiple
               id="offering-requirements"
               name="offering-requirements"
-              label="Requirements"
+              label="Preferred/Required Skills and Knowledge"
               options={requirements}
               selected={defaultRequirements}
               sx={formFieldStyles}
@@ -515,13 +520,22 @@ export default function OfferingForm({
               id="offering-activities"
               name="offering-activities"
               label="Activities"
+              helptext=""
               options={activities}
               selected={defaultActivities}
               sx={formFieldStyles}
+
             />
           )}
+          <TextareaAutosize
+            maxRows={4}
+            id="offering-expected-skills"
+            name="offering-expected-skills"
+            aria-label="maximum height"
+            placeholder="Expected Skill Acquisition"
+          />
         </div>
-        <div title="Time commitment">
+        <div title="Time & Compensation">
           <TextField
             required
             type="number"
@@ -595,15 +609,25 @@ export default function OfferingForm({
           {isEdit ? 'Update' : 'Create'} offering
         </Button>
 
-        {isEdit && cancelUrl && (
-          <Button
-            variant="outlined"
-            component={Link}
-            href={cancelUrl}
-            sx={{ flexShrink: 0 }}
-          >
-            Cancel
-          </Button>
+        {isEdit && cancelUrl && duplidateUr && (
+          <>
+            <Button
+              variant="contained"
+              component={Link}
+              href={duplidateUr}
+              sx={{ flexShrink: 0 }}
+            >
+              Duplicate offering
+            </Button>
+            <Button
+              variant="outlined"
+              component={Link}
+              href={cancelUrl}
+              sx={{ flexShrink: 0 }}
+            >
+              Cancel
+            </Button>
+          </>
         )}
       </Box>
     </>

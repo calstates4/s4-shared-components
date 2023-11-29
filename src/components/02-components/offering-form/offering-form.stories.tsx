@@ -134,6 +134,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     departments,
+    requirements,
     primaryContacts: users,
     timeApprovers: users,
     formSigners: users,
@@ -151,6 +152,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
   args: {
     isEdit: true,
     cancelUrl: '#',
+    duplidateUr: '#',
     breadcrumb: [
       {
         title: 'Offerings',
