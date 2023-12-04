@@ -6,6 +6,7 @@ import { useRef } from "react";
 import Tabs, { type RefHandler } from '../../../../02-components/tabs/tabs';
 import Breadcrumbs from '../../../../01-elements/breadcrumbs/breadcrumbs';
 import Link from "~/components/01-elements/link/link";
+import {black} from "colorette";
 
 export type CourseDetailsPageProps = {
   breadcrumb: {
@@ -171,10 +172,12 @@ export default function CourseDetailsPage({
         <Box sx={[itemCol, leftLine]}>
           {(faculty && faculty.length > 0) && (
             <>
+              <Box component="dl">
               <Typography variant="h4" sx={titleBlock}>Faculty</Typography>
               {faculty.map((item:any, indexL:number) => (
-                <Box>{item}</Box>
+                <Box component="dt">{item}</Box>
               ))}
+              </Box>
             </>
           )}
         </Box>
