@@ -172,11 +172,11 @@ export default function CourseDetailsPage({
         <Box sx={[itemCol, leftLine]}>
           {(faculty && faculty.length > 0) && (
             <>
-              <Box component="dl">
               <Typography variant="h4" sx={titleBlock}>Faculty</Typography>
-              {faculty.map((item:any, indexL:number) => (
-                <Box component="dt">{item}</Box>
-              ))}
+              <Box component="dl">
+                {faculty.map((item:any, indexL:number) => (
+                  <Box component="dt">{item}</Box>
+                ))}
               </Box>
             </>
           )}
