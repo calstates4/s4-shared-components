@@ -169,6 +169,12 @@ export default function OfferingForm({
     flexWrap: 'wrap',
   };
 
+  const fieldSetStyles = {
+    p: theme.spacing(3),
+    border: `1px solid ${theme.palette.secondary.main}`,
+    borderRadius: theme.spacing(1),
+  };
+
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
   }
@@ -189,34 +195,185 @@ export default function OfferingForm({
         ref={tabRef}
       >
         <div title="Offering Details">
-          <TextField
-            autoFocus
-            required
-            fullWidth
-            id="offering-name"
-            name="offering-name"
-            label="Offering Title"
-            defaultValue={defaultName ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>General Information</legend>
+            <TextField
+              autoFocus
+              required
+              fullWidth
+              id="offering-name"
+              name="offering-name"
+              label="Offering Title"
+              defaultValue={defaultName ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={formFieldStyles}
+            />
+            <TextField
+              required
+              fullWidth
+              multiline
+              maxRows={4}
+              id="offering-description"
+              name="offering-description"
+              label="Offering Description"
+              defaultValue={defaultDescription ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={formFieldStyles}
+            />
+            <TextField
+              select
+              required
+              id="offering-type"
+              name="offering-type"
+              label="Offering Type"
+              defaultValue={defaultOfferingType ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              SelectProps={{
+                native: true,
+              }}
+              sx={formFieldStyles}
+            >
+              {OFFERING_TYPES.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+            <TextField
+              required
+              type="number"
+              id="offering-max-students"
+              name="offering-max-students"
+              label="Maximum number of students"
+              defaultValue={defaultMaxStudents ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 1,
+                min: 1,
+              }}
+              sx={formFieldStyles}
+            />
+            {preferredLanguages && (
+              <AutocompleteField
+                multiple
+                id="offering-preferred-languages"
+                name="offering-preferred-languages"
+                label="Preferred language(s)"
+                options={preferredLanguages}
+                selected={defaultPreferredLanguages}
+                sx={formFieldStyles}
+              />
+            )}
+            {requiredLanguages && (
+              <AutocompleteField
+                multiple
+                id="offering-required-languages"
+                name="offering-required-languages"
+                label="Required language(s)"
+                options={requiredLanguages}
+                selected={defaultRequiredLanguages}
+                sx={formFieldStyles}
+              />
+            )}
+            {requirements && (
+              <AutocompleteField
+                multiple
+                id="offering-requirements"
+                name="offering-requirements"
+                label="Preferred/Required Skills and Knowledge"
+                options={requirements}
+                selected={defaultRequirements}
+                sx={formFieldStyles}
+              />
+            )}
+            {activities && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-activities"
+                name="offering-activities"
+                label="Activities"
+                helptext=""
+                options={activities}
+                selected={defaultActivities}
+                sx={formFieldStyles}
 
-          <TextField
-            required
-            fullWidth
-            multiline
-            maxRows={4}
-            id="offering-description"
-            name="offering-description"
-            label="Offering Description"
-            defaultValue={defaultDescription ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
+              />
+            )}
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Offering Supervision</legend>
+            <Typography sx={formFieldStyles}>
+              Only active staff members with an account can be selected.
+            </Typography>
+            {primaryContacts && (
+              <AutocompleteField
+                required
+                id="offering-primary-contact"
+                name="offering-primary-contact"
+                label="Primary Contact"
+                options={primaryContacts}
+                selected={defaultPrimaryContact}
+                sx={formFieldStyles}
+              />
+            )}
+            {timeApprovers && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-time-approvers"
+                name="offering-time-approvers"
+                label="Time Approver(s)"
+                options={timeApprovers}
+                selected={defaultTimeApprovers}
+                sx={formFieldStyles}
+              />
+            )}
+            {formSigners && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-form-signers"
+                name="offering-form-signers"
+                label="Form Signer(s)"
+                options={formSigners}
+                selected={defaultFormSigners}
+                sx={formFieldStyles}
+              />
+            )}
+            {observers && (
+              <AutocompleteField
+                multiple
+                id="offering-observers"
+                name="offering-observers"
+                label="Observer(s)"
+                options={observers}
+                selected={defaultObservers}
+                sx={formFieldStyles}
+              />
+            )}
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Requirements and Fees</legend>
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Safety Considerations</legend>
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Application Process</legend>
+          </Box>
 
           <FormControlLabel
             control={
@@ -259,44 +416,9 @@ export default function OfferingForm({
             />
           )}
 
-          <TextField
-            select
-            required
-            id="offering-type"
-            name="offering-type"
-            label="Offering Type"
-            defaultValue={defaultOfferingType ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {OFFERING_TYPES.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
 
-          <TextField
-            required
-            type="number"
-            id="offering-max-students"
-            name="offering-max-students"
-            label="Maximum number of students"
-            defaultValue={defaultMaxStudents ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 1,
-              min: 1,
-            }}
-            sx={formFieldStyles}
-          />
+
+
 
           <TextField
             required
@@ -336,76 +458,10 @@ export default function OfferingForm({
 
           <AddressField id="offering" address={address} mb={3} />
 
-          {primaryContacts && (
-            <AutocompleteField
-              required
-              id="offering-primary-contact"
-              name="offering-primary-contact"
-              label="Primary contact"
-              options={primaryContacts}
-              selected={defaultPrimaryContact}
-              sx={formFieldStyles}
-            />
-          )}
 
-          {timeApprovers && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-time-approvers"
-              name="offering-time-approvers"
-              label="Time Approver(s)"
-              options={timeApprovers}
-              selected={defaultTimeApprovers}
-              sx={formFieldStyles}
-            />
-          )}
 
-          {formSigners && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-form-signers"
-              name="offering-form-signers"
-              label="Form Signer(s)"
-              options={formSigners}
-              selected={defaultFormSigners}
-              sx={formFieldStyles}
-            />
-          )}
-          {observers && (
-            <AutocompleteField
-              multiple
-              id="offering-observers"
-              name="offering-observers"
-              label="Observer(s)"
-              options={observers}
-              selected={defaultObservers}
-              sx={formFieldStyles}
-            />
-          )}
-          {preferredLanguages && (
-            <AutocompleteField
-              multiple
-              id="offering-preferred-languages"
-              name="offering-preferred-languages"
-              label="Preferred language(s)"
-              options={preferredLanguages}
-              selected={defaultPreferredLanguages}
-              sx={formFieldStyles}
-            />
-          )}
-          {requiredLanguages && (
-            <AutocompleteField
-              multiple
-              id="offering-required-languages"
-              name="offering-required-languages"
-              label="Required language(s)"
-              options={requiredLanguages}
-              selected={defaultRequiredLanguages}
-              sx={formFieldStyles}
-            />
-          )}
+
+
 
           <FormControlLabel
             control={
@@ -448,17 +504,7 @@ export default function OfferingForm({
             sx={formFieldStyles}
           />
 
-          {requirements && (
-            <AutocompleteField
-              multiple
-              id="offering-requirements"
-              name="offering-requirements"
-              label="Preferred/Required Skills and Knowledge"
-              options={requirements}
-              selected={defaultRequirements}
-              sx={formFieldStyles}
-            />
-          )}
+
 
           <TextField
             fullWidth
@@ -513,20 +559,7 @@ export default function OfferingForm({
             />
           )}
 
-          {activities && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-activities"
-              name="offering-activities"
-              label="Activities"
-              helptext=""
-              options={activities}
-              selected={defaultActivities}
-              sx={formFieldStyles}
 
-            />
-          )}
           <TextareaAutosize
             maxRows={4}
             id="offering-expected-skills"
@@ -536,6 +569,12 @@ export default function OfferingForm({
           />
         </div>
         <div title="Time & Compensation">
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Offering Availability</legend>
+          </Box>
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Compensation</legend>
+          </Box>
           <TextField
             required
             type="number"
@@ -595,6 +634,7 @@ export default function OfferingForm({
             ))}
           </TextField>
         </div>
+        <div title="Additional Information"></div>
       </Tabs>
 
       <Box sx={actionButtonsContainerStyles}>
