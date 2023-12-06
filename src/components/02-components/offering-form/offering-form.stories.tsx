@@ -134,6 +134,15 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     departments,
+    address: {
+      label: 'Location of Offering',
+      country: 'US',
+      streetAddress1: '30 Rockefeller Plaza',
+      streetAddress2: 'Mercedem aut nummos unde',
+      city: 'New York',
+      state: 'NY',
+      zipCode: '10112',
+    },
     requirements,
     primaryContacts: users,
     timeApprovers: users,
@@ -169,6 +178,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     ],
     departments,
     address: {
+      label: 'Location of Offering',
       country: 'US',
       streetAddress1: '30 Rockefeller Plaza',
       streetAddress2: 'Mercedem aut nummos unde',
