@@ -396,61 +396,60 @@ export default function OfferingForm({
 
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Application Process</legend>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={requiresApproval}
+                  onChange={onChangeRequiresApprovalHandler}
+                  id="offering-requires-approval"
+                  name="offering-requires-approval"
+                />
+              }
+              label="Requires approval"
+              sx={formFieldStyles}
+            />
+
+            {requiresApproval && (
+              <TextField
+                required
+                fullWidth
+                multiline
+                maxRows={4}
+                id="offering-application-instructions"
+                name="offering-application-instructions"
+                label="Application Instructions"
+                defaultValue={defaultApplicationInstructions ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={formFieldStyles}
+              />
+            )}
+
+            {departments && (
+              <AutocompleteField
+                id="offering-department"
+                name="offering-department"
+                label="Department"
+                options={departments}
+                selected={defaultDepartment}
+                sx={formFieldStyles}
+              />
+            )}
+
+
+            <FormControlLabel
+              control={
+                <Switch
+                  id="offering-published"
+                  name="offering-published"
+                  defaultChecked={defaultPublished}
+                />
+              }
+              label="Published"
+              sx={formFieldStyles}
+            />
           </Box>
-
-          <FormControlLabel
-            control={
-              <Switch
-                checked={requiresApproval}
-                onChange={onChangeRequiresApprovalHandler}
-                id="offering-requires-approval"
-                name="offering-requires-approval"
-              />
-            }
-            label="Requires approval"
-            sx={formFieldStyles}
-          />
-
-          {requiresApproval && (
-            <TextField
-              required
-              fullWidth
-              multiline
-              maxRows={4}
-              id="offering-application-instructions"
-              name="offering-application-instructions"
-              label="Application Instructions"
-              defaultValue={defaultApplicationInstructions ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              sx={formFieldStyles}
-            />
-          )}
-
-          {departments && (
-            <AutocompleteField
-              id="offering-department"
-              name="offering-department"
-              label="Department"
-              options={departments}
-              selected={defaultDepartment}
-              sx={formFieldStyles}
-            />
-          )}
-
-
-          <FormControlLabel
-            control={
-              <Switch
-                id="offering-published"
-                name="offering-published"
-                defaultChecked={defaultPublished}
-              />
-            }
-            label="Published"
-            sx={formFieldStyles}
-          />
         </div>
         <div title="Time & Compensation">
           <Box component="fieldset" sx={fieldSetStyles}>
