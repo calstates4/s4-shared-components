@@ -17,6 +17,8 @@ import PropTypes from "prop-types";
 
 export type ExperienceCourseProps = {
   FormElement?: ElementType;
+  course: string;
+  membersList: string;
   studentsListValues: {
     id: string;
     fullname: string;
@@ -52,14 +54,16 @@ export type ExperienceCourseProps = {
 };
 
 export default function ExperienceForm({
-   FormElement,
-   studentsListValues,
-   courseFilterValues,
-   programFilterValues,
-   termFilterValues,
-   organizationFilterValues,
-   opportunityFilterValues,
-   currentFilters,
+  FormElement,
+  course,
+  membersList,
+  studentsListValues,
+  courseFilterValues,
+  programFilterValues,
+  termFilterValues,
+  organizationFilterValues,
+  opportunityFilterValues,
+  currentFilters,
  }: ExperienceCourseProps) {
   const theme = useTheme();
 
@@ -132,6 +136,9 @@ export default function ExperienceForm({
 
   const formInner = (
     <>
+      <input type="hidden" name="action" value="createExperience" />
+      <input type="hidden" name="course" value={course} />
+      <input type="hidden" name="members" value={membersList} />
       <Typography variant="h2" mb={0} color="primary.main">
         You are creating an experience for the following student(s):
       </Typography>
@@ -297,6 +304,8 @@ export default function ExperienceForm({
 
 ExperienceForm.propTypes = {
   FormElement: PropTypes.element,
+  course: PropTypes.string,
+  membersList: PropTypes.string,
   studentsListValues: PropTypes.array,
   courseFilterValues: PropTypes.array,
   programFilterValues: PropTypes.array,
