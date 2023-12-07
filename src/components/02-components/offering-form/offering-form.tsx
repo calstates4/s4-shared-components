@@ -273,13 +273,14 @@ export default function OfferingForm({
               id="offering-max-students"
               name="offering-max-students"
               label="Maximum number of students"
-              defaultValue={defaultMaxStudents ?? undefined}
+              defaultValue={defaultMaxStudents ?? 0}
+              helperText="Use 0 for unlimited"
               InputLabelProps={{
                 shrink: true,
               }}
               inputProps={{
                 step: 1,
-                min: 1,
+                min: 0,
               }}
               sx={formFieldStyles}
             />
