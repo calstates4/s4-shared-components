@@ -37,6 +37,7 @@ export type ExperiencePageProps = {
   duringForms?: FormProps[];
   endForms?: FormProps[];
   formBaseUrl?: string;
+  viewSubmissionBaseUrl?: string;
 };
 
 export default function ExperiencePage({
@@ -63,6 +64,7 @@ export default function ExperiencePage({
   observer,
   hasPendingForm,
   formBaseUrl,
+  viewSubmissionBaseUrl,
 }: ExperiencePageProps) {
   const theme = useTheme();
 
@@ -311,6 +313,7 @@ export default function ExperiencePage({
             duringForms={duringForms}
             endForms={endForms}
             formBaseUrl={formBaseUrl}
+            viewSubmissionBaseUrl={viewSubmissionBaseUrl}
           />
         ) : null}
         {children}

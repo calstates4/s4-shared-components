@@ -24,7 +24,7 @@ export default function ExperienceFormList({
   duringForms,
   endForms,
   formBaseUrl = '/forms/',
-  viewSubmissionBaseUrl = '/submission/',
+  viewSubmissionBaseUrl = '/submissions/',
 }: ExperienceFormListProps) {
   const theme = useTheme();
 
@@ -110,7 +110,9 @@ export default function ExperienceFormList({
               </Button>
             ) : (
               item.submissionId && (
-                <Link href={`${viewSubmissionBaseUrl}${item.submissionId}`}>
+                <Link
+                  href={`${viewSubmissionBaseUrl}${item.id}/${item.submissionId}`}
+                >
                   Review submission
                 </Link>
               )
