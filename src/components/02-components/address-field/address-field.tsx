@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from 'react';
 
 export type AddressType = {
+  label?: string;
   country: string;
   streetAddress1: string;
   streetAddress2?: string;
@@ -316,7 +317,7 @@ export default function AddressField({
   return (
     <Box sx={containerStyles} {...props}>
       <Typography variant="h3" mb={4}>
-        Address
+        {address?.label ?? 'Address'}
       </Typography>
       <FormControl fullWidth>
         <InputLabel id={`${idPrefix}address-country-label`}>Country</InputLabel>
