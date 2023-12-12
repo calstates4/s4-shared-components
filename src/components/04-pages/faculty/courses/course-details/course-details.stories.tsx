@@ -33,6 +33,12 @@ const courseDetailsArgs: CourseDetailsPageProps = {
     },
   ],
   title: 'Course Title',
+  term: 'Spring 2022',
+  program: 'Service Learning',
+  experience: 'Required',
+  max: '1',
+  lmsLink: '#lms-link',
+  faculty: [ 'Jordan, Rachel'],
   tableData: {
     rows: enrolledStudentsTableRows,
     columns: enrolledStudentsTableColumns,

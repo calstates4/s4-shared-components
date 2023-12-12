@@ -152,9 +152,9 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
           defaultValue={level1.selectedItem}
           onChange={onChangeHandler}
         >
-          <option value="0">{level1.placeholder}</option>
+          <option value="0" style={{ backgroundColor: 'grey' }}>{level1.placeholder}</option>
           {level1.items.map((item) => (
-            <option key={item.id} value={item.id}>
+            <option key={item.id} value={item.id} style={{ backgroundColor: 'grey' }} >
               {item.title}
             </option>
           ))}
@@ -180,9 +180,9 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
             defaultValue={level2.selectedItem}
             onChange={onChangeHandler}
           >
-            <option value="0">{level2.placeholder}</option>
+            <option value="0" style={{ backgroundColor: 'grey' }} >{level2.placeholder}</option>
             {level2.items.map((item) => (
-              <option key={item.id} value={item.id}>
+              <option key={item.id} value={item.id} style={{ backgroundColor: 'grey' }} >
                 {item.title}
               </option>
             ))}
