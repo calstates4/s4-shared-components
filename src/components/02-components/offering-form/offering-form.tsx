@@ -612,6 +612,7 @@ export default function OfferingForm({
                 options={focusPopulations}
                 selected={defaultFocusPopulations}
                 sx={formFieldStyles}
+                helptext="Please indicate primary population/clientele your organization will serve either directly or indirectly as part of this offering. If you're unsure, select 'Non-specific/any population' (select all that apply)."
               />
             )}
 
@@ -625,6 +626,7 @@ export default function OfferingForm({
                 options={focusAreas}
                 selected={defaultFocusAreas}
                 sx={formFieldStyles}
+                helptext="Please identify the general focus area(s) pertaining to this offering (select all that apply)."
               />
             )}
 
@@ -637,6 +639,7 @@ export default function OfferingForm({
                 options={subFocusAreas}
                 selected={defaultSubFocusAreas}
                 sx={formFieldStyles}
+                helptext="For the focus area(s) identified above, please select any subcategories that apply. (Note: not all areas have subcategories)."
               />
             )}
           </Box>
