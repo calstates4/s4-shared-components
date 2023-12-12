@@ -121,13 +121,6 @@ const languages = [
   { id: '4', label: 'English' },
 ];
 
-const studentSelected = [
-  { id: 'emily@sample.com', label: 'emily@sample.com' },
-  { id: 'mathew@sample.com', label: 'mathew@sample.com' },
-  { id: 'info@sample.com', label: 'info@sample.com' },
-  { id: 'harry@sample.com', label: 'harry@sample.com' },
-];
-
 export const AddOffering: StoryObj<typeof OfferingForm> = {
   args: {
     breadcrumb: [
@@ -161,7 +154,6 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
     focusAreas,
     subFocusAreas,
     activities,
-    studentSelected,
   },
 };
 
@@ -231,7 +223,6 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     defaultTimeAmount: 2,
     defaultTimeUnit: 'days',
     defaultTimeFrequency: 'month',
-    studentSelected,
-    defaultStudentSelected: 'info@sample.com',
+    emailStudentSelected: 'info@sample.com',
   },
 };

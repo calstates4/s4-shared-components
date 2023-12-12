@@ -106,8 +106,7 @@ export type OfferingFormProps = {
   defaultPublished?: boolean;
   defaultPayType?: string;
   defaultPayFrequency?: string;
-  studentSelected?: AutocompleteOptionType[];
-  defaultStudentSelected?: string;
+  emailStudentSelected?: string;
 };
 
 export default function OfferingForm({
@@ -158,8 +157,7 @@ export default function OfferingForm({
   defaultPayType,
   defaultPayFrequency,
   defaultPublished,
-  studentSelected,
-  defaultStudentSelected,
+  emailStudentSelected,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -270,17 +268,15 @@ export default function OfferingForm({
                 </option>
               ))}
             </TextField>
-            {studentSelected && (
-              <AutocompleteField
-                required
-                id="offering-student-selected"
-                name="offering-student-selected"
-                label="Has a student been selected for this offering?"
-                options={studentSelected}
-                selected={defaultStudentSelected ?? undefined}
-                sx={formFieldStyles}
-              />
-            )}
+            <TextField
+              fullWidth
+              id="offering-student-selected"
+              variant="outlined"
+              name="offering-student-selected"
+              label="Has a student been selected for this offering?"
+              defaultValue={emailStudentSelected}
+              sx={formFieldStyles}
+            />
             <TextField
               required
               type="number"
