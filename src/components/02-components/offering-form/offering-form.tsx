@@ -6,7 +6,6 @@ import {
   Switch,
   TextField,
   Typography,
-  TextareaAutosize,
   useTheme,
 } from '@mui/material';
 import { ChangeEvent, ElementType, useRef, useState } from 'react';
@@ -107,6 +106,8 @@ export type OfferingFormProps = {
   defaultPublished?: boolean;
   defaultPayType?: string;
   defaultPayFrequency?: string;
+  studentSelected?: AutocompleteOptionType[];
+  defaultStudentSelected?: string;
 };
 
 export default function OfferingForm({
@@ -157,6 +158,8 @@ export default function OfferingForm({
   defaultPayType,
   defaultPayFrequency,
   defaultPublished,
+  studentSelected,
+  defaultStudentSelected,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -267,6 +270,17 @@ export default function OfferingForm({
                 </option>
               ))}
             </TextField>
+            {studentSelected && (
+              <AutocompleteField
+                required
+                id="offering-student-selected"
+                name="offering-student-selected"
+                label="Has a student been selected for this offering?"
+                options={studentSelected}
+                selected={defaultStudentSelected ?? undefined}
+                sx={formFieldStyles}
+              />
+            )}
             <TextField
               required
               type="number"
