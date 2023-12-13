@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Paper,
   Box,
@@ -7,15 +8,17 @@ import {
   ListItemText,
   FormControl,
   InputLabel,
-  Select,
   Typography,
   useTheme, Divider, TextField,
 } from '@mui/material';
-import { ElementType, ReactNode } from 'react';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useEffect, useState, ElementType, ReactNode } from 'react';
 import PropTypes from "prop-types";
 
 export type ExperienceCourseProps = {
   FormElement?: ElementType;
+  course: string;
+  membersList: string;
   studentsListValues: {
     id: string;
     fullname: string;
@@ -51,14 +54,16 @@ export type ExperienceCourseProps = {
 };
 
 export default function ExperienceForm({
-   FormElement,
-   studentsListValues,
-   courseFilterValues,
-   programFilterValues,
-   termFilterValues,
-   organizationFilterValues,
-   opportunityFilterValues,
-   currentFilters,
+  FormElement,
+  course,
+  membersList,
+  studentsListValues,
+  courseFilterValues,
+  programFilterValues,
+  termFilterValues,
+  organizationFilterValues,
+  opportunityFilterValues,
+  currentFilters,
  }: ExperienceCourseProps) {
   const theme = useTheme();
 
@@ -118,8 +123,22 @@ export default function ExperienceForm({
     }
   };
 
+  const [org, setOrg] = React.useState('');
+  const [opport, setOpport] = React.useState('');
+  const [isValid, setValid] = React.useState(0);
+  const validate = () => {
+    return org.length & opport.length;
+  }
+  useEffect(() => {
+    const isValid = validate();
+    setValid(isValid);
+  }, [org, opport]);
+
   const formInner = (
     <>
+      <input type="hidden" name="action" value="createExperience" />
+      <input type="hidden" name="course" value={course} />
+      <input type="hidden" name="members" value={membersList} />
       <Typography variant="h2" mb={0} color="primary.main">
         You are creating an experience for the following student(s):
       </Typography>
@@ -199,9 +218,10 @@ export default function ExperienceForm({
             label="Organization"
             native={true}
             name="organization"
-            defaultValue={currentFilters.course}
+            defaultValue={org}
+            onChange={(e) => setOrg(String(e.target.value))}
           >
-            <option key={0} value={0}>
+            <option key="0" value="0">
               Organization name
             </option>
             {organizationFilterValues.map((item) => (
@@ -218,9 +238,10 @@ export default function ExperienceForm({
             label="Opportunity"
             native={true}
             name="opportunity"
-            defaultValue={currentFilters.program}
+            value={opport}
+            onChange={(e) => setOpport(String(e.target.value))}
           >
-            <option key={0} value={0}>
+            <option key="0" value="0">
               Opportunity name
             </option>
             {opportunityFilterValues.map((item) => (
@@ -252,11 +273,13 @@ export default function ExperienceForm({
           Cancel
         </Button>
         <Button
+          id='btn-create'
           variant="contained"
           sx={{
             flexShrink: 0,
             fontWeight: 700,
           }}
+          disabled={!isValid}
           type="submit">
           Create experience
         </Button>
@@ -281,6 +304,8 @@ export default function ExperienceForm({
 
 ExperienceForm.propTypes = {
   FormElement: PropTypes.element,
+  course: PropTypes.string,
+  membersList: PropTypes.string,
   studentsListValues: PropTypes.array,
   courseFilterValues: PropTypes.array,
   programFilterValues: PropTypes.array,

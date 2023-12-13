@@ -134,6 +134,16 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     departments,
+    address: {
+      label: 'Location of Offering',
+      country: 'US',
+      streetAddress1: '30 Rockefeller Plaza',
+      streetAddress2: 'Mercedem aut nummos unde',
+      city: 'New York',
+      state: 'NY',
+      zipCode: '10112',
+    },
+    requirements,
     primaryContacts: users,
     timeApprovers: users,
     formSigners: users,
@@ -151,6 +161,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
   args: {
     isEdit: true,
     cancelUrl: '#',
+    duplidateUr: '#',
     breadcrumb: [
       {
         title: 'Offerings',
@@ -167,6 +178,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     ],
     departments,
     address: {
+      label: 'Location of Offering',
       country: 'US',
       streetAddress1: '30 Rockefeller Plaza',
       streetAddress2: 'Mercedem aut nummos unde',
@@ -211,5 +223,6 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     defaultTimeAmount: 2,
     defaultTimeUnit: 'days',
     defaultTimeFrequency: 'month',
+    emailStudentSelected: 'info@sample.com',
   },
 };

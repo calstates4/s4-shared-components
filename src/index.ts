@@ -2,6 +2,10 @@
 export { default as theme } from './theme';
 // Elements.
 export { default as Breadcrumbs } from './components/01-elements/breadcrumbs/breadcrumbs';
+export {
+  default as CheckboxInput,
+  type CheckboxProps,
+} from './components/01-elements/checkbox/checkbox-input';
 export { default as Link } from './components/01-elements/link/link';
 export { default as Logo } from './components/01-elements/logo/logo';
 export { default as Pager } from './components/01-elements/pager/pager';
@@ -121,6 +125,14 @@ export {
 } from './components/02-components/past-experiences-list/past-experiences-list';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export {
+  default as ProgramCard,
+  type ProgramCardProps,
+} from './components/02-components/program-card/program-card';
+export {
+  default as ProgramList,
+  type ProgramListProps,
+} from './components/02-components/program-list/program-list';
+export {
   default as ProgramPage,
   type ProgramPageProps,
 } from './components/02-components/program-page/program-page';
@@ -152,11 +164,22 @@ export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 export { default as TwoColumnLayout } from './components/03-layouts/two-column-layout/two-column-layout';
 // Pages
-export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
+export {
+  default as DepartmentForm,
+  type DepartmentFormProps,
+} from './components/02-components/department-form/department-form';
+export {
+  default as ExperienceForm,
+  default as ExperienceForm,
+} from './components/02-components/experience-form/experience-form';
 export {
   default as RegistrationPage,
   type RegistrationPageProps,
 } from './components/02-components/registration-page/registration-page';
+export {
+  default as StaffAssignDepartment,
+  type StaffAssignDepartmentProps,
+} from './components/02-components/staff-assign-department/staff-assign-department';
 export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,

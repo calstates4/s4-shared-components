@@ -76,3 +76,11 @@ export const ReportStudents: StoryObj<typeof DataTable> = {
     toolbar: () => <GridToolbar title="Report Students" />,
   },
 };
+
+export const NoResults: StoryObj<typeof DataTable> = {
+  args: {
+    rows: [],
+    columns: reportStudentsTableColumns,
+    toolbar: () => <GridToolbar title="No Results" />,
+  },
+};

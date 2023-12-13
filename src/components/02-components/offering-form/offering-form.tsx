@@ -22,6 +22,7 @@ const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
   { value: 'remote', label: 'Remote' },
   { value: 'hybrid', label: 'Hybrid' },
+  { value: 'negotiable', label: 'Negotiable' },
 ];
 
 const OFFERING_TIME_UNITS = [
@@ -39,9 +40,25 @@ const OFFERING_TIME_FREQUENCY = [
   { value: 'year', label: 'Per year' },
 ];
 
+const PAY_TYPE = [
+  { value: 1, label: 'Hourly Pay' },
+  { value: 2, label: 'Stipend' },
+  { value: 3, label: 'Expense Reimbursement' },
+  { value: 4, label: 'Other (please explain)' },
+];
+
+const PAY_FREQUENCY = [
+  { value: 'weekly', label: 'weekly' },
+  { value: 'biweekly', label: 'bi-weekly' },
+  { value: 'monthly', label: 'monthly' },
+  { value: 'scheduled', label: 'scheduled' },
+  { value: 'once', label: 'once' },
+];
+
 export type OfferingFormProps = {
   isEdit?: boolean;
   cancelUrl?: string;
+  duplidateUr?: string;
   breadcrumb: {
     title: string;
     url: string;
@@ -87,11 +104,15 @@ export type OfferingFormProps = {
   defaultTimeUnit?: string;
   defaultTimeFrequency?: string;
   defaultPublished?: boolean;
+  defaultPayType?: string;
+  defaultPayFrequency?: string;
+  emailStudentSelected?: string;
 };
 
 export default function OfferingForm({
   isEdit = false,
   cancelUrl,
+  duplidateUr,
   breadcrumb,
   departments,
   address,
@@ -133,7 +154,10 @@ export default function OfferingForm({
   defaultTimeAmount,
   defaultTimeUnit,
   defaultTimeFrequency,
+  defaultPayType,
+  defaultPayFrequency,
   defaultPublished,
+  emailStudentSelected,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -165,6 +189,15 @@ export default function OfferingForm({
     flexWrap: 'wrap',
   };
 
+  const fieldSetStyles = {
+    pt: theme.spacing(3),
+    pl: theme.spacing(3),
+    pr: theme.spacing(3),
+    mb: theme.spacing(3),
+    border: `1px solid ${theme.palette.secondary.main}`,
+    borderRadius: theme.spacing(1),
+  };
+
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
   }
@@ -184,402 +217,442 @@ export default function OfferingForm({
         tabPanelClassName="offering-form-panel"
         ref={tabRef}
       >
-        <div title="Metadata">
-          <TextField
-            autoFocus
-            required
-            fullWidth
-            id="offering-name"
-            name="offering-name"
-            label="Offering name"
-            defaultValue={defaultName ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
-
-          <FormControlLabel
-            control={
-              <Switch
-                checked={requiresApproval}
-                onChange={onChangeRequiresApprovalHandler}
-                id="offering-requires-approval"
-                name="offering-requires-approval"
-              />
-            }
-            label="Requires approval"
-            sx={formFieldStyles}
-          />
-
-          {requiresApproval && (
+        <div title="Offering Details">
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>General Information</legend>
+            <TextField
+              autoFocus
+              required
+              fullWidth
+              id="offering-name"
+              name="offering-name"
+              label="Offering Title"
+              defaultValue={defaultName ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={formFieldStyles}
+            />
             <TextField
               required
               fullWidth
               multiline
               maxRows={4}
-              id="offering-application-instructions"
-              name="offering-application-instructions"
-              label="Application Instructions"
-              defaultValue={defaultApplicationInstructions ?? undefined}
+              id="offering-description"
+              name="offering-description"
+              label="Offering Description"
+              defaultValue={defaultDescription ?? undefined}
               InputLabelProps={{
                 shrink: true,
               }}
               sx={formFieldStyles}
             />
-          )}
-
-          {departments && (
-            <AutocompleteField
-              id="offering-department"
-              name="offering-department"
-              label="Department"
-              options={departments}
-              selected={defaultDepartment}
+            <TextField
+              select
+              required
+              id="offering-type"
+              name="offering-type"
+              label="Offering Type"
+              defaultValue={defaultOfferingType ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              SelectProps={{
+                native: true,
+              }}
+              sx={formFieldStyles}
+            >
+              {OFFERING_TYPES.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+            <TextField
+              fullWidth
+              id="offering-student-selected"
+              variant="outlined"
+              name="offering-student-selected"
+              label="Has a student been selected for this offering?"
+              defaultValue={emailStudentSelected}
               sx={formFieldStyles}
             />
-          )}
-
-          <TextField
-            select
-            required
-            id="offering-type"
-            name="offering-type"
-            label="Offering Type"
-            defaultValue={defaultOfferingType ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {OFFERING_TYPES.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
-
-          <TextField
-            required
-            type="number"
-            id="offering-max-students"
-            name="offering-max-students"
-            label="Maximum number of students"
-            defaultValue={defaultMaxStudents ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 1,
-              min: 1,
-            }}
-            sx={formFieldStyles}
-          />
-
-          <TextField
-            required
-            type="date"
-            id="offering-start-date"
-            name="offering-start-date"
-            label="Start date"
-            onChange={handleStartDateOnChange}
-            defaultValue={defaultStartDate ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              pattern: 'd{4}-d{2}-d{2}',
-            }}
-            sx={formFieldStyles}
-          />
-
-          {startDate && (
             <TextField
               required
-              type="date"
-              id="offering-end-date"
-              name="offering-end-date"
-              label="End date"
-              defaultValue={defaultEndDate ?? undefined}
+              type="number"
+              id="offering-max-students"
+              name="offering-max-students"
+              label="Maximum number of students"
+              defaultValue={defaultMaxStudents ?? 0}
+              helperText="Use 0 for unlimited"
               InputLabelProps={{
                 shrink: true,
               }}
               inputProps={{
-                min: startDate,
-                pattern: 'd{4}-d{2}-d{2}',
+                step: 1,
+                min: 0,
               }}
               sx={formFieldStyles}
             />
-          )}
-
-          <AddressField id="offering" address={address} mb={3} />
-
-          {primaryContacts && (
-            <AutocompleteField
-              required
-              id="offering-primary-contact"
-              name="offering-primary-contact"
-              label="Primary contact"
-              options={primaryContacts}
-              selected={defaultPrimaryContact}
-              sx={formFieldStyles}
-            />
-          )}
-
-          {timeApprovers && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-time-approvers"
-              name="offering-time-approvers"
-              label="Time approver(s)"
-              options={timeApprovers}
-              selected={defaultTimeApprovers}
-              sx={formFieldStyles}
-            />
-          )}
-
-          {formSigners && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-form-signers"
-              name="offering-form-signers"
-              label="Form signer(s)"
-              options={formSigners}
-              selected={defaultFormSigners}
-              sx={formFieldStyles}
-            />
-          )}
-          {observers && (
-            <AutocompleteField
-              multiple
-              id="offering-observers"
-              name="offering-observers"
-              label="Observer(s)"
-              options={observers}
-              selected={defaultObservers}
-              sx={formFieldStyles}
-            />
-          )}
-          {preferredLanguages && (
-            <AutocompleteField
-              multiple
-              id="offering-preferred-languages"
-              name="offering-preferred-languages"
-              label="Preferred language(s)"
-              options={preferredLanguages}
-              selected={defaultPreferredLanguages}
-              sx={formFieldStyles}
-            />
-          )}
-          {requiredLanguages && (
-            <AutocompleteField
-              multiple
-              id="offering-required-languages"
-              name="offering-required-languages"
-              label="Required language(s)"
-              options={requiredLanguages}
-              selected={defaultRequiredLanguages}
-              sx={formFieldStyles}
-            />
-          )}
-
-          <FormControlLabel
-            control={
-              <Switch
-                id="offering-published"
-                name="offering-published"
-                defaultChecked={defaultPublished}
+            {preferredLanguages && (
+              <AutocompleteField
+                multiple
+                id="offering-preferred-languages"
+                name="offering-preferred-languages"
+                label="Preferred language(s)"
+                options={preferredLanguages}
+                selected={defaultPreferredLanguages}
+                sx={formFieldStyles}
               />
-            }
-            label="Published"
-            sx={formFieldStyles}
-          />
+            )}
+            {requiredLanguages && (
+              <AutocompleteField
+                multiple
+                id="offering-required-languages"
+                name="offering-required-languages"
+                label="Required language(s)"
+                options={requiredLanguages}
+                selected={defaultRequiredLanguages}
+                sx={formFieldStyles}
+              />
+            )}
+            {requirements && (
+              <AutocompleteField
+                multiple
+                id="offering-requirements"
+                name="offering-requirements"
+                label="Preferred/Required Skills and Knowledge"
+                options={requirements}
+                selected={defaultRequirements}
+                sx={formFieldStyles}
+              />
+            )}
+            {activities && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-activities"
+                name="offering-activities"
+                label="Activities"
+                helptext=""
+                options={activities}
+                selected={defaultActivities}
+                sx={formFieldStyles}
+
+              />
+            )}
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Offering Supervision</legend>
+            <Typography sx={formFieldStyles}>
+              Only active staff members with an account can be selected.
+            </Typography>
+            {primaryContacts && (
+              <AutocompleteField
+                required
+                id="offering-primary-contact"
+                name="offering-primary-contact"
+                label="Primary Contact"
+                options={primaryContacts}
+                selected={defaultPrimaryContact}
+                sx={formFieldStyles}
+              />
+            )}
+            {timeApprovers && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-time-approvers"
+                name="offering-time-approvers"
+                label="Time Approver(s)"
+                options={timeApprovers}
+                selected={defaultTimeApprovers}
+                sx={formFieldStyles}
+              />
+            )}
+            {formSigners && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-form-signers"
+                name="offering-form-signers"
+                label="Form Signer(s)"
+                options={formSigners}
+                selected={defaultFormSigners}
+                sx={formFieldStyles}
+              />
+            )}
+            {observers && (
+              <AutocompleteField
+                multiple
+                id="offering-observers"
+                name="offering-observers"
+                label="Observer(s)"
+                options={observers}
+                selected={defaultObservers}
+                sx={formFieldStyles}
+              />
+            )}
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Requirements and Fees</legend>
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Safety Considerations</legend>
+          </Box>
+
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Application Process</legend>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={requiresApproval}
+                  onChange={onChangeRequiresApprovalHandler}
+                  id="offering-requires-approval"
+                  name="offering-requires-approval"
+                />
+              }
+              label="Requires approval"
+              sx={formFieldStyles}
+            />
+
+            {requiresApproval && (
+              <TextField
+                required
+                fullWidth
+                multiline
+                maxRows={4}
+                id="offering-application-instructions"
+                name="offering-application-instructions"
+                label="Application Instructions"
+                defaultValue={defaultApplicationInstructions ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={formFieldStyles}
+              />
+            )}
+
+            {departments && (
+              <AutocompleteField
+                id="offering-department"
+                name="offering-department"
+                label="Department"
+                options={departments}
+                selected={defaultDepartment}
+                sx={formFieldStyles}
+              />
+            )}
+
+
+            <FormControlLabel
+              control={
+                <Switch
+                  id="offering-published"
+                  name="offering-published"
+                  defaultChecked={defaultPublished}
+                />
+              }
+              label="Published"
+              sx={formFieldStyles}
+            />
+          </Box>
         </div>
-        <div title="Content">
-          <TextField
-            required
-            fullWidth
-            multiline
-            maxRows={4}
-            id="offering-description"
-            name="offering-description"
-            label="Offering description"
-            defaultValue={defaultDescription ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
-          <TextField
-            fullWidth
-            multiline
-            maxRows={4}
-            id="offering-health-safety"
-            name="offering-health-safety"
-            label="Health and safety information"
-            defaultValue={defaultHealthSafetyInformation ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
+        <div title="Time & Compensation">
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Offering Availability</legend>
+            <Box component="fieldset" sx={fieldSetStyles}>
+              <legend>Offering Dates</legend>
+              <TextField
+                required
+                type="date"
+                id="offering-start-date"
+                name="offering-start-date"
+                label="Start date"
+                onChange={handleStartDateOnChange}
+                defaultValue={defaultStartDate ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  pattern: 'd{4}-d{2}-d{2}',
+                }}
+                sx={formFieldStyles}
+              />
 
-          <TextField
-            fullWidth
-            multiline
-            maxRows={4}
-            id="offering-training"
-            name="offering-training"
-            label="Offering training"
-            defaultValue={defaultTraining ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
-
-          {requirements && (
-            <AutocompleteField
-              multiple
-              id="offering-requirements"
-              name="offering-requirements"
-              label="Requirements"
-              options={requirements}
-              selected={defaultRequirements}
+              {startDate && (
+                <TextField
+                  required
+                  type="date"
+                  id="offering-end-date"
+                  name="offering-end-date"
+                  label="End date"
+                  defaultValue={defaultEndDate ?? undefined}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    min: startDate,
+                    pattern: 'd{4}-d{2}-d{2}',
+                  }}
+                  sx={formFieldStyles}
+                />
+              )}
+            </Box>
+            <TextField
+              required
+              type="number"
+              id="offering-time-amount"
+              name="offering-time-amount"
+              label="Time Commitment"
+              defaultValue={defaultTimeAmount ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 0.1,
+                min: 1,
+              }}
               sx={formFieldStyles}
             />
-          )}
+            <TextField
+              select
+              required
+              id="offering-time-unit"
+              name="offering-time-unit"
+              label="Unit of time"
+              defaultValue={defaultTimeUnit ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              SelectProps={{
+                native: true,
+              }}
+              sx={formFieldStyles}
+            >
+              {OFFERING_TIME_UNITS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+            <TextField
+              select
+              required
+              id="offering-time-frequency"
+              name="offering-time-frequency"
+              label="Hours Frequency"
+              defaultValue={defaultTimeFrequency ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              SelectProps={{
+                native: true,
+              }}
+              sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+            >
+              {OFFERING_TIME_FREQUENCY.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Box>
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Compensation</legend>
+            <TextField
+              select
+              required
+              id="offering-pay-type"
+              name="offering-pay-type"
+              label="Pay Type"
+              defaultValue={defaultPayType ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              SelectProps={{
+                native: true,
+              }}
+              sx={formFieldStyles}
+            >
+              {PAY_TYPE.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+            <TextField
+              select
+              required
+              id="offering-pay-frequency"
+              name="offering-pay-frequency"
+              label="Pay Frequency"
+              defaultValue={defaultPayFrequency ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              SelectProps={{
+                native: true,
+              }}
+              sx={formFieldStyles}
+            >
+              {PAY_FREQUENCY.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Box>
 
-          <TextField
-            fullWidth
-            multiline
-            maxRows={4}
-            id="offering-supervision"
-            name="offering-supervision"
-            label="Supervision"
-            defaultValue={defaultSupervision ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            sx={formFieldStyles}
-          />
         </div>
-        <div title="Focus">
-          {focusPopulations && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-focus-populations"
-              name="offering-focus-populations"
-              label="Focus Population(s)"
-              options={focusPopulations}
-              selected={defaultFocusPopulations}
-              sx={formFieldStyles}
-            />
-          )}
+        <div title="Additional Information">
+          <AddressField id="offering" address={address} mb={3} />
+          <Box component="fieldset" sx={fieldSetStyles}>
+            <legend>Focus Population and Areas</legend>
+            {focusPopulations && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-focus-populations"
+                name="offering-focus-populations"
+                label="Focus Population(s)"
+                options={focusPopulations}
+                selected={defaultFocusPopulations}
+                sx={formFieldStyles}
+                helptext="Please indicate primary population/clientele your organization will serve either directly or indirectly as part of this offering. If you're unsure, select 'Non-specific/any population' (select all that apply)."
+              />
+            )}
 
-          {focusAreas && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-focus-areas"
-              name="offering-focus-areas"
-              label="Focus Area(s)"
-              options={focusAreas}
-              selected={defaultFocusAreas}
-              sx={formFieldStyles}
-            />
-          )}
+            {focusAreas && (
+              <AutocompleteField
+                multiple
+                required
+                id="offering-focus-areas"
+                name="offering-focus-areas"
+                label="Focus Area(s)"
+                options={focusAreas}
+                selected={defaultFocusAreas}
+                sx={formFieldStyles}
+                helptext="Please identify the general focus area(s) pertaining to this offering (select all that apply)."
+              />
+            )}
 
-          {subFocusAreas && (
-            <AutocompleteField
-              multiple
-              id="offering-sub-focus-areas"
-              name="offering-sub-focus-areas"
-              label="Sub focus Area(s)"
-              options={subFocusAreas}
-              selected={defaultSubFocusAreas}
-              sx={formFieldStyles}
-            />
-          )}
-
-          {activities && (
-            <AutocompleteField
-              multiple
-              required
-              id="offering-activities"
-              name="offering-activities"
-              label="Activities"
-              options={activities}
-              selected={defaultActivities}
-              sx={formFieldStyles}
-            />
-          )}
-        </div>
-        <div title="Time commitment">
-          <TextField
-            required
-            type="number"
-            id="offering-time-amount"
-            name="offering-time-amount"
-            label="Time Amount"
-            defaultValue={defaultTimeAmount ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 0.1,
-              min: 1,
-            }}
-            sx={formFieldStyles}
-          />
-          <TextField
-            select
-            required
-            id="offering-time-unit"
-            name="offering-time-unit"
-            label="Unit of time"
-            defaultValue={defaultTimeUnit ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-            }}
-            sx={formFieldStyles}
-          >
-            {OFFERING_TIME_UNITS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
-          <TextField
-            select
-            required
-            id="offering-time-frequency"
-            name="offering-time-frequency"
-            label="Frequency"
-            defaultValue={defaultTimeFrequency ?? undefined}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            SelectProps={{
-              native: true,
-            }}
-            sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
-          >
-            {OFFERING_TIME_FREQUENCY.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
+            {subFocusAreas && (
+              <AutocompleteField
+                multiple
+                id="offering-sub-focus-areas"
+                name="offering-sub-focus-areas"
+                label="Sub focus Area(s)"
+                options={subFocusAreas}
+                selected={defaultSubFocusAreas}
+                sx={formFieldStyles}
+                helptext="For the focus area(s) identified above, please select any subcategories that apply. (Note: not all areas have subcategories)."
+              />
+            )}
+          </Box>
         </div>
       </Tabs>
 
@@ -595,15 +668,25 @@ export default function OfferingForm({
           {isEdit ? 'Update' : 'Create'} offering
         </Button>
 
-        {isEdit && cancelUrl && (
-          <Button
-            variant="outlined"
-            component={Link}
-            href={cancelUrl}
-            sx={{ flexShrink: 0 }}
-          >
-            Cancel
-          </Button>
+        {isEdit && cancelUrl && duplidateUr && (
+          <>
+            <Button
+              variant="contained"
+              component={Link}
+              href={duplidateUr}
+              sx={{ flexShrink: 0 }}
+            >
+              Duplicate offering
+            </Button>
+            <Button
+              variant="outlined"
+              component={Link}
+              href={cancelUrl}
+              sx={{ flexShrink: 0 }}
+            >
+              Cancel
+            </Button>
+          </>
         )}
       </Box>
     </>

@@ -10,6 +10,7 @@ type AutocompleteFieldProps = {
   id: string;
   label: string;
   name: string;
+  helptext?: string;
   options: AutocompleteOptionType[];
   multiple?: boolean;
   selected?: string | string[] | null;
@@ -22,6 +23,7 @@ export default function AutocompleteField({
   id,
   name,
   label,
+  helptext,
   options,
   multiple = false,
   selected = null,
@@ -77,8 +79,9 @@ export default function AutocompleteField({
                 : false,
             }}
             required={required}
+            helperText={helptext}
           />
-        )}
+          )}
         isOptionEqualToValue={(
           option: AutocompleteOptionType,
           value: AutocompleteOptionType,
