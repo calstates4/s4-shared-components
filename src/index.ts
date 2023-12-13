@@ -168,10 +168,7 @@ export {
   default as DepartmentForm,
   type DepartmentFormProps,
 } from './components/02-components/department-form/department-form';
-export {
-  default as ExperienceForm,
-  default as ExperienceForm,
-} from './components/02-components/experience-form/experience-form';
+export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
 export {
   default as RegistrationPage,
   type RegistrationPageProps,
