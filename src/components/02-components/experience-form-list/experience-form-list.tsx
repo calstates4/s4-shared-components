@@ -16,6 +16,7 @@ type ExperienceFormListProps = {
   endForms: FormProps[] | undefined;
   formBaseUrl?: string;
   viewSubmissionBaseUrl?: string;
+  returnToUrl?: string;
 };
 
 export default function ExperienceFormList({
@@ -25,6 +26,7 @@ export default function ExperienceFormList({
   endForms,
   formBaseUrl = '/forms/',
   viewSubmissionBaseUrl = '/submissions/',
+  returnToUrl,
 }: ExperienceFormListProps) {
   const theme = useTheme();
 
@@ -50,6 +52,7 @@ export default function ExperienceFormList({
     borderBottom: `1px solid ${theme.palette.secondary.light}`,
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
+      alignItems: 'center',
     },
   };
 
@@ -103,7 +106,9 @@ export default function ExperienceFormList({
               <Button
                 variant="outlined"
                 component={Link}
-                href={`${formBaseUrl}${item.id}`}
+                href={`${formBaseUrl}${item.id}${
+                  returnToUrl ? `?return_to=${returnToUrl}` : ''
+                }`}
                 sx={{ flexShrink: 0 }}
               >
                 Complete form
@@ -111,7 +116,9 @@ export default function ExperienceFormList({
             ) : (
               item.submissionId && (
                 <Link
-                  href={`${viewSubmissionBaseUrl}${item.id}/${item.submissionId}`}
+                  href={`${viewSubmissionBaseUrl}${item.id}/${
+                    item.submissionId
+                  }${returnToUrl ? `?return_to=${returnToUrl}` : ''}`}
                 >
                   Review submission
                 </Link>
