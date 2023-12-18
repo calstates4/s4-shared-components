@@ -179,3 +179,11 @@ export {
   default as StaffAssignDepartment,
   type StaffAssignDepartmentProps,
 } from './components/02-components/staff-assign-department/staff-assign-department';
+export {
+  default as StepsBar,
+  type StepsProps,
+} from './components/02-components/steps-bar/steps-bar';
+export {
+  default as StudentExperienceForm,
+  type StudentExperienceFormProps,
+} from './components/02-components/student-experience-form/student-experience-form'

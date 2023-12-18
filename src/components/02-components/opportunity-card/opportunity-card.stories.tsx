@@ -31,3 +31,18 @@ export const Default: StoryObj<typeof OpportunityCard> = {
     description,
   },
 };
+
+export const CardSelected: StoryObj<typeof OpportunityCard> = {
+  args: {
+    id: 1,
+    title: 'Service Learning at Action VC',
+    url: '#',
+    location: 'Camarillo, CA United States',
+    type: 'Hybrid',
+    timeCommitment: '20 hours',
+    termPeriod: 'Fall 2023',
+    description,
+    cardSelected: true,
+    requirements: `{Lorem ipsum dolor sit amet consectetur. Nulla lacus volutpat pretium facilisis non vulputate mauris scelerisque. Tincidunt mauris auctor semper mauris auctor viverra facilisi at tempus.}`,
+  },
+};
