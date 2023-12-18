@@ -22,7 +22,7 @@ export type OpportunityCardProps = {
   termPeriod?: string;
   program?: string;
   description?: string;
-  cardSelected: boolean;
+  cardSelected?: boolean;
   requirements?: string;
 };
 
