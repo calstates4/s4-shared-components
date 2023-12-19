@@ -1,5 +1,4 @@
-import { useTheme } from '@mui/material';
-import { styled, type Theme } from '@mui/material/styles';
+import { Box, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 type MainContentProps = {
@@ -13,12 +12,10 @@ export default function MainContent({
   sidebarOpen,
   sidebarWidth,
 }: MainContentProps) {
-  const Main = styled('main', {
-    shouldForwardProp: (prop) => prop !== 'menuOpen' && prop !== 'theme',
-  })<{
-    menuOpen?: boolean;
-    theme: Theme;
-  }>(({ theme, menuOpen }) => ({
+  const theme = useTheme();
+
+  // Styles.
+  const mainStyles = {
     flexGrow: 1,
     height: '100vh',
     padding: theme.spacing(2),
@@ -31,7 +28,7 @@ export default function MainContent({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      ...(menuOpen && {
+      ...(sidebarOpen && {
         transition: theme.transitions.create('margin,', {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
@@ -39,13 +36,11 @@ export default function MainContent({
         marginLeft: 0,
       }),
     },
-  }));
-
-  const theme = useTheme();
+  };
 
   return (
-    <Main theme={theme} menuOpen={sidebarOpen}>
+    <Box component="main" sx={mainStyles}>
       {children}
-    </Main>
+    </Box>
   );
 }
