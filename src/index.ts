@@ -187,3 +187,8 @@ export {
   default as StudentExperienceForm,
   type StudentExperienceFormProps,
 } from './components/02-components/student-experience-form/student-experience-form'
+
+export {
+  default as StudentExperienceFormStep2,
+  type StudentExperienceFormStep2Props,
+} from './components/02-components/student-experience-form-step2/student-experience-form-step2'
