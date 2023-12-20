@@ -1,3 +1,4 @@
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {
   Box,
   Button,
@@ -8,6 +9,7 @@ import {
 } from '@mui/material';
 import { experienceStatusInfo } from '../../../lib/utils';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
+import Link from '../../01-elements/link/link';
 
 export type CardExperienceProps = {
   id: string;
@@ -19,6 +21,7 @@ export type CardExperienceProps = {
   dateEnd: string;
   location: string;
   cta: string;
+  hasPendingForm: boolean;
   hours: number;
   hoursCtaUrl: string;
   cardCount: number;
@@ -33,6 +36,7 @@ export default function CardExperience({
   dateEnd,
   location,
   cta,
+  hasPendingForm,
   hours,
   hoursCtaUrl,
   cardCount,
@@ -40,17 +44,17 @@ export default function CardExperience({
   const theme = useTheme();
 
   // Variables according to the variant of the number of items
-  const position = cardCount >= 2 ? 'column' : 'row';
-  const contentPadding = cardCount >= 2 ? theme.spacing(4) : theme.spacing(5);
-  const itemsAlignment = cardCount >= 2 ? 'flex-start' : 'center';
-  const stateMarginY = cardCount >= 2 ? theme.spacing(2) : '0';
-  const stateMarginX = cardCount >= 2 ? '0' : theme.spacing(2);
-  const bodyMarginLeft = cardCount >= 2 ? '0' : theme.spacing(5);
-  const bodyMarginBottom = cardCount >= 2 ? theme.spacing(3) : '0';
-  const cardNumberVariation = cardCount >= 2 ? 'row' : 'column';
-  const bodyWrapper = cardCount >= 2 ? '0' : '1 0 75%';
-  const cardHourWrapper = cardCount >= 2 ? '0' : '1 0 25%';
-  const containerPosition = cardCount >= 2 ? 'row' : 'column';
+  const position = cardCount === 1 ? 'row' : 'column';
+  const contentPadding = cardCount === 1 ? theme.spacing(5) : theme.spacing(4);
+  const itemsAlignment = cardCount === 1 ? 'center' : 'flex-start';
+  const stateMarginY = cardCount === 1 ? 0 : theme.spacing(2);
+  const stateMarginX = cardCount === 1 ? theme.spacing(2) : 0;
+  const bodyMarginLeft = cardCount === 1 ? theme.spacing(5) : 0;
+  const bodyMarginBottom = cardCount === 1 ? 0 : theme.spacing(3);
+  const cardNumberVariation = cardCount === 1 ? 'column' : 'row';
+  const bodyWrapper = cardCount === 1 ? '1 1 75%' : 'none';
+  const cardHourWrapper = cardCount === 1 ? '0 0 25%' : 'none';
+  const containerPosition = cardCount === 1 ? 'column' : 'row';
 
   const states = experienceStatusInfo(theme);
 
@@ -77,9 +81,12 @@ export default function CardExperience({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    flex: 'auto',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
+      gap: cardCount === 1 ? theme.spacing(5) : 0,
+    },
+    [theme.breakpoints.up('lg')]: {
+      gap: cardCount === 1 ? theme.spacing(10) : 0,
     },
   };
 
@@ -90,7 +97,7 @@ export default function CardExperience({
   const headingWrapperStyles = {
     display: 'flex',
     alignItems: 'flex-start',
-    marginBottom: theme.spacing(1),
+    mb: theme.spacing(1),
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: position,
@@ -150,6 +157,40 @@ export default function CardExperience({
 
   const cardHoursStyles = {
     flex: cardHourWrapper,
+    mb: theme.spacing(5),
+    [theme.breakpoints.up('md')]: {
+      mb: 0,
+    },
+  };
+
+  const pendingFormStyles = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    my: theme.spacing(3),
+    border: `1px solid ${theme.palette.warning.main}`,
+    p: theme.spacing(2),
+    pr: theme.spacing(3),
+    borderRadius: theme.spacing(1),
+    [theme.breakpoints.up('md')]: {
+      flexWrap: 'nowrap',
+      mb: theme.spacing(5),
+    },
+  };
+
+  const iconPendingStyles = {
+    color: theme.palette.warning.main,
+    marginRight: theme.spacing(1),
+  };
+
+  const pendingFormButtonStyles = {
+    width: '100%',
+    mt: theme.spacing(3),
+    mb: cardCount === 1 ? 0 : theme.spacing(2),
+    [theme.breakpoints.up('md')]: {
+      width: cardCount === 1 ? 'auto' : '100%',
+      mt: 0,
+      ml: 'auto',
+    },
   };
 
   // Render funtions.
@@ -209,6 +250,38 @@ export default function CardExperience({
               {renderedDate}
             </Box>
           </Box>
+          {hasPendingForm &&
+            (cardCount === 1 ? (
+              <Box sx={pendingFormStyles}>
+                <ErrorOutlineIcon sx={iconPendingStyles} />
+                <Box>
+                  <Typography sx={headingStyles} variant="h4">
+                    Pending forms
+                  </Typography>
+                  <Typography variant="body2">
+                    There are pending forms for this experience, please fill all
+                    the forms.
+                  </Typography>
+                </Box>
+                <Button
+                  variant="outlined"
+                  component={Link}
+                  href={`${cta}#experience-forms`}
+                  sx={pendingFormButtonStyles}
+                >
+                  Go to Forms
+                </Button>
+              </Box>
+            ) : (
+              <Button
+                variant="outlined"
+                component={Link}
+                href={`${cta}#experience-forms`}
+                sx={pendingFormButtonStyles}
+              >
+                Fill Pending Form(s)
+              </Button>
+            ))}
         </Box>
         <Box sx={cardHoursStyles}>
           <CardExperienceHours
@@ -216,8 +289,11 @@ export default function CardExperience({
             cta={hoursCtaUrl}
             position={cardNumberVariation}
           />
-          {cardCount >= 2 && (
-            <Button sx={{ ...buttonStyles, width: '100%' }} href={cta}>
+          {cardCount > 1 && (
+            <Button
+              sx={{ ...buttonStyles, width: '100%', mt: theme.spacing(4) }}
+              href={cta}
+            >
               More Details
             </Button>
           )}
