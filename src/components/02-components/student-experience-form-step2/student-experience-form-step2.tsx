@@ -10,6 +10,7 @@ import { ChangeEvent, ElementType, useRef, useState, ReactNode } from 'react';
 import AutocompleteField, {
   type AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 export type StudentExperienceFormStep2Props = {
   opportunityId: string;
@@ -20,6 +21,8 @@ export type StudentExperienceFormStep2Props = {
   defaultCourse: string | null;
   stepsBar: ReactNode;
   FormElement: ElementType;
+  courseSelected: string;
+  errorMsg: boolean;
 };
 
 export default function StudentExperienceFormStep2({
@@ -31,6 +34,8 @@ export default function StudentExperienceFormStep2({
   defaultCourse,
   stepsBar,
   FormElement,
+  courseSelected,
+  errorMsg,
 }: StudentExperienceFormStep2Props) {
   const theme = useTheme();
 
@@ -43,7 +48,7 @@ export default function StudentExperienceFormStep2({
   };
 
   const formFieldStyles = {
-    mb: theme.spacing(3),
+    mb: theme.spacing(1),
     display: 'block',
     width: '300px',
   };
@@ -63,6 +68,16 @@ export default function StudentExperienceFormStep2({
       mb: 0,
     },
   };
+  const timeEntryStatusLabelStyles = {
+    display: 'flex',
+    columnGap: theme.spacing(1),
+    mb: theme.spacing(1),
+    color: '#D32F2F',
+    fontSize: '10px',
+    fontWeight: '400',
+  };
+
+  const defaultSelect = courseSelected !== '0' ? courseSelected : defaultCourse;
 
   const formInner = (
     <>
@@ -83,9 +98,17 @@ export default function StudentExperienceFormStep2({
             name="courseId"
             label="Course"
             options={courseValues}
-            selected={defaultCourse}
+            selected={defaultSelect}
             sx={formFieldStyles}
           />
+        )}
+        {errorMsg && (
+          <Box sx={timeEntryStatusLabelStyles}>
+            <ErrorOutlineIcon sx={{ color: '#D32F2F'}} />
+            <Typography>
+              The opportunity you have selected is not part of this course. Please select another one to continue.
+            </Typography>
+          </Box>
         )}
       </Paper>
       <input type="hidden" name="opportunityId" value={ opportunityId } />
@@ -93,7 +116,7 @@ export default function StudentExperienceFormStep2({
       <input type="hidden" name="programId" value={ programId } />
       <Button type="button" variant="outlined" sx={{ mr: 1, float: 'left' }}>Cancel</Button>
       <Button type="submit" variant="contained" sx={{ mr: 1, float: 'right' }}>Continue</Button>
-      <Button type="button" variant="outlined" sx={{ mr: 1, float: 'right' }}>Back</Button>
+      <Button type="button" href={`/create-experience?opportunity=${opportunityId}`} variant="outlined" sx={{ mr: 1, float: 'right' }}>Back</Button>
     </>
   );
 

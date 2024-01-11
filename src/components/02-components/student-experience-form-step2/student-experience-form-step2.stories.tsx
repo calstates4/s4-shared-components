@@ -33,5 +33,7 @@ export const AddStudentExperienceFormStep2: StoryObj<typeof StudentExperienceFor
     courseValues: courses,
     defaultCourse:'2',
     stepsBar: stepsBar,
+    courseSelected: '0',
+    errorMsg: false,
   }
 };
