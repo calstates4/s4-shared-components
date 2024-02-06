@@ -178,6 +178,10 @@ export {
   type StaffAssignDepartmentProps,
 } from './components/02-components/staff-assign-department/staff-assign-department';
 export {
+  default as StaffAssignRole,
+  type StaffAssignRoleProps,
+} from './components/02-components/staff-assign-role/staff-assign-role';
+export {
   default as CourseDetailsPage,
   type CourseDetailsPageProps,
 } from './components/04-pages/faculty/courses/course-details/course-details';
