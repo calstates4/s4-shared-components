@@ -22,6 +22,7 @@ export type StaffAssignRoleProps = {
   fName?: string;
   lName?: string;
   roles: AutocompleteOptionType[];
+  memberRole: string;
   FormElement: ElementType;
 };
 
@@ -32,6 +33,7 @@ export default function StaffAssignRole({
   fName,
   lName,
   roles,
+  memberRole,
   FormElement,
 }: StaffAssignRoleProps ) {
   const theme = useTheme();
@@ -62,7 +64,7 @@ export default function StaffAssignRole({
         name="field_roles"
         label="Roles"
         options={roles}
-        selected=""
+        selected={memberRole}
         sx={baseFormItemStyles}
       />
       <Typography component="ul" sx={hlpText}>

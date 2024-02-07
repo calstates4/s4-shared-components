@@ -37,5 +37,6 @@ export const Default: StoryObj<typeof StaffAssignRole> = {
     fName: 'Peter',
     lName: 'Parker',
     roles: rolesList,
+    memberRole: '3'
   }
 }
