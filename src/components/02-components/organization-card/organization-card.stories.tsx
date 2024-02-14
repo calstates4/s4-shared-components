@@ -15,6 +15,8 @@ export const Default: StoryObj<typeof OrganizationCard> = {
     name: 'Tempor dolor eu esse in',
     description:
       'Et cillum aute voluptate et anim aute aliqua commodo dolor quis mollit sit. Nisi labore reprehenderit sint ad. Laboris aliquip excepteur fugiat minim nulla cupidatat cupidatat commodo tempor occaecat dolor voluptate.',
+    btnDisable: true,
+    btnText: 'Pending',
   },
   render: (args) => (
     <div style={{ maxWidth: '400px' }}>
