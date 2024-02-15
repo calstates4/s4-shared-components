@@ -1,10 +1,12 @@
-import { ElementType } from 'react';
+import {ElementType, useState} from 'react';
 import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 
 export type OrganizationCardProps = {
   id: string;
   name: string;
   description?: string;
+  btnDisable: boolean;
+  btnText: string
   FormElement?: ElementType;
 };
 
@@ -12,6 +14,8 @@ export default function OrganizationCard({
   id,
   name,
   description,
+  btnDisable,
+  btnText,
   FormElement,
 }: OrganizationCardProps) {
   const theme = useTheme();
@@ -30,12 +34,14 @@ export default function OrganizationCard({
     mt: 'auto',
   };
 
+  const [isDisabled] = useState(btnDisable);
+
   const innerForm = (
     <>
       <input type="hidden" name="action" value="joinOrganization" />
       <input type="hidden" name="orgId" value={id} />
-      <Button type="submit" variant="contained">
-        Select
+      <Button type="submit" disabled={isDisabled} variant="contained">
+        {btnText}
       </Button>
     </>
   );
