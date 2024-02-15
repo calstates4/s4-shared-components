@@ -22,6 +22,8 @@ export type OpportunityCardProps = {
   termPeriod?: string;
   program?: string;
   description?: string;
+  cardSelected?: boolean;
+  requirements?: string;
 };
 
 export default function OpportunityCard({
@@ -35,6 +37,8 @@ export default function OpportunityCard({
   termPeriod,
   program,
   description,
+  cardSelected,
+  requirements,
 }: OpportunityCardProps) {
   const theme = useTheme();
 
@@ -87,7 +91,9 @@ export default function OpportunityCard({
 
   return (
     <article>
-      <Accordion>
+      <Accordion
+        defaultExpanded={ cardSelected ? true : false}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />}
           aria-controls={`opportunity-content-${id}`}
@@ -121,7 +127,15 @@ export default function OpportunityCard({
             </Typography>
           )}
           {description && (
-            <Typography dangerouslySetInnerHTML={{ __html: description }} />
+            <Typography sx={{ mb: theme.spacing(1) }}>
+              {cardSelected && (
+                <>Description: </>
+              )}
+              {description}
+            </Typography>
+          )}
+          {requirements && (
+            <Typography sx={{ mb: theme.spacing(1) }} dangerouslySetInnerHTML={{ __html: 'Requirements: ' + requirements }} />
           )}
           <Box sx={buttonsContainerSyles}>
             <Button
@@ -132,14 +146,16 @@ export default function OpportunityCard({
             >
               View details
             </Button>
-            <Button
-              variant="contained"
-              component={Link}
-              href={destinationUrl}
-              sx={{ flexShrink: 0 }}
-            >
-              Select
-            </Button>
+            {!cardSelected && (
+              <Button
+                variant="contained"
+                component={Link}
+                href={destinationUrl}
+                sx={{ flexShrink: 0 }}
+              >
+                Select
+              </Button>
+            )}
           </Box>
         </AccordionDetails>
       </Accordion>
