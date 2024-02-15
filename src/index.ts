@@ -193,15 +193,6 @@ export {
   default as PartnerExperienceDetailsPage,
   type PartnerExperienceDetailsPageProps,
 } from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
-export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
-export {
-  default as CourseDetailsPage,
-  type CourseDetailsPageProps,
-} from './components/04-pages/faculty/courses/course-details/course-details';
-export {
-  default as StaffAssignDepartment,
-  type StaffAssignDepartmentProps,
-} from './components/02-components/staff-assign-department/staff-assign-department';
 export {
   default as StepsBar,
   type StepsProps,
