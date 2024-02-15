@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+import { Default as ExperienceFormListStory } from '../experience-form-list/experience-form-list.stories';
 import TimeLogTable, {
   type TimeLogTableProps,
 } from '../time-log-table/time-log-table';
@@ -40,38 +41,7 @@ export const Student: StoryObj<typeof ExperiencePage> = {
     timeApprover: 'Name Lastname, Name Lastname',
     observer: 'Name Lastname',
     hasPendingForm: true,
-    formsBegining: {
-      items: [
-        {
-          id: '1',
-          formName: 'Release of Liability - COVID 19',
-          statusFoms: 'Submitted',
-          urlForm: '/opportunities',
-        },
-        {
-          id: '2',
-          formName: 'Release of Liability - COVID 19',
-          statusFoms: 'Pending',
-          urlForm: '/opportunities',
-        },
-      ],
-    },
-    formsDuring: {
-      items: [
-        {
-          id: '1',
-          formName: 'Release of Liability - COVID 19',
-          statusFoms: 'Submitted',
-          urlForm: '/opportunities',
-        },
-        {
-          id: '2',
-          formName: 'Release of Liability - COVID 19',
-          statusFoms: 'Pending',
-          urlForm: '/opportunities',
-        },
-      ],
-    },
+    ...ExperienceFormListStory.args,
   },
   render: (args) => (
     <ExperiencePage {...args}>
