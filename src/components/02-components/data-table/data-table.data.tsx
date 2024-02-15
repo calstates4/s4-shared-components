@@ -89,7 +89,11 @@ export const staffTableRows = [
       'Banking',
       'Administration'
     ],
-
+    roles: [
+      'Staff',
+      'Organization Editor',
+      'Organization Manager'
+    ],
   },
   {
     id: 2,
@@ -100,36 +104,48 @@ export const staffTableRows = [
       'Banking',
       'Administration'
     ],
+    roles: [ 'Staff' ],
   },
   {
     id: 3,
     col1: 'Sarah',
     col2: 'Parker',
-    departments: ['Elementary']
+    departments: ['Elementary'],
+    roles: [ 'Organization Editor' ],
   },
   {
     id: 4,
     col1: 'John',
     col2: 'Parker',
     departments: ['Teaching'],
+    roles: [ 'Organization Manager' ],
   },
   {
     id: 5,
     col1: 'Fernando',
     col2: 'Parker',
     departments: ['Teaching', 'Social Work'],
+    roles: [],
   },
   {
     id: 6,
     col1: 'Bob',
     col2: 'Parker',
     departments: ['Education'],
+    roles: [
+      'Staff',
+      'Organization Manager'
+    ],
   },
   {
     id: 7,
     col1: 'George',
     col2: 'Parker',
     departments: [],
+    roles: [
+      'Organization Editor',
+      'Organization Manager'
+    ],
   },
 ];
 
@@ -140,7 +156,6 @@ export const staffTableColumns = [
     field: 'col3',
     headerName: 'Departments',
     width: 150,
-    disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <ul style={{listStyleType: 'none', padding: '0'}}>
         {params.row.departments.map((item:string, index: number) => (
@@ -153,7 +168,21 @@ export const staffTableColumns = [
   },
   {
     field: 'col4',
-    width: 300,
+    headerName: 'Roles',
+    width: 170,
+    renderCell: (params: GridRenderCellParams) => (
+      <ul style={{listStyleType: 'none', padding: '0'}}>
+        {params.row.roles.map((item:string, index: number) => (
+          <li key={index}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  {
+    field: 'col5',
+    width: 220,
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
@@ -169,6 +198,28 @@ export const staffTableColumns = [
           }}
         >
           Assign Department
+        </Button>
+      </strong>
+    ),
+  },
+  {
+    field: 'col6',
+    width: 130,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'/organization/role/edit/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+          }}
+        >
+          Edit Role
         </Button>
       </strong>
     ),
