@@ -49,7 +49,7 @@ const GridToolbar: React.FC<GridToolbarProps> = ({ title }) => {
         {title}
       </Typography>
       <GridToolbarColumnsButton sx={buttonToolbarStyles} />
-      <GridToolbarDensitySelector sx={buttonToolbarStyles} />
+      {/*<GridToolbarDensitySelector sx={buttonToolbarStyles} />*/}
       <GridToolbarExport
         printOptions={{
           hideFooter: true,

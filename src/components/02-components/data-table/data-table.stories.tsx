@@ -49,6 +49,7 @@ export const Staff: StoryObj<typeof DataTable> = {
     columns: staffTableColumns,
     toolbar: () => <GridToolbar title="Staff" />,
     filters: staffFilterModel,
+    hideCols: {},
   },
 };
 

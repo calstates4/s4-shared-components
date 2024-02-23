@@ -182,6 +182,7 @@ export const staffTableColumns = [
   },
   {
     field: 'col5',
+    headerName: 'Manage Departments',
     width: 220,
     type: 'actions',
     disableExport: true,
@@ -197,13 +198,14 @@ export const staffTableColumns = [
             border: '1px solid',
           }}
         >
-          Assign Department
+          Manage Departments
         </Button>
       </strong>
     ),
   },
   {
     field: 'col6',
+    headerName: 'Manage Roles',
     width: 130,
     type: 'actions',
     disableExport: true,
