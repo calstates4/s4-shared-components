@@ -3,7 +3,7 @@ import {
   DataGrid,
   GridFilterModel,
   type GridColDef,
-  type GridRowsProp,
+  type GridRowsProp, GridColumnVisibilityModel,
 } from '@mui/x-data-grid';
 import React from 'react';
 
@@ -12,6 +12,7 @@ export type DataTableProps = {
   columns: GridColDef[];
   toolbar: React.FC;
   filters?: GridFilterModel;
+  hideCols?: GridColumnVisibilityModel;
 };
 
 export default function DataTable({
@@ -19,10 +20,10 @@ export default function DataTable({
   columns,
   toolbar: CustomToolbar,
   filters,
+  hideCols,
 }: DataTableProps) {
   const theme = useTheme();
   const [selectedIds, setSelectedIds] = React.useState([]);
-
   return (
     <>
       <DataGrid
@@ -44,6 +45,7 @@ export default function DataTable({
         filterModel={filters}
         pageSizeOptions={[5, 10, 25, 50, 100]}
         sx={{ paddingLeft: theme.spacing(3) }}
+        columnVisibilityModel={hideCols}
       />
       <input type="hidden" name="selectedIds" value={selectedIds} />
     </>

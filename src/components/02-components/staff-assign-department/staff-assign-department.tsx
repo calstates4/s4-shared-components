@@ -1,3 +1,4 @@
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import {
   Box,
   Button,
@@ -6,14 +7,12 @@ import {
   useTheme,
 } from "@mui/material";
 import { ElementType, ReactNode } from "react";
-import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import { useState } from "react";
+import Link from '../../01-elements/link/link';
 
 export type StaffAssignDepartmentProps = {
-  breadcrumb: {
-    title: string;
-    url: string;
-  }[];
+  goBackText: string;
+  goBackUrl: string;
   orgId?: string;
   uid?: string;
   fName?: string;
@@ -23,7 +22,8 @@ export type StaffAssignDepartmentProps = {
 };
 
 export default function StaffAssignDepartment({
-  breadcrumb,
+  goBackText,
+  goBackUrl,
   orgId,
   uid,
   fName,
@@ -41,6 +41,19 @@ export default function StaffAssignDepartment({
     [theme.breakpoints.up('sm')]: {
       p: theme.spacing(3),
     },
+  };
+
+  const goBackLinkStyles = {
+    textDecoration: 'none',
+    mb: 2,
+    display: 'block',
+    fontSize: '1rem',
+  };
+
+  const iconStyles = {
+    fontSize: '1rem',
+    color: 'text.secondary',
+    verticalAlign: '-3px',
   };
 
   const handleButtonClick = (event: React.FormEvent<HTMLButtonElement>) => {
@@ -77,14 +90,18 @@ export default function StaffAssignDepartment({
 
   return (
     <>
-      <Breadcrumbs items={breadcrumb} />
+      {goBackText && goBackUrl && (
+        <Link href={goBackUrl} color="text.secondary" sx={goBackLinkStyles}>
+          <ArrowBackIosNewIcon sx={iconStyles} /> {goBackText}
+        </Link>
+      )}
       <Paper sx={containerStyles}>
         <Typography
           variant={"h1"}
           mb={3}
           color="primary.main"
         >
-          Assign Departments
+          Manage Departments
         </Typography>
         {(fName && lName) && (
           <Typography
