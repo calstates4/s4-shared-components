@@ -422,7 +422,6 @@ export default function OrganizationForm({
               />
               {id && (
                 <AutocompleteField
-                  required
                   id="org-form-main-contact-user"
                   name="field_main_contact_user"
                   label="User"
