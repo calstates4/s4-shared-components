@@ -34,6 +34,10 @@ export type OrganizationPageProps = {
     phone: string;
     email: string;
   };
+  orgAvailability: {
+    day: string;
+    time:string;
+  }[];
   departments?: {
     pages: number;
     currentPage: number;
@@ -61,6 +65,7 @@ export default function OrganizationPage({
   email,
   webpage,
   mainContact,
+  orgAvailability,
   departments,
 }: OrganizationPageProps) {
   const theme = useTheme();
@@ -129,6 +134,7 @@ export default function OrganizationPage({
       },
     },
     'li + li': {
+      mt: theme.spacing(1),
       [theme.breakpoints.down('sm')]: {
         mt: theme.spacing(1),
       },
@@ -208,6 +214,10 @@ export default function OrganizationPage({
       flexShrink: 0,
       flexWrap: 'nowrap',
     },
+  };
+
+  const availabilityStyle = {
+    mt: theme.spacing(1),
   };
 
   return (
@@ -293,6 +303,16 @@ export default function OrganizationPage({
               <li>
                 <WebAssetIcon sx={iconStyles} />
                 <Link href={webpage}>{webpage}</Link>
+              </li>
+            )}
+            {orgAvailability && (
+              <li>
+                <Typography component="h2" variant="h3" sx={detailsTitleStyles}>
+                  Organizational Availability
+                </Typography>
+                {orgAvailability.map((slot) => (
+                  <Box component='div' sx={availabilityStyle}><strong>{slot.day}:</strong> {slot.time}</Box>
+                ))}
               </li>
             )}
           </Box>

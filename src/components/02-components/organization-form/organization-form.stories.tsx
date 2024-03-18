@@ -69,6 +69,27 @@ const options = [
   },
 ];
 
+const orgAvailability = [
+  {
+    day: '7',
+    startHour: '8',
+    startMin: '30',
+    starAmpm: 'am',
+    endHour: '5',
+    endtMin: '00',
+    endAmpm: 'pm',
+  },
+  {
+    day: '2',
+    startHour: '9',
+    startMin: '00',
+    starAmpm: 'am',
+    endHour: '1',
+    endtMin: '30',
+    endAmpm: 'pm',
+  }
+];
+
 export const AddOrganization: StoryObj<typeof OrganizationForm> = {
   args: {
     mainContactUserOptions: options,
@@ -80,6 +101,17 @@ export const AddOrganization: StoryObj<typeof OrganizationForm> = {
     mainHeadingLevel: 'h2',
     byline:
       'In order to complete your registration process please create an Organization.',
+    orgAvailability: [
+      {
+        day: '',
+        startHour: '',
+        startMin: '',
+        starAmpm: '',
+        endHour: '',
+        endtMin: '',
+        endAmpm: '',
+      }
+    ],
   },
 };
 
@@ -87,6 +119,7 @@ export const EditOrganization: StoryObj<typeof OrganizationForm> = {
   args: {
     isEdit: true,
     name: 'Test Organization',
+    addressType: 'remote-online',
     address: {
       country: 'US',
       streetAddress1: '30 Rockefeller Plaza',
@@ -94,6 +127,7 @@ export const EditOrganization: StoryObj<typeof OrganizationForm> = {
       state: 'NY',
       zipCode: '10112',
     },
+    detailsRemote: 'Praesent blandit laoreet nibh.. Etiam ultricies nisi vel augue. Nullam dictum felis eu pede mollis pretium.',
     offeringRequiresApproval: true,
     description,
     healthSafetyInfo,
@@ -111,7 +145,6 @@ export const EditOrganization: StoryObj<typeof OrganizationForm> = {
       website: 'https://www.actionvc.org',
     },
     legalContactSameAsMain: false,
-    // legalContactInfo,
     studentContactInfo: {
       firstName: 'Joe',
       lastName: 'Dumas',
@@ -130,5 +163,6 @@ export const EditOrganization: StoryObj<typeof OrganizationForm> = {
     focusAreaOptions: options,
     subFocusAreaOptions: options,
     focusPopulationOptions: options,
+    orgAvailability: orgAvailability,
   },
 };
