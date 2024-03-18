@@ -53,6 +53,28 @@ export const Default: StoryObj<typeof OrganizationPage> = {
       phone: '(805) 987-0300',
       email: 'natalie.pavia@actionvc.org',
     },
+    orgAvailability: [
+      {
+        day: 'Monday',
+        time: '7:00 am-1:30 pm',
+      },
+      {
+        day: 'Tuesday',
+        time: '7:00 am-1:30 pm',
+      },
+      {
+        day: 'Wednesday',
+        time: '7:00 am-1:30 pm',
+      },
+      {
+        day: 'Thursday',
+        time: '7:00 am-1:30 pm',
+      },
+      {
+        day: 'Friday',
+        time: '7:00 am-1:30 pm',
+      }
+    ],
     departments: {
       pages: 3,
       currentPage: 1,

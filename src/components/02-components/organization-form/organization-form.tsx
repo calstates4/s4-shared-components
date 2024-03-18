@@ -5,27 +5,34 @@ import {
   Box,
   Button,
   FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
   Paper,
   Switch,
   TextField,
   Typography,
   useTheme,
 } from '@mui/material';
-import { ElementType, useRef, useState } from 'react';
+import React, { ElementType, useRef, useState,Component } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Link from '../../01-elements/link/link';
 import AddressField, { type AddressType } from '../address-field/address-field';
 import AutocompleteField, {
   AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
+import ScheduleFields , { type ScheduleFieldsProps } from '../schedule-fields/schedule-fields';
 import Tabs, { type RefHandler } from '../tabs/tabs';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 type OrganizationFormProps = {
   isEdit?: boolean;
   id?: string;
   name?: string;
+  addressType?: string;
   address?: AddressType;
+  detailsRemote?: string;
   offeringRequiresApproval?: boolean;
   description?: string;
   additionalInformation?: string;
@@ -76,13 +83,16 @@ type OrganizationFormProps = {
   FormElement: ElementType;
   mainHeadingLevel?: 'h1' | 'h2';
   byline?: string;
+  orgAvailability?: ScheduleFieldsProps[];
 };
 
 export default function OrganizationForm({
   isEdit = false,
   id,
   name,
+  addressType,
   address,
+  detailsRemote,
   offeringRequiresApproval,
   description,
   additionalInformation,
@@ -97,7 +107,6 @@ export default function OrganizationForm({
   focusPopulation,
   focusAreas,
   subFocusAreas,
-  //populationSize,
   mainContactUserOptions,
   industryOptions,
   organizationTypeOptions,
@@ -107,6 +116,7 @@ export default function OrganizationForm({
   FormElement,
   mainHeadingLevel = 'h1',
   byline,
+  orgAvailability,
 }: OrganizationFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -151,10 +161,44 @@ export default function OrganizationForm({
     fontSize: "10px",
   };
 
+  const [isRemote, setIsRemote] = useState(addressType === 'remote-online' ? true : false);
+  const [noRemote, setNoRemote] = useState(addressType === 'remote-online' ? false : true);
+
+  const remoteHandler = (ev:any) => {
+    if (ev.target.value === 'remote-online') {
+      setIsRemote(true);
+      setNoRemote(false);
+    } else {
+      setIsRemote(false);
+      setNoRemote(true);
+    }
+  }
+
   const [checked, setChecked] = useState(legalContactSameAsMain);
 
   const switchHandler = (event: any) => {
     setChecked(event.target.checked);
+  };
+
+  const [sFields, setSFields] = useState(orgAvailability);
+
+  const removeElement = (idx: number) => {
+    const data = [...sFields as []];
+    data.splice(idx, 1);
+    setSFields(data);
+  };
+  
+  const addElement = () => {
+    const newFields = {
+      day: '',
+      startHour: '',
+      startMin: '',
+      startAmpm: '',
+      endHour: '',
+      endMin: '',
+      endAmpm: '',
+    }
+    setSFields([...sFields as [], newFields]);
   };
 
 
@@ -213,6 +257,36 @@ export default function OrganizationForm({
                 selected={orgType}
                 sx={baseFormItemStyles}
               />
+              <Accordion defaultExpanded={false} sx={accordionStyles}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Organizational Availability</AccordionSummary>
+                <AccordionDetails>
+                  {sFields && sFields.map((item:any, idx: number) => (
+                    <div key={idx}>
+                      <ScheduleFields
+                        day={item.day}
+                        startHour={item.startHour}
+                        startMin={item.startMin}
+                        startAmpm={item.startAmpm}
+                        endHour={item.endHour}
+                        endMin={item.endMin}
+                        endAmpm={item.endAmpm}
+                      />
+                      <Button
+                        onClick={() => removeElement(idx) }
+                        variant={"text"}
+                      >
+                        <DeleteOutlinedIcon sx={{ color: 'primary.dark' }} />
+                      </Button>
+                    </div>
+                  ))}
+                  <Button
+                    onClick={addElement}
+                    variant={"contained"}
+                  >
+                    Add another Options
+                  </Button>
+                </AccordionDetails>
+              </Accordion>
               <TextField
                 fullWidth
                 multiline
@@ -302,7 +376,38 @@ export default function OrganizationForm({
           <Accordion defaultExpanded={true} sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >General Contact Information</AccordionSummary>
             <AccordionDetails>
-              <AddressField address={address} sx={baseFormItemStyles} />
+              <FormControl fullWidth>
+                <InputLabel>Address type</InputLabel>
+                <Select
+                  id="org-form-addressptype"
+                  name="field_address_type"
+                  label="Address type"
+                  native={true}
+                  defaultValue={addressType}
+                  sx={baseFormItemStyles}
+                  onChange={remoteHandler}
+                >
+                  <option value="none">Select type...</option>
+                  <option value="business">Business</option>
+                  <option value="residence">Residence</option>
+                  <option value="po-box">PO Box</option>
+                  <option value="remote-online">Remote/Online</option>
+                </Select>
+              </FormControl>
+              <AddressField display={isRemote ? 'none' : 'block'} address={address} sx={baseFormItemStyles} />
+              <Box display={noRemote ? 'none' : 'block'}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={4}
+                  id="org-form-details-remote"
+                  variant="outlined"
+                  name="field_details_remote"
+                  label="Details Remote"
+                  defaultValue={detailsRemote}
+                  sx={baseFormItemStyles}
+                />
+              </Box>
               <TextField
                 fullWidth
                 id="org-form-public-contact-phone"
