@@ -336,6 +336,8 @@ export default function OrganizationPage({
             </li>
             <li>
               <MailIcon sx={iconStyles} />
+              <Link href={`mailto:${mainContact.email}`}>
+                {mainContact.email}
               </Link>
             </li>
           </Box>
