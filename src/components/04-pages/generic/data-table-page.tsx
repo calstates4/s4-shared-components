@@ -78,6 +78,7 @@ export default function DataTablePage({
         columns={tableData.columns}
         toolbar={tableData.toolbar}
         filters={tableData.filters}
+        hideCols={tableData.hideCols}
       />
     </>
   );

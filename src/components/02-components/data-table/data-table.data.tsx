@@ -196,6 +196,7 @@ export const staffTableColumns = [
             flexShrink: 0,
             fontWeight: 700,
             border: '1px solid',
+            whiteSpace: 'nowrap',
           }}
         >
           Manage Departments
