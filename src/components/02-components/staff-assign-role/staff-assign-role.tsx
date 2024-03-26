@@ -1,3 +1,5 @@
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Link from '../../01-elements/link/link';
 import {
   Box,
   Button,
@@ -13,10 +15,8 @@ import AutocompleteField, {
 } from '../autocomplete-field/autocomplete-field';
 
 export type StaffAssignRoleProps = {
-  breadcrumb: {
-    title: string;
-    url: string;
-  }[];
+  goBackText: string;
+  goBackUrl: string;
   orgId?: string;
   uid?: string;
   fName?: string;
@@ -27,7 +27,8 @@ export type StaffAssignRoleProps = {
 };
 
 export default function StaffAssignRole({
-  breadcrumb,
+  goBackText,
+  goBackUrl,
   orgId,
   uid,
   fName,
@@ -95,16 +96,33 @@ export default function StaffAssignRole({
     <form method="post">{innerForm}</form>
   );
 
+  const goBackLinkStyles = {
+    textDecoration: 'none',
+    mb: 2,
+    display: 'block',
+    fontSize: '1rem',
+  };
+
+  const iconStyles = {
+    fontSize: '1rem',
+    color: 'text.secondary',
+    verticalAlign: '-3px',
+  };
+
   return (
     <>
-      <Breadcrumbs items={breadcrumb} />
+      {goBackText && goBackUrl && (
+        <Link href={goBackUrl} color="text.secondary" sx={goBackLinkStyles}>
+          <ArrowBackIosNewIcon sx={iconStyles} /> {goBackText}
+        </Link>
+      )}
       <Paper sx={containerStyles}>
         <Typography
           variant={"h1"}
           mb={3}
           color="primary.main"
         >
-          Assign Role
+          Edit Role
         </Typography>
         {(fName && lName) && (
           <Typography
