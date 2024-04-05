@@ -1,9 +1,11 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { type SyntheticEvent, useState, useEffect } from 'react';
+import {element} from "prop-types";
 
 export type AutocompleteOptionType = {
   id: string;
   label: string;
+  key?: string;
 };
 
 type AutocompleteFieldProps = {
@@ -51,6 +53,34 @@ export default function AutocompleteField({
     setValue(value);
   }
 
+  const filterOP = (options:any, state:any) => {
+    const opts:any[] = [];
+    options.forEach((element: any) => {
+      if (element.key) {
+        if (element.key
+          .replace(",", "")
+          .toLowerCase()
+          .includes(state.inputValue.toLowerCase()) ||
+          element.label
+            .replace(",", "")
+            .toLowerCase()
+            .includes(state.inputValue.toLowerCase())
+        ) {
+          opts.push(element);
+        }
+      } else {
+        if (element.label
+          .replace(",", "")
+          .toLowerCase()
+          .includes(state.inputValue.toLowerCase())
+        ) {
+          opts.push(element);
+        }
+      }
+    });
+    return opts;
+  };
+
   let valueString = '';
 
   if (value) {
@@ -86,6 +116,7 @@ export default function AutocompleteField({
           option: AutocompleteOptionType,
           value: AutocompleteOptionType,
         ) => option.id === value.id}
+        filterOptions={filterOP}
         value={value}
         onChange={onChangeHandler}
         sx={sx}
