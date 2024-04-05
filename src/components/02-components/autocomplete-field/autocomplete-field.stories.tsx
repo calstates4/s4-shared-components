@@ -13,38 +13,47 @@ const options = [
   {
     id: '1',
     label: 'Option 1',
+    key: '21',
   },
   {
     id: '2',
     label: 'Option 2',
+    key: '22',
   },
   {
     id: '3',
     label: 'Option 3',
+    key: '23',
   },
   {
     id: '4',
     label: 'Option 4',
+    key: '24',
   },
   {
     id: '5',
     label: 'Option 5',
+    key: '25',
   },
   {
     id: '6',
     label: 'Option 6',
+    key: '26',
   },
   {
     id: '7',
     label: 'Option 7',
+    key: '27',
   },
   {
     id: '8',
     label: 'Option 8',
+    key: '28',
   },
   {
     id: '9',
     label: 'Option 9',
+    key: '29',
   },
 ];
 
