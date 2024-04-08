@@ -48,8 +48,8 @@ const min = [
   { id: '30', label: '30' },
 ];
 const ampm = [
-  { id: 'am', label: 'am' },
-  { id: 'pm', label: 'pm' },
+  { id: 'am', label: 'AM' },
+  { id: 'pm', label: 'PM' },
 ];
 
 export default function ScheduleFields({
@@ -108,7 +108,7 @@ export default function ScheduleFields({
         </Select>
       </FormControl>
       <FormControl>
-        <InputLabel>Start Hours</InputLabel>
+        <InputLabel>Start Time</InputLabel>
         <Select
           id="org-form-starthours-hour"
           name="startHour"
@@ -126,7 +126,7 @@ export default function ScheduleFields({
         </Select>
       </FormControl>
       <FormControl>
-        <InputLabel>Start Minutes</InputLabel>
+        <InputLabel>Minutes</InputLabel>
         <Select
           id="org-form-starthours-minute"
           name="startMin"
@@ -162,7 +162,7 @@ export default function ScheduleFields({
         </Select>
       </FormControl>
       <FormControl>
-        <InputLabel>Start Hours</InputLabel>
+        <InputLabel>End Time</InputLabel>
         <Select
           id="org-form-endhours-hour"
           name="endHour"
@@ -180,7 +180,7 @@ export default function ScheduleFields({
         </Select>
       </FormControl>
       <FormControl>
-        <InputLabel>End Minutes</InputLabel>
+        <InputLabel>Minutes</InputLabel>
         <Select
           id="org-form-endhours-minute"
           name="endMin"

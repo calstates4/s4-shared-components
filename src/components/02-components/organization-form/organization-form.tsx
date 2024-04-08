@@ -403,9 +403,10 @@ export default function OrganizationForm({
                   id="org-form-details-remote"
                   variant="outlined"
                   name="field_details_remote"
-                  label="Details Remote"
+                  label=""
                   defaultValue={detailsRemote}
                   sx={baseFormItemStyles}
+                  helperText="Provide details regarding the reason that there is no physical address"
                 />
               </Box>
               <TextField
