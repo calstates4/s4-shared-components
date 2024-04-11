@@ -227,6 +227,30 @@ export const staffTableColumns = [
       </strong>
     ),
   },
+  {
+    field: 'col7',
+    headerName: 'Archive',
+    width: 150,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'/organization/staff/archive/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Archive
+        </Button>
+      </strong>
+    ),
+  },
 ];
 
 export const experiencesTableColumns = [
