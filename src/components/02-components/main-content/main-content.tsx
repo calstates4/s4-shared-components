@@ -5,12 +5,16 @@ type MainContentProps = {
   children: ReactNode;
   sidebarOpen: boolean;
   sidebarWidth: number;
+  id: string;
+  tabIndex?: number;
 };
 
 export default function MainContent({
   children,
   sidebarOpen,
   sidebarWidth,
+  id,
+  tabIndex
 }: MainContentProps) {
   const theme = useTheme();
 
@@ -39,7 +43,7 @@ export default function MainContent({
   };
 
   return (
-    <Box component="main" sx={mainStyles}>
+    <Box component="main" sx={mainStyles} id={id} tabIndex={tabIndex}>
       {children}
     </Box>
   );

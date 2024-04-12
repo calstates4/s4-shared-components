@@ -315,10 +315,10 @@ export default function AddressField({
   const idPrefix = typeof id !== 'undefined' ? `${id}-` : '';
 
   return (
-    <Box sx={containerStyles} {...props}>
-      <Typography variant="h3" mb={4}>
+    <Box component="fieldset" sx={containerStyles} {...props}>
+      <legend>
         {address?.label ?? 'Address'}
-      </Typography>
+      </legend>
       <FormControl fullWidth>
         <InputLabel id={`${idPrefix}address-country-label`}>Country</InputLabel>
         <Select
