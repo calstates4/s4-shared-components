@@ -187,7 +187,7 @@ export default function OrganizationForm({
     data.splice(idx, 1);
     setSFields(data);
   };
-  
+
   const addElement = () => {
     const newFields = {
       day: '',
@@ -377,7 +377,12 @@ export default function OrganizationForm({
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >General Contact Information</AccordionSummary>
             <AccordionDetails>
               <FormControl fullWidth>
-                <InputLabel>Address type</InputLabel>
+                <InputLabel
+                  id='org-form-addressptype'
+                  htmlFor='org-form-addressptype'
+                >
+                  Address type
+                </InputLabel>
                 <Select
                   id="org-form-addressptype"
                   name="field_address_type"
@@ -403,7 +408,7 @@ export default function OrganizationForm({
                   id="org-form-details-remote"
                   variant="outlined"
                   name="field_details_remote"
-                  label=""
+                  label="Remote/Online Details"
                   defaultValue={detailsRemote}
                   sx={baseFormItemStyles}
                   helperText="Provide details regarding the reason that there is no physical address"

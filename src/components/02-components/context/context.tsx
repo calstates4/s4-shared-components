@@ -138,7 +138,11 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
   const formElements = (
     <>
       <FormControl size="small" sx={formControlStyles}>
-        <InputLabel id="level1-select-label" sx={labelStyles}>
+        <InputLabel
+          id="level1-select-label"
+          sx={labelStyles}
+          htmlFor="level1-select"
+        >
           {level1.label}
         </InputLabel>
         <Select
@@ -166,7 +170,11 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
           sx={formControlStyles}
           disabled={level2Disabled}
         >
-          <InputLabel id="level2-select-label" sx={labelStyles}>
+          <InputLabel
+            id="level2-select-label"
+            sx={labelStyles} htmlFor="level2-select"
+            aria-label={level2.label}
+          >
             {level2.label}
           </InputLabel>
           <Select

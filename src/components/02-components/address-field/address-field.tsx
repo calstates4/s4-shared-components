@@ -320,7 +320,12 @@ export default function AddressField({
         {address?.label ?? 'Address'}
       </legend>
       <FormControl fullWidth>
-        <InputLabel id={`${idPrefix}address-country-label`}>Country</InputLabel>
+        <InputLabel
+          id={`${idPrefix}address-country-label`}
+          htmlFor={`${idPrefix}address-country`}
+        >
+          Country
+        </InputLabel>
         <Select
           labelId={`${idPrefix}address-country-label`}
           id={`${idPrefix}address-country`}
@@ -366,7 +371,13 @@ export default function AddressField({
             sx={fieldBaseStyles}
           />
           <FormControl fullWidth required sx={fieldBaseStyles}>
-            <InputLabel id={`${idPrefix}address-state-label`}>State</InputLabel>
+            <InputLabel
+              id={`${idPrefix}address-state-label`}
+              htmlFor={`${idPrefix}address-state`}
+              aria-label="State"
+            >
+              State
+            </InputLabel>
             <Select
               required={expanded}
               labelId="address-state-label"
