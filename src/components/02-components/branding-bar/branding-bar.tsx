@@ -14,6 +14,7 @@ import {
   MenuItem,
   Toolbar,
   useTheme,
+  Typography,
 } from '@mui/material';
 import {
   useState,
@@ -66,6 +67,18 @@ export default function BrandingBar({
     setAnchorElMobile(event.currentTarget);
   }
 
+  const srOnly = {
+    //scren reader only
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    padding: 0,
+    margin: '-1px',
+    overflow: 'hidden',
+    clip: 'rect(0, 0, 0, 0)',
+    whiteSpace: 'nowrap',
+  };
+
   // Generate Site menu links.
   function siteMenu(isMobile = false): ReactNode[] {
     const styles = isMobile
@@ -83,6 +96,12 @@ export default function BrandingBar({
           className={item.isActive ? 'is-active' : undefined}
         >
           {item.title}
+          <Typography
+            sx={srOnly}
+            component="span"
+          >
+            Applitacion
+          </Typography>
         </Element>
       </li>
     ));
