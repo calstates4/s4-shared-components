@@ -6,7 +6,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
+import { ElementType } from "react";
 import Link from '../../01-elements/link/link';
 
 export type StaffArchiveMemberProps = {
@@ -16,6 +16,7 @@ export type StaffArchiveMemberProps = {
   uid?: string;
   fName?: string;
   lName?: string;
+  FormElement: ElementType;
 };
 
 export default function StaffArchiveMember({
@@ -25,11 +26,30 @@ export default function StaffArchiveMember({
   uid,
   fName,
   lName,
+  FormElement
 }: StaffArchiveMemberProps ) {
   const theme = useTheme();
 
-  // Add state for the disabled variable
-  const [disabled, setDisabled] = useState<boolean>(false);
+  const innerForm = (
+    <>
+      <input type="hidden" name="orgId" value={orgId} />
+      <input type="hidden" name="userId" value={uid} />
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        sx={{ mr: 2 }}
+      >
+        Archive
+      </Button>
+    </>
+  );
+
+  const form = FormElement ? (
+    <FormElement method="post">{innerForm}</FormElement>
+  ) : (
+    <form method="post">{innerForm}</form>
+  );
 
   const containerStyles = {
     p: theme.spacing(2),
@@ -51,12 +71,6 @@ export default function StaffArchiveMember({
     verticalAlign: '-3px',
   };
 
-  const handleButtonClick = (event: React.FormEvent<HTMLButtonElement>) => {
-    // Update the disabled state when the button is clicked
-    setDisabled(true);
-
-    event.preventDefault();
-  };
 
   return (
     <>
@@ -75,19 +89,7 @@ export default function StaffArchiveMember({
           Are you sure you want to archive this member?
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 2 }}>
-          <>
-            <input type="hidden" name="orgId" value={orgId} />
-            <input type="hidden" name="userId" value={uid} />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleButtonClick}
-              disabled={disabled}
-              sx={{ mr: 2 }}
-            >
-              Archive
-            </Button>
-          </>
+          {form}
           <Button
             variant="outlined"
             color="primary"
