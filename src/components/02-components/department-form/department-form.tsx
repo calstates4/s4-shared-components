@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Button,
   Paper,
@@ -26,6 +27,16 @@ export default function DepartmentForm({
 }: DepartmentFormProps) {
   const theme = useTheme();
 
+  // Set states for form fields.
+  const [nameValue, setName] = React.useState("");
+  const [error, setErrorText] = React.useState("");
+
+  // Form submission validation.
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setErrorText(!nameValue ? "Please enter a value." : "");
+  };
+
   // Styles.
   const containerStyles = {
     p: theme.spacing(2),
@@ -51,6 +62,9 @@ export default function DepartmentForm({
         label="Name"
         defaultValue={name}
         sx={baseFormItemStyles}
+        error={!!error}
+        helperText={error}
+        onChange={e => setName(e.target.value)}
       />
       <TextField
         fullWidth
@@ -66,6 +80,7 @@ export default function DepartmentForm({
       <Button
         type="submit"
         variant="contained"
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => onSubmit(e)}
       >
         {isEdit ? 'Edit' : 'Create'} Department
       </Button>
