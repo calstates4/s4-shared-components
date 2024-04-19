@@ -34,7 +34,12 @@ export default function DepartmentForm({
   // Form submission validation.
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setErrorText(!nameValue ? "Please enter a value." : "");
+    const form = e.currentTarget.form;
+    if (!nameValue) {
+      setErrorText("Please enter a value.");
+    } else if (form) {
+      form.submit();
+    }
   };
 
   // Styles.
@@ -80,7 +85,7 @@ export default function DepartmentForm({
       <Button
         type="submit"
         variant="contained"
-        onClick={(e: React.MouseEvent<HTMLButtonElement>) => onSubmit(e)}
+        onClick={onSubmit}
       >
         {isEdit ? 'Edit' : 'Create'} Department
       </Button>
