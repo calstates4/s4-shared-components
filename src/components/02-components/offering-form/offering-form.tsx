@@ -452,9 +452,11 @@ export default function OfferingForm({
             <legend>Safety Considerations</legend>
             <FormGroup sx={formFieldStyles}>
               <FormControlLabel
+                name="offering-safety-considerations"
+                value="known_hazards"
                 control={
                   <Checkbox
-                    name="known_hazards"
+                    value="known_hazards"
                     onChange={khChangeHandler}
                     checked={isKnownHazards}
                   />
@@ -462,6 +464,8 @@ export default function OfferingForm({
                 label="Known Hazards"
               />
               <FormControlLabel
+                name="offering-safety-considerations"
+                value="population_served"
                 control={
                   <Checkbox
                     name="population_served"
@@ -472,9 +476,11 @@ export default function OfferingForm({
                 label="Population Served"
               />
               <FormControlLabel
+                name="offering-safety-considerations"
+                value="site_location"
                 control={
                   <Checkbox
-                    name="site_location"
+                    value="site_location"
                     onChange={slChangeHandler}
                     checked={isSiteLocation}
                   />
@@ -482,6 +488,8 @@ export default function OfferingForm({
                 label="Site Location"
               />
               <FormControlLabel
+                name="offering-safety-considerations"
+                value="supervision"
                 control={
                   <Checkbox
                     name="supervision"
