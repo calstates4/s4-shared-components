@@ -232,6 +232,12 @@ export default function OfferingForm({
     borderRadius: theme.spacing(1),
   };
 
+  const hlpText = {
+    fontWeight: 100,
+    fontSize: 14,
+    pl: theme.spacing(2),
+  };
+
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
   }
@@ -500,6 +506,7 @@ export default function OfferingForm({
                 label="Supervision"
               />
             </FormGroup>
+
             <Box display={isKnownHazards ? 'block' : 'none'}>
               <TextField
                 fullWidth
@@ -560,6 +567,35 @@ export default function OfferingForm({
                 sx={formFieldStyles}
               />
             </Box>
+            <Typography component="p" sx={hlpText}>
+              Please select any health and safety considerations associated with this offering; you may be required to provide additional information based on your selections. This information will be shared with students.
+            </Typography>
+            <Typography component="ul" sx={hlpText}>
+              <li>
+                <strong>KNOWN HAZARDS</strong>: This offering requires working with hazardous materials, heavy equipment, construction equipment, heights, or heavy machinery.
+              </li>
+              <li>
+                <strong>POPULATION SERVED</strong>: Students may be working unsupervised with minors.
+              </li>
+              <li>
+                <strong>POPULATION SERVED</strong>: Students may be working with behaviorally challenged populations.
+              </li>
+              <li>
+                <strong>POPULATION SERVED</strong>: Students may be working with individuals who pose an elevated risk of harm or injury to them?
+              </li>
+              <li>
+                <strong>SITE LOCATION</strong>: Parking and work areas may not be secure or adequately illuminated.
+              </li>
+              <li>
+                <strong>SITE LOCATION</strong>: There have been incidents of criminal activity at the organization or site(s) within the last year. Or, the location would be described as a high-crime area.
+              </li>
+              <li>
+                <strong>SUPERVISION</strong>: Students may be required to work at night (after 6pm). Or, students may be supervised less than 50% of the time or the supervisor will be overseeing more than 8 people.
+              </li>
+              <li>
+                None of the above options apply
+              </li>
+            </Typography>
           </Box>
 
           <Box component="fieldset" sx={fieldSetStyles}>
