@@ -468,7 +468,7 @@ export default function OfferingForm({
                 value="population_served"
                 control={
                   <Checkbox
-                    name="population_served"
+                    value="population_served"
                     onChange={psChangeHandler}
                     checked={isPopulationServed}
                   />
@@ -492,7 +492,7 @@ export default function OfferingForm({
                 value="supervision"
                 control={
                   <Checkbox
-                    name="supervision"
+                    value="supervision"
                     onChange={supervisionChangeHandler}
                     checked={isSupervision}
                   />
