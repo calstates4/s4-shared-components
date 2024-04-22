@@ -2,6 +2,10 @@ import {
   Box,
   Button,
   FormControlLabel,
+  FormControl,
+  FormLabel,
+  FormGroup,
+  Checkbox,
   Paper,
   Switch,
   TextField,
@@ -107,6 +111,13 @@ export type OfferingFormProps = {
   defaultPayType?: string;
   defaultPayFrequency?: string;
   emailStudentSelected?: string;
+
+  expectedSkillAcquisition?: string;
+  safetyConsiderations?: string[];
+  knownHazardsComments?: string;
+  populationServedComments?: string;
+  siteLocationComments?: string;
+  supervisionComments?: string;
 };
 
 export default function OfferingForm({
@@ -158,6 +169,12 @@ export default function OfferingForm({
   defaultPayFrequency,
   defaultPublished,
   emailStudentSelected,
+  expectedSkillAcquisition,
+  safetyConsiderations,
+  knownHazardsComments,
+  populationServedComments,
+  siteLocationComments,
+  supervisionComments,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -165,6 +182,23 @@ export default function OfferingForm({
   const [requiresApproval, setRequiresApproval] = useState(
     defaultRequiresApproval,
   );
+
+  const [isKnownHazards, setIsKnownHazards] = useState(safetyConsiderations?.includes('known_hazards'));
+  function khChangeHandler() {
+    setIsKnownHazards(!isKnownHazards);
+  }
+  const [isPopulationServed, setIsPopulationServed] = useState(safetyConsiderations?.includes('population_served'));
+  function psChangeHandler() {
+    setIsPopulationServed(!isPopulationServed);
+  }
+  const [isSiteLocation, setIsSiteLocation] = useState(safetyConsiderations?.includes('site_location'));
+  function slChangeHandler() {
+    setIsSiteLocation(!isSiteLocation);
+  }
+  const [isSupervision, setIsSupervision] = useState(safetyConsiderations?.includes('supervision'));
+  function supervisionChangeHandler() {
+    setIsSupervision(!isSupervision);
+  }
 
   // Styles.
   const paperStyles = {
@@ -196,6 +230,12 @@ export default function OfferingForm({
     mb: theme.spacing(3),
     border: `1px solid ${theme.palette.secondary.main}`,
     borderRadius: theme.spacing(1),
+  };
+
+  const hlpText = {
+    fontWeight: 100,
+    fontSize: 14,
+    pl: theme.spacing(2),
   };
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -341,6 +381,20 @@ export default function OfferingForm({
 
               />
             )}
+            <TextField
+              fullWidth
+              multiline
+              maxRows={4}
+              id="offering-expected-skills"
+              name="offering-expected-skills"
+              label="Expected Skill Acquisition"
+              defaultValue={expectedSkillAcquisition ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={formFieldStyles}
+              helperText="Share the skills or knowledge students can expect to gain from this experience (i.e., what are the learning outcomes)."
+            />
           </Box>
 
           <Box component="fieldset" sx={fieldSetStyles}>
@@ -402,6 +456,146 @@ export default function OfferingForm({
 
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Safety Considerations</legend>
+            <FormGroup sx={formFieldStyles}>
+              <FormControlLabel
+                name="offering-safety-considerations"
+                value="known_hazards"
+                control={
+                  <Checkbox
+                    value="known_hazards"
+                    onChange={khChangeHandler}
+                    checked={isKnownHazards}
+                  />
+                }
+                label="Known Hazards"
+              />
+              <FormControlLabel
+                name="offering-safety-considerations"
+                value="population_served"
+                control={
+                  <Checkbox
+                    value="population_served"
+                    onChange={psChangeHandler}
+                    checked={isPopulationServed}
+                  />
+                }
+                label="Population Served"
+              />
+              <FormControlLabel
+                name="offering-safety-considerations"
+                value="site_location"
+                control={
+                  <Checkbox
+                    value="site_location"
+                    onChange={slChangeHandler}
+                    checked={isSiteLocation}
+                  />
+                }
+                label="Site Location"
+              />
+              <FormControlLabel
+                name="offering-safety-considerations"
+                value="supervision"
+                control={
+                  <Checkbox
+                    value="supervision"
+                    onChange={supervisionChangeHandler}
+                    checked={isSupervision}
+                  />
+                }
+                label="Supervision"
+              />
+            </FormGroup>
+
+            <Box display={isKnownHazards ? 'block' : 'none'}>
+              <TextField
+                fullWidth
+                multiline
+                maxRows={4}
+                id="offering-known-hazards-comments"
+                name="offering-known-hazards-comments"
+                label="Known Hazards comments"
+                defaultValue={knownHazardsComments ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={formFieldStyles}
+              />
+            </Box>
+            <Box display={isPopulationServed ? 'block' : 'none'}>
+              <TextField
+                fullWidth
+                multiline
+                maxRows={4}
+                id="offering-population-served-comments"
+                name="offering-population-served-comments"
+                label="Population Served comments"
+                defaultValue={populationServedComments ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={formFieldStyles}
+              />
+            </Box>
+            <Box display={isSiteLocation ? 'block' : 'none'}>
+              <TextField
+                fullWidth
+                multiline
+                maxRows={4}
+                id="offering-site-location-comments"
+                name="offering-site-location-comments"
+                label="Site Location comments"
+                defaultValue={siteLocationComments ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={formFieldStyles}
+              />
+            </Box>
+            <Box display={isSupervision ? 'block' : 'none'}>
+              <TextField
+                fullWidth
+                multiline
+                maxRows={4}
+                id="offering-supervision-comments"
+                name="offering-supervision-comments"
+                label="Supervision comments"
+                defaultValue={supervisionComments ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={formFieldStyles}
+              />
+            </Box>
+            <Typography component="p" sx={hlpText}>
+              Please select any health and safety considerations associated with this offering; you may be required to provide additional information based on your selections. This information will be shared with students.
+            </Typography>
+            <Typography component="ul" sx={hlpText}>
+              <li>
+                <strong>KNOWN HAZARDS</strong>: This offering requires working with hazardous materials, heavy equipment, construction equipment, heights, or heavy machinery.
+              </li>
+              <li>
+                <strong>POPULATION SERVED</strong>: Students may be working unsupervised with minors.
+              </li>
+              <li>
+                <strong>POPULATION SERVED</strong>: Students may be working with behaviorally challenged populations.
+              </li>
+              <li>
+                <strong>POPULATION SERVED</strong>: Students may be working with individuals who pose an elevated risk of harm or injury to them?
+              </li>
+              <li>
+                <strong>SITE LOCATION</strong>: Parking and work areas may not be secure or adequately illuminated.
+              </li>
+              <li>
+                <strong>SITE LOCATION</strong>: There have been incidents of criminal activity at the organization or site(s) within the last year. Or, the location would be described as a high-crime area.
+              </li>
+              <li>
+                <strong>SUPERVISION</strong>: Students may be required to work at night (after 6pm). Or, students may be supervised less than 50% of the time or the supervisor will be overseeing more than 8 people.
+              </li>
+              <li>
+                None of the above options apply
+              </li>
+            </Typography>
           </Box>
 
           <Box component="fieldset" sx={fieldSetStyles}>
