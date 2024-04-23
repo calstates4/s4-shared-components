@@ -60,16 +60,17 @@ const options = [
 export const SingleValue: StoryObj<typeof AutocompletesDependecyFields> = {
   args: {
     options,
-    selected: '7',
     name: 'autocomplete',
     label: 'Select an option',
     required: true,
 
     options2: options,
-    selected2: '4',
+    selected: '4',
     name2: 'autocomplete2',
     label2: 'Select an option',
     required2: true,
+    id: 'autocomplete',
+    id2: 'autocomplete2',
   },
 };
 
@@ -84,8 +85,9 @@ export const MultipleValues: StoryObj<typeof AutocompletesDependecyFields> = {
     options2: options,
     multiple2: true,
     name2: 'autocomplete2',
-    selected2: [7],
     label2: 'Required options',
     required2: false,
+    id: 'autocomplete',
+    id2: 'autocomplete2',
   },
 };
