@@ -20,6 +20,9 @@ import AddressField, { AddressType } from '../address-field/address-field';
 import AutocompleteField, {
   type AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
+import AutocompletesDependecyFields, {
+  type AutocompleteDependencyOptionType,
+} from '../autocompletes-dependecy-fields/autocompletes-dependecy-fields';
 import Tabs, { type RefHandler } from '../tabs/tabs';
 
 const OFFERING_TYPES = [
@@ -73,8 +76,8 @@ export type OfferingFormProps = {
   timeApprovers?: AutocompleteOptionType[];
   formSigners?: AutocompleteOptionType[];
   observers?: AutocompleteOptionType[];
-  preferredLanguages?: AutocompleteOptionType[];
-  requiredLanguages?: AutocompleteOptionType[];
+  preferredLanguages?: AutocompleteDependencyOptionType[];
+  requiredLanguages?: AutocompleteDependencyOptionType[];
   focusPopulations?: AutocompleteOptionType[];
   focusAreas?: AutocompleteOptionType[];
   subFocusAreas?: AutocompleteOptionType[];
@@ -335,25 +338,20 @@ export default function OfferingForm({
               sx={formFieldStyles}
             />
             {preferredLanguages && (
-              <AutocompleteField
+              <AutocompletesDependecyFields
                 multiple
+                multiple2
                 id="offering-preferred-languages"
                 name="offering-preferred-languages"
                 label="Preferred language(s)"
                 options={preferredLanguages}
                 selected={defaultPreferredLanguages}
                 sx={formFieldStyles}
-              />
-            )}
-            {requiredLanguages && (
-              <AutocompleteField
-                multiple
-                id="offering-required-languages"
-                name="offering-required-languages"
-                label="Required language(s)"
-                options={requiredLanguages}
-                selected={defaultRequiredLanguages}
-                sx={formFieldStyles}
+                id2="offering-required-languages"
+                name2="offering-required-languages"
+                label2="Required language(s)"
+                options2={preferredLanguages}
+                selected2={defaultRequiredLanguages}
               />
             )}
             {requirements && (

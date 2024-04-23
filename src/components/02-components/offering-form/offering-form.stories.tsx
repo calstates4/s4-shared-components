@@ -212,7 +212,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     defaultFormSigners: ['5', '8'],
     defaultObservers: ['3', '6'],
     defaultPreferredLanguages: ['1', '3'],
-    defaultRequiredLanguages: ['3', '4'],
+    defaultRequiredLanguages: ['1'],
     defaultFocusPopulations: ['2', '3'],
     defaultFocusAreas: ['5', '7'],
     defaultSubFocusAreas: ['2', '4'],
