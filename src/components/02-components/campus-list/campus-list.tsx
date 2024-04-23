@@ -71,7 +71,13 @@ export default function CampusList({
   const formInner = (
     <>
       <FormControl size="small" sx={formItemStyles}>
-        <InputLabel id="status-select-label">Status</InputLabel>
+        <InputLabel
+          id="status-select"
+          htmlFor="status-select"
+          aria-label="Status"
+        >
+          Status
+        </InputLabel>
         <Select
           id="status-select"
           label="Status"

@@ -67,7 +67,7 @@ const theme = createTheme({
       light: '#d7ffd1',
     },
     error: {
-      main: '#ffb9b9',
+      main: '#f44336',
       light: '#d6cfff',
     },
     black: {

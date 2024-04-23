@@ -213,3 +213,7 @@ export {
   default as ScheduleFields,
   type ScheduleFieldsProps,
 } from './components/02-components/schedule-fields/schedule-fields';
+export {
+  default as StaffArchiveMember,
+  type StaffArchiveMemberProps,
+} from './components/02-components/staff-archive-member/staff-archive-member';

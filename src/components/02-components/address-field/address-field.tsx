@@ -315,12 +315,17 @@ export default function AddressField({
   const idPrefix = typeof id !== 'undefined' ? `${id}-` : '';
 
   return (
-    <Box sx={containerStyles} {...props}>
-      <Typography variant="h3" mb={4}>
+    <Box component="fieldset" sx={containerStyles} {...props}>
+      <legend>
         {address?.label ?? 'Address'}
-      </Typography>
+      </legend>
       <FormControl fullWidth>
-        <InputLabel id={`${idPrefix}address-country-label`}>Country</InputLabel>
+        <InputLabel
+          id={`${idPrefix}address-country-label`}
+          htmlFor={`${idPrefix}address-country`}
+        >
+          Country
+        </InputLabel>
         <Select
           labelId={`${idPrefix}address-country-label`}
           id={`${idPrefix}address-country`}
@@ -366,7 +371,13 @@ export default function AddressField({
             sx={fieldBaseStyles}
           />
           <FormControl fullWidth required sx={fieldBaseStyles}>
-            <InputLabel id={`${idPrefix}address-state-label`}>State</InputLabel>
+            <InputLabel
+              id={`${idPrefix}address-state-label`}
+              htmlFor={`${idPrefix}address-state`}
+              aria-label="State"
+            >
+              State
+            </InputLabel>
             <Select
               required={expanded}
               labelId="address-state-label"

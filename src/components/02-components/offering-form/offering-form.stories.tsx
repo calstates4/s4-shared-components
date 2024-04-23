@@ -121,6 +121,16 @@ const languages = [
   { id: '4', label: 'English' },
 ];
 
+const expectedSkillAcquisition = `Suspendisse nisl elit rhoncus eget.`;
+const safetyConsiderations = [
+  "known_hazards",
+  "site_location"
+];
+const knownHazardsComments = `Proin pretium, leo ac pellentesque mollis, felis nunc ultrices eros, sed gravida augue augue mollis justo. Aenean imperdiet. Nulla consequat massa quis enim.`;
+const populationServedComments = '';
+const siteLocationComments = `Quisque id odio. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.`;
+const supervisionComments = '';
+
 export const AddOffering: StoryObj<typeof OfferingForm> = {
   args: {
     breadcrumb: [
@@ -224,5 +234,11 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     defaultTimeUnit: 'days',
     defaultTimeFrequency: 'month',
     emailStudentSelected: 'info@sample.com',
+    expectedSkillAcquisition,
+    safetyConsiderations,
+    knownHazardsComments,
+    populationServedComments,
+    siteLocationComments,
+    supervisionComments,
   },
 };

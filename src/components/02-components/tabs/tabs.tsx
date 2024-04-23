@@ -80,7 +80,7 @@ const Tabs = forwardRef<RefHandler, TabsProps>(function Tabs(
   Children.forEach(children, (child, index) => {
     if (child && child.props.title) {
       renderedTabs.push(
-        <Tab key={index} label={child.props.title} {...a11yProps(id, index)} />,
+        <Tab key={index} label={child.props.title} tabIndex={0} {...a11yProps(id, index)} />,
       );
       renderedTabPanels.push(
         <TabPanel
