@@ -372,7 +372,7 @@ export default function OfferingForm({
                 id="offering-activities"
                 name="offering-activities"
                 label="Activities"
-                helptext=""
+                helptext="Please select the tasks/activities students would be doing for this offering (select all that apply; you can type key words which will then highlight activity options for selection)"
                 options={activities}
                 selected={defaultActivities}
                 sx={formFieldStyles}
