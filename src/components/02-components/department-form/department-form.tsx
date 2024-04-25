@@ -121,6 +121,7 @@ export default function DepartmentForm({
       }
       { isEdit &&
         <Button
+          type="submit"
           variant="outlined"
           sx={{ ml: 2 }}
         >
