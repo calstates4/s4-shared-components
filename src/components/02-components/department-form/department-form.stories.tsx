@@ -13,6 +13,8 @@ export const AddDepartment: StoryObj<typeof DepartmentForm> = {
   args: {
     isEdit: false,
     departments: '1, 2, 3',
+    goBackText: 'Back to Organization',
+    goBackUrl: '#',
   },
 };
 
@@ -23,5 +25,7 @@ export const EditDepartment: StoryObj<typeof DepartmentForm> = {
     name: 'Test Department',
     description,
     departments: '1, 2, 3',
+    goBackText: 'Back to Organization',
+    goBackUrl: '#',
   }
 }
