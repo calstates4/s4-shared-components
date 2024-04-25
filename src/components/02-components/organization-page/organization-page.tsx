@@ -373,6 +373,14 @@ export default function OrganizationPage({
                     >
                       See Staff
                     </Button>
+                    <Button
+                      variant="outlined"
+                      component={Link}
+                      href={`/organization/department/edit/${item.id}`}
+                      sx={{ flexShrink: 0 }}
+                    >
+                      Manage
+                    </Button>
                   </Box>
                 </Box>
               </Box>
