@@ -101,10 +101,12 @@ export default function DepartmentDelete({
         </Typography>
         <Typography variant={"h2"} mb={3}>{name}</Typography>
         <Typography mb={3}>{description}</Typography>
-        {members.length && <Typography variant={"h3"}>Members</Typography>}
-        <Box component="ul" sx={formListStyles}>
-          {members.map((item, i) => <Box component="li" sx={formItemStyles} key={i}>{item}</Box> )}
-        </Box>
+        {members.length && <>
+          <Typography variant={"h3"}>Members</Typography>
+          <Box component="ul" sx={formListStyles}>
+            {members.map((item, i) => <Box component="li" sx={formItemStyles} key={i}>{item}</Box> )}
+          </Box>
+        </>}
         {form}
       </Paper>
     </>

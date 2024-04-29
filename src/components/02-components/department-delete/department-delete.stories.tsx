@@ -31,6 +31,5 @@ export const Default: StoryObj<typeof DepartmentDelete> = {
     members,
     goBackText: 'Back to Organization',
     goBackUrl: '#',
-    btnLink: '#',
   },
 };

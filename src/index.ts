@@ -172,6 +172,10 @@ export {
   default as DepartmentForm,
   type DepartmentFormProps,
 } from './components/02-components/department-form/department-form';
+export {
+  default as DepartmentDelete,
+  type DepartmentDeleteProps,
+} from './components/02-components/department-delete/department-delete';
 export { default as ExperienceForm } from './components/02-components/experience-form/experience-form';
 export {
   default as RegistrationPage,
