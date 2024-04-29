@@ -15,6 +15,7 @@ export const AddDepartment: StoryObj<typeof DepartmentForm> = {
     departments: '1, 2, 3',
     goBackText: 'Back to Organization',
     goBackUrl: '#',
+    btnLink: '#',
   },
 };
 
@@ -27,5 +28,6 @@ export const EditDepartment: StoryObj<typeof DepartmentForm> = {
     departments: '1, 2, 3',
     goBackText: 'Back to Organization',
     goBackUrl: '#',
+    btnLink: '#',
   }
 }

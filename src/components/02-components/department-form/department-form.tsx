@@ -19,6 +19,7 @@ export type DepartmentFormProps = {
   FormElement: ElementType;
   goBackText: string;
   goBackUrl: string;
+  btnLink: string;
 };
 
 export default function DepartmentForm({
@@ -30,6 +31,7 @@ export default function DepartmentForm({
   FormElement,
   goBackText,
   goBackUrl,
+  btnLink,
 }: DepartmentFormProps) {
   const theme = useTheme();
 
@@ -112,21 +114,22 @@ export default function DepartmentForm({
         </Button>
       }
       { isEdit &&
-        <Button
-          type="submit"
-          variant="contained"
-        >
-          Update Department
-        </Button>
-      }
-      { isEdit &&
-        <Button
-          type="submit"
-          variant="outlined"
-          sx={{ ml: 2 }}
-        >
-          Delete Department
-        </Button>
+        <>
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Update Department
+          </Button>
+          <Button
+            variant="outlined"
+            component={Link}
+            href={btnLink}
+            sx={{ ml: 2 }}
+          >
+            Delete Department
+          </Button>
+        </>
       }
     </>
   );
