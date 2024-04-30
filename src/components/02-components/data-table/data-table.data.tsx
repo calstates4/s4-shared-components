@@ -579,3 +579,75 @@ export const reportStudentsTableColumns = [
   { field: 'repHours', headerName: 'Reported hours', width: 125},
   { field: 'siteStaff', headerName: 'Site staff', width: 200},
 ];
+
+export const membershipsRequestedTableColumns = [
+  { field: 'firstName', headerName: 'First Name', width: 150 },
+  { field: 'lastName', headerName: 'Last Name', width: 150 },
+  { field: 'email', headerName: 'Email', width: 200 },
+  {
+    field: 'col5',
+    headerName: 'Approve Request',
+    width: 150,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'#/organization/staff/approve/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+            whiteSpace: 'nowrap',
+            margin: '4px 0',
+          }}
+        >
+          Approve
+        </Button>
+      </strong>
+    ),
+  },
+  {
+    field: 'col6',
+    headerName: 'Deny Request',
+    width: 150,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'#/organization/role/deny/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+            whiteSpace: 'nowrap',
+            margin: '4px 0',
+          }}
+        >
+          Deny
+        </Button>
+      </strong>
+    ),
+  },
+];
+
+
+export const membershipsRequestedTableRows = [
+  {
+    id: 1,
+    firstName: 'Emily',
+    lastName: 'Parker',
+    email: 'csmit@test.com',
+  },
+  {
+    id: 2,
+    firstName: 'Peter',
+    lastName: 'Parker',
+    email: 'csmit@test.com',
+  }
+];

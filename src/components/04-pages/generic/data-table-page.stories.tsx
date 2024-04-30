@@ -7,6 +7,8 @@ import {
   staffFilterModel,
   staffTableColumns,
   staffTableRows,
+  membershipsRequestedTableColumns,
+  membershipsRequestedTableRows,
 } from '../../02-components/data-table/data-table.data';
 import { type ExposedFormProps } from '../../02-components/form/form';
 import { Staff as ExposedFormStories } from '../../02-components/form/form.stories';
@@ -35,6 +37,12 @@ const staffArgs: DataTablePageProps = {
     rows: staffTableRows,
     columns: staffTableColumns,
     toolbar: () => <GridToolbar title="Staff" />,
+    filters: staffFilterModel,
+  },
+  membershipRequestedTableData: {
+    rows: membershipsRequestedTableRows,
+    columns: membershipsRequestedTableColumns,
+    toolbar: () => <GridToolbar title="Membership Requests" />,
     filters: staffFilterModel,
   },
   form: ExposedFormStories.args as ExposedFormProps,
