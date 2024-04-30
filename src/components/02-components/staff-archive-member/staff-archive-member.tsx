@@ -16,7 +16,7 @@ export type StaffArchiveMemberProps = {
   uid?: string;
   fName?: string;
   lName?: string;
-  FormElement: ElementType;
+  FormElement?: ElementType;
 };
 
 export default function StaffArchiveMember({
@@ -26,7 +26,7 @@ export default function StaffArchiveMember({
   uid,
   fName,
   lName,
-  FormElement
+  FormElement,
 }: StaffArchiveMemberProps ) {
   const theme = useTheme();
 
