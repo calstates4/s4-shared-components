@@ -144,6 +144,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     departments,
+    addressType: 'remote_online',
     address: {
       label: 'Location of Offering',
       country: 'US',
@@ -187,6 +188,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
       },
     ],
     departments,
+    addressType: 'remote_online',
     address: {
       label: 'Location of Offering',
       country: 'US',
