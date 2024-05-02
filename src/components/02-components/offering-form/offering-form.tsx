@@ -4,15 +4,16 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
+  InputLabel,
   FormGroup,
   Checkbox,
   Paper,
   Switch,
   TextField,
   Typography,
-  useTheme,
+  useTheme, Select,
 } from '@mui/material';
-import { ChangeEvent, ElementType, useRef, useState } from 'react';
+import React, { ChangeEvent, ElementType, useRef, useState } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
@@ -71,6 +72,7 @@ export type OfferingFormProps = {
     url: string;
   }[];
   departments?: AutocompleteOptionType[];
+  addressType?: string;
   address?: AddressType;
   primaryContacts?: AutocompleteOptionType[];
   timeApprovers?: AutocompleteOptionType[];
@@ -129,6 +131,7 @@ export default function OfferingForm({
   duplidateUr,
   breadcrumb,
   departments,
+  addressType,
   address,
   primaryContacts,
   timeApprovers,
@@ -206,6 +209,16 @@ export default function OfferingForm({
   const [isNone, setIsNone] = useState(safetyConsiderations?.includes('none'));
   function noneChangeHandler() {
     setIsNone(!isNone);
+  }
+
+  const [isRemote, setIsRemote] = useState(addressType === 'remote_online' ? true : false);
+
+  const remoteHandler = (ev:any) => {
+    if (ev.target.value === 'remote_online') {
+      setIsRemote(true);
+    } else {
+      setIsRemote(false);
+    }
   }
 
   // Styles.
@@ -814,7 +827,30 @@ export default function OfferingForm({
 
         </div>
         <div title="Additional Information">
-          <AddressField id="offering" address={address} mb={3} />
+          <FormControl fullWidth>
+            <InputLabel
+              id='org-form-addressptype'
+              htmlFor='org-form-addressptype'
+            >
+              Location type
+            </InputLabel>
+            <Select
+              id="offering-form-locations-type"
+              name="field_location_type"
+              label="Location type"
+              native={true}
+              defaultValue={addressType}
+              sx={formFieldStyles}
+              onChange={remoteHandler}
+            >
+              <option value="none">Select type...</option>
+              <option value="business">Business</option>
+              <option value="residence">Residence</option>
+              <option value="public_space">Public Space</option>
+              <option value="remote_online">Remote/Online</option>
+            </Select>
+          </FormControl>
+          <AddressField display={isRemote ? 'none' : 'block'} id="offering" address={address} mb={3} />
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Focus Population and Areas</legend>
             {focusPopulations && (
