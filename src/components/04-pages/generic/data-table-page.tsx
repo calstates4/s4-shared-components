@@ -87,7 +87,7 @@ export default function DataTablePage({
             hideCols={tableData.hideCols}
           />
         </Box>
-        <Box title="Memberships requested">
+        <Box title="Memberships Requests">
           <DataTable
             rows={membershipRequestedTableData.rows}
             columns={membershipRequestedTableData.columns}

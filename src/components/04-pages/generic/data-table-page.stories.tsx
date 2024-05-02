@@ -7,8 +7,8 @@ import {
   staffFilterModel,
   staffTableColumns,
   staffTableRows,
-  membershipsRequestedTableColumns,
-  membershipsRequestedTableRows,
+  membershipsRequestsTableColumns,
+  membershipsRequestsTableRows,
 } from '../../02-components/data-table/data-table.data';
 import { type ExposedFormProps } from '../../02-components/form/form';
 import { Staff as ExposedFormStories } from '../../02-components/form/form.stories';
@@ -40,8 +40,8 @@ const staffArgs: DataTablePageProps = {
     filters: staffFilterModel,
   },
   membershipRequestedTableData: {
-    rows: membershipsRequestedTableRows,
-    columns: membershipsRequestedTableColumns,
+    rows: membershipsRequestsTableRows,
+    columns: membershipsRequestsTableColumns,
     toolbar: () => <GridToolbar title="Membership Requests" />,
     filters: staffFilterModel,
   },

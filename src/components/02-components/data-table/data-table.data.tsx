@@ -580,7 +580,7 @@ export const reportStudentsTableColumns = [
   { field: 'siteStaff', headerName: 'Site staff', width: 200},
 ];
 
-export const membershipsRequestedTableColumns = [
+export const membershipsRequestsTableColumns = [
   { field: 'firstName', headerName: 'First Name', width: 150 },
   { field: 'lastName', headerName: 'Last Name', width: 150 },
   { field: 'email', headerName: 'Email', width: 200 },
@@ -594,7 +594,7 @@ export const membershipsRequestedTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={'#/organization/staff/approve/' + params.row.id}
+          href={'/organization/staff/approve/' + params.row.id}
           disabled={false}
           sx={{
             flexShrink: 0,
@@ -619,7 +619,7 @@ export const membershipsRequestedTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={'#/organization/role/deny/' + params.row.id}
+          href={'/organization/role/deny/' + params.row.id}
           disabled={false}
           sx={{
             flexShrink: 0,
@@ -637,7 +637,7 @@ export const membershipsRequestedTableColumns = [
 ];
 
 
-export const membershipsRequestedTableRows = [
+export const membershipsRequestsTableRows = [
   {
     id: 1,
     firstName: 'Emily',
