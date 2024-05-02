@@ -203,6 +203,11 @@ export default function OfferingForm({
     setIsSupervision(!isSupervision);
   }
 
+  const [isNone, setIsNone] = useState(safetyConsiderations?.includes('none'));
+  function noneChangeHandler() {
+    setIsNone(!isNone);
+  }
+
   // Styles.
   const paperStyles = {
     p: theme.spacing(3),
@@ -453,7 +458,9 @@ export default function OfferingForm({
           </Box>
 
           <Box component="fieldset" sx={fieldSetStyles}>
-            <legend>Safety Considerations</legend>
+            <Typography component="p" sx={hlpText}>
+              Please review the health and safety considerations list below and check the box if any are associated with this offering; you will be required to provide additional information based on your selections. This information will be shared with students.
+            </Typography>
             <FormGroup sx={formFieldStyles}>
               <FormControlLabel
                 name="offering-safety-considerations"
@@ -502,6 +509,18 @@ export default function OfferingForm({
                   />
                 }
                 label="Supervision"
+              />
+              <FormControlLabel
+                name="offering-safety-considerations"
+                value="none"
+                control={
+                  <Checkbox
+                    value="none"
+                    onChange={noneChangeHandler}
+                    checked={isNone}
+                  />
+                }
+                label="None apply"
               />
             </FormGroup>
 
@@ -565,9 +584,6 @@ export default function OfferingForm({
                 sx={formFieldStyles}
               />
             </Box>
-            <Typography component="p" sx={hlpText}>
-              Please select any health and safety considerations associated with this offering; you may be required to provide additional information based on your selections. This information will be shared with students.
-            </Typography>
             <Typography component="ul" sx={hlpText}>
               <li>
                 <strong>KNOWN HAZARDS</strong>: This offering requires working with hazardous materials, heavy equipment, construction equipment, heights, or heavy machinery.
@@ -589,9 +605,6 @@ export default function OfferingForm({
               </li>
               <li>
                 <strong>SUPERVISION</strong>: Students may be required to work at night (after 6pm). Or, students may be supervised less than 50% of the time or the supervisor will be overseeing more than 8 people.
-              </li>
-              <li>
-                None of the above options apply
               </li>
             </Typography>
           </Box>
