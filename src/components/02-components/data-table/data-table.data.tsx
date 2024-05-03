@@ -619,7 +619,7 @@ export const membershipsRequestsTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={'/organization/role/deny/' + params.row.id}
+          href={'/organization/staff/deny/' + params.row.id}
           disabled={false}
           sx={{
             flexShrink: 0,
