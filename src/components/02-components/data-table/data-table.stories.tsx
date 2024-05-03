@@ -17,7 +17,9 @@ import {
   enrolledStudentsTableColumns,
   enrolledStudentsTableRows,
   reportStudentsTableColumns,
-  reportStudentsTableRows
+  reportStudentsTableRows,
+  membershipsRequestsTableColumns,
+  membershipsRequestsTableRows,
 } from './data-table.data';
 
 const meta: Meta<typeof DataTable> = {
@@ -83,5 +85,13 @@ export const NoResults: StoryObj<typeof DataTable> = {
     rows: [],
     columns: reportStudentsTableColumns,
     toolbar: () => <GridToolbar title="No Results" />,
+  },
+};
+
+export const MembershipsRequested: StoryObj<typeof DataTable> = {
+  args: {
+    rows: membershipsRequestsTableRows,
+    columns: membershipsRequestsTableColumns,
+    toolbar: () => <GridToolbar title="Memberships Requests" />,
   },
 };

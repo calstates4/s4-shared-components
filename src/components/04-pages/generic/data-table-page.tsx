@@ -6,6 +6,7 @@ import DataTable, {
   DataTableProps,
 } from '../../02-components/data-table/data-table';
 import ExposedForm, { ExposedFormProps } from '../../02-components/form/form';
+import Tabs from '../../02-components/tabs/tabs';
 
 export type DataTablePageProps = {
   breadcrumb: {
@@ -14,6 +15,7 @@ export type DataTablePageProps = {
   }[];
   title: string;
   tableData: DataTableProps;
+  membershipRequestedTableData?: DataTableProps;
   form?: ExposedFormProps;
   addUrl?: string;
   addTitle?: string;
@@ -23,6 +25,7 @@ export default function DataTablePage({
   breadcrumb,
   title,
   tableData,
+  membershipRequestedTableData,
   form,
   addUrl,
   addTitle,
@@ -73,13 +76,36 @@ export default function DataTablePage({
         )}
       </Box>
       {form && <ExposedForm {...form}></ExposedForm>}
-      <DataTable
-        rows={tableData.rows}
-        columns={tableData.columns}
-        toolbar={tableData.toolbar}
-        filters={tableData.filters}
-        hideCols={tableData.hideCols}
-      />
+      {tableData && membershipRequestedTableData ? (
+      <Tabs id="staff-tabs" name="Staff Tabs">
+        <Box title="Staff members">
+          <DataTable
+            rows={tableData.rows}
+            columns={tableData.columns}
+            toolbar={tableData.toolbar}
+            filters={tableData.filters}
+            hideCols={tableData.hideCols}
+          />
+        </Box>
+        <Box title="Memberships Requests">
+          <DataTable
+            rows={membershipRequestedTableData.rows}
+            columns={membershipRequestedTableData.columns}
+            toolbar={membershipRequestedTableData.toolbar}
+            filters={membershipRequestedTableData.filters}
+            hideCols={membershipRequestedTableData.hideCols}
+          />
+        </Box>
+      </Tabs>
+      ) : (
+        <DataTable
+          rows={tableData.rows}
+          columns={tableData.columns}
+          toolbar={tableData.toolbar}
+          filters={tableData.filters}
+          hideCols={tableData.hideCols}
+        />
+      )}
     </>
   );
 }
