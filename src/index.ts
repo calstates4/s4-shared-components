@@ -222,3 +222,7 @@ export {
   default as StaffArchiveMember,
   type StaffArchiveMemberProps,
 } from './components/02-components/staff-archive-member/staff-archive-member';
+export {
+  default as MembershipRequest,
+  type MembershipRequestProps,
+} from './components/02-components/membership-request/membership-request';
