@@ -85,6 +85,7 @@ export default function ScheduleFields({
     display: 'grid',
     gridTemplateColumns: "repeat(7, 1fr)",
     gridGap: 10,
+    width: '100%',
   };
 
   return (

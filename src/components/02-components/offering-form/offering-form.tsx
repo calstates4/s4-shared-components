@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   FormControlLabel,
@@ -25,6 +29,9 @@ import AutocompletesDependecyFields, {
   type AutocompleteDependencyOptionType,
 } from '../autocompletes-dependecy-fields/autocompletes-dependecy-fields';
 import Tabs, { type RefHandler } from '../tabs/tabs';
+import ParticipationRequirements , { type ParticipationRequirementsProps } from '../participation-requirements/participation-requirements';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
@@ -123,6 +130,7 @@ export type OfferingFormProps = {
   populationServedComments?: string;
   siteLocationComments?: string;
   supervisionComments?: string;
+  participationRequirement?: ParticipationRequirementsProps[];
 };
 
 export default function OfferingForm({
@@ -181,6 +189,7 @@ export default function OfferingForm({
   populationServedComments,
   siteLocationComments,
   supervisionComments,
+  participationRequirement,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -221,6 +230,33 @@ export default function OfferingForm({
     }
   }
 
+  // Requirements and Fees display by toggling the switch
+  const [displayRequirementsFees, setDisplayRequirementsFees] = useState(false);
+
+  function displayChangeHandler() {
+    setDisplayRequirementsFees(!displayRequirementsFees);
+  }
+
+  // auto-incrementing id for requirements and fees fields
+  const [sFields, setSFields] = useState(participationRequirement);
+
+  // Remove fields by index
+  const removeElement = (idx: number) => {
+    const data = [...sFields as []];
+    data.splice(idx, 1);
+    setSFields(data);
+  };
+
+  // Add fields by index
+  const addElement = () => {
+    const newFields = {
+      requirement_type: '',
+      requirements_fee: '',
+      requirements_cost: '',
+    }
+    setSFields([...sFields as [], newFields]);
+  };
+
   // Styles.
   const paperStyles = {
     p: theme.spacing(3),
@@ -257,6 +293,10 @@ export default function OfferingForm({
     fontWeight: 100,
     fontSize: 14,
     pl: theme.spacing(2),
+  };
+
+  const accordionStyles = {
+    mb: theme.spacing(3),
   };
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -394,7 +434,6 @@ export default function OfferingForm({
                 options={activities}
                 selected={defaultActivities}
                 sx={formFieldStyles}
-
               />
             )}
             <TextField
@@ -468,6 +507,58 @@ export default function OfferingForm({
 
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Requirements and Fees</legend>
+            <Typography variant="body1" gutterBottom>
+              Please identify all requirements and/or anticipated fees
+              associated with this offering. Additionally, if the amount of the
+              fee and the cost covered by your organization, is known, please
+              specify. This information will be shared with students. Each
+              requirement should have its own row.
+            </Typography>
+            <FormControlLabel
+              control={
+                <Switch
+                  onChange={displayChangeHandler}
+                  checked={displayRequirementsFees}
+                />
+              }
+              label="No participation requirements for this offering"
+            />
+            { !displayRequirementsFees && (
+              <Accordion defaultExpanded={true} sx={accordionStyles}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />}
+                >
+                  Requirements and Fees
+                </AccordionSummary>
+                <AccordionDetails>
+                  {sFields &&
+                    sFields.map((item: any, idx: number) => (
+                      <div
+                        key={idx}
+                        style={{
+                          display: 'flex',
+                          marginBottom: '1rem',
+                        }}
+                      >
+                        <ParticipationRequirements
+                          requirement_type={item.requirement_type}
+                          requirements_fee={item.requirements_fee}
+                          requirements_cost={item.requirements_cost}
+                        />
+                        <Button
+                          onClick={() => removeElement(idx)}
+                          variant={'text'}
+                        >
+                          <DeleteOutlinedIcon sx={{ color: 'primary.dark' }} />
+                        </Button>
+                      </div>
+                    ))}
+                  <Button onClick={addElement} variant={'contained'}>
+                    Add {sFields?.length ?? 0 > 0 ? 'another' : 'a'} requirement
+                  </Button>
+                </AccordionDetails>
+              </Accordion>
+            )}
           </Box>
 
           <Box component="fieldset" sx={fieldSetStyles}>
@@ -665,7 +756,6 @@ export default function OfferingForm({
               />
             )}
 
-
             <FormControlLabel
               control={
                 <Switch
@@ -824,13 +914,12 @@ export default function OfferingForm({
               ))}
             </TextField>
           </Box>
-
         </div>
         <div title="Additional Information">
           <FormControl fullWidth>
             <InputLabel
-              id='org-form-addressptype'
-              htmlFor='org-form-addressptype'
+              id="org-form-addressptype"
+              htmlFor="org-form-addressptype"
             >
               Location type
             </InputLabel>
@@ -850,7 +939,12 @@ export default function OfferingForm({
               <option value="remote_online">Remote/Online</option>
             </Select>
           </FormControl>
-          <AddressField display={isRemote ? 'none' : 'block'} id="offering" address={address} mb={3} />
+          <AddressField
+            display={isRemote ? 'none' : 'block'}
+            id="offering"
+            address={address}
+            mb={3}
+          />
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Focus Population and Areas</legend>
             {focusPopulations && (
