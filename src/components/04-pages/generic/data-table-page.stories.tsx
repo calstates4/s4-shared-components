@@ -48,6 +48,7 @@ const staffArgs: DataTablePageProps = {
   form: ExposedFormStories.args as ExposedFormProps,
   addUrl: '/organization/staff/add',
   addTitle: 'Invite a staff member',
+  inviteMembers: true,
 };
 
 export const StaffTable: StoryObj<typeof PageLayout> = {
