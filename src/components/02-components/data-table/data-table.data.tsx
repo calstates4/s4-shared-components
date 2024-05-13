@@ -94,6 +94,7 @@ export const staffTableRows = [
       'Organization Editor',
       'Organization Manager'
     ],
+    showbtn: false,
   },
   {
     id: 2,
@@ -105,6 +106,7 @@ export const staffTableRows = [
       'Administration'
     ],
     roles: [ 'Staff' ],
+    showbtn: false,
   },
   {
     id: 3,
@@ -112,6 +114,7 @@ export const staffTableRows = [
     col2: 'Parker',
     departments: ['Elementary'],
     roles: [ 'Organization Editor' ],
+    showbtn: true,
   },
   {
     id: 4,
@@ -119,6 +122,7 @@ export const staffTableRows = [
     col2: 'Parker',
     departments: ['Teaching'],
     roles: [ 'Organization Manager' ],
+    showbtn: true,
   },
   {
     id: 5,
@@ -126,6 +130,7 @@ export const staffTableRows = [
     col2: 'Parker',
     departments: ['Teaching', 'Social Work'],
     roles: [],
+    showbtn: true,
   },
   {
     id: 6,
@@ -136,6 +141,7 @@ export const staffTableRows = [
       'Staff',
       'Organization Manager'
     ],
+    showbtn: true,
   },
   {
     id: 7,
@@ -146,6 +152,7 @@ export const staffTableRows = [
       'Organization Editor',
       'Organization Manager'
     ],
+    showbtn: true,
   },
 ];
 
@@ -188,19 +195,21 @@ export const staffTableColumns = [
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <strong>
-        <Button
-          component={Link}
-          href={'/organization/staff/edit/' + params.row.id}
-          disabled={false}
-          sx={{
-            flexShrink: 0,
-            fontWeight: 700,
-            border: '1px solid',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          Manage Departments
-        </Button>
+        {params.row.showbtn &&
+          <Button
+            component={Link}
+            href={'/organization/staff/edit/' + params.row.id}
+            disabled={false}
+            sx={{
+              flexShrink: 0,
+              fontWeight: 700,
+              border: '1px solid',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Manage Departments
+          </Button>
+        }
       </strong>
     ),
   },
@@ -212,18 +221,20 @@ export const staffTableColumns = [
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <strong>
-        <Button
-          component={Link}
-          href={'/organization/role/edit/' + params.row.id}
-          disabled={false}
-          sx={{
-            flexShrink: 0,
-            fontWeight: 700,
-            border: '1px solid',
-          }}
-        >
-          Edit Role
-        </Button>
+        {params.row.showbtn &&
+          <Button
+            component={Link}
+            href={'/organization/role/edit/' + params.row.id}
+            disabled={false}
+            sx={{
+              flexShrink: 0,
+              fontWeight: 700,
+              border: '1px solid',
+            }}
+          >
+            Edit Role
+          </Button>
+        }
       </strong>
     ),
   },
@@ -235,19 +246,21 @@ export const staffTableColumns = [
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <strong>
-        <Button
-          component={Link}
-          href={'/organization/staff/archive/' + params.row.id}
-          disabled={false}
-          sx={{
-            flexShrink: 0,
-            fontWeight: 700,
-            border: '1px solid',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          Archive
-        </Button>
+        {params.row.showbtn &&
+          <Button
+            component={Link}
+            href={'/organization/staff/archive/' + params.row.id}
+            disabled={false}
+            sx={{
+              flexShrink: 0,
+              fontWeight: 700,
+              border: '1px solid',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Archive
+          </Button>
+        }
       </strong>
     ),
   },
