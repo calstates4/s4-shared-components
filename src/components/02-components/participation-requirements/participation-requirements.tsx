@@ -82,6 +82,8 @@ export default function ParticipationRequirements({
           defaultValue={requirements_fee}
           onChange={handleChange}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          placeholder="0"
+          type="number"
         />
       </FormControl>
       <FormControl>
@@ -94,6 +96,8 @@ export default function ParticipationRequirements({
           defaultValue={requirements_cost}
           onChange={handleChange}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          placeholder="0"
+          type="number"
         />
       </FormControl>
     </Box>

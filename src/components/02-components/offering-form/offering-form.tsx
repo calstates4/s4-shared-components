@@ -17,7 +17,7 @@ import {
   Typography,
   useTheme, Select,
 } from '@mui/material';
-import React, { ChangeEvent, ElementType, useRef, useState } from 'react';
+import React, { ChangeEvent, ElementType, useRef, useState, useEffect } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
@@ -239,6 +239,14 @@ export default function OfferingForm({
 
   // auto-incrementing id for requirements and fees fields
   const [sFields, setSFields] = useState(participationRequirement);
+
+  const [initialRowCount, setInitialRowCount] = useState(0);
+
+  // useEffect to set initial row count when the component mounts
+  useEffect(() => {
+    setInitialRowCount(sFields?.length ?? 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Remove fields by index
   const removeElement = (idx: number) => {
@@ -523,7 +531,7 @@ export default function OfferingForm({
               }
               label="No participation requirements for this offering"
             />
-            { !displayRequirementsFees && (
+            {!displayRequirementsFees && (
               <Accordion defaultExpanded={true} sx={accordionStyles}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />}
@@ -540,6 +548,11 @@ export default function OfferingForm({
                           marginBottom: '1rem',
                         }}
                       >
+                        <input
+                          type="hidden"
+                          name={`participation-requirement-${idx}`}
+                          value={idx < initialRowCount ? idx : 'new'}
+                        />
                         <ParticipationRequirements
                           requirement_type={item.requirement_type}
                           requirements_fee={item.requirements_fee}
@@ -563,7 +576,10 @@ export default function OfferingForm({
 
           <Box component="fieldset" sx={fieldSetStyles}>
             <Typography component="p" sx={hlpText}>
-              Please review the health and safety considerations list below and check the box if any are associated with this offering; you will be required to provide additional information based on your selections. This information will be shared with students.
+              Please review the health and safety considerations list below and
+              check the box if any are associated with this offering; you will
+              be required to provide additional information based on your
+              selections. This information will be shared with students.
             </Typography>
             <FormGroup sx={formFieldStyles}>
               <FormControlLabel
@@ -690,25 +706,36 @@ export default function OfferingForm({
             </Box>
             <Typography component="ul" sx={hlpText}>
               <li>
-                <strong>KNOWN HAZARDS</strong>: This offering requires working with hazardous materials, heavy equipment, construction equipment, heights, or heavy machinery.
+                <strong>KNOWN HAZARDS</strong>: This offering requires working
+                with hazardous materials, heavy equipment, construction
+                equipment, heights, or heavy machinery.
               </li>
               <li>
-                <strong>POPULATION SERVED</strong>: Students may be working unsupervised with minors.
+                <strong>POPULATION SERVED</strong>: Students may be working
+                unsupervised with minors.
               </li>
               <li>
-                <strong>POPULATION SERVED</strong>: Students may be working with behaviorally challenged populations.
+                <strong>POPULATION SERVED</strong>: Students may be working with
+                behaviorally challenged populations.
               </li>
               <li>
-                <strong>POPULATION SERVED</strong>: Students may be working with individuals who pose an elevated risk of harm or injury to them?
+                <strong>POPULATION SERVED</strong>: Students may be working with
+                individuals who pose an elevated risk of harm or injury to them?
               </li>
               <li>
-                <strong>SITE LOCATION</strong>: Parking and work areas may not be secure or adequately illuminated.
+                <strong>SITE LOCATION</strong>: Parking and work areas may not
+                be secure or adequately illuminated.
               </li>
               <li>
-                <strong>SITE LOCATION</strong>: There have been incidents of criminal activity at the organization or site(s) within the last year. Or, the location would be described as a high-crime area.
+                <strong>SITE LOCATION</strong>: There have been incidents of
+                criminal activity at the organization or site(s) within the last
+                year. Or, the location would be described as a high-crime area.
               </li>
               <li>
-                <strong>SUPERVISION</strong>: Students may be required to work at night (after 6pm). Or, students may be supervised less than 50% of the time or the supervisor will be overseeing more than 8 people.
+                <strong>SUPERVISION</strong>: Students may be required to work
+                at night (after 6pm). Or, students may be supervised less than
+                50% of the time or the supervisor will be overseeing more than 8
+                people.
               </li>
             </Typography>
           </Box>
