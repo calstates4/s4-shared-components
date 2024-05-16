@@ -13,20 +13,17 @@ export type ParticipationRequirementsProps = {
   requirement_type: string;
   requirements_fee: string;
   requirements_cost?: string;
+  requirement_types: {
+    id: string;
+    label: string;
+  }[];
 }
-
-const requirement_types = [
-  { id: '0', label: 'Option 1' },
-  { id: '1', label: 'Option 2' },
-  { id: '2', label: 'Option 3' },
-  { id: '3', label: 'Option 4' },
-  { id: '4', label: 'Option 5' },
-];
 
 export default function ParticipationRequirements({
   requirement_type,
   requirements_fee,
   requirements_cost,
+  requirement_types,
 }: ParticipationRequirementsProps) {
   const [inputFields, setInputFields] = useState([
     {
@@ -65,7 +62,7 @@ export default function ParticipationRequirements({
           onChange={handleChange}
         >
           <option value="none">Select an option…</option>
-          {requirement_types.map((op) => (
+          {requirement_types.map((op:any) => (
             <option key={op.id} value={op.id}>
               {op.label}
             </option>

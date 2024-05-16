@@ -130,6 +130,10 @@ export type OfferingFormProps = {
   populationServedComments?: string;
   siteLocationComments?: string;
   supervisionComments?: string;
+  requirementTypes: {
+    id: string;
+    label: string;
+  }[];
   participationRequirement?: ParticipationRequirementsProps[];
 };
 
@@ -189,6 +193,7 @@ export default function OfferingForm({
   populationServedComments,
   siteLocationComments,
   supervisionComments,
+  requirementTypes,
   participationRequirement,
 }: OfferingFormProps) {
   const theme = useTheme();
@@ -261,6 +266,7 @@ export default function OfferingForm({
       requirement_type: '',
       requirements_fee: '',
       requirements_cost: '',
+      requirement_types: requirementTypes,
     }
     setSFields([...sFields as [], newFields]);
   };
@@ -557,6 +563,7 @@ export default function OfferingForm({
                           requirement_type={item.requirement_type}
                           requirements_fee={item.requirements_fee}
                           requirements_cost={item.requirements_cost}
+                          requirement_types={item.requirement_types}
                         />
                         <Button
                           onClick={() => removeElement(idx)}
