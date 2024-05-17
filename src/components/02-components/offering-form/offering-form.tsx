@@ -130,7 +130,7 @@ export type OfferingFormProps = {
   populationServedComments?: string;
   siteLocationComments?: string;
   supervisionComments?: string;
-  requirementTypes: {
+  requirementTypes?: {
     id: string;
     label: string;
   }[];
@@ -259,7 +259,7 @@ export default function OfferingForm({
     data.splice(idx, 1);
     setSFields(data);
   };
-console.log(requirementTypes);
+
   // Add fields by index
   const addElement = () => {
     const newFields = {
@@ -269,8 +269,7 @@ console.log(requirementTypes);
       requirements_cost: '',
       requirement_types: requirementTypes,
     }
-    console.log(sFields);
-    console.log(newFields);
+
     setSFields([...sFields as [], newFields]);
   };
 
@@ -563,6 +562,7 @@ console.log(requirementTypes);
                           value={item.id}
                         />
                         <ParticipationRequirements
+                          id={item.id}
                           requirement_type={item.requirement_type}
                           requirements_fee={item.requirements_fee}
                           requirements_cost={item.requirements_cost}

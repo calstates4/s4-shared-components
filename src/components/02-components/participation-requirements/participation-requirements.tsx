@@ -10,10 +10,11 @@ import {
 import React, {useState} from "react";
 
 export type ParticipationRequirementsProps = {
-  requirement_type: string;
-  requirements_fee: string;
+  id: string;
+  requirement_type?: string;
+  requirements_fee?: string;
   requirements_cost?: string;
-  requirement_types: {
+  requirement_types?: {
     id: string;
     label: string;
   }[];
@@ -27,6 +28,7 @@ export default function ParticipationRequirements({
 }: ParticipationRequirementsProps) {
   const [inputFields, setInputFields] = useState([
     {
+      id: '',
       requirement: '',
       requirements_fee: '',
       requirements_cost: '',
@@ -51,24 +53,26 @@ export default function ParticipationRequirements({
 
   return (
     <Box sx={fieldStyles}>
-      <FormControl>
-        <InputLabel>Participation Requirement</InputLabel>
-        <Select
-          id="org-form-participation-requirements"
-          name="participationRequirements"
-          label="Participation Requirements"
-          native={true}
-          defaultValue={requirement_type}
-          onChange={handleChange}
-        >
-          <option value="none">Select an option…</option>
-          {requirement_types.map((op:any) => (
-            <option key={op.id} value={op.id}>
-              {op.label}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
+      {requirement_types &&
+        <FormControl>
+          <InputLabel>Participation Requirement</InputLabel>
+          <Select
+            id="org-form-participation-requirements"
+            name="participationRequirements"
+            label="Participation Requirements"
+            native={true}
+            defaultValue={requirement_type}
+            onChange={handleChange}
+          >
+            <option value="none">Select an option…</option>
+            {requirement_types.map((op:any) => (
+              <option key={op.id} value={op.id}>
+                {op.label}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+      }
       <FormControl>
         <InputLabel>Total Fee</InputLabel>
         <OutlinedInput
