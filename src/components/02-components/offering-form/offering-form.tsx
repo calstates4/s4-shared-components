@@ -259,15 +259,18 @@ export default function OfferingForm({
     data.splice(idx, 1);
     setSFields(data);
   };
-
+console.log(requirementTypes);
   // Add fields by index
   const addElement = () => {
     const newFields = {
+      id: 'new',
       requirement_type: '',
       requirements_fee: '',
       requirements_cost: '',
       requirement_types: requirementTypes,
     }
+    console.log(sFields);
+    console.log(newFields);
     setSFields([...sFields as [], newFields]);
   };
 
@@ -556,8 +559,8 @@ export default function OfferingForm({
                       >
                         <input
                           type="hidden"
-                          name={`participation-requirement-${idx}`}
-                          value={idx < initialRowCount ? idx : 'new'}
+                          name={'participation-requirement'}
+                          value={item.id}
                         />
                         <ParticipationRequirements
                           requirement_type={item.requirement_type}
