@@ -29,7 +29,7 @@ export default function PageLayout({
   const [sidebarOpen, setSidebarOpen] = useState<boolean | undefined>(
     undefined,
   );
-  const [showSkipButton, setShowSkipButton] = useState(false); // Track whether to show skip button
+
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -43,24 +43,21 @@ export default function PageLayout({
   const handleSkipContent = () => {
     // Focus on the main content when the skip content link is clicked
     document.getElementById("main-content")?.focus();
-    // Hide the skip content button after it's clicked
-    setShowSkipButton(false);
   };
 
-  const handleTabKeyPress = (event: { key: string; }) => {
-    // Show skip button when Tab key is pressed
-    if (event.key === 'Tab') {
-      setShowSkipButton(true);
-    }
-  };
+  const skipButtonStyle = {
+    margin: theme.spacing(1),
 
-  useEffect(() => {
-    // Add event listener to detect Tab key press
-    document.addEventListener('keydown', handleTabKeyPress);
-    return () => {
-      document.removeEventListener('keydown', handleTabKeyPress);
-    };
-  }, []);
+    ':not(:focus):not(:active)': {
+      clip: 'rect(0 0 0 0)',
+      clipPath: 'inset(50%)',
+      height: '1px',
+      overflow: 'hidden',
+      position: 'absolute',
+      whiteSpace: 'nowrap',
+      width: '1px',
+    },
+  };
 
   return (
     <Box>
@@ -74,12 +71,15 @@ export default function PageLayout({
           backgroundColor: 'white',
         }}
       >
-        {/* Skip content button/link */}
-        {showSkipButton && (
-          <Button variant="contained" sx={{ margin: theme.spacing(1) }} onClick={handleSkipContent}>
-            Skip to main content
-          </Button>
-        )}
+        <Button
+          variant="contained"
+          sx={skipButtonStyle}
+          tabIndex={0}
+          onClick={handleSkipContent}
+          aria-label="Skip to main content"
+        >
+          Skip to main content
+        </Button>
         <BrandingBar {...brandingBarLinks} />
         <TopBar>
           {brand}
