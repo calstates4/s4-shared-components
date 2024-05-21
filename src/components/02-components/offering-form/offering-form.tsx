@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   FormControlLabel,
@@ -13,7 +17,7 @@ import {
   Typography,
   useTheme, Select,
 } from '@mui/material';
-import React, { ChangeEvent, ElementType, useRef, useState } from 'react';
+import React, { ChangeEvent, ElementType, useRef, useState, useEffect } from 'react';
 import { checkRequiredFormFieldsTabs as onClickHandler } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
@@ -25,6 +29,9 @@ import AutocompletesDependecyFields, {
   type AutocompleteDependencyOptionType,
 } from '../autocompletes-dependecy-fields/autocompletes-dependecy-fields';
 import Tabs, { type RefHandler } from '../tabs/tabs';
+import ParticipationRequirements , { type ParticipationRequirementsProps } from '../participation-requirements/participation-requirements';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
@@ -123,6 +130,11 @@ export type OfferingFormProps = {
   populationServedComments?: string;
   siteLocationComments?: string;
   supervisionComments?: string;
+  requirementTypes?: {
+    id: string;
+    label: string;
+  }[];
+  participationRequirement?: ParticipationRequirementsProps[];
 };
 
 export default function OfferingForm({
@@ -181,6 +193,8 @@ export default function OfferingForm({
   populationServedComments,
   siteLocationComments,
   supervisionComments,
+  requirementTypes,
+  participationRequirement,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -221,6 +235,44 @@ export default function OfferingForm({
     }
   }
 
+  // Requirements and Fees display by toggling the switch
+  const [displayRequirementsFees, setDisplayRequirementsFees] = useState(false);
+
+  function displayChangeHandler() {
+    setDisplayRequirementsFees(!displayRequirementsFees);
+  }
+
+  // auto-incrementing id for requirements and fees fields
+  const [sFields, setSFields] = useState(participationRequirement);
+
+  const [initialRowCount, setInitialRowCount] = useState(0);
+
+  // useEffect to set initial row count when the component mounts
+  useEffect(() => {
+    setInitialRowCount(sFields?.length ?? 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Remove fields by index
+  const removeElement = (idx: number) => {
+    const data = [...sFields as []];
+    data.splice(idx, 1);
+    setSFields(data);
+  };
+
+  // Add fields by index
+  const addElement = () => {
+    const newFields = {
+      id: 'new',
+      requirement_type: '',
+      requirements_fee: '',
+      requirements_cost: '',
+      requirement_types: requirementTypes,
+    }
+
+    setSFields([...sFields as [], newFields]);
+  };
+
   // Styles.
   const paperStyles = {
     p: theme.spacing(3),
@@ -257,6 +309,10 @@ export default function OfferingForm({
     fontWeight: 100,
     fontSize: 14,
     pl: theme.spacing(2),
+  };
+
+  const accordionStyles = {
+    mb: theme.spacing(3),
   };
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -394,7 +450,6 @@ export default function OfferingForm({
                 options={activities}
                 selected={defaultActivities}
                 sx={formFieldStyles}
-
               />
             )}
             <TextField
@@ -468,11 +523,73 @@ export default function OfferingForm({
 
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Requirements and Fees</legend>
+            <Typography variant="body1" gutterBottom>
+              Please identify all requirements and/or anticipated fees
+              associated with this offering. Additionally, if the amount of the
+              fee and the cost covered by your organization, is known, please
+              specify. This information will be shared with students. Each
+              requirement should have its own row.
+            </Typography>
+            <FormControlLabel
+              control={
+                <Switch
+                  onChange={displayChangeHandler}
+                  checked={displayRequirementsFees}
+                />
+              }
+              label="No participation requirements for this offering"
+            />
+            {!displayRequirementsFees && (
+              <Accordion defaultExpanded={true} sx={accordionStyles}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />}
+                >
+                  Requirements and Fees
+                </AccordionSummary>
+                <AccordionDetails>
+                  {sFields &&
+                    sFields.map((item: any, idx: number) => (
+                      <div
+                        key={idx}
+                        style={{
+                          display: 'flex',
+                          marginBottom: '1rem',
+                        }}
+                      >
+                        <input
+                          type="hidden"
+                          name={'participation-requirement'}
+                          value={item.id}
+                        />
+                        <ParticipationRequirements
+                          id={item.id}
+                          requirement_type={item.requirement_type}
+                          requirements_fee={item.requirements_fee}
+                          requirements_cost={item.requirements_cost}
+                          requirement_types={item.requirement_types}
+                        />
+                        <Button
+                          onClick={() => removeElement(idx)}
+                          variant={'text'}
+                        >
+                          <DeleteOutlinedIcon sx={{ color: 'primary.dark' }} />
+                        </Button>
+                      </div>
+                    ))}
+                  <Button onClick={addElement} variant={'contained'}>
+                    Add {sFields?.length ?? 0 > 0 ? 'another' : 'a'} requirement
+                  </Button>
+                </AccordionDetails>
+              </Accordion>
+            )}
           </Box>
 
           <Box component="fieldset" sx={fieldSetStyles}>
             <Typography component="p" sx={hlpText}>
-              Please review the health and safety considerations list below and check the box if any are associated with this offering; you will be required to provide additional information based on your selections. This information will be shared with students.
+              Please review the health and safety considerations list below and
+              check the box if any are associated with this offering; you will
+              be required to provide additional information based on your
+              selections. This information will be shared with students.
             </Typography>
             <FormGroup sx={formFieldStyles}>
               <FormControlLabel
@@ -599,25 +716,36 @@ export default function OfferingForm({
             </Box>
             <Typography component="ul" sx={hlpText}>
               <li>
-                <strong>KNOWN HAZARDS</strong>: This offering requires working with hazardous materials, heavy equipment, construction equipment, heights, or heavy machinery.
+                <strong>KNOWN HAZARDS</strong>: This offering requires working
+                with hazardous materials, heavy equipment, construction
+                equipment, heights, or heavy machinery.
               </li>
               <li>
-                <strong>POPULATION SERVED</strong>: Students may be working unsupervised with minors.
+                <strong>POPULATION SERVED</strong>: Students may be working
+                unsupervised with minors.
               </li>
               <li>
-                <strong>POPULATION SERVED</strong>: Students may be working with behaviorally challenged populations.
+                <strong>POPULATION SERVED</strong>: Students may be working with
+                behaviorally challenged populations.
               </li>
               <li>
-                <strong>POPULATION SERVED</strong>: Students may be working with individuals who pose an elevated risk of harm or injury to them?
+                <strong>POPULATION SERVED</strong>: Students may be working with
+                individuals who pose an elevated risk of harm or injury to them?
               </li>
               <li>
-                <strong>SITE LOCATION</strong>: Parking and work areas may not be secure or adequately illuminated.
+                <strong>SITE LOCATION</strong>: Parking and work areas may not
+                be secure or adequately illuminated.
               </li>
               <li>
-                <strong>SITE LOCATION</strong>: There have been incidents of criminal activity at the organization or site(s) within the last year. Or, the location would be described as a high-crime area.
+                <strong>SITE LOCATION</strong>: There have been incidents of
+                criminal activity at the organization or site(s) within the last
+                year. Or, the location would be described as a high-crime area.
               </li>
               <li>
-                <strong>SUPERVISION</strong>: Students may be required to work at night (after 6pm). Or, students may be supervised less than 50% of the time or the supervisor will be overseeing more than 8 people.
+                <strong>SUPERVISION</strong>: Students may be required to work
+                at night (after 6pm). Or, students may be supervised less than
+                50% of the time or the supervisor will be overseeing more than 8
+                people.
               </li>
             </Typography>
           </Box>
@@ -664,7 +792,6 @@ export default function OfferingForm({
                 sx={formFieldStyles}
               />
             )}
-
 
             <FormControlLabel
               control={
@@ -824,13 +951,12 @@ export default function OfferingForm({
               ))}
             </TextField>
           </Box>
-
         </div>
         <div title="Additional Information">
           <FormControl fullWidth>
             <InputLabel
-              id='org-form-addressptype'
-              htmlFor='org-form-addressptype'
+              id="org-form-addressptype"
+              htmlFor="org-form-addressptype"
             >
               Location type
             </InputLabel>
@@ -850,7 +976,12 @@ export default function OfferingForm({
               <option value="remote_online">Remote/Online</option>
             </Select>
           </FormControl>
-          <AddressField display={isRemote ? 'none' : 'block'} id="offering" address={address} mb={3} />
+          <AddressField
+            display={isRemote ? 'none' : 'block'}
+            id="offering"
+            address={address}
+            mb={3}
+          />
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Focus Population and Areas</legend>
             {focusPopulations && (
