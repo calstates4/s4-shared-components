@@ -10,14 +10,35 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const InviteStaffDialog = ({
+export default function InviteStaffDialog({
   open,
   handleClose,
+  id,
 }: {
   open: boolean;
   handleClose: () => void;
-}) => {
+  id?: string;
+}) {
   const theme = useTheme();
+
+  const innerForm = (
+    <>
+      <input type="hidden" name="orgId" value={id} />
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          ml: theme.spacing(2),
+        }}
+      >
+        Invite
+      </Button>
+    </>
+  );
+
+  const form = (
+    <form>{innerForm}</form>
+  );
 
   return (
     <Dialog
@@ -67,20 +88,11 @@ const InviteStaffDialog = ({
             type="email"
             fullWidth
             required
+            name="emails"
           />
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              ml: theme.spacing(2),
-            }}
-          >
-            Invite
-          </Button>
+          {form}
         </DialogContentText>
       </DialogContent>
     </Dialog>
   );
-};
-
-export default InviteStaffDialog;
+}
