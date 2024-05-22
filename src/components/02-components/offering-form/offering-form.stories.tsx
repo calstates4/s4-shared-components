@@ -165,6 +165,8 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
     focusAreas,
     subFocusAreas,
     activities,
+    requirementTypes: requirements,
+    participationRequirement: [],
   },
 };
 
@@ -242,5 +244,22 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     populationServedComments,
     siteLocationComments,
     supervisionComments,
+    requirementTypes: requirements,
+    participationRequirement: [
+      {
+        id: 1,
+        requirement_type: '2',
+        requirements_fee: '10',
+        requirements_cost: '20',
+        requirement_types: requirements,
+      },
+      {
+        id: 3,
+        requirement_type: '1',
+        requirements_fee: '5',
+        requirements_cost: '0',
+        requirement_types: requirements,
+      },
+    ],
   },
 };
