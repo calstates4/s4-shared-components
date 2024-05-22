@@ -226,3 +226,7 @@ export {
   default as MembershipRequest,
   type MembershipRequestProps,
 } from './components/02-components/membership-request/membership-request';
+export {
+  default as ParticipationRequirements,
+  type ParticipationRequirementsProps,
+} from './components/02-components/participation-requirements/participation-requirements';

@@ -261,7 +261,13 @@ export default function OrganizationForm({
                 <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Organizational Availability</AccordionSummary>
                 <AccordionDetails>
                   {sFields && sFields.map((item:any, idx: number) => (
-                    <div key={idx}>
+                    <div
+                      key={idx}
+                      style={{
+                        display: 'flex',
+                        marginBottom: '1rem',
+                      }}
+                    >
                       <ScheduleFields
                         day={item.day}
                         startHour={item.startHour}
