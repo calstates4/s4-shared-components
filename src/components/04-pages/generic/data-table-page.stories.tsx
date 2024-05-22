@@ -46,8 +46,8 @@ const staffArgs: DataTablePageProps = {
     filters: staffFilterModel,
   },
   form: ExposedFormStories.args as ExposedFormProps,
-  addUrl: '/organization/staff/add',
-  addTitle: 'Invite a staff member',
+  addUrl= '/organization/departments/add',
+  addTitle= 'Add department',
   inviteMembers: true,
 };
 
