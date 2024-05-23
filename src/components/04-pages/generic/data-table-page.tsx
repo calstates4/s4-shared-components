@@ -26,7 +26,9 @@ export type DataTablePageProps = {
   form?: ExposedFormProps;
   addUrl?: string;
   addTitle?: string;
+  id?: string;
   inviteMembers?: boolean;
+  formDialog?: ExposedFormProps;
 };
 
 export default function DataTablePage({
@@ -37,7 +39,9 @@ export default function DataTablePage({
   form,
   addUrl,
   addTitle,
+  id,
   inviteMembers,
+  formDialog,
 }: DataTablePageProps) {
   const theme = useTheme();
 
@@ -144,7 +148,7 @@ export default function DataTablePage({
         />
       )}
       {inviteMembers && (
-        <InviteStaffDialog open={open} handleClose={handleClose} />
+        <InviteStaffDialog id={id} form={formDialog} open={open} handleClose={handleClose} />
       )}
     </>
   );

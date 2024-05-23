@@ -9,21 +9,35 @@ import {
   useTheme,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import {ExposedFormProps} from "~/components/02-components/form/form";
 
 export default function InviteStaffDialog({
   open,
   handleClose,
   id,
+  form,
 }: {
   open: boolean;
   handleClose: () => void;
   id?: string;
+  form?: ExposedFormProps;
 }) {
   const theme = useTheme();
 
   const innerForm = (
     <>
+      <input type="hidden" name="action" value="invite" />
       <input type="hidden" name="orgId" value={id} />
+      <TextField
+        autoFocus
+        margin="dense"
+        id="email"
+        label="Email Address"
+        type="text"
+        fullWidth
+        required
+        name="emails"
+      />
       <Button
         type="submit"
         variant="contained"
@@ -36,7 +50,7 @@ export default function InviteStaffDialog({
     </>
   );
 
-  const form = (
+  const formDialog = (
     <form>{innerForm}</form>
   );
 
@@ -80,17 +94,7 @@ export default function InviteStaffDialog({
             alignItems: 'center',
           }}
         >
-          <TextField
-            autoFocus
-            margin="dense"
-            id="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            required
-            name="emails"
-          />
-          {form}
+          {formDialog}
         </DialogContentText>
       </DialogContent>
     </Dialog>
