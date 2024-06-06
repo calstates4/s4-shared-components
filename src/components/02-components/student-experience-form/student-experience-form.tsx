@@ -33,7 +33,7 @@ export default function StudentExperienceForm({
   const formInner = (
     <>
       <input type="hidden" name="opportunityId" value={id ? id : 0} />
-      <Button type="button" variant="outlined" sx={{ mr: 1 }}>Cancel</Button>
+      <Button type="button" href="/create-experience" variant="outlined" sx={{ mr: 1 }}>Cancel</Button>
       <Button type="submit" variant="contained" sx={{ mr: 1 }}>Continue</Button>
     </>
   );
