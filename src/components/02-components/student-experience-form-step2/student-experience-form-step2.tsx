@@ -114,7 +114,7 @@ export default function StudentExperienceFormStep2({
       <input type="hidden" name="opportunityId" value={ opportunityId } />
       <input type="hidden" name="opportunityCourse" value={ opportunityCourseId } />
       <input type="hidden" name="programId" value={ programId } />
-      <Button type="button" variant="outlined" sx={{ mr: 1, float: 'left' }}>Cancel</Button>
+      <Button type="button" href="/create-experience" variant="outlined" sx={{ mr: 1, float: 'left' }}>Cancel</Button>
       <Button type="submit" variant="contained" sx={{ mr: 1, float: 'right' }}>Continue</Button>
       <Button type="button" href={`/create-experience?opportunity=${opportunityId}`} variant="outlined" sx={{ mr: 1, float: 'right' }}>Back</Button>
     </>

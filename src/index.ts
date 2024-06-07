@@ -219,6 +219,10 @@ export {
   type ScheduleFieldsProps,
 } from './components/02-components/schedule-fields/schedule-fields';
 export {
+  default as StudentExperienceFormStep3,
+  type StudentExperienceFormStep3Props,
+} from './components/02-components/student-experience-form-step3/student-experience-form-step3'
+export {
   default as StaffArchiveMember,
   type StaffArchiveMemberProps,
 } from './components/02-components/staff-archive-member/staff-archive-member';
