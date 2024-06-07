@@ -15,9 +15,9 @@ export default function StepsBar({
   step,
 }:StepsProps) {
   const theme = useTheme();
-  const stepsList = steps.map((data) => {
+  const stepsList = steps.map((data, index) => {
     return (
-      <Step>
+      <Step key={index}>
         <StepLabel>{data}</StepLabel>
       </Step>
     );

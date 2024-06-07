@@ -23,6 +23,7 @@ export type StudentExperienceFormStep3Props = {
   courseSelected: string;
   errorMsg: boolean;
   healthSafetyInformation: string;
+  healthSafetyInformationValue: string;
 };
 
 export default function StudentExperienceFormStep3({
@@ -33,10 +34,11 @@ export default function StudentExperienceFormStep3({
   FormElement,
   errorMsg,
   healthSafetyInformation,
+  healthSafetyInformationValue,
 }: StudentExperienceFormStep3Props) {
   const theme = useTheme();
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(healthSafetyInformationValue);
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
@@ -71,11 +73,11 @@ export default function StudentExperienceFormStep3({
           <Typography variant="h3" sx={{ mt: theme.spacing(1) }}>
             Organization’s Requirements
           </Typography>
-          {healthSafetyInformation ??
+          {healthSafetyInformation ?? (
             <Typography variant="body1" sx={{ mt: theme.spacing(1) }}>
               {healthSafetyInformation}
             </Typography>
-          }
+          )}
         </Box>
         <Box>
           <FormControl sx={{ my: 2 }} variant="standard">
