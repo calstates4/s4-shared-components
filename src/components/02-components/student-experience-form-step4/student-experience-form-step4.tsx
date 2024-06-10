@@ -179,11 +179,11 @@ export default function StudentExperienceFormStep4({
           )}
           {opportunityCourseName && (
             <Stack direction="row" spacing={1}>
-            <Typography variant="body1" sx={{ fontWeight: '700' }}>
-              Course:
-            </Typography>
-            <Typography variant="body1">{opportunityCourseName}</Typography>
-          </Stack>
+              <Typography variant="body1" sx={{ fontWeight: '700' }}>
+                Course:
+              </Typography>
+              <Typography variant="body1">{opportunityCourseName}</Typography>
+            </Stack>
           )}
           <Stack direction="row" spacing={1}>
             <Typography variant="body1" sx={{ fontWeight: '700' }}>
