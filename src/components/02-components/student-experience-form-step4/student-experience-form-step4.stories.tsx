@@ -15,7 +15,6 @@ const stepsNames = [
   'Program + Course',
   'Health and Safety Information',
   'Approval',
-  'Staff',
   'Duration',
   'Summary',
 ];
