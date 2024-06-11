@@ -10,7 +10,14 @@ const meta: Meta<typeof StudentExperienceFormStep2> = {
 
 export default meta;
 
-const stepsNames = ['Opportunity','Program + Course','Health and Safety Information','Approval','Staff','Duration', 'Summary'];
+const stepsNames = [
+  'Opportunity',
+  'Program + Course',
+  'Health and Safety Information',
+  'Approval',
+  'Duration',
+  'Summary',
+];
 const stepsBar = (
   <StepsBar
     steps={stepsNames}

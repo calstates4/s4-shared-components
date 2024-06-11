@@ -227,6 +227,10 @@ export {
   type StudentExperienceFormStep4Props,
 } from './components/02-components/student-experience-form-step4/student-experience-form-step4'
 export {
+  default as StudentExperienceFormStep5,
+  type StudentExperienceFormStep5Props,
+} from './components/02-components/student-experience-form-step5/student-experience-form-step5'
+export {
   default as StaffArchiveMember,
   type StaffArchiveMemberProps,
 } from './components/02-components/staff-archive-member/staff-archive-member';
