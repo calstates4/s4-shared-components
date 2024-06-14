@@ -113,7 +113,7 @@ export default function StudentExperienceFormStep5({
       </Button>
       <Button
         type="button"
-        href={`/create-experience/health-safety?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}`}
+        href={`/create-experience/approval?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >
