@@ -9,6 +9,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { ElementType, ReactNode } from 'react';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 export type StudentExperienceFormStep5Props = {
   opportunityId: string;
@@ -19,6 +20,7 @@ export type StudentExperienceFormStep5Props = {
   FormElement: ElementType;
   term: string;
   estimatedHours: number;
+  errorMsg?: boolean;
 };
 
 export default function StudentExperienceFormStep5({
@@ -30,6 +32,7 @@ export default function StudentExperienceFormStep5({
   FormElement,
   term,
   estimatedHours,
+  errorMsg,
 }: StudentExperienceFormStep5Props) {
   const theme = useTheme();
 
@@ -86,6 +89,14 @@ export default function StudentExperienceFormStep5({
           endAdornment={<InputAdornment position="end">Hours</InputAdornment>}
           inputProps={{ min: 0 }}
         />
+        {errorMsg && (
+          <Stack direction="row" spacing={1} mt={2} alignItems="center">
+            <ErrorOutlineIcon sx={{ color: '#f44336' }} />
+            <Typography variant="body2" sx={{ color: 'error.main' }}>
+              Please enter a valid number of hours.
+            </Typography>
+          </Stack>
+        )}
       </Paper>
       <input type="hidden" name="opportunityId" value={opportunityId} />
       <input
@@ -99,7 +110,7 @@ export default function StudentExperienceFormStep5({
         name="healthSafetyInformation"
         value={healthSafetySelected}
       />
-      <input type="hidden" name="estimatedHours" value={estimatedHours} />
+      <input type="hidden" name="timeCommitment" value={estimatedHours} />
       <Button
         type="button"
         href="/create-experience"
@@ -113,7 +124,7 @@ export default function StudentExperienceFormStep5({
       </Button>
       <Button
         type="button"
-        href={`/create-experience/approval?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}`}
+        href={`/create-experience/approval?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}&timeCommitment=${estimatedHours}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >

@@ -30,5 +30,6 @@ export const AddStudentExperienceFormStep5: StoryObj<typeof StudentExperienceFor
     stepsBar: stepsBar,
     term: 'Fall 2021',
     estimatedHours: 10,
+    errorMsg: false,
   },
 };

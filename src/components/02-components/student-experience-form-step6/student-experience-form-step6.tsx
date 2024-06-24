@@ -57,7 +57,7 @@ export default function StudentExperienceFormStep6({
         name="healthSafetyInformation"
         value={healthSafetySelected}
       />
-      <input type="hidden" name="estimatedHours" value={estimatedHours} />
+      <input type="hidden" name="timeCommitment" value={estimatedHours} />
     </>
   );
 
@@ -141,7 +141,7 @@ export default function StudentExperienceFormStep6({
                   Time commitments:
                 </Typography>
                 <Typography variant="body1">
-                  {estimatedHours} peer week
+                  {estimatedHours} hours peer week
                 </Typography>
               </Stack>
             )}
