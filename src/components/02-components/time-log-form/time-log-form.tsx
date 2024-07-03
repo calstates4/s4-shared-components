@@ -159,7 +159,10 @@ export default function TimeLogForm({
   }
 
   function handleClickOpen() {
-    setOpen(true);
+    // Check if the form is valid before opening the dialog.
+    if (formRef.current?.reportValidity()) {
+      setOpen(true);
+    }
   }
 
   function handleClose() {
@@ -225,6 +228,8 @@ export default function TimeLogForm({
           sx={{ fontWeight: 700 }}
           onClick={handleConfirm}
           variant="contained"
+          type="submit"
+          form="time-log-form"
         >
           Confirm
         </Button>
@@ -448,9 +453,9 @@ export default function TimeLogForm({
   );
 
   const renderedForm = FormElement ? (
-    <FormElement method="post" ref={formRef}>{formInner}</FormElement>
+    <FormElement method="post" ref={formRef} id="time-log-form">{formInner}</FormElement>
   ) : (
-    <form>{formInner}</form>
+    <form method="post" ref={formRef} id="time-log-form">{formInner}</form>
   );
 
   return (
