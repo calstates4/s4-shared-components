@@ -261,5 +261,6 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
         requirement_types: requirements,
       },
     ],
+    defaultPayAmount: 130,
   },
 };

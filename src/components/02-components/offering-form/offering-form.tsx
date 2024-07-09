@@ -122,6 +122,7 @@ export type OfferingFormProps = {
   defaultPublished?: boolean;
   defaultPayType?: string;
   defaultPayFrequency?: string;
+  defaultPayAmount?: number;
   emailStudentSelected?: string;
 
   expectedSkillAcquisition?: string;
@@ -185,6 +186,7 @@ export default function OfferingForm({
   defaultTimeFrequency,
   defaultPayType,
   defaultPayFrequency,
+  defaultPayAmount,
   defaultPublished,
   emailStudentSelected,
   expectedSkillAcquisition,
@@ -956,7 +958,7 @@ export default function OfferingForm({
               SelectProps={{
                 native: true,
               }}
-              sx={formFieldStyles}
+              sx={[formFieldStyles, rightSpace]}
             >
               {PAY_FREQUENCY.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -964,6 +966,22 @@ export default function OfferingForm({
                 </option>
               ))}
             </TextField>
+            <TextField
+              required
+              type="number"
+              id="offering-pay-amount"
+              name="offering-pay-amount"
+              label="Pay Amount"
+              defaultValue={defaultPayAmount ?? undefined}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 0.1,
+                min: 1,
+              }}
+              sx={formFieldStyles}
+            />
           </Box>
         </div>
         <div title="Additional Information">
