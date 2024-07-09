@@ -290,6 +290,10 @@ export default function OfferingForm({
     display: 'block',
   };
 
+  const rightSpace = {
+    mr: theme.spacing(1)
+  }
+
   const actionButtonsContainerStyles = {
     display: 'flex',
     gap: theme.spacing(1),
@@ -809,7 +813,7 @@ export default function OfferingForm({
         <div title="Time & Compensation">
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Offering Availability</legend>
-            <Box component="fieldset" sx={fieldSetStyles}>
+            <Box component="fieldset" sx={fieldSetStyles} style={{display: 'flex', marginBottom: '1rem'}}>
               <legend>Offering Dates</legend>
               <TextField
                 required
@@ -825,7 +829,7 @@ export default function OfferingForm({
                 inputProps={{
                   pattern: 'd{4}-d{2}-d{2}',
                 }}
-                sx={formFieldStyles}
+                sx={[formFieldStyles, rightSpace]}
               />
 
               {startDate && (
@@ -847,66 +851,76 @@ export default function OfferingForm({
                 />
               )}
             </Box>
-            <TextField
-              required
-              type="number"
-              id="offering-time-amount"
-              name="offering-time-amount"
-              label="Time Commitment"
-              defaultValue={defaultTimeAmount ?? undefined}
-              InputLabelProps={{
-                shrink: true,
+            <div
+              style={{
+                display: 'flex',
+                marginBottom: '1rem',
               }}
-              inputProps={{
-                step: 0.1,
-                min: 1,
-              }}
-              sx={formFieldStyles}
-            />
-            <TextField
-              select
-              required
-              id="offering-time-unit"
-              name="offering-time-unit"
-              label="Unit of time"
-              defaultValue={defaultTimeUnit ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              SelectProps={{
-                native: true,
-              }}
-              sx={formFieldStyles}
             >
-              {OFFERING_TIME_UNITS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-            <TextField
-              select
-              required
-              id="offering-time-frequency"
-              name="offering-time-frequency"
-              label="Hours Frequency"
-              defaultValue={defaultTimeFrequency ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              SelectProps={{
-                native: true,
-              }}
-              sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
-            >
-              {OFFERING_TIME_FREQUENCY.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
+              <TextField
+                required
+                type="number"
+                id="offering-time-amount"
+                name="offering-time-amount"
+                label="Time Commitment"
+                defaultValue={defaultTimeAmount ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  step: 0.1,
+                  min: 1,
+                }}
+                sx={[formFieldStyles, rightSpace]}
+              />
+              <TextField
+                select
+                required
+                id="offering-time-unit"
+                name="offering-time-unit"
+                label="Unit of time"
+                defaultValue={defaultTimeUnit ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                SelectProps={{
+                  native: true,
+                }}
+                sx={[formFieldStyles, rightSpace]}
+              >
+                {OFFERING_TIME_UNITS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+              <TextField
+                select
+                required
+                id="offering-time-frequency"
+                name="offering-time-frequency"
+                label="Hours Frequency"
+                defaultValue={defaultTimeFrequency ?? undefined}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                SelectProps={{
+                  native: true,
+                }}
+                sx={{ mb: theme.spacing(3), maxWidth: '13rem' }}
+              >
+                {OFFERING_TIME_FREQUENCY.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </div>
           </Box>
-          <Box component="fieldset" sx={fieldSetStyles}>
+          <Box component="fieldset" sx={fieldSetStyles} style={{
+            display: 'flex',
+            marginBottom: '1rem',
+          }}>
             <legend>Compensation</legend>
             <TextField
               select
@@ -921,7 +935,7 @@ export default function OfferingForm({
               SelectProps={{
                 native: true,
               }}
-              sx={formFieldStyles}
+              sx={[formFieldStyles, rightSpace]}
             >
               {PAY_TYPE.map((option) => (
                 <option key={option.value} value={option.value}>
