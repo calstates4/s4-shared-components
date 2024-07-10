@@ -261,5 +261,8 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
         requirement_types: requirements,
       },
     ],
+    defaultPayType: 3,
+    defaultPayFrequency: 'monthly',
+    defaultPayAmount: 130,
   },
 };
