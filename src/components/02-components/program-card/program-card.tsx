@@ -1,6 +1,6 @@
-import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Button, Paper, Typography, useTheme, Stack } from '@mui/material';
 import Link from '../../01-elements/link/link';
-import {useState} from "react";
+import { useState } from 'react';
 
 export type ProgramCardProps = {
   id: string;
@@ -54,7 +54,7 @@ export default function ProgramCard({
   const [isDisabled] = useState(btnDisable);
 
   return (
-    <Paper key={id} sx={containerStyles} component="article">
+    <Paper key={id} sx={containerStyles} elevation={1}>
       <Box sx={headerContainerStyles}>
         <Typography variant="h2" color="black">
           {title}
@@ -62,10 +62,15 @@ export default function ProgramCard({
       </Box>
       <Box sx={descriptionContainerStyles}>
         {description && (
-          <p dangerouslySetInnerHTML={{ __html: description }} />
+          <div dangerouslySetInnerHTML={{ __html: description }} />
         )}
       </Box>
-      <Box sx={{ mt: theme.spacing(2), display: 'flex', justifyContent: 'flex-end' }}>
+      <Stack
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="center"
+        spacing={2}
+      >
         <Button
           component={Link}
           href={url}
@@ -77,7 +82,7 @@ export default function ProgramCard({
           View
         </Button>
         <Button
-          id={"program-" + id}
+          id={'program-' + id}
           component={Link}
           href={joinUrl}
           type="submit"
@@ -90,7 +95,7 @@ export default function ProgramCard({
         >
           {btnText}
         </Button>
-      </Box>
+      </Stack>
     </Paper>
   );
 }

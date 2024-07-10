@@ -3,7 +3,15 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import TvIcon from '@mui/icons-material/Tv';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { useState, ElementType } from 'react';
-import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  Paper,
+  Typography,
+  useTheme,
+  Stack,
+  Divider,
+} from '@mui/material';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import Link from '../../01-elements/link/link';
 
@@ -63,30 +71,15 @@ export default function ProgramPage({
       gap: theme.spacing(3),
     },
   };
-  const detailsTitleStyles = {
-    mb: theme.spacing(2),
-    mt: theme.spacing(2),
-    [theme.breakpoints.up('md')]: {
-      borderTop: `0px`,
-      mb: theme.spacing(4),
-      mt: '0',
-    },
-  };
   const detailsStyles = {
-    borderTop: `1px solid ${theme.palette.black.main}`,
-    [theme.breakpoints.up('md')]: {
-      borderLeft: `1px solid ${theme.palette.black.main}`,
-      borderTop: `0px`,
-      pl: theme.spacing(2),
-    },
     ul: {
       m: 0,
       p: 0,
       listStyleType: 'none',
       li: {
         mb: theme.spacing(1),
-      }
-    }
+      },
+    },
   };
   const iconStyles = {
     fontSize: '1rem',
@@ -106,7 +99,7 @@ export default function ProgramPage({
       mr: '0',
       width: '100%',
       float: 'none',
-    }
+    },
   };
 
   const [isDisabled, setDisabled] = useState(btnDisable);
@@ -114,7 +107,7 @@ export default function ProgramPage({
   const handleSubmit = () => {
     setDisabled(true);
     setTextB(btnNextStatusText);
-  }
+  };
 
   const innerForm = (
     <>
@@ -131,7 +124,9 @@ export default function ProgramPage({
     </>
   );
   const form = FormElement ? (
-    <FormElement sx={btnStyles} method="post">{innerForm}</FormElement>
+    <FormElement sx={btnStyles} method="post">
+      {innerForm}
+    </FormElement>
   ) : (
     <Box sx={btnStyles}>
       <form>{innerForm}</form>
@@ -147,50 +142,62 @@ export default function ProgramPage({
         </Typography>
       </Box>
       <Paper sx={paperStyles}>
-        <Box sx={{ flex: '1 1 60%' }}>
-          <Typography variant="h3" color="primary.main" sx={titleStyles}>
-            Program Description
-          </Typography>
-          {description && (
-            <p dangerouslySetInnerHTML={{ __html: description }} />
-          )}
-          <Button
-            variant="outlined"
-            component={Link}
-            href={opportunitiesUrl}
-            sx={btnStyles}
-          >
-            SEE AVAILABLE OPPORTUNITIES
-          </Button>
-          {form}
-        </Box>
-        <Box sx={detailsStyles}>
-          <Typography component="h2" variant="h3" sx={detailsTitleStyles}>
-            Contact us
-          </Typography>
-          <Box component="ul">
-            {phone && (
-              <li>
-                <PhoneIcon sx={iconStyles} />
-                {phone}
-              </li>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={3}
+        >
+          <Box sx={{ flex: '1 1 60%' }}>
+            <Typography variant="h3" color="primary.main" sx={titleStyles}>
+              Program Description
+            </Typography>
+            {description && (
+              <p dangerouslySetInnerHTML={{ __html: description }} />
             )}
-            {mail && (
-              <li>
-                <MailIcon sx={iconStyles} />
-                <Link href={`mailto:${mail}`}>
-                  {mail}
-                </Link>
-              </li>
-            )}
-            {campusSite && (
-              <li>
-                <TvIcon sx={iconStyles} />
-                <Link href={campusSite}>{campusSite} <ArrowOutwardIcon sx={iconStyles}/></Link>
-              </li>
-            )}
+            <Stack direction="row" sx={{ mt: theme.spacing(2) }}>
+              <Button
+                variant="outlined"
+                component={Link}
+                href={opportunitiesUrl}
+                sx={btnStyles}
+              >
+                SEE AVAILABLE OPPORTUNITIES
+              </Button>
+              {form}
+            </Stack>
           </Box>
-        </Box>
+          <Stack
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
+            <Typography component="h3" variant="h3" sx={{mb: theme.spacing(2)}}>
+              Contact us
+            </Typography>
+            <Box component="ul" sx={detailsStyles.ul}>
+              {phone && (
+                <li>
+                  <PhoneIcon sx={iconStyles} />
+                  {phone}
+                </li>
+              )}
+              {mail && (
+                <li>
+                  <MailIcon sx={iconStyles} />
+                  <Link href={`mailto:${mail}`}>{mail}</Link>
+                </li>
+              )}
+              {campusSite && (
+                <li>
+                  <TvIcon sx={iconStyles} />
+                  <Link href={campusSite}>
+                    {campusSite} <ArrowOutwardIcon sx={iconStyles} />
+                  </Link>
+                </li>
+              )}
+            </Box>
+          </Stack>
+        </Stack>
       </Paper>
     </article>
   );
