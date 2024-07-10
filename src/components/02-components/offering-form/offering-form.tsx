@@ -939,6 +939,7 @@ export default function OfferingForm({
               }}
               sx={[formFieldStyles, rightSpace]}
             >
+              <option key="none" value="none">None</option>
               {PAY_TYPE.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -960,6 +961,7 @@ export default function OfferingForm({
               }}
               sx={[formFieldStyles, rightSpace]}
             >
+              <option key="0" value="0">None</option>
               {PAY_FREQUENCY.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
