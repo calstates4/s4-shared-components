@@ -28,6 +28,7 @@ export type ProgramListProps = {
     id: string;
     label: string;
   }[];
+  resetFiltersUrl?: string;
 };
 
 export default function ProgramList({
@@ -39,6 +40,7 @@ export default function ProgramList({
   items,
   displayFilterValues,
   defaultProgramDisplay,
+  resetFiltersUrl,
 }: ProgramListProps) {
   const theme = useTheme();
   const pagerCount = Math.ceil(totalItems / itemsPerPage);
@@ -149,7 +151,7 @@ export default function ProgramList({
           with, use the Initiate Partnership button to begin the process.
         </Typography>
         <Box sx={{ pt: theme.spacing(2), pb: theme.spacing(6) }}>{form}</Box>
-        {items ? (
+        {items && items.length >= 1 ? (
           <>
             <Grid container spacing={5} alignItems="stretch">
               {items?.map((item, _index) => (
@@ -171,8 +173,8 @@ export default function ProgramList({
         ) : (
           <Stack spacing={2} direction="row" alignItems="center">
             <Typography variant="body1">No programs found.</Typography>
-            <Button variant="outlined" href={url}>
-              Show all programs
+            <Button variant="outlined" href={resetFiltersUrl}>
+              Reset Filters
             </Button>
           </Stack>
         )}
