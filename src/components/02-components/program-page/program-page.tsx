@@ -154,7 +154,7 @@ export default function ProgramPage({
             {description && (
               <p dangerouslySetInnerHTML={{ __html: description }} />
             )}
-            <Box sx={{ mt: theme.spacing(2) }}>
+            <Stack direction="row" sx={{ mt: theme.spacing(2) }}>
               <Button
                 variant="outlined"
                 component={Link}
@@ -164,7 +164,7 @@ export default function ProgramPage({
                 SEE AVAILABLE OPPORTUNITIES
               </Button>
               {form}
-            </Box>
+            </Stack>
           </Box>
           <Stack
             direction="column"
