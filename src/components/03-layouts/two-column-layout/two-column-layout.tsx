@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Stack, Divider, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 
 export type TwoColumnLayoutProps = {
@@ -7,20 +7,27 @@ export type TwoColumnLayoutProps = {
 };
 
 export default function TwoColumnLayout({firstContent, secondContent}: TwoColumnLayoutProps) {
+  const border = {
+    [useTheme().breakpoints.down('lg')]: {
+      borderBottom: '1px solid #ccc',
+    }
+  };
+
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'nowrap',
-      justifyContent: 'space-between',
-      alignContent: 'flex-start',
-      alignItems: 'stretch',
-    }}>
+    <Stack
+      direction={{ sm: 'column', lg: 'row' }}
+      justifyContent="space-between"
+      alignItems="stretch"
+      spacing={{ sm: 2, lg: 0 }}
+      sx={{
+        flexWrap: 'nowrap',
+      }}
+      divider={<Divider orientation="vertical" flexItem />}
+    >
       <Box sx={{
         p: "1rem",
         flexGrow: '4',
-        borderRight: '1px solid grey'
-      }}>
+        ...border }}>
         {firstContent}
       </Box>
       <Box sx={{
@@ -30,6 +37,6 @@ export default function TwoColumnLayout({firstContent, secondContent}: TwoColumn
       }}>
         {secondContent}
       </Box>
-    </Box>
+    </Stack>
   );
 }

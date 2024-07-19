@@ -134,6 +134,7 @@ export default function BrandingBar({
     renderedUserMenuItems.push(
       <li key="item-help">
         <Button
+          aria-label="Help"
           fullWidth
           size="large"
           onClick={handleClickOpen}
@@ -226,6 +227,7 @@ export default function BrandingBar({
         {/* Mobile menu toggle. */}
         <IconButton
           id="mobile-menu-toggle"
+          aria-label="Menu"
           aria-controls={mobileMenuOpen ? 'mobile-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={mobileMenuOpen ? 'true' : undefined}
