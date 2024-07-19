@@ -20,12 +20,6 @@ export default function StatWithIcon({
     lineHeight: '0',
   };
 
-  const numberStyles = {
-    color: theme.palette.primary.main,
-    fontWeight: '700',
-    fontSize: '1.5rem',
-  };
-
   const textStyles = {
     color: theme.palette.primary.main,
     fontWeight: '500',
@@ -33,14 +27,10 @@ export default function StatWithIcon({
   };
 
   // Render functions.
-  const renderedNumber = number && (
-    <Typography sx={numberStyles} variant="h3" component="h3">
-      {number}
+  const stats = text && (
+    <Typography sx={textStyles} variant="h3" component="h3">
+      {number && <strong>{number}</strong>} {text}
     </Typography>
-  );
-
-  const renderedDescription = text && (
-    <Typography sx={textStyles} variant="h3">{text}</Typography>
   );
 
   return (
@@ -50,8 +40,7 @@ export default function StatWithIcon({
           {React.cloneElement(icon, { fontSize: 'inherit' })}
         </div>
       )}
-      {renderedNumber}
-      {renderedDescription}
+      {stats}
     </Stack>
   );
 }
