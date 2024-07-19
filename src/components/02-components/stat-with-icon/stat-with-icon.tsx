@@ -1,4 +1,4 @@
-import { Typography, useTheme } from '@mui/material';
+import { Typography, Stack, useTheme } from '@mui/material';
 import React from 'react';
 
 export type StatWithIconProps = {
@@ -14,21 +14,10 @@ export default function StatWithIcon({
 }: StatWithIconProps) {
   const theme = useTheme();
 
-  // Styles.
-  const inlineStyles = {
-    display: 'inline-block',
-    marginRight: theme.spacing(6),
-  };
-
-  const containerStyles = {
-    display: 'flex',
-    alignItems: 'center', // Vertically center items within the row
-  };
-
   const iconStyles = {
     color: theme.palette.primary.main,
     fontSize: '2.5rem',
-    marginRight: theme.spacing(2),
+    lineHeight: '0',
   };
 
   const numberStyles = {
@@ -41,31 +30,28 @@ export default function StatWithIcon({
     color: theme.palette.primary.main,
     fontWeight: '500',
     fontSize: '1.5rem',
-    marginLeft: theme.spacing(2)
   };
 
   // Render functions.
   const renderedNumber = number && (
-    <Typography sx={numberStyles} variant="h2">
+    <Typography sx={numberStyles} variant="h3" component="h3">
       {number}
     </Typography>
   );
 
   const renderedDescription = text && (
-    <Typography sx={textStyles}>{text}</Typography>
+    <Typography sx={textStyles} variant="h3">{text}</Typography>
   );
 
   return (
-    <div style={inlineStyles}>
-      <div style={containerStyles}>
-        {icon && (
-          <div style={iconStyles}>
-            {React.cloneElement(icon, { fontSize: 'inherit' })}
-          </div>
-        )}
-        {renderedNumber}
-        {renderedDescription}
-      </div>
-    </div>
+    <Stack direction="row" spacing={1.5} alignItems="center">
+      {icon && (
+        <div style={iconStyles}>
+          {React.cloneElement(icon, { fontSize: 'inherit' })}
+        </div>
+      )}
+      {renderedNumber}
+      {renderedDescription}
+    </Stack>
   );
 }

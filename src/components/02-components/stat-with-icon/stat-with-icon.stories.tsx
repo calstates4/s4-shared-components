@@ -4,7 +4,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MoodIcon from '@mui/icons-material/Mood';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import Wrapper from '../wrapper/wrapper';
 import StatWithIcon from './stat-with-icon';
@@ -16,14 +16,10 @@ const meta: Meta<typeof StatWithIcon> = {
 
 export default meta;
 
-const boxStyles = {
-  display: 'inline',
-};
-
 export const Default: StoryObj<typeof StatWithIcon> = {
   render: () => (
     <Wrapper>
-      <Box sx={boxStyles}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 4, md: 6 }}>
         <StatWithIcon
           icon={<LocationCityIcon />}
           number='4'
@@ -44,7 +40,7 @@ export const Default: StoryObj<typeof StatWithIcon> = {
           number='240'
           text='Hours approved'
         />
-      </Box>
+      </Stack>
     </Wrapper>
   ),
 };

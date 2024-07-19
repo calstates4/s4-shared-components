@@ -203,6 +203,7 @@ export default function Context({ level1, level2, formSubmit }: ContextProps) {
   return (
     <Box>
       <Button
+        aria-label="Toggle mobile context"
         sx={{
           borderRadius: 0,
           height: 56,

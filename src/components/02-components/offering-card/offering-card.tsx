@@ -167,10 +167,10 @@ export default function OfferingCard({
             fontWeight: 700,
           }}
         >
-          More Details
+          More Offering Details
         </Button>
         <Button sx={{ fontWeight: 700 }} href={editUrl}>
-          Edit
+          Edit Offering
         </Button>
       </Box>
     </Paper>

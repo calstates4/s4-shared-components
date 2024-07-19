@@ -29,7 +29,7 @@ export default function CardBasicLinks({
 
   // Render functions.
   const renderedHeading = heading && (
-    <Typography sx={headingStyles} variant="h2" component="h2" color="primary.main">
+    <Typography sx={headingStyles} variant="h3" component="h3" color="primary.main">
       {heading}
     </Typography>
   );
