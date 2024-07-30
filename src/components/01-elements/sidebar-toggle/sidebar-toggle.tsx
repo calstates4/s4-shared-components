@@ -23,6 +23,7 @@ export default function SidebarToggle({
       onClick={() => setSidebarOpen(!sidebarOpen)}
       color={sidebarOpen ? 'default' : 'primary'}
       size={isMobile ? 'medium' : 'large'}
+      tabIndex={2}
       sx={{
         position: 'fixed',
         bottom: theme.spacing(2),

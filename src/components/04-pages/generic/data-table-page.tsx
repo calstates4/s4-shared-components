@@ -75,6 +75,7 @@ export default function DataTablePage({
           {inviteMembers && (
             <Button
               variant="outlined"
+              aria-label="Invite Staff Members"
               component={Link}
               onClick={handleOpen}
               startIcon={
@@ -96,6 +97,7 @@ export default function DataTablePage({
           {addUrl && addTitle && (
             <Button
               variant="outlined"
+              aria-label={addTitle}
               component={Link}
               href={addUrl}
               startIcon={

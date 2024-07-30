@@ -169,7 +169,7 @@ export default function OfferingCard({
         >
           More Offering Details
         </Button>
-        <Button sx={{ fontWeight: 700 }} href={editUrl}>
+        <Button sx={{ fontWeight: 700 }} href={editUrl} variant="contained">
           Edit Offering
         </Button>
       </Box>

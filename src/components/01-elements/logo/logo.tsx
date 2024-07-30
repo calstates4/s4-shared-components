@@ -5,6 +5,7 @@ export default function Logo() {
       height="50"
       viewBox="0 0 50 50"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <image
         width={50}
