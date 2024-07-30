@@ -198,7 +198,8 @@ export const staffTableColumns = [
         {params.row.showbtn &&
           <Button
             component={Link}
-            href={'/organization/staff/edit/' + params.row.id}
+            href={'#/organization/staff/edit/' + params.row.id}
+            aria-label={"Manage Department of " + params.row.col1 + " " + params.row.col2}
             disabled={false}
             sx={{
               flexShrink: 0,
@@ -224,7 +225,8 @@ export const staffTableColumns = [
         {params.row.showbtn &&
           <Button
             component={Link}
-            href={'/organization/role/edit/' + params.row.id}
+            href={'#/organization/role/edit/' + params.row.id}
+            aria-label={"Manage Roles of " + params.row.col1 + " " + params.row.col2}
             disabled={false}
             sx={{
               flexShrink: 0,
@@ -249,7 +251,8 @@ export const staffTableColumns = [
         {params.row.showbtn &&
           <Button
             component={Link}
-            href={'/organization/staff/archive/' + params.row.id}
+            href={'#/organization/staff/archive/' + params.row.id}
+            aria-label={"Archive " + params.row.col1 + " " + params.row.col2}
             disabled={false}
             sx={{
               flexShrink: 0,

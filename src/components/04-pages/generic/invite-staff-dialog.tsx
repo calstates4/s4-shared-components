@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -7,6 +6,7 @@ import {
   TextField,
   Button,
   useTheme,
+  Stack,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import {ExposedFormProps} from "~/components/02-components/form/form";
@@ -25,12 +25,18 @@ export default function InviteStaffDialog({
   const theme = useTheme();
 
   const innerForm = (
-    <>
+    <Stack
+      direction={{ xs: 'column', sm: 'row' }}
+      spacing={2}
+      alignItems="center"
+      marginTop={2}
+    >
       <input type="hidden" name="action" value="invite" />
       <input type="hidden" name="orgId" value={id} />
       <TextField
         autoFocus
-        margin="dense"
+        tabIndex={0}
+        aria-label="email"
         id="email"
         label="Email Address"
         type="text"
@@ -39,6 +45,7 @@ export default function InviteStaffDialog({
         name="emails"
       />
       <Button
+        aria-label="Invite"
         type="submit"
         variant="contained"
         sx={{
@@ -47,19 +54,19 @@ export default function InviteStaffDialog({
       >
         Invite
       </Button>
-    </>
+    </Stack>
   );
 
   const formDialog = (
-    <form>{innerForm}</form>
+    <form style={{width: '100%'}}>{innerForm}</form>
   );
 
   return (
     <Dialog
       open={open}
       onClose={handleClose}
+      id="modal-invite-staff"
       aria-labelledby="modal-invite-staff"
-      aria-describedby="modal-invite-staff"
     >
       <DialogTitle
         id="modal-title"
@@ -73,6 +80,8 @@ export default function InviteStaffDialog({
         Write the email of the staff member you want to invite.
       </DialogTitle>
       <CloseIcon
+        aria-label="Close"
+        tabIndex={0}
         onClick={handleClose}
         sx={{
           position: 'absolute',

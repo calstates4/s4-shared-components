@@ -74,7 +74,7 @@ export default function PageLayout({
         <Button
           variant="contained"
           sx={skipButtonStyle}
-          tabIndex={0}
+          tabIndex={1}
           onClick={handleSkipContent}
           aria-label="Skip to main content"
         >
