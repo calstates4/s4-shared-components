@@ -117,7 +117,9 @@ export default function OfferingList({
     <>
       {categoryFilterValues && currentFilters && (
         <FormControl size="small" sx={formItemStyles}>
-          <InputLabel id="category-select-label">Category</InputLabel>
+          <InputLabel id="category-select-label" htmlFor="category-select">
+            Category
+          </InputLabel>
           <Select
             labelId="category-select-label"
             id="category-select"
@@ -136,7 +138,9 @@ export default function OfferingList({
       )}
       {departmentFilterValues && currentFilters && (
         <FormControl size="small" sx={formItemStyles}>
-          <InputLabel id="department-select-label">Department</InputLabel>
+          <InputLabel id="department-select-label" htmlFor="department-select">
+            Department
+          </InputLabel>
           <Select
             labelId="department-select-label"
             id="department-select"
