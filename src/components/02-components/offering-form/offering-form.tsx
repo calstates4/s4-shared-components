@@ -290,6 +290,10 @@ export default function OfferingForm({
   const formFieldStyles = {
     mb: theme.spacing(3),
     display: 'block',
+
+    '& .MuiFormLabel-root:not(.Mui-focused)': {
+      color: '#000000CC',
+    }
   };
 
   const rightSpace = {
@@ -331,6 +335,71 @@ export default function OfferingForm({
     setRequiresApproval(event.target.checked);
   }
 
+  const [errors, setErrors] = useState({
+    offeringName: false,
+    offeringDescription: false,
+    offeringActivities: false,
+    offeringPrimaryContact: false,
+    offeringTimeApprovers: false,
+    offeringFormSigners: false,
+    offeringApplicationInstructions: false,
+    offeringStartDate: false,
+    offeringEndDate: false,
+    offeringTimeAmount: false,
+    offeringPayAmount: false,
+    offeringFocusPopulations: false,
+    offeringFocusAreas: false,
+  });
+
+
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const offeringNameValue = (document.getElementById('offering-name') as HTMLInputElement)?.value;
+    const offeringDescriptionValue = (document.getElementById('offering-description') as HTMLInputElement)?.value;
+    // Extract chips for Activities
+    const offeringActivitiesValues = Array.from(
+      document.querySelectorAll('#offering-activities-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
+    const offeringPrimaryContactValue = (document.getElementById('offering-primary-contact') as HTMLInputElement)?.value;
+    const offeringTimeApproversValue = (document.getElementById('offering-time-approvers') as HTMLInputElement)?.value;
+    const offeringFormSignersValue = (document.getElementById('offering-form-signers') as HTMLInputElement)?.value;
+    const offeringApplicationInstructionsValue = (document.getElementById('offering-application-instructions') as HTMLInputElement)?.value;
+    const startDateValue = (document.getElementById('offering-start-date') as HTMLInputElement)?.value;
+    const offeringEndDateValue = (document.getElementById('offering-end-date') as HTMLInputElement)?.value;
+    const offeringTimeAmountValue = (document.getElementById('offering-time-amount') as HTMLInputElement)?.value;
+    const offeringPayAmountValue = (document.getElementById('offering-pay-amount') as HTMLInputElement)?.value;
+    // Extract chips for Focus Population(s)
+    const offeringFocusPopulationsValues = Array.from(
+      document.querySelectorAll('#offering-focus-populations-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
+    // Extract chips for Focus Area(s)
+    const offeringFocusAreasValues = Array.from(
+      document.querySelectorAll('#offering-focus-areas-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
+
+    const errors = {
+      offeringName: offeringNameValue === '',
+      offeringDescription: offeringDescriptionValue === '',
+      offeringActivities: offeringActivitiesValues.length === 0,
+      offeringPrimaryContact: offeringPrimaryContactValue === '',
+      offeringTimeApprovers: offeringTimeApproversValue === '',
+      offeringFormSigners: offeringFormSignersValue === '',
+      offeringApplicationInstructions: offeringApplicationInstructionsValue === '',
+      offeringStartDate: startDateValue === '',
+      offeringEndDate: offeringEndDateValue === '',
+      offeringTimeAmount: offeringTimeAmountValue === '',
+      offeringPayAmount: offeringPayAmountValue === '',
+      offeringFocusPopulations: offeringFocusPopulationsValues.length === 0,
+      offeringFocusAreas: offeringFocusAreasValues.length === 0,
+    };
+
+    setErrors(errors);
+
+    if (Object.values(errors).some((error) => error)) {
+      (event.target as HTMLButtonElement).reportValidity(); // Display tooltips and prevent form submission
+    }
+  };
+
+
   // Render.
   const formInner = (
     <>
@@ -340,7 +409,7 @@ export default function OfferingForm({
         tabPanelClassName="offering-form-panel"
         ref={tabRef}
       >
-        <div title="Offering Details">
+        <div aria-label="Offering Details">
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>General Information</legend>
             <TextField
@@ -351,10 +420,10 @@ export default function OfferingForm({
               name="offering-name"
               label="Offering Title"
               defaultValue={defaultName ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
               sx={formFieldStyles}
+              onChange={event => setErrors({...errors, offeringName: event.target.value === ''})}
+              error={errors.offeringName}
+              helperText={errors.offeringName ? "This field is required" : ""}
             />
             <TextField
               required
@@ -365,10 +434,10 @@ export default function OfferingForm({
               name="offering-description"
               label="Offering Description"
               defaultValue={defaultDescription ?? undefined}
-              InputLabelProps={{
-                shrink: true,
-              }}
               sx={formFieldStyles}
+              onChange={event => setErrors({...errors, offeringDescription: event.target.value === ''})}
+              error={errors.offeringDescription}
+              helperText={errors.offeringDescription ? "This field is required" : ""}
             />
             <TextField
               select
@@ -456,6 +525,8 @@ export default function OfferingForm({
                 options={activities}
                 selected={defaultActivities}
                 sx={formFieldStyles}
+                error={errors.offeringActivities}
+                onChange={event => setErrors({...errors, offeringActivities: (event.target as HTMLInputElement).value.length === 0})}
               />
             )}
             <TextField
@@ -488,6 +559,9 @@ export default function OfferingForm({
                 options={primaryContacts}
                 selected={defaultPrimaryContact}
                 sx={formFieldStyles}
+                error={errors.offeringPrimaryContact}
+                helptext={errors.offeringPrimaryContact ? "This field is required" : ""}
+                onChange={event => setErrors({...errors, offeringPrimaryContact: (event.target as HTMLInputElement).value.length === 0})}
               />
             )}
             {timeApprovers && (
@@ -500,6 +574,9 @@ export default function OfferingForm({
                 options={timeApprovers}
                 selected={defaultTimeApprovers}
                 sx={formFieldStyles}
+                error={errors.offeringTimeApprovers}
+                helptext={errors.offeringTimeApprovers ? "This field is required" : ""}
+                onChange={event => setErrors({...errors, offeringTimeApprovers: (event.target as HTMLInputElement).value.length === 0})}
               />
             )}
             {formSigners && (
@@ -512,6 +589,9 @@ export default function OfferingForm({
                 options={formSigners}
                 selected={defaultFormSigners}
                 sx={formFieldStyles}
+                error={errors.offeringFormSigners}
+                helptext={errors.offeringFormSigners ? "This field is required" : ""}
+                onChange={event => setErrors({...errors, offeringFormSigners: (event.target as HTMLInputElement).value.length === 0})}
               />
             )}
             {observers && (
@@ -577,6 +657,7 @@ export default function OfferingForm({
                         <Button
                           onClick={() => removeElement(idx)}
                           variant={'text'}
+                          aria-label="Remove requirement button"
                         >
                           <DeleteOutlinedIcon sx={{ color: 'primary.dark' }} />
                         </Button>
@@ -781,10 +862,10 @@ export default function OfferingForm({
                 name="offering-application-instructions"
                 label="Application Instructions"
                 defaultValue={defaultApplicationInstructions ?? undefined}
-                InputLabelProps={{
-                  shrink: true,
-                }}
                 sx={formFieldStyles}
+                error={errors.offeringApplicationInstructions}
+                helperText={errors.offeringApplicationInstructions ? "This field is required" : ""}
+                onChange={event => setErrors({...errors, offeringApplicationInstructions: event.target.value === ''})}
               />
             )}
 
@@ -812,7 +893,7 @@ export default function OfferingForm({
             />
           </Box>
         </div>
-        <div title="Time & Compensation">
+        <div aria-label="Time & Compensation">
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Offering Availability</legend>
             <Box component="fieldset" sx={fieldSetStyles} style={{display: 'flex', marginBottom: '1rem'}}>
@@ -832,6 +913,8 @@ export default function OfferingForm({
                   pattern: 'd{4}-d{2}-d{2}',
                 }}
                 sx={[formFieldStyles, rightSpace]}
+                error={errors.offeringStartDate}
+                helperText={errors.offeringStartDate ? "This field is required" : ""}
               />
 
               {startDate && (
@@ -850,6 +933,8 @@ export default function OfferingForm({
                     pattern: 'd{4}-d{2}-d{2}',
                   }}
                   sx={formFieldStyles}
+                  error={errors.offeringEndDate}
+                  helperText={errors.offeringEndDate ? "This field is required" : ""}
                 />
               )}
             </Box>
@@ -874,6 +959,9 @@ export default function OfferingForm({
                   min: 1,
                 }}
                 sx={[formFieldStyles, rightSpace]}
+                error={errors.offeringTimeAmount}
+                helperText={errors.offeringTimeAmount ? "This field is required" : ""}
+                onChange={event => setErrors({...errors, offeringTimeAmount: event.target.value === ''})}
               />
               <TextField
                 select
@@ -983,14 +1071,17 @@ export default function OfferingForm({
                 min: 1,
               }}
               sx={formFieldStyles}
+              error={errors.offeringPayAmount}
+              helperText={errors.offeringPayAmount ? "This field is required" : ""}
+              onChange={event => setErrors({...errors, offeringPayAmount: event.target.value === ''})}
             />
           </Box>
         </div>
-        <div title="Additional Information">
+        <div aria-label="Additional Information">
           <FormControl fullWidth>
             <InputLabel
               id="org-form-addressptype"
-              htmlFor="org-form-addressptype"
+              htmlFor="offering-form-locations-type"
             >
               Location type
             </InputLabel>
@@ -1029,6 +1120,8 @@ export default function OfferingForm({
                 selected={defaultFocusPopulations}
                 sx={formFieldStyles}
                 helptext="Please indicate primary population/clientele your organization will serve either directly or indirectly as part of this offering. If you're unsure, select 'Non-specific/any population' (select all that apply)."
+                error={errors.offeringFocusPopulations}
+                onChange={event => setErrors({...errors, offeringFocusPopulations: (event.target as HTMLInputElement).value.length === 0 })}
               />
             )}
 
@@ -1043,6 +1136,8 @@ export default function OfferingForm({
                 selected={defaultFocusAreas}
                 sx={formFieldStyles}
                 helptext="Please identify the general focus area(s) pertaining to this offering (select all that apply)."
+                error={errors.offeringFocusAreas}
+                onChange={event => setErrors({...errors, offeringFocusAreas: (event.target as HTMLInputElement).value.length === 0 })}
               />
             )}
 
@@ -1067,9 +1162,10 @@ export default function OfferingForm({
           variant="contained"
           type="submit"
           sx={{ flexShrink: 0 }}
-          onClick={(event) =>
-            onClickHandler(event, 'offering-form-panel', tabRef)
-          }
+          onClick={(event) => {
+            handleSubmit(event);
+            onClickHandler(event, 'offering-form-panel', tabRef);
+          }}
         >
           {isEdit ? 'Update' : 'Create'} offering
         </Button>
@@ -1108,7 +1204,7 @@ export default function OfferingForm({
     <article>
       <Breadcrumbs items={breadcrumb} />
       <Typography variant="h1" sx={titleStyles}>
-        {isEdit ? 'Edit' : 'Create an'} offering
+        {isEdit ? 'Edit' : 'Add an'} offering
       </Typography>
       <Paper sx={paperStyles}>{form}</Paper>
     </article>

@@ -126,7 +126,7 @@ export default function UserProfileForm({
   }
 
   const tabs = [
-    <div title="Personal Information">
+    <div aria-label="Personal Information">
       <Typography variant="h2" mb={4}>
         Edit your personal information
       </Typography>
@@ -180,7 +180,7 @@ export default function UserProfileForm({
 
   if (type === 'partner') {
     tabs.unshift(
-      <div title="Email and Password">
+      <div aria-label="Email and Password">
         <Typography variant="h2" mb={4}>
           Edit your username and password
         </Typography>
@@ -217,7 +217,7 @@ export default function UserProfileForm({
 
   if (type === 'student') {
     tabs.push(
-      <div title="Primary Emergency Contact">
+      <div aria-label="Primary Emergency Contact">
         <Typography variant="h2" mb={4}>
           Edit your primary emergency contact
         </Typography>
@@ -228,7 +228,7 @@ export default function UserProfileForm({
       </div>,
     );
     tabs.push(
-      <div title="Secondary Emergency Contact">
+      <div aria-label="Secondary Emergency Contact">
         <Typography variant="h2" mb={4}>
           Edit your secondary emergency contact
         </Typography>

@@ -51,6 +51,10 @@ export default function StudentExperienceFormStep2({
     mb: theme.spacing(1),
     display: 'block',
     width: '300px',
+
+    '& .MuiFormLabel-root:not(.Mui-focused)': {
+      color: '#000000CC',
+    }
   };
 
   const definitionListStyles = {
