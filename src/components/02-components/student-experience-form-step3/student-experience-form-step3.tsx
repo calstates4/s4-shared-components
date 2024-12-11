@@ -96,6 +96,7 @@ export default function StudentExperienceFormStep3({
                 value="2"
                 control={<Radio />}
                 label="I will create the experience but I am unsure about these site requirements and would like to have someone contact me."
+                sx={{ display: 'none' }} //Remove later: since the staff member contact process is not yet implemented this option is hidden
               />
               <FormControlLabel
                 value="3"

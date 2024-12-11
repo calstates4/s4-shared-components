@@ -28,7 +28,7 @@ export default function StudentExperienceFormStep4({
 }: StudentExperienceFormStep4Props) {
   const theme = useTheme();
 
-  const approvalStatus = approvalState ? 'approved' : 'reviewing';
+  const approvalStatus = approvalState ? 'reviewing' : 'approved';
 
   const approvalStates: Record<
     string,
@@ -93,7 +93,7 @@ export default function StudentExperienceFormStep4({
         type="submit"
         variant="contained"
         sx={{ mr: 1, float: 'right' }}
-        disabled={approvalState ? false : true}
+        disabled={approvalState ? true : false} // disabled if approvalState is true
       >
         Continue
       </Button>

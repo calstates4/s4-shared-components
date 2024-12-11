@@ -30,6 +30,6 @@ export const AddStudentExperienceFormStep4: StoryObj<typeof StudentExperienceFor
     opportunityCourseName: 'Name of the course',
     stepsBar: stepsBar,
     healthSafetySelected: '1',
-    approvalState: true, // true for approved, false for reviewing
+    approvalState: true, // true for reviewing, false for approved
   },
 };
