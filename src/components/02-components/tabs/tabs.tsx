@@ -16,7 +16,7 @@ export type RefHandler = {
 type TabsProps = {
   name: string;
   id: string;
-  children?: ReactElement<{ title: string }>[];
+  children?: ReactElement<{ 'aria-label': string }>[];
   tabPanelClassName?: string;
   activeTab?: number;
 };
@@ -78,9 +78,9 @@ const Tabs = forwardRef<RefHandler, TabsProps>(function Tabs(
   const renderedTabPanels: ReactNode[] = [];
 
   Children.forEach(children, (child, index) => {
-    if (child && child.props.title) {
+    if (child && child.props['aria-label']) {
       renderedTabs.push(
-        <Tab key={index} label={child.props.title} tabIndex={0} {...a11yProps(id, index)} />,
+        <Tab key={index} label={child.props['aria-label']} tabIndex={0} {...a11yProps(id, index)} />,
       );
       renderedTabPanels.push(
         <TabPanel

@@ -19,6 +19,8 @@ type AutocompleteFieldProps = {
   required?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sx?: any;
+  error?: boolean;
+  onChange?: (event: SyntheticEvent, value: AutocompleteOptionType | AutocompleteOptionType[] | null) => void;
 };
 
 export default function AutocompleteField({
@@ -31,6 +33,8 @@ export default function AutocompleteField({
   selected = null,
   required = false,
   sx,
+  error = false,
+  onChange,
 }: AutocompleteFieldProps) {
   const [value, setValue] = useState<
     AutocompleteOptionType | AutocompleteOptionType[] | null
@@ -51,6 +55,7 @@ export default function AutocompleteField({
     value: AutocompleteOptionType | AutocompleteOptionType[] | null,
   ) {
     setValue(value);
+    if (onChange) onChange(event, value);
   }
 
   const filterOP = (options:any, state:any) => {
@@ -110,6 +115,7 @@ export default function AutocompleteField({
             }}
             required={required}
             helperText={helptext}
+            error={error}
           />
           )}
         isOptionEqualToValue={(
@@ -120,6 +126,7 @@ export default function AutocompleteField({
         value={value}
         onChange={onChangeHandler}
         sx={sx}
+        noOptionsText="No options match your search"
       />
       <input type="hidden" name={name} value={valueString} />
     </>

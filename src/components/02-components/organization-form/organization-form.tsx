@@ -153,6 +153,10 @@ export default function OrganizationForm({
   const formFieldStyles = {
     mb: theme.spacing(3),
     display: 'block',
+
+    '& .MuiFormLabel-root:not(.Mui-focused)': {
+      color: '#000000CC',
+    }
   };
 
   const helpTextStyles = {
@@ -210,7 +214,7 @@ export default function OrganizationForm({
         tabPanelClassName="organization-form-panel"
         ref={tabRef}
       >
-        <div title="General Information">
+        <div aria-label="General Information">
           <Accordion defaultExpanded={true} sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >
               General Information
@@ -378,7 +382,7 @@ export default function OrganizationForm({
           </Accordion>
         </div>
 
-        <div title="Contacts">
+        <div aria-label="Contacts">
           <Accordion defaultExpanded={true} sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >General Contact Information</AccordionSummary>
             <AccordionDetails>

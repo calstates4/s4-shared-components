@@ -162,6 +162,7 @@ export default function AutocompletesDependecyFields({
         value={value}
         onChange={(event, value) => onChangeHandler(event, value, 'first')}
         sx={sx}
+        noOptionsText={'No options match your search'}
       />
       <input type="hidden" name={name} value={valueString} id={`hidden-${id}`} />
       <Autocomplete
@@ -202,6 +203,7 @@ export default function AutocompletesDependecyFields({
           return filtered;
         }}
         sx={{ mt: 2, ...sx }}
+        noOptionsText={'No options match your search'}
       />
       <input type="hidden" name={name2} value={valueString2} id={`hidden-${id2}`} />
     </>

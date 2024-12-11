@@ -85,6 +85,10 @@ export default function TimeLogForm({
     [theme.breakpoints.up('lg')]: {
       minWidth: '300px',
     },
+
+    '& .MuiFormLabel-root:not(.Mui-focused)': {
+      color: '#000000CC',
+    }
   };
 
   const startDateFieldStyles = {
