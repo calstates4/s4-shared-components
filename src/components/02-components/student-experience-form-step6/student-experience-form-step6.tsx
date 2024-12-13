@@ -7,6 +7,7 @@ export type StudentExperienceFormStep6Props = {
   programId: string;
   opportunityCourseId: string;
   healthSafetySelected: string;
+  healthSafetyComments?: string;
   stepsBar: ReactNode;
   FormElement: ElementType;
   term: string;
@@ -21,6 +22,7 @@ export default function StudentExperienceFormStep6({
   programId,
   opportunityCourseId,
   healthSafetySelected,
+  healthSafetyComments,
   stepsBar,
   FormElement,
   term,
@@ -58,6 +60,7 @@ export default function StudentExperienceFormStep6({
         value={healthSafetySelected}
       />
       <input type="hidden" name="timeCommitment" value={estimatedHours} />
+      <input type="hidden" name="healthSafetyComments" value={healthSafetyComments} />
     </>
   );
 

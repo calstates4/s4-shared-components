@@ -8,6 +8,7 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
+  TextField,
 } from '@mui/material';
 import { ElementType, useState, ReactNode } from 'react';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -24,6 +25,7 @@ export type StudentExperienceFormStep3Props = {
   errorMsg: boolean;
   healthSafetyInformation: string;
   healthSafetyInformationValue: string;
+  healthSafetyComments: string;
 };
 
 export default function StudentExperienceFormStep3({
@@ -35,6 +37,7 @@ export default function StudentExperienceFormStep3({
   errorMsg,
   healthSafetyInformation,
   healthSafetyInformationValue,
+  healthSafetyComments,
 }: StudentExperienceFormStep3Props) {
   const theme = useTheme();
 
@@ -82,7 +85,6 @@ export default function StudentExperienceFormStep3({
         <Box>
           <FormControl sx={{ my: 2 }} variant="standard">
             <RadioGroup
-              aria-labelledby="health-and-safety-information"
               name="health-and-safety-information"
               value={value}
               onChange={handleRadioChange}
@@ -96,8 +98,19 @@ export default function StudentExperienceFormStep3({
                 value="2"
                 control={<Radio />}
                 label="I will create the experience but I am unsure about these site requirements and would like to have someone contact me."
-                sx={{ display: 'none' }} //Remove later: since the staff member contact process is not yet implemented this option is hidden
               />
+              {value === "2" && (
+                <TextField
+                  multiline
+                  id="health-and-safety-comments"
+                  name="health-and-safety-comments"
+                  label="Tell us more about your concerns or questions"
+                  placeholder="Please provide any additional information or questions you have about the health and safety requirements."
+                  helperText="By clicking continue, you are agreeing to have someone contact you to discuss your concerns."
+                  sx={{ mt: theme.spacing(2), ml: theme.spacing(4), mb: theme.spacing(2) }}
+                  defaultValue={healthSafetyComments}
+                />
+              )}
               <FormControlLabel
                 value="3"
                 control={<Radio />}

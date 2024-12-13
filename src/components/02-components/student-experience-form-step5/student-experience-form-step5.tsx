@@ -21,6 +21,7 @@ export type StudentExperienceFormStep5Props = {
   term: string;
   estimatedHours: number;
   errorMsg?: boolean;
+  healthSafetyComments?: string;
 };
 
 export default function StudentExperienceFormStep5({
@@ -33,6 +34,7 @@ export default function StudentExperienceFormStep5({
   term,
   estimatedHours,
   errorMsg,
+  healthSafetyComments,
 }: StudentExperienceFormStep5Props) {
   const theme = useTheme();
 
@@ -111,6 +113,13 @@ export default function StudentExperienceFormStep5({
         value={healthSafetySelected}
       />
       <input type="hidden" name="timeCommitment" value={estimatedHours} />
+      {healthSafetyComments && (
+        <input
+          type="hidden"
+          name="healthSafetyComments"
+          value={healthSafetyComments}
+        />
+      )}
       <Button
         type="button"
         href="/create-experience"
@@ -124,7 +133,7 @@ export default function StudentExperienceFormStep5({
       </Button>
       <Button
         type="button"
-        href={`/create-experience/approval?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}&timeCommitment=${estimatedHours}`}
+        href={`/create-experience/approval?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}${healthSafetyComments ? `&comments=${healthSafetyComments}` : ''}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >
