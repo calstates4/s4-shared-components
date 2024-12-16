@@ -12,6 +12,7 @@ export type StudentExperienceFormStep4Props = {
   FormElement: ElementType;
   healthSafetySelected: string;
   approvalState: boolean;
+  healthSafetyComments?: string;
 };
 
 export default function StudentExperienceFormStep4({
@@ -25,6 +26,7 @@ export default function StudentExperienceFormStep4({
   FormElement,
   healthSafetySelected,
   approvalState,
+  healthSafetyComments,
 }: StudentExperienceFormStep4Props) {
   const theme = useTheme();
 
@@ -81,6 +83,13 @@ export default function StudentExperienceFormStep4({
         name="healthSafetyInformation"
         value={healthSafetySelected}
       />
+      {healthSafetyComments && (
+        <input
+          type="hidden"
+          name="healthSafetyComments"
+          value={healthSafetyComments}
+        />
+      )}
       <Button
         type="button"
         href="/create-experience"
@@ -99,7 +108,7 @@ export default function StudentExperienceFormStep4({
       </Button>
       <Button
         type="button"
-        href={`/create-experience/health-safety?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}`}
+        href={`/create-experience/health-safety?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}${healthSafetyComments ? `&comments=${healthSafetyComments}` : ''}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >
@@ -191,6 +200,14 @@ export default function StudentExperienceFormStep4({
             </Typography>
             <Typography variant="body1">Accepted</Typography>
           </Stack>
+          {healthSafetyComments && (
+            <Stack direction="column">
+              <Typography variant="body1" sx={{ fontWeight: '700' }}>
+                Health and Safety Comments:
+              </Typography>
+              <Typography variant="body1">{healthSafetyComments}</Typography>
+            </Stack>
+          )}
         </Box>
       </Paper>
       {form}
