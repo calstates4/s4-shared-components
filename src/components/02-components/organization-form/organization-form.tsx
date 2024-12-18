@@ -302,6 +302,7 @@ export default function OrganizationForm({
                 sx={baseFormItemStyles}
                 onChange={event => setErrors({...errors, orgSector: (event.target as HTMLInputElement).value.length === 0})}
                 error={errors.orgSector}
+                helptext={errors.orgSector ? "This field is required" : ""}
               />
               <AutocompleteField
                 required
@@ -313,6 +314,7 @@ export default function OrganizationForm({
                 sx={baseFormItemStyles}
                 onChange={event => setErrors({...errors, orgType: (event.target as HTMLInputElement).value.length === 0})}
                 error={errors.orgType}
+                helptext={errors.orgType ? "This field is required" : ""}
               />
               <Accordion defaultExpanded={false} sx={accordionStyles}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Organizational Availability</AccordionSummary>
