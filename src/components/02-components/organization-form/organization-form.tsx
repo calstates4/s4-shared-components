@@ -205,6 +205,52 @@ export default function OrganizationForm({
     setSFields([...sFields as [], newFields]);
   };
 
+  // Validate required fields
+  const [errors, setErrors] = useState({
+    orgName: false,
+    orgSector: false,
+    orgType: false,
+    orgFocusPopulation: false,
+    orgFocusArea: false,
+    orgPrimaryContactName: false,
+    orgPrimaryContactLastName: false,
+    orgContactPhone: false,
+    orgContactEmail: false,
+  });
+
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const orgNameValue = (document.getElementById('org-form-name') as HTMLInputElement)?.value;
+    const orgSectorValue = (document.getElementById('org-form-industry') as HTMLInputElement)?.value;
+    const orgTypeValue = (document.getElementById('org-form-org-type') as HTMLInputElement)?.value;
+    const orgFocusPopulationValues  = Array.from(
+      document.querySelectorAll('#org-form-focus-population-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
+    const orgFocusAreaValues = Array.from(
+      document.querySelectorAll('#org-form-focus-areas-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
+    const orgPrimaryContactNameValue = (document.getElementById('org-form-main-contact-firstname') as HTMLInputElement)?.value;
+    const orgPrimaryContactLastNameValue = (document.getElementById('org-form-main-contact-lastname') as HTMLInputElement)?.value;
+    const orgContactPhoneValue = (document.getElementById('org-form-main-contact-phone') as HTMLInputElement)?.value;
+    const orgContactEmailValue = (document.getElementById('org-form-main-contact-email') as HTMLInputElement)?.value;
+
+    const errors = {
+      orgName: orgNameValue === '',
+      orgSector: orgSectorValue === '',
+      orgType: orgTypeValue === '',
+      orgFocusPopulation: orgFocusPopulationValues.length === 0,
+      orgFocusArea: orgFocusAreaValues.length === 0,
+      orgPrimaryContactName: orgPrimaryContactNameValue === '',
+      orgPrimaryContactLastName: orgPrimaryContactLastNameValue === '',
+      orgContactPhone: orgContactPhoneValue === '',
+      orgContactEmail: orgContactEmailValue === '',
+    };
+
+    setErrors(errors);
+
+    if (Object.values(errors).some((error) => error)) {
+      (event.target as HTMLButtonElement).reportValidity(); // Display tooltips and prevent form submission
+    }
+  };
 
   const innerForm = (
     <>
@@ -230,6 +276,9 @@ export default function OrganizationForm({
                 label="Name"
                 defaultValue={name}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgName: event.target.value === ''})}
+                error={errors.orgName}
+                helperText={errors.orgName ? "This field is required" : ""}
               />
               <TextField
                 fullWidth
@@ -251,6 +300,8 @@ export default function OrganizationForm({
                 options={industryOptions}
                 selected={industry}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgSector: (event.target as HTMLInputElement).value.length === 0})}
+                error={errors.orgSector}
               />
               <AutocompleteField
                 required
@@ -260,11 +311,13 @@ export default function OrganizationForm({
                 options={organizationTypeOptions}
                 selected={orgType}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgType: (event.target as HTMLInputElement).value.length === 0})}
+                error={errors.orgType}
               />
               <Accordion defaultExpanded={false} sx={accordionStyles}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Organizational Availability</AccordionSummary>
                 <AccordionDetails>
-                  {sFields && sFields.map((item:any, idx: number) => (
+                  {sFields && sFields.map((item: ScheduleFieldsProps, idx: number) => (
                     <div
                       key={idx}
                       style={{
@@ -323,7 +376,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Focus Population and Areas</AccordionSummary>
             <AccordionDetails>
               <AutocompleteField
@@ -336,6 +389,8 @@ export default function OrganizationForm({
                 selected={focusPopulation}
                 sx={baseFormItemStyles}
                 helptext="Please indicate primary population/clientele your organization will serve either directly or indirectly as part of this offering. If you're unsure, select 'Non-specific/any population' (select all that apply)."
+                onChange={event => setErrors({...errors, orgFocusPopulation: (event.target as HTMLInputElement).value.length === 0})}
+                error={errors.orgFocusPopulation}
               />
               <AutocompleteField
                 multiple
@@ -347,6 +402,8 @@ export default function OrganizationForm({
                 selected={focusAreas}
                 sx={baseFormItemStyles}
                 helptext="Please identify the general focus area(s) pertaining to this offering (select all that apply)"
+                onChange={event => setErrors({...errors, orgFocusArea: (event.target as HTMLInputElement).value.length === 0})}
+                error={errors.orgFocusArea}
               />
               <AutocompleteField
                 multiple
@@ -501,6 +558,9 @@ export default function OrganizationForm({
                 label="First Name"
                 defaultValue={mainContactInfo?.firstName}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgPrimaryContactName: event.target.value === ''})}
+                error={errors.orgPrimaryContactName}
+                helperText={errors.orgPrimaryContactName ? "This field is required" : ""}
               />
               <TextField
                 required
@@ -511,6 +571,9 @@ export default function OrganizationForm({
                 label="Last Name"
                 defaultValue={mainContactInfo?.lastName}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgPrimaryContactLastName: event.target.value === ''})}
+                error={errors.orgPrimaryContactLastName}
+                helperText={errors.orgPrimaryContactLastName ? "This field is required" : ""}
               />
               <TextField
                 fullWidth
@@ -530,6 +593,9 @@ export default function OrganizationForm({
                 label="Phone"
                 defaultValue={mainContactInfo?.phone}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgContactPhone: event.target.value === ''})}
+                error={errors.orgContactPhone}
+                helperText={errors.orgContactPhone ? "This field is required" : ""}
               />
               <TextField
                 required
@@ -540,6 +606,9 @@ export default function OrganizationForm({
                 label="Email"
                 defaultValue={mainContactInfo?.email}
                 sx={baseFormItemStyles}
+                onChange={event => setErrors({...errors, orgContactEmail: event.target.value === ''})}
+                error={errors.orgContactEmail}
+                helperText={errors.orgContactEmail ? "This field is required" : ""}
               />
               {id && (
                 <AutocompleteField
@@ -674,9 +743,10 @@ export default function OrganizationForm({
         <Button
           type="submit"
           variant="contained"
-          onClick={(event) =>
+          onClick={(event) => {
+            handleSubmit(event);
             onClickHandler(event, 'organization-form-panel', tabRef)
-          }
+          }}
         >
           {isEdit ? 'Update' : 'Create'} Organization
         </Button>
