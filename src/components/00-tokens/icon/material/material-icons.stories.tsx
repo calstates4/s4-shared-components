@@ -26,7 +26,8 @@ const MaterialIconsData = {
     'Schedule',
     'SwitchAccount',
     'PeopleAlt',
-    'ErrorOutline'
+    'ErrorOutline',
+    'CheckCircleOutline',
   ],
 }
 
