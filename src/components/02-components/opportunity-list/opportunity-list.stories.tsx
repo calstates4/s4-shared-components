@@ -63,7 +63,7 @@ export const Default: StoryObj<typeof OpportunityList> = {
         url: '#',
       },
     ],
-    url: '#http://localhost:6006/',
+    url: 'http://localhost:6006/',
     children: opportunities,
     listView: true,
     totalItems: 30,
