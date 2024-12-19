@@ -26,7 +26,7 @@ export type OpportunityCardProps = {
   description?: string;
   cardSelected?: boolean;
   requirements?: string;
-  approvalState: boolean;
+  approvalState?: boolean;
 };
 
 export default function OpportunityCard({
@@ -168,20 +168,23 @@ export default function OpportunityCard({
               {termPeriod && (
                 <Typography sx={subtitleStyles}>{termPeriod}</Typography>
               )}
-              <Typography
-                sx={{
-                  ...statusStyles,
-                  backgroundColor: approvalStates[approvalStatus].backgroundColor,
-                }}
-                component="span"
-              >
-                {approvalStates[approvalStatus].label === 'reviewing' ? (
-                  <div className='statusStrutureStyles'>
-                    <ErrorOutlineIcon />
-                    <p>Pending approval</p>
-                  </div>
-                ) : ''}
-              </Typography>
+
+              {approvalState && (
+                <Typography
+                  sx={{
+                    ...statusStyles,
+                    backgroundColor: approvalStates[approvalStatus].backgroundColor,
+                  }}
+                  component="span"
+                >
+                  {approvalStates[approvalStatus].label === 'reviewing' ? (
+                    <div className='statusStrutureStyles'>
+                      <ErrorOutlineIcon />
+                      <p>Pending approval</p>
+                    </div>
+                  ) : ''}
+                </Typography>
+              )}
             </Box>
           </Box>
         </AccordionSummary>
