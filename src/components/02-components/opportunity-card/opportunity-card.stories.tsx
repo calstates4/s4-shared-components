@@ -29,7 +29,7 @@ export const Default: StoryObj<typeof OpportunityCard> = {
     termPeriod: 'Fall 2023',
     program: 'Service Learning',
     description,
-    approvalState: false,
+    approvalState: true,
   },
 };
 

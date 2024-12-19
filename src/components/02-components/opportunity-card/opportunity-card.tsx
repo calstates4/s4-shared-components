@@ -69,7 +69,7 @@ export default function OpportunityCard({
   const statusStyles = {
     borderRadius: theme.spacing(0.5),
     display: 'inline-flex',
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     fontSize: '0.875rem',
     fontWeight: '700',
     px: theme.spacing(1),
@@ -82,7 +82,17 @@ export default function OpportunityCard({
     'svg': {
       maxWidth: '20px',
       height: 'auto',
-    }
+    },
+
+    '.statusStrutureStyles': {
+      display: 'flex',
+      gap: '5px',
+
+      '& p': {
+        margin: 0,
+        padding: 0,
+      }
+    },
   };
 
   const accordionSummaryStyles = {
@@ -165,8 +175,17 @@ export default function OpportunityCard({
                 }}
                 component="span"
               >
-                {}
-                {approvalStates[approvalStatus].label == 'reviewing' ? <ErrorOutlineIcon /> : <CheckCircleOutline />}
+                {approvalStates[approvalStatus].label === 'reviewing' ? (
+                  <div className='statusStrutureStyles'>
+                    <ErrorOutlineIcon />
+                    <p>Pending approval</p>
+                  </div>
+                ) : (
+                  <div className='statusStrutureStyles'>
+                    <CheckCircleOutline />
+                    <p>Approved</p>
+                  </div>
+                )}
               </Typography>
             </Box>
           </Box>
