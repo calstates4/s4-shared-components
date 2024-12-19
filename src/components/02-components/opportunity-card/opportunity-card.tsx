@@ -57,7 +57,7 @@ export default function OpportunityCard({
   > = {
     approved: {
       label: 'approved',
-      backgroundColor: 'success.dark',
+      backgroundColor: '',
     },
     reviewing: {
       label: 'reviewing',
@@ -180,12 +180,7 @@ export default function OpportunityCard({
                     <ErrorOutlineIcon />
                     <p>Pending approval</p>
                   </div>
-                ) : (
-                  <div className='statusStrutureStyles'>
-                    <CheckCircleOutline />
-                    <p>Approved</p>
-                  </div>
-                )}
+                ) : ''}
               </Typography>
             </Box>
           </Box>
