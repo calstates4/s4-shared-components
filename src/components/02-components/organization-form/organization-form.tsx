@@ -218,6 +218,9 @@ export default function OrganizationForm({
     orgContactEmail: false,
   });
 
+  // Check if form has errors to expand accordion panels
+  const [accordionExpanded, setAccordionExpanded] = useState(false);
+
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const orgNameValue = (document.getElementById('org-form-name') as HTMLInputElement)?.value;
     const orgSectorValue = (document.getElementById('org-form-industry') as HTMLInputElement)?.value;
@@ -249,6 +252,7 @@ export default function OrganizationForm({
 
     if (Object.values(errors).some((error) => error)) {
       (event.target as HTMLButtonElement).reportValidity(); // Display tooltips and prevent form submission
+      setAccordionExpanded(true); // Expand the accordion when there are errors
     }
   };
 
@@ -378,7 +382,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion sx={accordionStyles}>
+          <Accordion sx={accordionStyles} expanded={accordionExpanded} onChange={() => setAccordionExpanded(!accordionExpanded)}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Focus Population and Areas</AccordionSummary>
             <AccordionDetails>
               <AutocompleteField
@@ -419,7 +423,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Default Offering Settings</AccordionSummary>
             <AccordionDetails>
               <Typography sx={formFieldStyles}>
@@ -442,7 +446,7 @@ export default function OrganizationForm({
         </div>
 
         <div aria-label="Contacts">
-          <Accordion defaultExpanded={true} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >General Contact Information</AccordionSummary>
             <AccordionDetails>
               <FormControl fullWidth>
@@ -548,7 +552,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles} expanded={accordionExpanded} onChange={() => setAccordionExpanded(!accordionExpanded)}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Primary Contact</AccordionSummary>
             <AccordionDetails>
               <TextField
