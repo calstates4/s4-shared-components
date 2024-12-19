@@ -9,6 +9,8 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckCircleOutline from '@mui/icons-material/CheckCircleOutline';
 import Link from '../../01-elements/link/link';
 
 export type OpportunityCardProps = {
@@ -24,6 +26,7 @@ export type OpportunityCardProps = {
   description?: string;
   cardSelected?: boolean;
   requirements?: string;
+  approvalState: boolean;
 };
 
 export default function OpportunityCard({
@@ -39,10 +42,59 @@ export default function OpportunityCard({
   description,
   cardSelected,
   requirements,
+  approvalState,
 }: OpportunityCardProps) {
   const theme = useTheme();
 
+  const approvalStatus = approvalState ? 'reviewing' : 'approved';
+
+  const approvalStates: Record<
+    string,
+    {
+      label: string;
+      backgroundColor: string;
+    }
+  > = {
+    approved: {
+      label: 'approved',
+      backgroundColor: 'success.dark',
+    },
+    reviewing: {
+      label: 'reviewing',
+      backgroundColor: 'warning.main',
+    },
+  };
+
   // Styles.
+  const statusStyles = {
+    borderRadius: theme.spacing(0.5),
+    display: 'inline-flex',
+    textTransform: 'capitalize',
+    fontSize: '0.875rem',
+    fontWeight: '700',
+    px: theme.spacing(1),
+    py: theme.spacing(0.5),
+    mt: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      mt: 0,
+    },
+
+    'svg': {
+      maxWidth: '20px',
+      height: 'auto',
+    },
+
+    '.statusStrutureStyles': {
+      display: 'flex',
+      gap: '5px',
+
+      '& p': {
+        margin: 0,
+        padding: 0,
+      }
+    },
+  };
+
   const accordionSummaryStyles = {
     '& .MuiAccordionSummary-expandIconWrapper': {
       mt: theme.spacing(1.5),
@@ -116,6 +168,25 @@ export default function OpportunityCard({
               {termPeriod && (
                 <Typography sx={subtitleStyles}>{termPeriod}</Typography>
               )}
+              <Typography
+                sx={{
+                  ...statusStyles,
+                  backgroundColor: approvalStates[approvalStatus].backgroundColor,
+                }}
+                component="span"
+              >
+                {approvalStates[approvalStatus].label === 'reviewing' ? (
+                  <div className='statusStrutureStyles'>
+                    <ErrorOutlineIcon />
+                    <p>Pending approval</p>
+                  </div>
+                ) : (
+                  <div className='statusStrutureStyles'>
+                    <CheckCircleOutline />
+                    <p>Approved</p>
+                  </div>
+                )}
+              </Typography>
             </Box>
           </Box>
         </AccordionSummary>
