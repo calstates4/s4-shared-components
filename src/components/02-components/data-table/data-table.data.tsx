@@ -677,7 +677,7 @@ export const ApproveExperienceTableColumns = [
   { field: 'opportunityProgram', headerName: 'Opportunity Program', width: 150 },
   {
     field: 'col5',
-    headerName: 'Approve',
+    headerName: '',
     width: 120,
     type: 'actions',
     disableExport: true,
@@ -703,7 +703,7 @@ export const ApproveExperienceTableColumns = [
   },
   {
     field: 'col6',
-    headerName: 'Deny',
+    headerName: '',
     width: 120,
     type: 'actions',
     disableExport: true,
