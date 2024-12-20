@@ -8,13 +8,13 @@ const meta: Meta<typeof Tabs> = {
   component: Tabs,
   render: () => (
     <Tabs id="custom-tabs" name="Custom Tabs">
-      <Box title="Tab 1">
+      <Box aria-label="Tab 1">
         <h1>Tab 1</h1>
       </Box>
-      <Box title="Tab 2">
+      <Box aria-label="Tab 2">
         <h1>Tab 2</h1>
       </Box>
-      <Box title="Tab 3">
+      <Box aria-label="Tab 3">
         <h1>Tab 2</h1>
       </Box>
     </Tabs>

@@ -190,7 +190,7 @@ export default function CourseDetailsPage({
           ref={tabRef}
         >
           <div
-            title="Students"
+            aria-label="Students"
             className="tabContainer"
           >
             <Paper sx={contentContainerStyles}>
@@ -202,7 +202,7 @@ export default function CourseDetailsPage({
             </Paper>
           </div>
           <div
-            title="Experiences"
+            aria-label="Experiences"
             className="tab-container"
           >
             <Paper sx={contentContainerStyles}>
