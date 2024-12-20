@@ -121,7 +121,7 @@ export default function DataTablePage({
       {form && <ExposedForm {...form}></ExposedForm>}
       {tableData && membershipRequestedTableData ? (
         <Tabs id="staff-tabs" name="Staff Tabs">
-          <Box title="Staff members">
+          <Box aria-label="Staff members">
             <DataTable
               rows={tableData.rows}
               columns={tableData.columns}
@@ -130,7 +130,7 @@ export default function DataTablePage({
               hideCols={tableData.hideCols}
             />
           </Box>
-          <Box title="Memberships Requests">
+          <Box aria-label="Memberships Requests">
             <DataTable
               rows={membershipRequestedTableData.rows}
               columns={membershipRequestedTableData.columns}

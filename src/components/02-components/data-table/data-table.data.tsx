@@ -667,3 +667,85 @@ export const membershipsRequestsTableRows = [
     email: 'csmit@test.com',
   }
 ];
+
+export const ApproveExperienceTableColumns = [
+  { field: 'experienceId', headerName: 'ID', width: 80 },
+  { field: 'offeringName', headerName: 'Offering Name', width: 120 },
+  { field: 'offeringDepartment', headerName: 'Offering Department', width: 150 },
+  { field: 'studentName', headerName: 'Student Name', width: 150 },
+  { field: 'university', headerName: 'University', width: 150 },
+  { field: 'opportunityProgram', headerName: 'Opportunity Program', width: 150 },
+  {
+    field: 'col5',
+    headerName: '',
+    width: 120,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'#/organization/experience/approve/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid',
+            whiteSpace: 'nowrap',
+            margin: '4px 0',
+            color: 'green',
+          }}
+        >
+          Approve
+        </Button>
+      </strong>
+    ),
+  },
+  {
+    field: 'col6',
+    headerName: '',
+    width: 120,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <strong>
+        <Button
+          component={Link}
+          href={'#/organization/experience/deny/' + params.row.id}
+          disabled={false}
+          sx={{
+            flexShrink: 0,
+            fontWeight: 700,
+            border: '1px solid ',
+            whiteSpace: 'nowrap',
+            margin: '4px 0',
+            color: 'red',
+          }}
+        >
+          Deny
+        </Button>
+      </strong>
+    ),
+  },
+];
+
+export const ApproveExperienceTableRows = [
+  {
+    id: 1,
+    experienceId: '1',
+    offeringName: 'Offering 1',
+    offeringDepartment: 'Department 1',
+    studentName: 'Emily Parker',
+    university: 'CSU',
+    opportunityProgram: 'Blood Drive Admin Assistant',
+  },
+  {
+    id: 2,
+    experienceId: '2',
+    offeringName: 'Offering 2',
+    offeringDepartment: 'Department 2',
+    studentName: 'Carlos Smith',
+    university: 'Channel Islands',
+    opportunityProgram: 'Prison Social Worker',
+  }
+];
