@@ -685,7 +685,7 @@ export const ApproveExperienceTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={'#/organization/experience/approve/' + params.row.id}
+          href={'/organization/experience/approve/' + params.row.id}
           disabled={false}
           sx={{
             flexShrink: 0,
@@ -711,7 +711,7 @@ export const ApproveExperienceTableColumns = [
       <strong>
         <Button
           component={Link}
-          href={'#/organization/experience/deny/' + params.row.id}
+          href={'/organization/experience/deny/' + params.row.id}
           disabled={false}
           sx={{
             flexShrink: 0,
