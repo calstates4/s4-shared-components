@@ -265,6 +265,7 @@ export default function OrganizationForm({
         ref={tabRef}
       >
         <div aria-label="General Information">
+          {/* TODO: Based on CSU-533 S4 needs to discuss if they want to keep defaultExpanded or use expanded prop like line 386 */}
           <Accordion defaultExpanded={true} sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >
               General Information
