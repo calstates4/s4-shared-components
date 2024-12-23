@@ -15,10 +15,6 @@ export type ApproveExperiencePageProps = {
   }[];
   title: string;
   tableData: DataTableProps;
-  membershipRequestedTableData?: DataTableProps;
-  addUrl?: string;
-  addTitle?: string;
-  id?: string;
 };
 
 export default function ApproveExperiencePage({
