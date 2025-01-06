@@ -10,7 +10,7 @@ export type OpportunityPageProps = {
   }[];
   title: string;
   description: string;
-  selectURL: string;
+  selectURL?: string;
   address: string;
   type: string;
   timeCommitment: string;
@@ -136,14 +136,16 @@ export default function OpportunityPage({
               Opportunity Summary
             </Typography>
             <div dangerouslySetInnerHTML={{ __html: description }} />
-            <Button
-              variant="contained"
-              component={Link}
-              href={selectURL}
-              sx={{ flexShrink: 0, fontWeight: '700' }}
-            >
-              Select
-            </Button>
+            {selectURL && (
+              <Button
+                variant="contained"
+                component={Link}
+                href={selectURL}
+                sx={{ flexShrink: 0, fontWeight: '700' }}
+              >
+                Select
+              </Button>
+            )}
           </Box>
           <Box sx={style25}>
             <ul>
