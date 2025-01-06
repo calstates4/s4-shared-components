@@ -17,7 +17,7 @@ export type OpportunityCardProps = {
   id: string | number;
   title: string;
   url: string;
-  destinationUrl: string;
+  destinationUrl?: string;
   location?: string;
   type?: string;
   timeCommitment?: string;
@@ -215,7 +215,7 @@ export default function OpportunityCard({
             >
               View details
             </Button>
-            {!cardSelected && (
+            {!cardSelected && destinationUrl && (
               <Button
                 variant="contained"
                 component={Link}
