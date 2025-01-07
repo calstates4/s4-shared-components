@@ -38,6 +38,7 @@ export default function StudentExperienceFormStep2({
   errorMsg,
 }: StudentExperienceFormStep2Props) {
   const theme = useTheme();
+  const [currentOpportunityCourseId, setCurrentOpportunityCourseId] = useState(opportunityCourseId || '');
 
   // Styles.
   const contentContainerStyles = {
@@ -104,6 +105,11 @@ export default function StudentExperienceFormStep2({
             options={courseValues}
             selected={defaultSelect}
             sx={formFieldStyles}
+            onChange={(_, value) => {
+              if (value && !Array.isArray(value) && 'id' in value) {
+                setCurrentOpportunityCourseId(value.id);
+              }
+            }}
           />
         )}
         {errorMsg && (
@@ -116,7 +122,7 @@ export default function StudentExperienceFormStep2({
         )}
       </Paper>
       <input type="hidden" name="opportunityId" value={ opportunityId } />
-      <input type="hidden" name="opportunityCourse" value={ opportunityCourseId } />
+      <input type="hidden" name="opportunityCourse" value={currentOpportunityCourseId} />
       <input type="hidden" name="programId" value={ programId } />
       <Button type="button" href="/create-experience" variant="outlined" sx={{ mr: 1, float: 'left' }}>Cancel</Button>
       <Button type="submit" variant="contained" sx={{ mr: 1, float: 'right' }}>Continue</Button>
