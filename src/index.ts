@@ -63,6 +63,7 @@ export {
   reportStudentsTableColumns,
   staffTableColumns,
   membershipsRequestsTableColumns,
+  ApproveExperienceTableColumns,
 } from './components/02-components/data-table/data-table.data';
 export {
   default as ExperiencePage,
@@ -198,6 +199,10 @@ export {
   default as DataTablePage,
   type DataTablePageProps,
 } from './components/04-pages/generic/data-table-page';
+export {
+  default as ApproveExperiencePage,
+  type ApproveExperiencePageProps,
+} from './components/04-pages/approve-experience/approve-experience';
 export {
   default as PartnerExperienceDetailsPage,
   type PartnerExperienceDetailsPageProps,

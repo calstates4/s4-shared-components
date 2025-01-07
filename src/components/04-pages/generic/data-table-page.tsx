@@ -1,4 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
+import CheckIcon from '@mui/icons-material/Check';
 import {
   Box,
   Button,
@@ -29,6 +30,7 @@ export type DataTablePageProps = {
   id?: string;
   inviteMembers?: boolean;
   formDialog?: ExposedFormProps;
+  iconType?: string;
 };
 
 export default function DataTablePage({
@@ -42,6 +44,7 @@ export default function DataTablePage({
   id,
   inviteMembers,
   formDialog,
+  iconType,
 }: DataTablePageProps) {
   const theme = useTheme();
 
@@ -100,14 +103,7 @@ export default function DataTablePage({
               aria-label={addTitle}
               component={Link}
               href={addUrl}
-              startIcon={
-                <AddIcon
-                  sx={{
-                    fontSize: '1rem',
-                    mr: theme.spacing(0.5),
-                  }}
-                />
-              }
+              startIcon={iconType === 'check' ? <CheckIcon /> : <AddIcon />}
               sx={{
                 flexShrink: 0,
                 fontWeight: 700,
@@ -121,7 +117,7 @@ export default function DataTablePage({
       {form && <ExposedForm {...form}></ExposedForm>}
       {tableData && membershipRequestedTableData ? (
         <Tabs id="staff-tabs" name="Staff Tabs">
-          <Box title="Staff members">
+          <Box aria-label="Staff members">
             <DataTable
               rows={tableData.rows}
               columns={tableData.columns}
@@ -130,7 +126,7 @@ export default function DataTablePage({
               hideCols={tableData.hideCols}
             />
           </Box>
-          <Box title="Memberships Requests">
+          <Box aria-label="Memberships Requests">
             <DataTable
               rows={membershipRequestedTableData.rows}
               columns={membershipRequestedTableData.columns}

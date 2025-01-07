@@ -73,6 +73,9 @@ const experienceArgs: DataTablePageProps = {
     toolbar: () => <GridToolbar title="Experiences" />,
     filters: staffFilterModel,
   },
+  addUrl: '/organization/experiences/pending',
+  addTitle: 'Approve Experiences',
+  iconType: 'check',
 };
 
 export const ExperienceTable: StoryObj<typeof PageLayout> = {

@@ -20,6 +20,8 @@ import {
   reportStudentsTableRows,
   membershipsRequestsTableColumns,
   membershipsRequestsTableRows,
+  ApproveExperienceTableColumns,
+  ApproveExperienceTableRows,
 } from './data-table.data';
 
 const meta: Meta<typeof DataTable> = {
@@ -95,3 +97,11 @@ export const MembershipsRequested: StoryObj<typeof DataTable> = {
     toolbar: () => <GridToolbar title="Memberships Requests" />,
   },
 };
+
+export const ExperiencesWaitingApproval: StoryObj<typeof DataTable> = {
+  args: {
+    rows: ApproveExperienceTableRows,
+    columns: ApproveExperienceTableColumns,
+    toolbar: () => <GridToolbar title="Approve Experience(s)" />,
+  },
+}
