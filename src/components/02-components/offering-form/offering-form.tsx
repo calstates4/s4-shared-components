@@ -395,34 +395,31 @@ export default function OfferingForm({
     setErrors(errors);
 
     if (Object.values(errors).some((error) => error)) {
-      event.preventDefault(); // Evitar que el formulario se envíe
+      event.preventDefault();
 
-      const form = (event.target as HTMLButtonElement).form; // Accede al formulario desde el botón
+      const form = (event.target as HTMLButtonElement).form;
       if (form) {
         const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
 
         if (firstInvalidInput) {
-          // Evitar que el navegador realice el desplazamiento automático
           firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
 
-          // Calcular la posición ajustada dejando 107px de espacio superior
-          const container = document.querySelector('main') || window; // Selecciona el contenedor correcto
+          const container = document.querySelector('main') || window;
           const rect = firstInvalidInput.getBoundingClientRect();
 
           const offsetTop = container === window
-            ? window.scrollY + rect.top - 157 // Si el contenedor es la ventana
-            : (container as HTMLElement).scrollTop + rect.top - 157; // Si es un contenedor específico
+            ? window.scrollY + rect.top - 157
+            : (container as HTMLElement).scrollTop + rect.top - 157;
 
           (container as Window | HTMLElement).scrollTo({
             top: offsetTop,
             behavior: 'smooth',
           });
 
-          // Usar un pequeño retraso para asegurar que el scroll se complete antes de mostrar la validez
           setTimeout(() => {
-            firstInvalidInput.focus(); // Enfocar el campo para mostrar el tooltip
-            form.reportValidity(); // Mostrar los tooltips de validación del navegador
-          }, 300); // Ajusta el tiempo si es necesario
+            firstInvalidInput.focus();
+            form.reportValidity();
+          }, 300);
         }
       }
     }
