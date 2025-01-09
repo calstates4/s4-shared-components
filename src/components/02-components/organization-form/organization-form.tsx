@@ -218,9 +218,6 @@ export default function OrganizationForm({
     orgContactEmail: false,
   });
 
-  // Check if form has errors to expand accordion panels
-  const [accordionExpanded, setAccordionExpanded] = useState(false);
-
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const orgNameValue = (document.getElementById('org-form-name') as HTMLInputElement)?.value;
     const orgSectorValue = (document.getElementById('org-form-industry') as HTMLInputElement)?.value;
@@ -258,13 +255,13 @@ export default function OrganizationForm({
         const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
 
         if (firstInvalidInput) {
-          // Encuentra el acordeón contenedor del campo inválido
+          // Finds the accordion container of the invalid field
           const accordion = firstInvalidInput.closest('.MuiAccordion-root') as HTMLElement;
           if (accordion) {
             // Verifica si el acordeón ya está expandido
             const isExpanded = accordion.classList.contains('Mui-expanded');
             if (!isExpanded) {
-              // Solo abre el acordeón si no está expandido
+              // Checks if the accordion is already expanded
               const accordionSummary = accordion.querySelector('.MuiAccordionSummary-root') as HTMLElement;
               if (accordionSummary) {
                 accordionSummary.click();
@@ -272,7 +269,7 @@ export default function OrganizationForm({
             }
           }
 
-          // Desplazarse al campo inválido
+          // Move to invalid field
           firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
 
           const container = document.querySelector('main') || window;
