@@ -258,6 +258,21 @@ export default function OrganizationForm({
         const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
 
         if (firstInvalidInput) {
+          // Encuentra el acordeón contenedor del campo inválido
+          const accordion = firstInvalidInput.closest('.MuiAccordion-root') as HTMLElement;
+          if (accordion) {
+            // Verifica si el acordeón ya está expandido
+            const isExpanded = accordion.classList.contains('Mui-expanded');
+            if (!isExpanded) {
+              // Solo abre el acordeón si no está expandido
+              const accordionSummary = accordion.querySelector('.MuiAccordionSummary-root') as HTMLElement;
+              if (accordionSummary) {
+                accordionSummary.click();
+              }
+            }
+          }
+
+          // Desplazarse al campo inválido
           firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
 
           const container = document.querySelector('main') || window;
@@ -278,8 +293,6 @@ export default function OrganizationForm({
           }, 300);
         }
       }
-      // (event.target as HTMLButtonElement).reportValidity(); // Display tooltips and prevent form submission
-      // setAccordionExpanded(true); // Expand the accordion when there are errors
     }
   };
 
@@ -410,7 +423,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion sx={accordionStyles} expanded={accordionExpanded} onChange={() => setAccordionExpanded(!accordionExpanded)}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Focus Population and Areas</AccordionSummary>
             <AccordionDetails>
               <AutocompleteField
@@ -580,7 +593,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion sx={accordionStyles} expanded={accordionExpanded} onChange={() => setAccordionExpanded(!accordionExpanded)}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Primary Contact</AccordionSummary>
             <AccordionDetails>
               <TextField
@@ -656,7 +669,7 @@ export default function OrganizationForm({
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Legal Contact</AccordionSummary>
             <AccordionDetails>
               <FormControlLabel
@@ -721,7 +734,7 @@ export default function OrganizationForm({
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Organization's Student Contact</AccordionSummary>
             <AccordionDetails>
               <TextField
