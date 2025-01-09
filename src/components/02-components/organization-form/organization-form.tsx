@@ -255,6 +255,21 @@ export default function OrganizationForm({
         const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
 
         if (firstInvalidInput) {
+          // Finds the accordion container of the invalid field
+          const accordion = firstInvalidInput.closest('.MuiAccordion-root') as HTMLElement;
+          if (accordion) {
+            // Verifica si el acordeón ya está expandido
+            const isExpanded = accordion.classList.contains('Mui-expanded');
+            if (!isExpanded) {
+              // Checks if the accordion is already expanded
+              const accordionSummary = accordion.querySelector('.MuiAccordionSummary-root') as HTMLElement;
+              if (accordionSummary) {
+                accordionSummary.click();
+              }
+            }
+          }
+
+          // Move to invalid field
           firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
 
           const container = document.querySelector('main') || window;
@@ -287,6 +302,7 @@ export default function OrganizationForm({
         ref={tabRef}
       >
         <div aria-label="General Information">
+          {/* TODO: Based on CSU-533 S4 needs to discuss if they want to keep defaultExpanded or use expanded prop like line 386 */}
           <Accordion defaultExpanded={true} sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >
               General Information
@@ -445,7 +461,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Default Offering Settings</AccordionSummary>
             <AccordionDetails>
               <Typography sx={formFieldStyles}>
@@ -468,7 +484,7 @@ export default function OrganizationForm({
         </div>
 
         <div aria-label="Contacts">
-          <Accordion defaultExpanded={true} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >General Contact Information</AccordionSummary>
             <AccordionDetails>
               <FormControl fullWidth>
@@ -574,7 +590,7 @@ export default function OrganizationForm({
               />
             </AccordionDetails>
           </Accordion>
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Primary Contact</AccordionSummary>
             <AccordionDetails>
               <TextField
@@ -650,7 +666,7 @@ export default function OrganizationForm({
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Legal Contact</AccordionSummary>
             <AccordionDetails>
               <FormControlLabel
@@ -715,7 +731,7 @@ export default function OrganizationForm({
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded={false} sx={accordionStyles}>
+          <Accordion sx={accordionStyles}>
             <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />} >Organization's Student Contact</AccordionSummary>
             <AccordionDetails>
               <TextField
