@@ -248,7 +248,33 @@ export default function OrganizationForm({
     setErrors(errors);
 
     if (Object.values(errors).some((error) => error)) {
-      (event.target as HTMLButtonElement).reportValidity(); // Display tooltips and prevent form submission
+      event.preventDefault();
+
+      const form = (event.target as HTMLButtonElement).form;
+      if (form) {
+        const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
+
+        if (firstInvalidInput) {
+          firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
+
+          const container = document.querySelector('main') || window;
+          const rect = firstInvalidInput.getBoundingClientRect();
+
+          const offsetTop = container === window
+            ? window.scrollY + rect.top - 157
+            : (container as HTMLElement).scrollTop + rect.top - 157;
+
+          (container as Window | HTMLElement).scrollTo({
+            top: offsetTop,
+            behavior: 'smooth',
+          });
+
+          setTimeout(() => {
+            firstInvalidInput.focus();
+            form.reportValidity();
+          }, 300);
+        }
+      }
     }
   };
 
