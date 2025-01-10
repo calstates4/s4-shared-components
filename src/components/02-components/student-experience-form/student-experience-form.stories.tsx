@@ -48,6 +48,7 @@ export const AddStudentExperienceForm: StoryObj<typeof StudentExperienceForm> = 
   args: {
     id: '1',
     children: opportunity,
-    stepsBar: stepsBar
+    stepsBar: stepsBar,
+    duplicateExperience: true
   }
 };
