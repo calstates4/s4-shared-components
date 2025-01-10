@@ -12,6 +12,7 @@ export type StudentExperienceFormProps = {
   children: ReactNode;
   stepsBar: ReactNode;
   FormElement?: ElementType;
+  duplicateExperience?: boolean;
 };
 
 export default function StudentExperienceForm({
@@ -19,6 +20,7 @@ export default function StudentExperienceForm({
   children,
   stepsBar,
   FormElement,
+  duplicateExperience,
 }: StudentExperienceFormProps) {
   const theme = useTheme();
 
@@ -52,6 +54,9 @@ export default function StudentExperienceForm({
       </Paper>
       {stepsBar}
       <Paper sx={contentContainerStyles}>
+        { duplicateExperience && (
+          <Typography color="error.main" sx={{ mb: theme.spacing(2) }}>An experience has already been created for this opportunity. Do you want to create another one?</Typography>
+        )}
         <Typography variant="h2" color="primary.main" sx={{ mb: theme.spacing(1) }}>Opportunity</Typography>
         {(children) ? (
           <>
