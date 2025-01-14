@@ -360,8 +360,12 @@ export default function OfferingForm({
       document.querySelectorAll('#offering-activities-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
     ).map((chip) => chip.textContent?.trim());
     const offeringPrimaryContactValue = (document.getElementById('offering-primary-contact') as HTMLInputElement)?.value;
-    const offeringTimeApproversValue = (document.getElementById('offering-time-approvers') as HTMLInputElement)?.value;
-    const offeringFormSignersValue = (document.getElementById('offering-form-signers') as HTMLInputElement)?.value;
+    const offeringTimeApproversValue = Array.from(
+      document.querySelectorAll('#offering-time-approvers-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
+    const offeringFormSignersValue = Array.from(
+      document.querySelectorAll('#offering-form-signers-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
+    ).map((chip) => chip.textContent?.trim());
     const offeringApplicationInstructionsValue = (document.getElementById('offering-application-instructions') as HTMLInputElement)?.value;
     const startDateValue = (document.getElementById('offering-start-date') as HTMLInputElement)?.value;
     const offeringEndDateValue = (document.getElementById('offering-end-date') as HTMLInputElement)?.value;
@@ -381,8 +385,8 @@ export default function OfferingForm({
       offeringDescription: offeringDescriptionValue === '',
       offeringActivities: offeringActivitiesValues.length === 0,
       offeringPrimaryContact: offeringPrimaryContactValue === '',
-      offeringTimeApprovers: offeringTimeApproversValue === '',
-      offeringFormSigners: offeringFormSignersValue === '',
+      offeringTimeApprovers: offeringTimeApproversValue.length === 0,
+      offeringFormSigners: offeringFormSignersValue.length === 0,
       offeringApplicationInstructions: offeringApplicationInstructionsValue === '',
       offeringStartDate: startDateValue === '',
       offeringEndDate: offeringEndDateValue === '',
@@ -1094,7 +1098,7 @@ export default function OfferingForm({
               }}
               inputProps={{
                 step: 0.1,
-                min: 1,
+                min: 0,
               }}
               sx={formFieldStyles}
               error={errors.offeringPayAmount}
