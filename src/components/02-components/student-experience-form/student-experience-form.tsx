@@ -55,7 +55,7 @@ export default function StudentExperienceForm({
       {stepsBar}
       <Paper sx={contentContainerStyles}>
         { duplicateExperience && (
-          <Typography color="error.main" sx={{ mb: theme.spacing(2) }}>An experience has already been created for this opportunity. Do you want to create another one?</Typography>
+          <Typography color="error.main" sx={{ mb: theme.spacing(2) }}>You already have an active experience with this opportunity. If this selection was an error you can use the back button to return to the list of Opportunities.</Typography>
         )}
         <Typography variant="h2" color="primary.main" sx={{ mb: theme.spacing(1) }}>Opportunity</Typography>
         {(children) ? (
