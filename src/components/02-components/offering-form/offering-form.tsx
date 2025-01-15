@@ -349,6 +349,10 @@ export default function OfferingForm({
     offeringPayAmount: false,
     offeringFocusPopulations: false,
     offeringFocusAreas: false,
+    offeringStreetAddress: false,
+    offeringCity: false,
+    offeringZipcode: false,
+    offeringState: false,
   });
 
 
@@ -380,6 +384,13 @@ export default function OfferingForm({
       document.querySelectorAll('#offering-focus-areas-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
     ).map((chip) => chip.textContent?.trim());
 
+    // AddressFields
+    const offeringStreetAddressValue = (document.getElementById('offering-street-address1') as HTMLInputElement)?.value;
+    const offeringCityValue = (document.getElementById('offering-city') as HTMLInputElement)?.value;
+    const offeringZipCode = (document.getElementById('offering-zipcode') as HTMLInputElement)?.value;
+    const offeringAddressState = (document.getElementById('offering-address-state') as HTMLInputElement)?.value;
+    const offeringAddressCountry = (document.getElementById('offering-address-country') as HTMLInputElement)?.value;
+
     const errors = {
       offeringName: offeringNameValue === '',
       offeringDescription: offeringDescriptionValue === '',
@@ -396,9 +407,42 @@ export default function OfferingForm({
       offeringFocusAreas: offeringFocusAreasValues.length === 0,
     };
 
-    setErrors(errors);
+     // Check if country is "none"
+    const isAddressRequired = offeringAddressCountry !== 'none';
 
-    if (Object.values(errors).some((error) => error)) {
+    const addressErrors = {
+      ...errors,
+      offeringStreetAddress: isAddressRequired && offeringStreetAddressValue === '',
+      offeringCity: isAddressRequired && offeringCityValue === '',
+      offeringZipcode: isAddressRequired && offeringZipCode === '',
+      offeringState: isAddressRequired && offeringAddressState === '',
+    };
+
+    setErrors(addressErrors);
+
+    const scrollToInvalidField = (field: HTMLElement) => {
+      const container = document.querySelector('main') || window;
+      const rect = field.getBoundingClientRect();
+
+      const offsetTop =
+        container === window
+          ? window.scrollY + rect.top - 200
+          : (container as HTMLElement).scrollTop + rect.top - 200;
+
+      (container as Window | HTMLElement).scrollTo({
+        top: offsetTop,
+        behavior: 'smooth',
+      });
+
+      setTimeout(() => {
+        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+          field.focus();
+          field.form?.reportValidity();
+        }
+      }, 300);
+    };
+
+    if (Object.values(addressErrors).some((error) => error)) {
       event.preventDefault();
 
       const form = (event.target as HTMLButtonElement).form;
@@ -406,24 +450,39 @@ export default function OfferingForm({
         const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
 
         if (firstInvalidInput) {
-          firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
+          // Tab management
+          const parentTab = firstInvalidInput.closest('[aria-label]');
+          const currentTab = document.querySelector('.MuiTab-root.Mui-selected');
 
-          const container = document.querySelector('main') || window;
-          const rect = firstInvalidInput.getBoundingClientRect();
+          if (parentTab && currentTab?.textContent !== parentTab.getAttribute('aria-label')) {
+            // Switch to the correct tab
+            const targetTabButton = Array.from(document.querySelectorAll('.MuiTab-root')).find(
+              (tab) => tab.textContent === parentTab.getAttribute('aria-label')
+            );
 
-          const offsetTop = container === window
-            ? window.scrollY + rect.top - 157
-            : (container as HTMLElement).scrollTop + rect.top - 157;
+            if (targetTabButton) {
+              (targetTabButton as HTMLElement).click();
+            }
 
-          (container as Window | HTMLElement).scrollTo({
-            top: offsetTop,
-            behavior: 'smooth',
-          });
+            // Wait for the tab to render
+            setTimeout(() => {
+              scrollToInvalidField(firstInvalidInput);
+            }, 300);
+          } else {
+            scrollToInvalidField(firstInvalidInput);
+          }
 
-          setTimeout(() => {
-            firstInvalidInput.focus();
-            form.reportValidity();
-          }, 300);
+          // Accordion handling
+          const accordion = firstInvalidInput.closest('.MuiAccordion-root') as HTMLElement;
+          if (accordion) {
+            const isExpanded = accordion.classList.contains('Mui-expanded');
+            if (!isExpanded) {
+              const accordionSummary = accordion.querySelector('.MuiAccordionSummary-root') as HTMLElement;
+              if (accordionSummary) {
+                accordionSummary.click();
+              }
+            }
+          }
         }
       }
     }
@@ -1135,6 +1194,12 @@ export default function OfferingForm({
             display={isRemote ? 'none' : 'block'}
             id="offering"
             address={address}
+            errors={{
+              streetAddress: errors.offeringStreetAddress,
+              city: errors.offeringCity,
+              zip: errors.offeringZipcode,
+              state: errors.offeringState
+            }}
             mb={3}
           />
           <Box component="fieldset" sx={fieldSetStyles}>
