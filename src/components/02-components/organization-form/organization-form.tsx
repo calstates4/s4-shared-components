@@ -216,6 +216,10 @@ export default function OrganizationForm({
     orgPrimaryContactLastName: false,
     orgContactPhone: false,
     orgContactEmail: false,
+    orgStreetAddress: false,
+    orgCity: false,
+    orgZipcode: false,
+    orgState: false,
   });
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -233,6 +237,12 @@ export default function OrganizationForm({
     const orgContactPhoneValue = (document.getElementById('org-form-main-contact-phone') as HTMLInputElement)?.value;
     const orgContactEmailValue = (document.getElementById('org-form-main-contact-email') as HTMLInputElement)?.value;
 
+    const orgStreetAddressValue = (document.getElementById('org-street-address1') as HTMLInputElement)?.value;
+    const orgCityValue = (document.getElementById('org-city') as HTMLInputElement)?.value;
+    const orgZipCode = (document.getElementById('org-zipcode') as HTMLInputElement)?.value;
+    const orgAddressState = (document.getElementById('org-address-state') as HTMLInputElement)?.value;
+    const orgAddressCountry = (document.getElementById('org-address-country') as HTMLInputElement)?.value;
+
     const errors = {
       orgName: orgNameValue === '',
       orgSector: orgSectorValue === '',
@@ -245,9 +255,41 @@ export default function OrganizationForm({
       orgContactEmail: orgContactEmailValue === '',
     };
 
-    setErrors(errors);
+    const isAddressRequired = orgAddressCountry !== 'none';
 
-    if (Object.values(errors).some((error) => error)) {
+    const orgErrors = {
+      ...errors,
+      orgStreetAddress: isAddressRequired && orgStreetAddressValue === '',
+      orgCity: isAddressRequired && orgCityValue === '',
+      orgZipcode: isAddressRequired && orgZipCode === '',
+      orgState: isAddressRequired && orgAddressState === '',
+    };
+
+    setErrors(orgErrors);
+
+    const scrollToInvalidField = (field: HTMLElement) => {
+      const container = document.querySelector('main') || window;
+      const rect = field.getBoundingClientRect();
+
+      const offsetTop =
+        container === window
+          ? window.scrollY + rect.top - 200
+          : (container as HTMLElement).scrollTop + rect.top - 200;
+
+      (container as Window | HTMLElement).scrollTo({
+        top: offsetTop,
+        behavior: 'smooth',
+      });
+
+      setTimeout(() => {
+        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+          field.focus();
+          field.form?.reportValidity();
+        }
+      }, 300);
+    };
+
+    if (Object.values(orgErrors).some((error) => error)) {
       event.preventDefault();
 
       const form = (event.target as HTMLButtonElement).form;
@@ -255,39 +297,39 @@ export default function OrganizationForm({
         const firstInvalidInput = form.querySelector(':invalid') as HTMLElement;
 
         if (firstInvalidInput) {
-          // Finds the accordion container of the invalid field
+          // Tab management
+          const parentTab = firstInvalidInput.closest('[aria-label]');
+          const currentTab = document.querySelector('.MuiTab-root.Mui-selected');
+
+          if (parentTab && currentTab?.textContent !== parentTab.getAttribute('aria-label')) {
+            // Switch to the correct tab
+            const targetTabButton = Array.from(document.querySelectorAll('.MuiTab-root')).find(
+              (tab) => tab.textContent === parentTab.getAttribute('aria-label')
+            );
+
+            if (targetTabButton) {
+              (targetTabButton as HTMLElement).click();
+            }
+
+            // Wait for the tab to render
+            setTimeout(() => {
+              scrollToInvalidField(firstInvalidInput);
+            }, 300);
+          } else {
+            scrollToInvalidField(firstInvalidInput);
+          }
+
+          // Accordion handling
           const accordion = firstInvalidInput.closest('.MuiAccordion-root') as HTMLElement;
           if (accordion) {
-            // Verifica si el acordeón ya está expandido
             const isExpanded = accordion.classList.contains('Mui-expanded');
             if (!isExpanded) {
-              // Checks if the accordion is already expanded
               const accordionSummary = accordion.querySelector('.MuiAccordionSummary-root') as HTMLElement;
               if (accordionSummary) {
                 accordionSummary.click();
               }
             }
           }
-
-          // Move to invalid field
-          firstInvalidInput.scrollIntoView({ block: 'center', inline: 'nearest' });
-
-          const container = document.querySelector('main') || window;
-          const rect = firstInvalidInput.getBoundingClientRect();
-
-          const offsetTop = container === window
-            ? window.scrollY + rect.top - 157
-            : (container as HTMLElement).scrollTop + rect.top - 157;
-
-          (container as Window | HTMLElement).scrollTo({
-            top: offsetTop,
-            behavior: 'smooth',
-          });
-
-          setTimeout(() => {
-            firstInvalidInput.focus();
-            form.reportValidity();
-          }, 300);
         }
       }
     }
@@ -510,7 +552,18 @@ export default function OrganizationForm({
                   <option value="remote-online">Remote/Online</option>
                 </Select>
               </FormControl>
-              <AddressField display={isRemote ? 'none' : 'block'} address={address} sx={baseFormItemStyles} />
+              <AddressField
+                display={isRemote ? 'none' : 'block'}
+                address={address}
+                id='org'
+                sx={baseFormItemStyles}
+                errors={{
+                  streetAddress: errors.orgStreetAddress,
+                  city: errors.orgCity,
+                  zip: errors.orgZipcode,
+                  state: errors.orgState
+                }}
+              />
               <Box display={noRemote ? 'none' : 'block'}>
                 <TextField
                   fullWidth

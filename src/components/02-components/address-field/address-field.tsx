@@ -25,6 +25,12 @@ export type AddressType = {
 interface AddressFieldProps extends BoxProps {
   id?: string;
   address?: AddressType;
+  errors?: {
+    streetAddress?: boolean;
+    city?: boolean;
+    zip?: boolean;
+    state?: boolean;
+  };
 }
 
 const usStates = [
@@ -281,6 +287,7 @@ const usStates = [
 export default function AddressField({
   id,
   address,
+  errors,
   ...props
 }: AddressFieldProps) {
   const [expanded, setExpanded] = useState(false);
@@ -349,6 +356,8 @@ export default function AddressField({
           label="Street address"
           defaultValue={address?.streetAddress1}
           sx={{ ...fieldBaseStyles, mt: theme.spacing(3) }}
+          error={errors?.streetAddress}
+          helperText={errors?.streetAddress ? 'This field is required' : ''}
         />
         <TextField
           fullWidth
@@ -369,6 +378,8 @@ export default function AddressField({
             label="City"
             defaultValue={address?.city}
             sx={fieldBaseStyles}
+            error={errors?.city}
+            helperText={errors?.city ? 'This field is required' : ''}
           />
           <FormControl fullWidth required sx={fieldBaseStyles}>
             <InputLabel
@@ -386,14 +397,15 @@ export default function AddressField({
               native={true}
               name="address_state"
               defaultValue={address?.state ?? 'none'}
+              placeholder='Select state'
             >
-              <option value="none">Select state…</option>
               {usStates.map((state) => (
                 <option key={state.id} value={state.id}>
                   {state.label}
                 </option>
               ))}
             </Select>
+            {errors?.state && <Typography color="error">This field is required</Typography>}
           </FormControl>
         </Box>
         <TextField
@@ -403,6 +415,8 @@ export default function AddressField({
           name="address_zipcode"
           label="Zip code"
           defaultValue={address?.zipCode}
+          error={errors?.zip}
+          helperText={errors?.zip ? 'This field is required' : ''}
         />
       </Collapse>
     </Box>
