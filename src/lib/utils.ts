@@ -29,45 +29,29 @@ export function experienceStatusInfo(
   theme: Theme,
 ): Record<string, { color: string; label: string }> {
   return {
+    program_course: {
+      color: theme.palette.warning.light,
+      label: 'Program Course',
+    },
     draft: {
       color: theme.palette.warning.light,
-      label: 'Risk Acknowledgment',
+      label: 'Health & Safety Acknowledgement',
     },
-    pending: {
+    approval: {
       color: theme.palette.warning.main,
-      label: 'Pending',
-    },
-    approved: {
-      color: theme.palette.success.main,
-      label: 'Approved',
-    },
-    declined: {
-      color: theme.palette.secondary.main,
-      label: 'Declined',
-    },
-    site_staff: {
-      color: theme.palette.error.light,
-      label: 'Site Staff',
+      label: 'Approval',
     },
     duration: {
-      color: theme.palette.teal.main,
+      color: theme.palette.warning.main,
       label: 'Duration',
-    },
-    grace_period: {
-      color: theme.palette.blue.main,
-      label: 'Grace Period',
     },
     published: {
       color: theme.palette.success.light,
       label: 'Active',
     },
-    success: {
+    archived: {
       color: theme.palette.success.dark,
-      label: 'Success',
-    },
-    incomplete: {
-      color: theme.palette.error.main,
-      label: 'Incomplete',
+      label: 'Archived',
     },
   };
 }
