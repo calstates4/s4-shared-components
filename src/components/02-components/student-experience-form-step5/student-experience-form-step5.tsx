@@ -12,29 +12,21 @@ import { ElementType, ReactNode } from 'react';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 export type StudentExperienceFormStep5Props = {
-  opportunityId: string;
-  programId: string;
-  opportunityCourseId: string;
-  healthSafetySelected: string;
-  stepsBar: ReactNode;
-  FormElement: ElementType;
+  experienceId: string;
   term: string;
   estimatedHours: number;
+  stepsBar: ReactNode;
+  FormElement: ElementType;
   errorMsg?: boolean;
-  healthSafetyComments?: string;
 };
 
 export default function StudentExperienceFormStep5({
-  opportunityId,
-  programId,
-  opportunityCourseId,
-  healthSafetySelected,
+  experienceId,
   stepsBar,
   FormElement,
   term,
   estimatedHours,
   errorMsg,
-  healthSafetyComments,
 }: StudentExperienceFormStep5Props) {
   const theme = useTheme();
 
@@ -100,40 +92,20 @@ export default function StudentExperienceFormStep5({
           </Stack>
         )}
       </Paper>
-      <input type="hidden" name="opportunityId" value={opportunityId} />
-      <input
-        type="hidden"
-        name="opportunityCourse"
-        value={opportunityCourseId}
-      />
-      <input type="hidden" name="programId" value={programId} />
-      <input
-        type="hidden"
-        name="healthSafetyInformation"
-        value={healthSafetySelected}
-      />
-      <input type="hidden" name="timeCommitment" value={estimatedHours} />
-      {healthSafetyComments && (
-        <input
-          type="hidden"
-          name="healthSafetyComments"
-          value={healthSafetyComments}
-        />
-      )}
       <Button
         type="button"
-        href="/create-experience"
+        href="/experiences"
         variant="outlined"
         sx={{ mr: 1, float: 'left' }}
       >
         Cancel
       </Button>
       <Button type="submit" variant="contained" sx={{ mr: 1, float: 'right' }}>
-        Save and Submit
+        Save
       </Button>
       <Button
         type="button"
-        href={`/create-experience/approval?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}${healthSafetyComments ? `&comments=${healthSafetyComments}` : ''}`}
+        href={`/update-experience/approval?experience=${experienceId}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >

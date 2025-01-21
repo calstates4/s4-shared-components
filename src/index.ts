@@ -220,6 +220,10 @@ export {
   type StudentExperienceFormStep2Props,
 } from './components/02-components/student-experience-form-step2/student-experience-form-step2'
 export {
+  default as StudentExperienceFormStep2Update,
+  type StudentExperienceFormStep2UpdateProps,
+} from './components/02-components/student-experience-form-step2-update/student-experience-form-step2-update'
+export {
   default as ScheduleFields,
   type ScheduleFieldsProps,
 } from './components/02-components/schedule-fields/schedule-fields';

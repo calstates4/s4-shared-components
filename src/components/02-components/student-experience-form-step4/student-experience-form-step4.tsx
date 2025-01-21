@@ -2,29 +2,23 @@ import { Box, Button, Stack, Paper, Typography, useTheme } from '@mui/material';
 import { ElementType, ReactNode } from 'react';
 
 export type StudentExperienceFormStep4Props = {
-  opportunityId: string;
+  experienceId: string;
   opportunityName: string;
-  opportunityCourseId: string;
   opportunityCourseName: string;
-  programId: string;
   programName: string;
   stepsBar: ReactNode;
   FormElement: ElementType;
-  healthSafetySelected: string;
   approvalState: boolean;
   healthSafetyComments?: string;
 };
 
 export default function StudentExperienceFormStep4({
-  opportunityId,
+  experienceId,
   opportunityName,
-  opportunityCourseId,
   opportunityCourseName,
-  programId,
   programName,
   stepsBar,
   FormElement,
-  healthSafetySelected,
   approvalState,
   healthSafetyComments,
 }: StudentExperienceFormStep4Props) {
@@ -71,18 +65,6 @@ export default function StudentExperienceFormStep4({
   // Form.
   const formInner = (
     <>
-      <input type="hidden" name="opportunityId" value={opportunityId} />
-      <input
-        type="hidden"
-        name="opportunityCourse"
-        value={opportunityCourseId}
-      />
-      <input type="hidden" name="programId" value={programId} />
-      <input
-        type="hidden"
-        name="healthSafetyInformation"
-        value={healthSafetySelected}
-      />
       {healthSafetyComments && (
         <input
           type="hidden"
@@ -92,7 +74,7 @@ export default function StudentExperienceFormStep4({
       )}
       <Button
         type="button"
-        href="/create-experience"
+        href="/experiences"
         variant="outlined"
         sx={{ mr: 1, float: 'left' }}
       >
@@ -108,7 +90,7 @@ export default function StudentExperienceFormStep4({
       </Button>
       <Button
         type="button"
-        href={`/create-experience/health-safety?opportunity=${opportunityId}&program=${programId}&course=${opportunityCourseId}&healthSafety=${healthSafetySelected}${healthSafetyComments ? `&comments=${healthSafetyComments}` : ''}`}
+        href={`/update-experience/health-safety?experience=${experienceId}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >

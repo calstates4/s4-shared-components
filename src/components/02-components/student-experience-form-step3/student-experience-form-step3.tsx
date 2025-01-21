@@ -14,34 +14,27 @@ import { ElementType, useState, ReactNode } from 'react';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 export type StudentExperienceFormStep3Props = {
-  opportunityId: string;
-  opportunityCourseId: string;
-  programId: string;
-  programName: string;
-  defaultCourse: string | null;
+  experienceId: string;
   stepsBar: ReactNode;
   FormElement: ElementType;
-  courseSelected: string;
   errorMsg: boolean;
-  healthSafetyInformation: string;
-  healthSafetyInformationValue: string;
-  healthSafetyComments: string;
+  healthSafetyInformation?: string;
+  healthSafetyInformationValue?: string;
+  selectedValue?: string;
 };
 
 export default function StudentExperienceFormStep3({
-  opportunityId,
-  opportunityCourseId,
-  programId,
+  experienceId,
   stepsBar,
   FormElement,
   errorMsg,
   healthSafetyInformation,
   healthSafetyInformationValue,
-  healthSafetyComments,
+  selectedValue,
 }: StudentExperienceFormStep3Props) {
   const theme = useTheme();
 
-  const [value, setValue] = useState(healthSafetyInformationValue);
+  const [value, setValue] =  useState(selectedValue ?? healthSafetyInformationValue ?? '');
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
@@ -108,7 +101,6 @@ export default function StudentExperienceFormStep3({
                   placeholder="Please provide any additional information or questions you have about the health and safety requirements."
                   helperText="By clicking continue, you are agreeing to have someone contact you to discuss your concerns."
                   sx={{ mt: theme.spacing(2), ml: theme.spacing(4), mb: theme.spacing(2) }}
-                  defaultValue={healthSafetyComments}
                 />
               )}
               <FormControlLabel
@@ -126,17 +118,12 @@ export default function StudentExperienceFormStep3({
           </Box>
         )}
       </Paper>
-      <input type="hidden" name="opportunityId" value={opportunityId} />
-      <input
-        type="hidden"
-        name="opportunityCourse"
-        value={opportunityCourseId}
-      />
-      <input type="hidden" name="programId" value={programId} />
+
       <input type="hidden" name="selectedValue" value={value} />
+
       <Button
         type="button"
-        href="/create-experience"
+        href="/experiences"
         variant="outlined"
         sx={{ mr: 1, float: 'left' }}
       >
@@ -163,7 +150,7 @@ export default function StudentExperienceFormStep3({
       )}
       <Button
         type="button"
-        href={`/create-experience/program-course?opportunity=${opportunityId}`}
+        href={`/update-experience/program-course?experience=${experienceId}`}
         variant="outlined"
         sx={{ mr: 1, float: 'right' }}
       >
