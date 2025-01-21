@@ -28,6 +28,7 @@ export type CardExperienceProps = {
 };
 
 export default function CardExperience({
+  id,
   heading,
   state,
   description,
@@ -289,20 +290,37 @@ export default function CardExperience({
             cta={hoursCtaUrl}
             position={cardNumberVariation}
           />
+
           {cardCount > 1 && (
-            <Button
-              sx={{ ...buttonStyles, width: '100%', mt: theme.spacing(4) }}
-              href={cta}
-            >
-              More Details
-            </Button>
+            <Box>
+              <Button
+                sx={{ ...buttonStyles, width: '100%', mt: theme.spacing(4) }}
+                href={cta}
+              >
+                More Details
+              </Button>
+              {states[state].label !== "Active" && states[state].label !== "Archived" && (
+                <Button sx={{ ...buttonStyles, alignSelf: 'flex-start', ml: 2 }} href={states[state].url + id}>
+                  Edit
+                </Button>
+              )}
+            </Box>
           )}
+
         </Box>
       </Box>
       {cardCount === 1 && (
-        <Button sx={{ ...buttonStyles, alignSelf: 'flex-start' }} href={cta}>
-          More Details
-        </Button>
+        <Box>
+          <Button sx={{ ...buttonStyles, alignSelf: 'flex-start' }} href={cta}>
+            More Details
+          </Button>
+
+          {states[state].label !== "Active" && states[state].label !== "Archived" && (
+            <Button sx={{ ...buttonStyles, alignSelf: 'flex-start', ml: 2 }} href={states[state].url + id}>
+              Edit
+            </Button>
+          )}
+        </Box>
       )}
     </Paper>
   );

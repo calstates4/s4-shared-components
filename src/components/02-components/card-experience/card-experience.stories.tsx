@@ -18,7 +18,7 @@ export default meta;
 export const WideCard: StoryObj<typeof CardExperience> = {
   args: {
     heading: '{Opportunity Name}',
-    state: 'approved',
+    state: 'approval',
     description: dummyText,
     cta: '/opportunities',
     program: 'Program',
@@ -34,7 +34,7 @@ export const WideCard: StoryObj<typeof CardExperience> = {
 export const WideCardWithPendingForms: StoryObj<typeof CardExperience> = {
   args: {
     heading: '{Opportunity Name}',
-    state: 'approved',
+    state: 'approval',
     description: dummyText,
     cta: '/opportunities',
     program: 'Program',
@@ -51,7 +51,7 @@ export const WideCardWithPendingForms: StoryObj<typeof CardExperience> = {
 export const NarrowCard: StoryObj<typeof CardExperience> = {
   args: {
     heading: '{Opportunity Name}',
-    state: 'approved',
+    state: 'approval',
     description: dummyText,
     cta: '/opportunities',
     program: 'Program',
@@ -67,7 +67,7 @@ export const NarrowCard: StoryObj<typeof CardExperience> = {
 export const NarrowCardWithPendingForms: StoryObj<typeof CardExperience> = {
   args: {
     heading: '{Opportunity Name}',
-    state: 'approved',
+    state: 'approval',
     description: dummyText,
     cta: '/opportunities',
     program: 'Program',

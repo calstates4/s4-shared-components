@@ -3,33 +3,23 @@ import { ElementType, ReactNode } from 'react';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 export type StudentExperienceFormStep6Props = {
-  opportunityId: string;
-  programId: string;
-  opportunityCourseId: string;
-  healthSafetySelected: string;
-  healthSafetyComments?: string;
-  stepsBar: ReactNode;
-  FormElement: ElementType;
+  experienceId: string;
   term: string;
   opportunityName: string;
   programName: string;
-  opportunityCourseName: string;
+  courseName?: string;
   estimatedHours: number;
+  stepsBar: ReactNode;
+  FormElement: ElementType;
 };
 
 export default function StudentExperienceFormStep6({
-  opportunityId,
-  programId,
-  opportunityCourseId,
-  healthSafetySelected,
-  healthSafetyComments,
-  stepsBar,
-  FormElement,
-  term,
   opportunityName,
   programName,
-  opportunityCourseName,
+  courseName,
+  term,
   estimatedHours,
+  stepsBar,
 }: StudentExperienceFormStep6Props) {
   const theme = useTheme();
 
@@ -43,32 +33,6 @@ export default function StudentExperienceFormStep6({
     fontWeight: '700',
     color: theme.palette.primary.main,
   };
-
-  // Form.
-  const formInner = (
-    <>
-      <input type="hidden" name="opportunityId" value={opportunityId} />
-      <input
-        type="hidden"
-        name="opportunityCourse"
-        value={opportunityCourseId}
-      />
-      <input type="hidden" name="programId" value={programId} />
-      <input
-        type="hidden"
-        name="healthSafetyInformation"
-        value={healthSafetySelected}
-      />
-      <input type="hidden" name="timeCommitment" value={estimatedHours} />
-      <input type="hidden" name="healthSafetyComments" value={healthSafetyComments} />
-    </>
-  );
-
-  const form = FormElement ? (
-    <FormElement method="post">{formInner}</FormElement>
-  ) : (
-    <form>{formInner}</form>
-  );
 
   return (
     <>
@@ -116,12 +80,12 @@ export default function StudentExperienceFormStep6({
                 <Typography variant="body1">{programName}</Typography>
               </Stack>
             )}
-            {opportunityCourseName && (
+            {courseName && (
               <Stack direction="row" spacing={1} sx={{ mb: theme.spacing(1) }}>
                 <Typography variant="body1" sx={label}>
                   Course:
                 </Typography>
-                <Typography variant="body1">{opportunityCourseName}</Typography>
+                <Typography variant="body1">{courseName}</Typography>
               </Stack>
             )}
             <Stack direction="row" spacing={1} sx={{ mb: theme.spacing(1) }}>
@@ -185,7 +149,6 @@ export default function StudentExperienceFormStep6({
           </Box>
         </Stack>
       </Paper>
-      {form}
     </>
   );
 }

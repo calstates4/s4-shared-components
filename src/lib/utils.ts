@@ -27,23 +27,27 @@ export function checkRequiredFormFieldsTabs(
 
 export function experienceStatusInfo(
   theme: Theme,
-): Record<string, { color: string; label: string }> {
+): Record<string, { color: string; label: string, url?: string }> {
   return {
     program_course: {
       color: theme.palette.warning.light,
       label: 'Program Course',
+      url: '/update-experience/program-course?experience=',
     },
     draft: {
       color: theme.palette.warning.light,
       label: 'Health & Safety Acknowledgement',
+      url: '/update-experience/health-safety?experience=',
     },
     approval: {
       color: theme.palette.warning.main,
       label: 'Approval',
+      url: '/update-experience/approval?experience=',
     },
     duration: {
       color: theme.palette.warning.main,
       label: 'Duration',
+      url: '/update-experience/duration?experience=',
     },
     published: {
       color: theme.palette.success.light,

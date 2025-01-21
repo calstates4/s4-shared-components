@@ -42,9 +42,13 @@ export default function AutocompleteField({
 
   useEffect(() => {
     if (selected) {
-      if (multiple)
+      if (multiple) {
         setValue(options.filter((item) => selected.includes(item.id)));
-      else setValue(options.find((item) => item.id === selected) ?? null);
+      } else {
+        // Buscar el curso en la lista `options` basado en el ID y asignarlo a `value`
+        const selectedOption = options.find((item) => item.id === selected);
+        setValue(selectedOption ?? null);
+      }
     } else {
       setValue(multiple ? [] : null);
     }
