@@ -21,6 +21,7 @@ export type StudentExperienceFormStep3Props = {
   healthSafetyInformation?: string;
   healthSafetyInformationValue?: string;
   selectedValue?: string;
+  healthSafetyQuestion?: string;
 };
 
 export default function StudentExperienceFormStep3({
@@ -31,13 +32,19 @@ export default function StudentExperienceFormStep3({
   healthSafetyInformation,
   healthSafetyInformationValue,
   selectedValue,
+  healthSafetyQuestion,
 }: StudentExperienceFormStep3Props) {
   const theme = useTheme();
 
   const [value, setValue] =  useState(selectedValue ?? healthSafetyInformationValue ?? '');
+  const [question, setQuestion] = useState(healthSafetyQuestion ?? '');
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
+  };
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuestion(event.target.value);
   };
 
   // Styles.
@@ -101,6 +108,8 @@ export default function StudentExperienceFormStep3({
                   placeholder="Please provide any additional information or questions you have about the health and safety requirements."
                   helperText="By clicking continue, you are agreeing to have someone contact you to discuss your concerns."
                   sx={{ mt: theme.spacing(2), ml: theme.spacing(4), mb: theme.spacing(2) }}
+                  value={question}
+                  onChange={handleTextChange}
                 />
               )}
               <FormControlLabel
@@ -119,6 +128,7 @@ export default function StudentExperienceFormStep3({
         )}
       </Paper>
 
+      <input type="hidden" name="healthsafetyquestion" value={question} />
       <input type="hidden" name="selectedValue" value={value} />
 
       <Button
