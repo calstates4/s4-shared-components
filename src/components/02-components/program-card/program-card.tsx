@@ -51,8 +51,6 @@ export default function ProgramCard({
     },
   };
 
-  const [isDisabled] = useState(btnDisable);
-
   return (
     <Paper key={id} sx={containerStyles} elevation={1}>
       <Box sx={headerContainerStyles}>
@@ -87,7 +85,7 @@ export default function ProgramCard({
           href={joinUrl}
           type="submit"
           variant="contained"
-          disabled={isDisabled}
+          disabled={btnDisable}
           sx={{
             mr: theme.spacing(1),
             fontWeight: 700,
