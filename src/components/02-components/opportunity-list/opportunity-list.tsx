@@ -33,6 +33,7 @@ export type OpportunityListProps = {
   typeFilterValues?: AutocompleteOptionType[];
   termFilterValues?: AutocompleteOptionType[];
   focusPopulationFilterValues?: AutocompleteOptionType[];
+  categoryFilterValues?: AutocompleteOptionType[];
   focusAreaFilterValues?: AutocompleteOptionType[];
   cityFilterValues?: AutocompleteOptionType[];
   currentFilters: {
@@ -41,6 +42,7 @@ export type OpportunityListProps = {
     type: string | null;
     term: string | null;
     focusPopulation: string | null;
+    category : string | null;
     focusArea: string | null;
     city: string | null;
     keyword: string | null;
@@ -62,6 +64,7 @@ export default function OpportunityList({
   typeFilterValues,
   termFilterValues,
   focusPopulationFilterValues,
+  categoryFilterValues,
   focusAreaFilterValues,
   cityFilterValues,
   currentFilters,
@@ -179,6 +182,17 @@ export default function OpportunityList({
           label="Focus Population"
           options={focusPopulationFilterValues}
           selected={currentFilters.focusPopulation}
+          sx={formItemStyles}
+        />
+      )}
+
+      {categoryFilterValues && (
+        <AutocompleteField
+          id="opportunity-category"
+          name="opportunity-category"
+          label="Category"
+          options={categoryFilterValues}
+          selected={currentFilters.category}
           sx={formItemStyles}
         />
       )}
