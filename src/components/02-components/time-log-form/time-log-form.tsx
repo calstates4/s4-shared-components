@@ -31,6 +31,9 @@ export type TimeLogFormProps = {
   focusAreas?: AutocompleteOptionType[];
   focusPopulations?: AutocompleteOptionType[];
   learningOutcomes?: AutocompleteOptionType[];
+  enableOutcomes?: boolean;
+  requireOutcomes?: boolean;
+  outcomesDescription?: string;
   FormElement?: ElementType;
   formSubmit?: (a: HTMLFormElement) => void;
   defaultActivity?: string;
@@ -53,6 +56,9 @@ export default function TimeLogForm({
   FormElement,
   formSubmit,
   learningOutcomes,
+  enableOutcomes,
+  requireOutcomes,
+  outcomesDescription,
   defaultActivity,
   defaultEndDate,
   defaultFocusArea,
@@ -387,28 +393,30 @@ export default function TimeLogForm({
           </Box>
         </Box>
       </Paper>
-      <Paper sx={paperStyles}>
-        <Typography variant="h3" mb={2}>
-          Teacher Performance Assessment
-        </Typography>
-        <Typography mb={3}>
-          Select the Major Learning Outcomes you met during this experience
-        </Typography>
-        <Box>
-          {learningOutcomes && (
-            <AutocompleteField
-              multiple
-              id="time-log-learning-objectives"
-              name="time-log-learning-objectives"
-              label="Learning Objectives"
-              options={learningOutcomes}
-              selected={defaultLearningOutcomes}
-              sx={formFieldStyles}
-              required
-            />
-          )}
-        </Box>
-      </Paper>
+      {enableOutcomes && (
+        <Paper sx={paperStyles}>
+          <Typography variant="h3" mb={2}>
+            Teacher Performance Assessment
+          </Typography>
+          <Typography mb={3}>
+            {outcomesDescription}
+          </Typography>
+          <Box>
+            {learningOutcomes && (
+              <AutocompleteField
+                multiple
+                id="time-log-learning-objectives"
+                name="time-log-learning-objectives"
+                label="Learning Objectives"
+                options={learningOutcomes}
+                selected={defaultLearningOutcomes}
+                sx={formFieldStyles}
+                required={requireOutcomes}
+              />
+            )}
+          </Box>
+        </Paper>
+      )}
       <Paper sx={{ ...paperStyles, mb: theme.spacing(10) }}>
         <Typography variant="h3" mb={2}>
           Self reflections assesment
