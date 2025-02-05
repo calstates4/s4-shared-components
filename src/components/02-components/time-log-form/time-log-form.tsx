@@ -34,6 +34,10 @@ export type TimeLogFormProps = {
   enableOutcomes?: boolean;
   requireOutcomes?: boolean;
   outcomesDescription?: string;
+  teacherexpectationsTerms?: AutocompleteOptionType[];
+  enableTeacherExpectations?: boolean;
+  requireTeacherExpectations?: boolean;
+  teacherExpectationsDescription?: string;
   FormElement?: ElementType;
   formSubmit?: (a: HTMLFormElement) => void;
   defaultActivity?: string;
@@ -59,6 +63,10 @@ export default function TimeLogForm({
   enableOutcomes,
   requireOutcomes,
   outcomesDescription,
+  teacherexpectationsTerms,
+  enableTeacherExpectations,
+  requireTeacherExpectations,
+  teacherExpectationsDescription,
   defaultActivity,
   defaultEndDate,
   defaultFocusArea,
@@ -396,7 +404,7 @@ export default function TimeLogForm({
       {enableOutcomes && (
         <Paper sx={paperStyles}>
           <Typography variant="h3" mb={2}>
-            Teacher Performance Assessment
+            Learning Outcomes
           </Typography>
           <Typography mb={3}>
             {outcomesDescription}
@@ -412,6 +420,30 @@ export default function TimeLogForm({
                 selected={defaultLearningOutcomes}
                 sx={formFieldStyles}
                 required={requireOutcomes}
+              />
+            )}
+          </Box>
+        </Paper>
+      )}
+      {enableTeacherExpectations && (
+        <Paper sx={paperStyles}>
+          <Typography variant="h3" mb={2}>
+            Teacher Performance Expectations
+          </Typography>
+          <Typography mb={3}>
+            {teacherExpectationsDescription}
+          </Typography>
+          <Box>
+            {teacherexpectationsTerms && (
+              <AutocompleteField
+                multiple
+                id="time-log-teacher-performance-expectations"
+                name="time-log-teacher-performance-expectations"
+                label="Teacher Performance Expectations"
+                options={teacherexpectationsTerms}
+                selected={defaultLearningOutcomes}
+                sx={formFieldStyles}
+                required={requireTeacherExpectations}
               />
             )}
           </Box>
