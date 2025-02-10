@@ -289,6 +289,7 @@ export default function CardExperience({
             hours={hours}
             cta={hoursCtaUrl}
             position={cardNumberVariation}
+            state={states[state].label}
           />
 
           {cardCount > 1 && (

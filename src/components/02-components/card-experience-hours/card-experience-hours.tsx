@@ -4,12 +4,14 @@ export type CardExperienceHoursProps = {
   hours: number;
   cta?: string;
   position: string;
+  state?: string;
 };
 
 export default function CardExperienceHours({
   hours,
   cta,
   position,
+  state,
 }: CardExperienceHoursProps) {
   const theme = useTheme();
 
@@ -89,7 +91,7 @@ export default function CardExperienceHours({
         {renderedHours}
         {renderedHoursText}
       </Box>
-      {cta ? (
+      {cta && state === "Active" ? (
         <Button sx={buttonStyles} href={cta}>
           Log Time
         </Button>
