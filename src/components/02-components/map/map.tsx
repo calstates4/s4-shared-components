@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { Map, Marker, Popup } from "@vis.gl/react-maplibre";
-// import "maplibre-gl/dist/maplibre-gl.css";
 
 type Location = {
   id: string;
