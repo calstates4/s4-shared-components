@@ -111,6 +111,10 @@ export {
   type OpportunityListProps,
 } from './components/02-components/opportunity-list/opportunity-list';
 export {
+  default as MapField,
+  type MapFieldProps,
+} from './components/02-components/map/map';
+export {
   default as OpportunityPage,
   type OpportunityPageProps,
 } from './components/02-components/opportunity-page/opportunity-page';
