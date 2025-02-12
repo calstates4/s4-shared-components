@@ -1,12 +1,24 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Map, Marker, Popup } from "@vis.gl/react-maplibre";
+import {
+  Box,
+  Button,
+  Typography,
+  useTheme,
+} from '@mui/material';
+import Link from '../../01-elements/link/link';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 type Location = {
   id: string;
   title: string;
-  latitude: number;
-  longitude: number;
-  summary?: string;
+  url: string;
+  latitude: number | null;
+  longitude: number | null;
+  destinationUrl?: string;
+  dates?: string;
+  location?: string;
+  timeCommitment?: string;
 };
 
 export type MapFieldProps = {
@@ -16,47 +28,127 @@ export type MapFieldProps = {
 function MapField({ locations }: MapFieldProps) {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
-  const initialViewState = useMemo(() => ({
-    longitude: locations.length > 0 ? locations[0].longitude : -100,
-    latitude: locations.length > 0 ? locations[0].latitude : 40,
-    zoom: 16,
-  }), [locations]);
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+      .maplibregl-popup {
+        max-width: max-content !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+
+
+  // Filtrar ubicaciones válidas
+  const validLocations = locations.filter(
+    (loc) => loc.latitude !== null && loc.longitude !== null
+  );
+
+  // Obtener la primera ubicación válida
+  const firstValidLocation = validLocations[0];
+
+   // Establecer la vista inicial
+   const initialViewState = useMemo(
+    () => ({
+      longitude: firstValidLocation.longitude ?? -100,
+      latitude: firstValidLocation.latitude ?? 40,
+      zoom: 16,
+    }),
+    [firstValidLocation]
+  );
+
+  const theme = useTheme();
+
+  const subtitleStyles = {
+    pr: theme.spacing(1),
+  };
+
+  const buttonsContainerSyles = {
+    display: 'flex',
+    mt: theme.spacing(2),
+    gap: theme.spacing(1),
+    flexWrap: 'wrap',
+    justifyContent: 'right',
+  };
 
   return (
     <Map
       initialViewState={initialViewState}
       style={{ height: "700px", width: "100%", overflow: "hidden" }}
       mapStyle="https://tiles.openfreemap.org/styles/liberty"
+      // onMove={() => setSelectedLocation(null)}
     >
-      {locations.map((loc) => (
+      {validLocations.map((loc) => (
         <Marker
           key={loc.id}
-          longitude={loc.longitude}
-          latitude={loc.latitude}
+          longitude={loc.longitude ?? -100}
+          latitude={loc.latitude ?? 40}
           onClick={() => setSelectedLocation(loc.id)}
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
-            alt="marker"
-            style={{ width: "20px", height: "20px", cursor: "pointer" }}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: selectedLocation === loc.id ? "70px" : "auto",
+              height: selectedLocation === loc.id ? "70px" : "auto",
+              backgroundColor: selectedLocation === loc.id ? "white" : "transparent",
+              borderRadius: "50%",
+              padding: selectedLocation === loc.id ? "5px" : "0",
+              transition: "0.3s ease-in-out",
+            }}
+          >
+            <LocationOnIcon
+              sx={{
+                color: theme.palette.primary.main,
+                fontSize: "60px",
+              }}
+            />
+          </Box>
         </Marker>
       ))}
 
-      {locations.map(
+      {validLocations.map(
         (loc) =>
           selectedLocation === loc.id && (
             <Popup
               key={loc.id}
-              longitude={loc.longitude}
-              latitude={loc.latitude}
+              longitude={loc.longitude ?? -100}
+              latitude={loc.latitude ?? 40}
               closeOnClick={false}
               onClose={() => setSelectedLocation(null)}
             >
-              <div>
-                <h3>{loc.title}</h3>
-                {loc.summary && <p>{loc.summary}</p>}
-              </div>
+              <Box sx={{ padding: "10px", }}>
+                <Typography variant="h2">{loc.title}</Typography>
+                {loc.location && <Typography sx={subtitleStyles}>{loc.location}</Typography>}
+                {loc.dates && <Typography sx={subtitleStyles}>{loc.dates}</Typography>}
+                {loc.timeCommitment && <Typography sx={subtitleStyles}>{loc.timeCommitment}</Typography>}
+              </Box>
+              <Box sx={buttonsContainerSyles}>
+                <Button
+                  variant="outlined"
+                  component={Link}
+                  href={loc.url}
+                  sx={{ flexShrink: 0 }}
+                >
+                  View details
+                </Button>
+                {loc.destinationUrl && (
+                  <Button
+                    variant="contained"
+                    component={Link}
+                    href={loc.destinationUrl}
+                    sx={{ flexShrink: 0 }}
+                  >
+                    Select
+                  </Button>
+                )}
+              </Box>
             </Popup>
           )
       )}
