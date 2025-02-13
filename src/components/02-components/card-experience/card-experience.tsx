@@ -10,6 +10,7 @@ import {
 import { experienceStatusInfo } from '../../../lib/utils';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 import Link from '../../01-elements/link/link';
+import { differenceInDays, parse } from 'date-fns';
 
 export type CardExperienceProps = {
   id: string;
@@ -20,6 +21,7 @@ export type CardExperienceProps = {
   dateStart: string;
   dateEnd: string;
   location: string;
+  creationDate: string;
   cta: string;
   hasPendingForm: boolean;
   hours: number;
@@ -36,6 +38,7 @@ export default function CardExperience({
   dateStart,
   dateEnd,
   location,
+  creationDate,
   cta,
   hasPendingForm,
   hours,
@@ -43,6 +46,15 @@ export default function CardExperience({
   cardCount,
 }: CardExperienceProps) {
   const theme = useTheme();
+
+  // Convertir la fecha de `creationDate` a un objeto Date
+  const parsedCreationDate = parse(creationDate, 'dd/MM/yyyy', new Date());
+
+  // Calcular la diferencia en días entre hoy y la fecha de creación
+  const daysSinceCreation = differenceInDays(new Date(), parsedCreationDate);
+
+  // Determinar si se debe mostrar el botón (solo si han pasado menos de 14 días)
+  const showEditButton = daysSinceCreation <= 14;
 
   // Variables according to the variant of the number of items
   const position = cardCount === 1 ? 'row' : 'column';
@@ -291,23 +303,6 @@ export default function CardExperience({
             position={cardNumberVariation}
             state={states[state].label}
           />
-
-          {cardCount > 1 && (
-            <Box>
-              <Button
-                sx={{ ...buttonStyles, width: '100%', mt: theme.spacing(4) }}
-                href={cta}
-              >
-                More Details
-              </Button>
-              {states[state].label !== "Active" && states[state].label !== "Archived" && (
-                <Button sx={{ ...buttonStyles, alignSelf: 'flex-start', ml: 2 }} href={states[state].url + id}>
-                  Edit
-                </Button>
-              )}
-            </Box>
-          )}
-
         </Box>
       </Box>
       {cardCount === 1 && (
@@ -316,8 +311,11 @@ export default function CardExperience({
             More Details
           </Button>
 
-          {states[state].label !== "Active" && states[state].label !== "Archived" && (
-            <Button sx={{ ...buttonStyles, alignSelf: 'flex-start', ml: 2 }} href={states[state].url + id}>
+          {showEditButton && states[state].label !== "Archived" && (
+            <Button
+              sx={{ ...buttonStyles, alignSelf: 'flex-start', ml: 2 }}
+              href={`${states[state].url + id}`}
+            >
               Edit
             </Button>
           )}

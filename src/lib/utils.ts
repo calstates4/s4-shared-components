@@ -52,6 +52,7 @@ export function experienceStatusInfo(
     published: {
       color: theme.palette.success.light,
       label: 'Active',
+      url: '/update-experience/summary?experience='
     },
     archived: {
       color: theme.palette.success.dark,
