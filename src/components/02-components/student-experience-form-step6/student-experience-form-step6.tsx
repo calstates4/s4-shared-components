@@ -14,6 +14,7 @@ export type StudentExperienceFormStep6Props = {
 };
 
 export default function StudentExperienceFormStep6({
+  experienceId,
   opportunityName,
   programName,
   courseName,
@@ -139,13 +140,27 @@ export default function StudentExperienceFormStep6({
               </Typography>
               <Typography variant="body1">
                 If you need to make any changes or updates to this experience,
-                reach out to your campus program office for assistance. You can
-                access your process from the experience list.
+                you have two weeks from today's date to do so. You can access
+                your process from the experience list and make any necessary
+                updates.
               </Typography>
             </Stack>
-            <Button type="button" variant="contained" href="/experiences">
-              VIEW MY EXPERIENCES
-            </Button>
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'left',
+            }}>
+              <Button
+                type="button"
+                href={`/update-experience/duration?experience=${experienceId}`}
+                variant="outlined"
+                sx={{ mr: 1, float: 'right' }}
+              >
+                Edit Experience
+              </Button>
+              <Button type="button" variant="contained" href="/experiences">
+                VIEW MY EXPERIENCES
+              </Button>
+            </Box>
           </Box>
         </Stack>
       </Paper>
