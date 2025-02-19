@@ -101,6 +101,8 @@ export type OfferingFormProps = {
   defaultMaxStudents?: number;
   defaultStartDate?: string;
   defaultEndDate?: string;
+  defaultApplicationStartDate?: string;
+  defaultApplicationEndDate?: string;
   defaultPrimaryContact?: string;
   defaultTimeApprovers?: string[];
   defaultFormSigners?: string[];
@@ -172,6 +174,8 @@ export default function OfferingForm({
   defaultMaxStudents,
   defaultStartDate,
   defaultEndDate,
+  defaultApplicationStartDate,
+  defaultApplicationEndDate,
   defaultDescription,
   defaultHealthSafetyInformation,
   defaultTraining,
@@ -201,6 +205,7 @@ export default function OfferingForm({
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
   const [startDate, setStartDate] = useState(defaultStartDate);
+  const [applicationstartDate, setApplicationStartDate] = useState(defaultApplicationStartDate);
   const [requiresApproval, setRequiresApproval] = useState(
     defaultRequiresApproval,
   );
@@ -327,6 +332,10 @@ export default function OfferingForm({
 
   function handleStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value);
+  }
+
+  function handleApplicationStartDateOnChange(event: ChangeEvent<HTMLInputElement>) {
+    setApplicationStartDate(event.target.value);
   }
 
   function onChangeRequiresApprovalHandler(
@@ -942,20 +951,58 @@ export default function OfferingForm({
             />
 
             {requiresApproval && (
-              <TextField
-                required
-                fullWidth
-                multiline
-                maxRows={4}
-                id="offering-application-instructions"
-                name="offering-application-instructions"
-                label="Application Instructions"
-                defaultValue={defaultApplicationInstructions ?? undefined}
-                sx={formFieldStyles}
-                error={errors.offeringApplicationInstructions}
-                helperText={errors.offeringApplicationInstructions ? "This field is required" : ""}
-                onChange={event => setErrors({...errors, offeringApplicationInstructions: event.target.value === ''})}
-              />
+              <>
+                <Box component="fieldset" sx={fieldSetStyles} style={{display: 'flex', marginBottom: '1rem'}}>
+                  <legend>Application Period</legend>
+                  <TextField
+                    type="date"
+                    id="application-period-start-date"
+                    name="application-period-start-date"
+                    label="Start date"
+                    onChange={handleApplicationStartDateOnChange}
+                    defaultValue={defaultApplicationStartDate ?? undefined}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    inputProps={{
+                      pattern: 'd{4}-d{2}-d{2}',
+                    }}
+                    sx={[formFieldStyles, rightSpace]}
+                  />
+
+                  {applicationstartDate && (
+                    <TextField
+                      type="date"
+                      id="application-period-end-date"
+                      name="application-period-end-date"
+                      label="End date"
+                      defaultValue={defaultApplicationEndDate ?? undefined}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      inputProps={{
+                        min: applicationstartDate,
+                        pattern: 'd{4}-d{2}-d{2}',
+                      }}
+                      sx={formFieldStyles}
+                    />
+                  )}
+                </Box>
+                <TextField
+                  required
+                  fullWidth
+                  multiline
+                  maxRows={4}
+                  id="offering-application-instructions"
+                  name="offering-application-instructions"
+                  label="Application Instructions"
+                  defaultValue={defaultApplicationInstructions ?? undefined}
+                  sx={formFieldStyles}
+                  error={errors.offeringApplicationInstructions}
+                  helperText={errors.offeringApplicationInstructions ? "This field is required" : ""}
+                  onChange={event => setErrors({...errors, offeringApplicationInstructions: event.target.value === ''})}
+                />
+              </>
             )}
 
             {departments && (
