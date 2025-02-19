@@ -25,6 +25,8 @@ export type OfferingPageProps = {
   preferredLanguages?: string;
   startDate: string;
   endDate: string;
+  applicationStartDate: string;
+  applicationEndDate: string;
   primaryContact: string;
   timeApprovers: string;
   formSigners: string;
@@ -53,6 +55,8 @@ export default function OfferingPage({
   preferredLanguages,
   startDate,
   endDate,
+  applicationStartDate,
+  applicationEndDate,
   primaryContact,
   timeApprovers,
   formSigners,
@@ -266,20 +270,31 @@ export default function OfferingPage({
                 <dd>{`End: ${endDate}`}</dd>
               </Box>
             </Box>
-            <Box sx={inlineDefinitionListStyles} component="dl">
-              {requiredLanguages && (
-                <div>
-                  <dt>Required Language(s) other than English: </dt>
-                  <dd>{requiredLanguages}</dd>
-                </div>
-              )}
-              {preferredLanguages && (
-                <div>
-                  <dt>Preferred Language(s) other than English: </dt>
-                  <dd>{preferredLanguages}</dd>
-                </div>
-              )}
-            </Box>
+            {applicationStartDate && (
+              <>
+                <Box sx={definitionListContainerStyles}>
+                  <Box sx={definitionListStyles} component="dl">
+                    <dt>Application Pediod: </dt>
+                    <dd>{`Start: ${applicationStartDate}`}</dd>
+                    <dd>{`End: ${applicationEndDate}`}</dd>
+                  </Box>
+                </Box>
+                <Box sx={inlineDefinitionListStyles} component="dl">
+                  {requiredLanguages && (
+                    <div>
+                      <dt>Required Language(s) other than English: </dt>
+                      <dd>{requiredLanguages}</dd>
+                    </div>
+                  )}
+                  {preferredLanguages && (
+                    <div>
+                      <dt>Preferred Language(s) other than English: </dt>
+                      <dd>{preferredLanguages}</dd>
+                    </div>
+                  )}
+                </Box>
+              </>
+            )}
           </Box>
           <Box
             sx={{ ...rightColumnContainerStyles, ...contactContainerStyles }}
