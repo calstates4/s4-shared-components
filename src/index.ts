@@ -133,6 +133,10 @@ export {
   default as PastExperiencesList,
   type PastExperiencesListProps,
 } from './components/02-components/past-experiences-list/past-experiences-list';
+export {
+  default as OrganizationFacultyList,
+  type OrganizationFacultyListProps,
+} from './components/02-components/organization-faculty-list/organization-faculty-list';
 export { default as Placeholder } from './components/02-components/placeholder/placeholder';
 export {
   default as ProgramCard,
