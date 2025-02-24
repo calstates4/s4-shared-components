@@ -134,6 +134,10 @@ export {
   type PastExperiencesListProps,
 } from './components/02-components/past-experiences-list/past-experiences-list';
 export {
+  default as OrganizationFacultyCard,
+  type OrganizationFacultyCardProps,
+} from './components/02-components/organization-faculty-card/organization-faculty-card';
+export {
   default as OrganizationFacultyList,
   type OrganizationFacultyListProps,
 } from './components/02-components/organization-faculty-list/organization-faculty-list';
