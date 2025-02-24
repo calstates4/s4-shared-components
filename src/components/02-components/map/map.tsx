@@ -50,13 +50,13 @@ function MapField({ locations }: MapFieldProps) {
   );
 
   // Obtener la primera ubicación válida
-  const firstValidLocation = validLocations[0];
+  const firstValidLocation = validLocations.length > 0 ? validLocations[0] : null;
 
    // Establecer la vista inicial
    const initialViewState = useMemo(
     () => ({
-      longitude: firstValidLocation.longitude ?? -100,
-      latitude: firstValidLocation.latitude ?? 40,
+      longitude: firstValidLocation?.longitude ?? -100,
+      latitude: firstValidLocation?.latitude ?? 40,
       zoom: 16,
     }),
     [firstValidLocation]
@@ -83,74 +83,82 @@ function MapField({ locations }: MapFieldProps) {
       mapStyle="https://tiles.openfreemap.org/styles/liberty"
       // onMove={() => setSelectedLocation(null)}
     >
-      {validLocations.map((loc) => (
-        <Marker
-          key={loc.id}
-          longitude={loc.longitude ?? -100}
-          latitude={loc.latitude ?? 40}
-          onClick={() => setSelectedLocation(loc.id)}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: selectedLocation === loc.id ? "70px" : "auto",
-              height: selectedLocation === loc.id ? "70px" : "auto",
-              backgroundColor: selectedLocation === loc.id ? "white" : "transparent",
-              borderRadius: "50%",
-              padding: selectedLocation === loc.id ? "5px" : "0",
-              transition: "0.3s ease-in-out",
-            }}
-          >
-            <LocationOnIcon
-              sx={{
-                color: theme.palette.primary.main,
-                fontSize: "60px",
-              }}
-            />
-          </Box>
-        </Marker>
-      ))}
-
-      {validLocations.map(
-        (loc) =>
-          selectedLocation === loc.id && (
-            <Popup
+            {validLocations.length > 0 ? (
+        <>
+          {validLocations.map((loc) => (
+            <Marker
               key={loc.id}
-              longitude={loc.longitude ?? -100}
-              latitude={loc.latitude ?? 40}
-              closeOnClick={false}
-              onClose={() => setSelectedLocation(null)}
+              longitude={loc.longitude!}
+              latitude={loc.latitude!}
+              onClick={() => setSelectedLocation(loc.id)}
             >
-              <Box sx={{ padding: "10px", }}>
-                <Typography variant="h2">{loc.title}</Typography>
-                {loc.location && <Typography sx={subtitleStyles}>{loc.location}</Typography>}
-                {loc.dates && <Typography sx={subtitleStyles}>{loc.dates}</Typography>}
-                {loc.timeCommitment && <Typography sx={subtitleStyles}>{loc.timeCommitment}</Typography>}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: selectedLocation === loc.id ? "70px" : "auto",
+                  height: selectedLocation === loc.id ? "70px" : "auto",
+                  backgroundColor: selectedLocation === loc.id ? "white" : "transparent",
+                  borderRadius: "50%",
+                  padding: selectedLocation === loc.id ? "5px" : "0",
+                  transition: "0.3s ease-in-out",
+                }}
+              >
+                <LocationOnIcon
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontSize: "60px",
+                  }}
+                />
               </Box>
-              <Box sx={buttonsContainerSyles}>
-                <Button
-                  variant="outlined"
-                  component={Link}
-                  href={loc.url}
-                  sx={{ flexShrink: 0 }}
+            </Marker>
+          ))}
+
+          {validLocations.map(
+            (loc) =>
+              selectedLocation === loc.id && (
+                <Popup
+                  key={loc.id}
+                  longitude={loc.longitude!}
+                  latitude={loc.latitude!}
+                  closeOnClick={false}
+                  onClose={() => setSelectedLocation(null)}
                 >
-                  View details
-                </Button>
-                {loc.destinationUrl && (
-                  <Button
-                    variant="contained"
-                    component={Link}
-                    href={loc.destinationUrl}
-                    sx={{ flexShrink: 0 }}
-                  >
-                    Select
-                  </Button>
-                )}
-              </Box>
-            </Popup>
-          )
+                  <Box sx={{ padding: "10px" }}>
+                    <Typography variant="h2">{loc.title}</Typography>
+                    {loc.location && <Typography sx={subtitleStyles}>{loc.location}</Typography>}
+                    {loc.dates && <Typography sx={subtitleStyles}>{loc.dates}</Typography>}
+                    {loc.timeCommitment && <Typography sx={subtitleStyles}>{loc.timeCommitment}</Typography>}
+                  </Box>
+                  <Box sx={buttonsContainerSyles}>
+                    <Button
+                      variant="outlined"
+                      component={Link}
+                      href={loc.url}
+                      sx={{ flexShrink: 0 }}
+                    >
+                      View details
+                    </Button>
+                    {loc.destinationUrl && (
+                      <Button
+                        variant="contained"
+                        component={Link}
+                        href={loc.destinationUrl}
+                        sx={{ flexShrink: 0 }}
+                      >
+                        Select
+                      </Button>
+                    )}
+                  </Box>
+                </Popup>
+              )
+          )}
+        </>
+      ) : (
+        <Typography sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          No locations available.
+        </Typography>
       )}
     </Map>
   );
