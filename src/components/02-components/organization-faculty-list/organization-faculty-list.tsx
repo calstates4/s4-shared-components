@@ -112,7 +112,7 @@ export default function OrganizationFacultyList({
               name="organization-industry-type"
               label="Industry Type"
               options={industryFilterValues}
-              selected={currentFilters.course}
+              selected={currentFilters.industry}
               sx={formItemStyles}
             />
           )}
