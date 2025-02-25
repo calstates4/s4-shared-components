@@ -17,7 +17,7 @@ export const Default: StoryObj<typeof OrganizationFacultyCard> = {
     description:
       'Et cillum aute voluptate et anim aute aliqua commodo dolor quis mollit sit. Nisi labore reprehenderit sint ad. Laboris aliquip excepteur fugiat minim nulla cupidatat cupidatat commodo tempor occaecat dolor voluptate.',
     url: '#',
-    industryType: 'Human, Social, Employment Services (Nonprofit) ',
+    type: 'Human, Social, Employment Services (Nonprofit) ',
     focusPopulation: 'People Experiencing Disability, Seniors, People Experiencing Material Poverty',
     focusAreas: 'Civic Engagement, Construction, Emergency Services & Public Safety, Health & Medicine',
   },

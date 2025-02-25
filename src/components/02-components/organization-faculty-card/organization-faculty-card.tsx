@@ -1,4 +1,3 @@
-import {ElementType} from 'react';
 import {
   Box,
   Button,
@@ -13,12 +12,12 @@ import Link from '../../01-elements/link/link';
 export type OrganizationFacultyCardProps = {
   id: string;
   title: string;
-  address: string;
-  description: string;
   url: string;
-  industryType: string;
-  focusPopulation: string;
-  focusAreas: string;
+  address?: string;
+  description?: string;
+  type?: string;
+  focusPopulation?: string;
+  focusAreas?: string;
 };
 
 export default function OrganizationFacultyCard({
@@ -26,7 +25,7 @@ export default function OrganizationFacultyCard({
   address,
   description,
   url,
-  industryType,
+  type,
   focusPopulation,
   focusAreas,
 }: OrganizationFacultyCardProps) {
@@ -114,8 +113,8 @@ export default function OrganizationFacultyCard({
             <Typography component="h2" variant="h1" sx={{ color: 'primary.dark', }}>
               { title }
             </Typography>
-            <Typography sx={iconLabel}><FmdGoodIcon sx={iconStyles} />{address}</Typography>
-            <div dangerouslySetInnerHTML={{ __html: description }} />
+            {address && <Typography sx={iconLabel}><FmdGoodIcon sx={iconStyles} />{address}</Typography>}
+            {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
             <Button
               variant="outlined"
               component={Link}
@@ -129,18 +128,24 @@ export default function OrganizationFacultyCard({
             sx={{ ...rightColumnContainerStyles, ...contactContainerStyles }}
           >
             <Box sx={inlineDefinitionListStyles} component="dl">
-              <div>
-                <dt>Type: </dt>
-                <dd>{industryType}</dd>
-              </div>
-              <div>
-                <dt>Population: </dt>
-                <dd>{focusPopulation}</dd>
-              </div>
-              <div>
-                <dt>Areas: </dt>
-                <dd>{focusAreas}</dd>
-              </div>
+              {type && (
+                <div>
+                  <dt>Type: </dt>
+                  <dd>{type}</dd>
+                </div>
+              )}
+              {focusPopulation && (
+                <div>
+                  <dt>Population: </dt>
+                  <dd>{focusPopulation}</dd>
+                </div>
+              )}
+              {focusAreas && (
+                <div>
+                  <dt>Areas: </dt>
+                  <dd>{focusAreas}</dd>
+                </div>
+              )}
             </Box>
           </Box>
         </Box>
