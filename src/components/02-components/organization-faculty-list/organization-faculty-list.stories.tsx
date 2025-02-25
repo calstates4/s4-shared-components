@@ -57,28 +57,11 @@ const cities = [
 
 export const Default: StoryObj<typeof OrganizationFacultyList> = {
   args: {
-    breadcrumb: [
-      {
-        title: 'Opportunities',
-        url: '#',
-      },
-    ],
     url: '#',
     children: opportunities,
-    listView: true,
     totalItems: 30,
     itemsPerPage: 6,
     currentPage: 3,
-    programFilterValues: [
-      {
-        id: 'all',
-        label: 'All Campus programs',
-      },
-      {
-        id: '1',
-        label: 'My programs',
-      },
-    ],
     industryFilterValues: [
       {
         id: '1',
@@ -98,25 +81,12 @@ export const Default: StoryObj<typeof OrganizationFacultyList> = {
       { id: 'remote', label: 'Remote' },
       { id: 'hybrid', label: 'Hybrid' },
     ],
-    termFilterValues: [
-      {
-        id: '1',
-        label: 'Fall 2023',
-      },
-      {
-        id: '2',
-        label: 'Winter 2023',
-      },
-    ],
-
     focusPopulationFilterValues: focusPopulations,
     focusAreaFilterValues: focusAreas,
     cityFilterValues: cities,
     currentFilters: {
-      program: '1',
-      course: null,
       type: null,
-      term: null,
+      industry: null,
       focusPopulation: null,
       focusArea: null,
       city: null,
