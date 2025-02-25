@@ -24,12 +24,9 @@ export type OrganizationFacultyListProps = {
   focusAreaFilterValues?: AutocompleteOptionType[];
   cityFilterValues?: AutocompleteOptionType[];
   currentFilters: {
-    program: string | null;
-    course: string | null;
     type: string | null;
-    term: string | null;
+    industry: string | null;
     focusPopulation: string | null;
-    category : string | null;
     focusArea: string | null;
     city: string | null;
     keyword: string | null;
