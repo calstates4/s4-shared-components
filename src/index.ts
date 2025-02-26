@@ -128,6 +128,10 @@ export {
   default as OrganizationPage,
   type OrganizationPageProps,
 } from './components/02-components/organization-page/organization-page';
+export {
+  default as OrganizationFacultyPage,
+  type OrganizationFacultyPageProps,
+} from './components/02-components/organization-faculty-page/organization-faculty-page';
 export { default as PartnerOnboardingConfirm } from './components/02-components/partner-onboarding-confirm/partner-onboarding-confirm';
 export {
   default as PastExperiencesList,
