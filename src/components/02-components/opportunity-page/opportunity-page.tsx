@@ -19,6 +19,7 @@ export type OpportunityPageProps = {
   training: string;
   other: string;
   risk: string;
+  facultyUrl?: string;
 };
 
 export default function OpportunityPage({
@@ -34,6 +35,7 @@ export default function OpportunityPage({
   training,
   other,
   risk,
+  facultyUrl,
 }: OpportunityPageProps) {
   const theme = useTheme();
 
@@ -144,6 +146,16 @@ export default function OpportunityPage({
                 sx={{ flexShrink: 0, fontWeight: '700' }}
               >
                 Select
+              </Button>
+            )}
+            {facultyUrl && (
+              <Button
+                variant="contained"
+                component={Link}
+                href={facultyUrl}
+                sx={{ flexShrink: 0, fontWeight: '700', mt: theme.spacing(3) }}
+              >
+                Add to course
               </Button>
             )}
           </Box>

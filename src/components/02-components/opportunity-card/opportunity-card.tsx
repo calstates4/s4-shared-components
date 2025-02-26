@@ -10,7 +10,6 @@ import {
   useTheme,
 } from '@mui/material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import CheckCircleOutline from '@mui/icons-material/CheckCircleOutline';
 import Link from '../../01-elements/link/link';
 
 export type OpportunityCardProps = {
@@ -27,6 +26,7 @@ export type OpportunityCardProps = {
   cardSelected?: boolean;
   requirements?: string;
   approvalState?: boolean;
+  facultyUrl?: string;
 };
 
 export default function OpportunityCard({
@@ -43,6 +43,7 @@ export default function OpportunityCard({
   cardSelected,
   requirements,
   approvalState,
+  facultyUrl,
 }: OpportunityCardProps) {
   const theme = useTheme();
 
@@ -215,6 +216,16 @@ export default function OpportunityCard({
             >
               View details
             </Button>
+            {facultyUrl && (
+              <Button
+                variant="outlined"
+                component={Link}
+                href={facultyUrl}
+                sx={{ flexShrink: 0 }}
+              >
+                Add to course
+              </Button>
+            )}
             {!cardSelected && destinationUrl && (
               <Button
                 variant="contained"
