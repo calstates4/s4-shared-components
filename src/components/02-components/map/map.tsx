@@ -19,6 +19,7 @@ type Location = {
   dates?: string;
   location?: string;
   timeCommitment?: string;
+  facultyUrl?: string;
 };
 
 export type MapFieldProps = {
@@ -140,6 +141,16 @@ function MapField({ locations }: MapFieldProps) {
                     >
                       View details
                     </Button>
+                    {loc.facultyUrl && (
+                      <Button
+                        variant="outlined"
+                        component={Link}
+                        href={loc.facultyUrl}
+                        sx={{ flexShrink: 0 }}
+                      >
+                        Add to Course
+                      </Button>
+                    )}
                     {loc.destinationUrl && (
                       <Button
                         variant="contained"
