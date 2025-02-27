@@ -139,7 +139,7 @@ export default function PartnerExperienceDetailsPage({
 
   const stateStyles = {
     marginTop: theme.spacing(2),
-    backgroundColor: states[state].color,
+    backgroundColor: '#d7ffd1',
     px: theme.spacing(1),
     borderRadius: '4px',
     [theme.breakpoints.up('md')]: {
