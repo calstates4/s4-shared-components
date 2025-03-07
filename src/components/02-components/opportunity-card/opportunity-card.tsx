@@ -26,7 +26,9 @@ export type OpportunityCardProps = {
   cardSelected?: boolean;
   requirements?: string;
   approvalState?: boolean;
-  facultyUrl?: string;
+  courseId?: string;
+  facultyPages?: boolean;
+  coursesList?: string;
 };
 
 export default function OpportunityCard({
@@ -43,7 +45,9 @@ export default function OpportunityCard({
   cardSelected,
   requirements,
   approvalState,
-  facultyUrl,
+  courseId,
+  facultyPages,
+  coursesList,
 }: OpportunityCardProps) {
   const theme = useTheme();
 
@@ -169,6 +173,9 @@ export default function OpportunityCard({
               {termPeriod && (
                 <Typography sx={subtitleStyles}>{termPeriod}</Typography>
               )}
+              {facultyPages && coursesList && (
+                  <Typography sx={subtitleStyles}>In Courses: {coursesList}</Typography>
+              )}
 
               {approvalState && (
                 <Typography
@@ -216,15 +223,17 @@ export default function OpportunityCard({
             >
               View details
             </Button>
-            {facultyUrl && (
-              <Button
-                variant="outlined"
-                component={Link}
-                href={facultyUrl}
-                sx={{ flexShrink: 0 }}
-              >
-                Add to course
-              </Button>
+            {courseId && (
+              <form method="post">
+                <input type="hidden" name="opportunityId" value={id} />
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  sx={{ flexShrink: 0 }}
+                >
+                  Add to course
+                </Button>
+              </form>
             )}
             {!cardSelected && destinationUrl && (
               <Button
