@@ -10,7 +10,7 @@ import React from 'react';
 export type DataTableProps = {
   rows: GridRowsProp;
   columns: GridColDef[];
-  toolbar: React.FC;
+  toolbar?: React.FC;
   filters?: GridFilterModel;
   hideCols?: GridColumnVisibilityModel;
 };
@@ -36,7 +36,9 @@ export default function DataTable({
           const selectedIds = ids;
           setSelectedIds(selectedIds);
         }}
-        slots={{ toolbar: () => <CustomToolbar /> }}
+        slots={{
+          toolbar: CustomToolbar ? () => <CustomToolbar /> : undefined,
+        }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

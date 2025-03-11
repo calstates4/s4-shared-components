@@ -58,6 +58,7 @@ export { default as GridToolbarExtraButton } from './components/02-components/da
 export { default as GridToolbar } from './components/02-components/data-table/data-table-toolbar.generic';
 export {
   coursesTableColumns,
+  coursesDashboardTableColumns,
   enrolledStudentsTableColumns,
   experiencesTableColumns,
   reportStudentsTableColumns,
@@ -185,6 +186,7 @@ export { default as Wrapper } from './components/02-components/wrapper/wrapper';
 // Layout.
 export { default as PageLayout } from './components/03-layouts/page-layout/page-layout';
 export { default as TwoColumnLayout } from './components/03-layouts/two-column-layout/two-column-layout';
+export { default as TwoColumnLayoutFaculty } from './components/03-layouts/two-column-layout-faculty/two-column-layout-faculty';
 // Pages
 export {
   default as DepartmentForm,

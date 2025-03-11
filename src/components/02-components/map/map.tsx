@@ -19,7 +19,7 @@ type Location = {
   dates?: string;
   location?: string;
   timeCommitment?: string;
-  facultyUrl?: string;
+  courseId?: string;
 };
 
 export type MapFieldProps = {
@@ -141,11 +141,11 @@ function MapField({ locations }: MapFieldProps) {
                     >
                       View details
                     </Button>
-                    {loc.facultyUrl && (
+                    {loc.courseId && (
                       <Button
                         variant="outlined"
                         component={Link}
-                        href={loc.facultyUrl}
+                        href={loc.courseId}
                         sx={{ flexShrink: 0 }}
                       >
                         Add to Course

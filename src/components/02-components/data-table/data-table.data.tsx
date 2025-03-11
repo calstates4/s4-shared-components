@@ -445,6 +445,22 @@ export const coursesTableColumns = [
   },
 ];
 
+export const coursesDashboardTableColumns = [
+  { field: 'term', headerName: 'Term', width: 100 },
+  {
+    field: 'courseName',
+    headerName: 'Course Name',
+    width: 300,
+    type: 'actions',
+    disableExport: true,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={params.row.linkCourse}>{params.row.courseName}</Link>
+    ),
+  },
+  { field: 'program', headerName: 'Program', width: 200 },
+  { field: 'enrollment', headerName: 'Enrollment', width: 100 },
+];
+
 export const enrolledStudentsTableRows = [
   {
     id: 1,
