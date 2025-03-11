@@ -224,6 +224,10 @@ export {
   type PartnerExperienceDetailsPageProps,
 } from './components/04-pages/partners/organization/experiences/experience-details/experience-details';
 export {
+  default as FacultyExperienceDetailsPage,
+  type FacultyExperienceDetailsPageProps,
+} from './components/04-pages/faculty/experiences/experience-details/experience-details';
+export {
   default as StepsBar,
   type StepsProps,
 } from './components/02-components/steps-bar/steps-bar';
