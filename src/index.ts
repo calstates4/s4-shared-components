@@ -174,6 +174,11 @@ export {
   type TimeLogEntryProps,
   type TimeLogTableProps,
 } from './components/02-components/time-log-table/time-log-table';
+export {
+  default as FacultyTimeLogTable,
+  type FacultyTimeLogEntryProps,
+  type FacultyTimeLogTableProps,
+} from './components/02-components/faculty-time-log-table/faculty-time-log-table';
 export { default as TimezoneField } from './components/02-components/timezone-field/timezone-field';
 export { default as TopBar } from './components/02-components/topbar/topbar';
 export { default as UserProfileForm } from './components/02-components/user-profile-form/user-profile-form';

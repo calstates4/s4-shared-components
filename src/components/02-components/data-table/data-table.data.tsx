@@ -495,7 +495,7 @@ export const enrolledStudentsTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <ul>
+      <ul style={{ listStyleType: 'none' }}>
         {params.row.experienceData.map((item: {cid: string, eid: string, oppName: string}, index: number) => (
           <li key={index}>
             <Link
