@@ -495,11 +495,11 @@ export const enrolledStudentsTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <ul>
+      <ul style={{ listStyleType: 'none' }}>
         {params.row.experienceData.map((item: {cid: string, eid: string, oppName: string}, index: number) => (
           <li key={index}>
             <Link
-              href={'/course/' + item.cid + '/experience/' + item.eid}
+              href={'/courses/' + item.cid + '/experience/' + item.eid}
             >
               #{item.eid} - {item.oppName}
             </Link>
@@ -571,7 +571,7 @@ export const reportStudentsTableColumns = [
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
       <Link
-        href={'/course/' + params.row.experienceData.cid + '/experience/' + params.row.experienceData.eid}
+        href={'/courses/' + params.row.experienceData.cid + '/experience/' + params.row.experienceData.eid}
       >
         {params.row.experienceData.expName}
       </Link>
