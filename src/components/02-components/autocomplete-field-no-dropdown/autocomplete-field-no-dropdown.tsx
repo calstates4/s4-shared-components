@@ -33,8 +33,8 @@ export default function AutocompleteFieldNoDropdown({
   onChange,
 }: AutocompleteFieldNoDropdownProps) {
   const [inputValue, setInputValue] = useState('');
-  const [open, setOpen] = useState(false); // Controla la apertura del dropdown
-  const [filteredOptions, setFilteredOptions] = useState(options); // Estado para las opciones filtradas
+  const [open, setOpen] = useState(false);
+  const [filteredOptions, setFilteredOptions] = useState<AutocompleteOptionTypeNoDropdown[]>([]);
 
   useEffect(() => {
     if (selected) {
@@ -47,32 +47,33 @@ export default function AutocompleteFieldNoDropdown({
     setTimeout(() => setOpen(false), 100); // 🔥 Cierra el dropdown después de la carga inicial
   }, [selected, options]);
 
-  function onChangeHandler(event: SyntheticEvent, value: AutocompleteOptionTypeNoDropdown | string | null) {
-    if (typeof value === 'string') {
-      setInputValue(value);
-      setOpen(value.length > 0); // Solo abrir si hay texto
-      if (onChange) onChange(event, null);
-    } else {
-      setInputValue(value?.label ?? '');
-      setOpen(false); // Cierra dropdown al seleccionar un valor
-      if (onChange) onChange(event, value);
-    }
-  }
-
   function handleInputChange(event: SyntheticEvent, newInputValue: string) {
     setInputValue(newInputValue);
 
-    // 🔥 Filtrar opciones en tiempo real
-    if (newInputValue.length > 0) {
-      setFilteredOptions(
-        options.filter((option) =>
-          option.label.toLowerCase().includes(newInputValue.toLowerCase())
-        )
-      );
-      setOpen(true);
-    } else {
-      setFilteredOptions(options); // Restablecer opciones si el input está vacío
+    if (newInputValue.length < 2) {
+      setFilteredOptions([]); // 🔥 No mostrar opciones hasta que haya 2+ letras
       setOpen(false);
+      return;
+    }
+
+    // 🔥 Filtrar opciones solo si hay 2 o más letras
+    const filtered = options.filter((option) =>
+      option.label.toLowerCase().includes(newInputValue.toLowerCase())
+    );
+
+    setFilteredOptions(filtered);
+    setOpen(filtered.length > 0);
+  }
+
+  function onChangeHandler(event: SyntheticEvent, value: AutocompleteOptionTypeNoDropdown | string | null) {
+    if (typeof value === 'string') {
+      setInputValue(value);
+      setOpen(value.length >= 2);
+      if (onChange) onChange(event, null);
+    } else {
+      setInputValue(value?.label ?? '');
+      setOpen(false);
+      if (onChange) onChange(event, value);
     }
   }
 
@@ -80,12 +81,12 @@ export default function AutocompleteFieldNoDropdown({
     <>
       <Autocomplete
         id={id}
-        options={filteredOptions} // 🔥 Usamos las opciones filtradas
+        options={filteredOptions} // 🔥 Solo muestra opciones si hay 2+ letras
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.label)}
-        freeSolo={true} // Permite escritura libre
-        open={open} // 🔥 Controlamos manualmente si se muestra el dropdown
-        onOpen={() => setOpen(inputValue.length > 0)} // Solo abrir si hay texto
-        onClose={() => setOpen(false)} // Cierra el dropdown cuando haga clic afuera
+        freeSolo={true}
+        open={open}
+        onOpen={() => setOpen(inputValue.length >= 2)} // 🔥 Evita que se abra con 1 sola letra
+        onClose={() => setOpen(false)}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -99,7 +100,7 @@ export default function AutocompleteFieldNoDropdown({
           />
         )}
         value={inputValue}
-        onInputChange={handleInputChange} // 🔥 Manejo centralizado de cambios
+        onInputChange={handleInputChange}
         onChange={onChangeHandler}
         sx={sx}
         noOptionsText="No options match your search"
