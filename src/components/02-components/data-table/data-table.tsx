@@ -10,9 +10,10 @@ import React from 'react';
 export type DataTableProps = {
   rows: GridRowsProp;
   columns: GridColDef[];
-  toolbar: React.FC;
+  toolbar?: React.FC;
   filters?: GridFilterModel;
   hideCols?: GridColumnVisibilityModel;
+  showSelectionModel?: boolean;
 };
 
 export default function DataTable({
@@ -21,6 +22,7 @@ export default function DataTable({
   toolbar: CustomToolbar,
   filters,
   hideCols,
+  showSelectionModel,
 }: DataTableProps) {
   const theme = useTheme();
   const [selectedIds, setSelectedIds] = React.useState([]);
@@ -31,12 +33,14 @@ export default function DataTable({
         autoHeight
         getRowHeight={() => 'auto'}
         columns={columns}
-        checkboxSelection
+        checkboxSelection={showSelectionModel ?? true}
         onRowSelectionModelChange={(ids:any) => {
           const selectedIds = ids;
           setSelectedIds(selectedIds);
         }}
-        slots={{ toolbar: () => <CustomToolbar /> }}
+        slots={{
+          toolbar: CustomToolbar ? () => <CustomToolbar /> : undefined,
+        }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

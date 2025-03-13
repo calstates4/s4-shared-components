@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import StudentExperienceForm from './student-experience-form';
-import OpportunityCard, {
-  type OpportunityCardProps,
-} from '../opportunity-card/opportunity-card';
+import OpportunityCard from '../opportunity-card/opportunity-card';
 import StepsBar from "../steps-bar/steps-bar";
 import React from "react";
 
