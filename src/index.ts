@@ -21,6 +21,10 @@ export {
   type AutocompleteOptionType,
 } from './components/02-components/autocomplete-field/autocomplete-field';
 export {
+  default as AutocompleteFieldNoDropdown,
+  type AutocompleteOptionTypeNoDropdown,
+} from './components/02-components/autocomplete-field-no-dropdown/autocomplete-field-no-dropdown';
+export {
   default as AutocompletesDependecyFields,
   type AutocompleteDependencyOptionType,
 } from './components/02-components/autocompletes-dependecy-fields/autocompletes-dependecy-fields';

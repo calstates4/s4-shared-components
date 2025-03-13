@@ -14,6 +14,9 @@ import Pager from '../../01-elements/pager/pager';
 import AutocompleteField, {
   type AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
+import AutocompleteFieldNoDropdown, {
+  AutocompleteOptionTypeNoDropdown,
+} from '../autocomplete-field-no-dropdown/autocomplete-field-no-dropdown';
 
 export type OpportunityListProps = {
   breadcrumb: {
@@ -36,6 +39,7 @@ export type OpportunityListProps = {
   categoryFilterValues?: AutocompleteOptionType[];
   focusAreaFilterValues?: AutocompleteOptionType[];
   cityFilterValues?: AutocompleteOptionType[];
+  organizationByCampus?: AutocompleteOptionTypeNoDropdown[];
   currentFilters: {
     program: string | null;
     course: string | null;
@@ -46,6 +50,7 @@ export type OpportunityListProps = {
     focusArea: string | null;
     city: string | null;
     keyword: string | null;
+    organization: string | null;
   };
 };
 
@@ -67,6 +72,7 @@ export default function OpportunityList({
   categoryFilterValues,
   focusAreaFilterValues,
   cityFilterValues,
+  organizationByCampus,
   currentFilters,
 }: OpportunityListProps) {
   const theme = useTheme();
@@ -215,6 +221,17 @@ export default function OpportunityList({
           label="City"
           options={cityFilterValues}
           selected={currentFilters.city}
+          sx={formItemStyles}
+        />
+      )}
+
+      {organizationByCampus && (
+        <AutocompleteFieldNoDropdown
+          id="opportunity-organization"
+          name="opportunity-organization"
+          label="Organization"
+          options={organizationByCampus}
+          selected={currentFilters.organization}
           sx={formItemStyles}
         />
       )}

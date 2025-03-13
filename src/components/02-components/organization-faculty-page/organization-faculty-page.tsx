@@ -8,6 +8,7 @@ import Link from '../../01-elements/link/link';
 import Pager from '../../01-elements/pager/pager';
 
 export type OrganizationFacultyPageProps = {
+  filterUrl: string;
   title: string;
   url: string;
   description?: string;
@@ -44,6 +45,7 @@ export type OrganizationFacultyPageProps = {
 };
 
 export default function OrganizationFacultyPage({
+  filterUrl,
   title,
   url,
   description,
@@ -214,7 +216,15 @@ export default function OrganizationFacultyPage({
         <Typography variant="h1" color="primary.main" sx={titleStyles}>
           {title}
         </Typography>
-      </Box>
+        <Button
+          variant="contained"
+          component={Link}
+          href={filterUrl}
+          sx={{ flexShrink: 0 }}
+        >
+          Filter Opportunities by Organization
+        </Button>
+        </Box>
       <Paper sx={paperStyles}>
         <Box sx={{ flex: '1 1 67%' }}>
           {description && (
