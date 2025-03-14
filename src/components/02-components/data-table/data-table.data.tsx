@@ -1,4 +1,4 @@
-import { Button, ListItem } from '@mui/material';
+import { Button, ListItem, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import {
   GridFilterModel,
@@ -270,8 +270,30 @@ export const staffTableColumns = [
 ];
 
 export const experiencesTableColumns = [
-  { field: 'firstName', headerName: 'First Name', width: 150 },
-  { field: 'lastName', headerName: 'Last Name', width: 150 },
+  {
+    field: 'firstName',
+    headerName: 'First Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   { field: 'email', headerName: 'Email', width: 150 },
   { field: 'campus', headerName: 'Campus', width: 150 },
   { field: 'offering', headerName: 'Offering', width: 150 },
