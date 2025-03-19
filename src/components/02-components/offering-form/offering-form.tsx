@@ -7,7 +7,6 @@ import {
   Button,
   FormControlLabel,
   FormControl,
-  FormLabel,
   InputLabel,
   FormGroup,
   Checkbox,
@@ -153,7 +152,6 @@ export default function OfferingForm({
   formSigners,
   observers,
   preferredLanguages,
-  requiredLanguages,
   focusPopulations,
   focusAreas,
   subFocusAreas,
@@ -177,14 +175,11 @@ export default function OfferingForm({
   defaultApplicationStartDate,
   defaultApplicationEndDate,
   defaultDescription,
-  defaultHealthSafetyInformation,
-  defaultTraining,
   defaultFocusPopulations,
   defaultFocusAreas,
   defaultSubFocusAreas,
   defaultActivities,
   defaultRequirements,
-  defaultSupervision,
   defaultTimeAmount,
   defaultTimeUnit,
   defaultTimeFrequency,
@@ -210,6 +205,20 @@ export default function OfferingForm({
     defaultRequiresApproval,
   );
 
+  const [geoLocation, setGeoLocation] = useState<{ latitude: number | null; longitude: number | null }>({
+    latitude: null,
+    longitude: null,
+  });
+
+  const [addressState, setAddressState] = useState<AddressType>({
+    streetAddress1: address?.streetAddress1 || '',
+    streetAddress2: address?.streetAddress2 || '',
+    city: address?.city || '',
+    state: address?.state || '',
+    zipCode: address?.zipCode || '',
+    country: address?.country || 'US',
+  });
+
   const [isKnownHazards, setIsKnownHazards] = useState(safetyConsiderations?.includes('known_hazards'));
   function khChangeHandler() {
     setIsKnownHazards(!isKnownHazards);
@@ -218,6 +227,13 @@ export default function OfferingForm({
   function psChangeHandler() {
     setIsPopulationServed(!isPopulationServed);
   }
+
+  const [isStudentsSelected, setisStudentsSelected] = useState(false);
+
+  function ssChangeHandler() {
+    setisStudentsSelected(!isStudentsSelected);
+  }
+
   const [isSiteLocation, setIsSiteLocation] = useState(safetyConsiderations?.includes('site_location'));
   function slChangeHandler() {
     setIsSiteLocation(!isSiteLocation);
@@ -301,6 +317,11 @@ export default function OfferingForm({
     }
   };
 
+  const studentSelected = {
+    mb: theme.spacing(3),
+    display: 'block',
+  };
+
   const rightSpace = {
     mr: theme.spacing(1)
   }
@@ -344,6 +365,31 @@ export default function OfferingForm({
     setRequiresApproval(event.target.checked);
   }
 
+  useEffect(() => {
+    if (geoLocation.latitude && geoLocation.longitude) {
+      const latitudeInput = document.getElementById('offering-latitude') as HTMLInputElement;
+      const longitudeInput = document.getElementById('offering-longitude') as HTMLInputElement;
+
+      if (latitudeInput && longitudeInput) {
+        latitudeInput.value = geoLocation.latitude.toString();
+        longitudeInput.value = geoLocation.longitude.toString();
+      }
+    }
+  }, [geoLocation]);
+
+  const handleAddressChange = (updatedAddress: Partial<AddressType>) => {
+    setAddressState((prev) => {
+      const newAddress = { ...prev, ...updatedAddress };
+
+      // Si todos los campos de dirección están vacíos, reseteamos la geolocalización
+      if (!newAddress.streetAddress1 && !newAddress.city && !newAddress.zipCode) {
+        setGeoLocation({ latitude: null, longitude: null });
+      }
+
+      return newAddress;
+    });
+  };
+
   const [errors, setErrors] = useState({
     offeringName: false,
     offeringDescription: false,
@@ -362,10 +408,22 @@ export default function OfferingForm({
     offeringCity: false,
     offeringZipcode: false,
     offeringState: false,
+    latitude: false,
+    longitude: false,
   });
 
+  useEffect(() => {
+    if (addressState.streetAddress1 && addressState.city && addressState.state && addressState.zipCode) {
+      getCoordinates(addressState.streetAddress1, addressState.city, addressState.state, addressState.zipCode)
+        .then((coords) => {
+          if (coords) {
+            setGeoLocation(coords);
+          }
+        });
+    }
+  }, [addressState]);
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = async(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const offeringNameValue = (document.getElementById('offering-name') as HTMLInputElement)?.value;
     const offeringDescriptionValue = (document.getElementById('offering-description') as HTMLInputElement)?.value;
     // Extract chips for Activities
@@ -384,6 +442,7 @@ export default function OfferingForm({
     const offeringEndDateValue = (document.getElementById('offering-end-date') as HTMLInputElement)?.value;
     const offeringTimeAmountValue = (document.getElementById('offering-time-amount') as HTMLInputElement)?.value;
     const offeringPayAmountValue = (document.getElementById('offering-pay-amount') as HTMLInputElement)?.value;
+    const offeringStudentSelected = (document.getElementById('offering-student-selected') as HTMLInputElement)?.value;
     // Extract chips for Focus Population(s)
     const offeringFocusPopulationsValues = Array.from(
       document.querySelectorAll('#offering-focus-populations-label ~ .MuiAutocomplete-inputRoot .MuiChip-label')
@@ -400,6 +459,14 @@ export default function OfferingForm({
     const offeringAddressState = (document.getElementById('offering-address-state') as HTMLInputElement)?.value;
     const offeringAddressCountry = (document.getElementById('offering-address-country') as HTMLInputElement)?.value;
 
+    // Coordinates
+    const latitudeInput = document.getElementById('offering-latitude') as HTMLInputElement;
+    const longitudeInput = document.getElementById('offering-longitude') as HTMLInputElement;
+
+
+    const latitudeValue = latitudeInput?.value;
+    const longitudeValue = longitudeInput?.value;
+
     const errors = {
       offeringName: offeringNameValue === '',
       offeringDescription: offeringDescriptionValue === '',
@@ -412,6 +479,7 @@ export default function OfferingForm({
       offeringEndDate: offeringEndDateValue === '',
       offeringTimeAmount: offeringTimeAmountValue === '',
       offeringPayAmount: offeringPayAmountValue === '',
+      offeringStudentSelected: offeringStudentSelected === '',
       offeringFocusPopulations: offeringFocusPopulationsValues.length === 0,
       offeringFocusAreas: offeringFocusAreasValues.length === 0,
     };
@@ -425,6 +493,8 @@ export default function OfferingForm({
       offeringCity: isAddressRequired && offeringCityValue === '',
       offeringZipcode: isAddressRequired && offeringZipCode === '',
       offeringState: isAddressRequired && offeringAddressState === '',
+      latitude: isAddressRequired && (!latitudeValue || latitudeValue === ''),
+      longitude: isAddressRequired && (!longitudeValue || longitudeValue === ''),
     };
 
     setErrors(addressErrors);
@@ -497,6 +567,39 @@ export default function OfferingForm({
     }
   };
 
+  // Nominatim Implementation
+  async function getCoordinates(
+    street: string,
+    city: string,
+    state: string,
+    zip: string
+  ): Promise<{ latitude: number; longitude: number } | null> {
+    if (!street || !city || !state || !zip) return null;
+
+    const query = `${street}, ${city}, ${state}, ${zip}, USA`;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "User-Agent": "OfferingFormApp", // Nominatim requiere un user-agent
+        },
+      });
+      const data = await response.json();
+
+      if (data.length > 0) {
+        return {
+          latitude: parseFloat(data[0].lat),
+          longitude: parseFloat(data[0].lon),
+        };
+      }
+
+      return null;
+    } catch (error) {
+      console.error("Error fetching coordinates:", error);
+      return null;
+    }
+  }
 
   // Render.
   const formInner = (
@@ -558,14 +661,17 @@ export default function OfferingForm({
                 </option>
               ))}
             </TextField>
-            <TextField
-              fullWidth
-              id="offering-student-selected"
-              variant="outlined"
-              name="offering-student-selected"
-              label="Has a student been selected for this offering?"
-              defaultValue={emailStudentSelected}
-              sx={formFieldStyles}
+            <FormControlLabel
+              control={
+                <Switch
+                  onChange={ssChangeHandler}
+                  checked={isStudentsSelected}
+                  id="offering-student-selected"
+                  name="offering-student-selected"
+                />
+              }
+              sx={studentSelected}
+              label="Has a student been selected?"
             />
             <TextField
               required
@@ -1163,7 +1269,6 @@ export default function OfferingForm({
               }}
               sx={[formFieldStyles, rightSpace]}
             >
-              <option key="none" value="none">None</option>
               {PAY_TYPE.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -1185,7 +1290,6 @@ export default function OfferingForm({
               }}
               sx={[formFieldStyles, rightSpace]}
             >
-              <option key="0" value="0">None</option>
               {PAY_FREQUENCY.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -1230,7 +1334,6 @@ export default function OfferingForm({
               sx={formFieldStyles}
               onChange={remoteHandler}
             >
-              <option value="none">Select type...</option>
               <option value="business">Business</option>
               <option value="residence">Residence</option>
               <option value="public_space">Public Space</option>
@@ -1241,6 +1344,7 @@ export default function OfferingForm({
             display={isRemote ? 'none' : 'block'}
             id="offering"
             address={address}
+            onAddressChange={handleAddressChange}
             errors={{
               streetAddress: errors.offeringStreetAddress,
               city: errors.offeringCity,
@@ -1249,6 +1353,8 @@ export default function OfferingForm({
             }}
             mb={3}
           />
+          <input type="hidden" id="offering-latitude" name="offering-latitude" value={geoLocation.latitude ?? ''} />
+          <input type="hidden" id="offering-longitude" name="offering-longitude" value={geoLocation.longitude ?? ''} />
           <Box component="fieldset" sx={fieldSetStyles}>
             <legend>Focus Population and Areas</legend>
             {focusPopulations && (

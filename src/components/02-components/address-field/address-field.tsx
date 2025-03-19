@@ -31,6 +31,7 @@ interface AddressFieldProps extends BoxProps {
     zip?: boolean;
     state?: boolean;
   };
+  onAddressChange?: (updatedAddress: Partial<AddressType>) => void;
 }
 
 const usStates = [
@@ -288,6 +289,7 @@ export default function AddressField({
   id,
   address,
   errors,
+  onAddressChange,
   ...props
 }: AddressFieldProps) {
   const [expanded, setExpanded] = useState(false);
@@ -356,6 +358,7 @@ export default function AddressField({
           label="Street address"
           defaultValue={address?.streetAddress1}
           sx={{ ...fieldBaseStyles, mt: theme.spacing(3) }}
+          onChange={(e) => onAddressChange?.({ streetAddress1: e.target.value })}
           error={errors?.streetAddress}
           helperText={errors?.streetAddress ? 'This field is required' : ''}
         />
@@ -377,6 +380,7 @@ export default function AddressField({
             name="address_city"
             label="City"
             defaultValue={address?.city}
+            onChange={(e) => onAddressChange?.({ city: e.target.value })}
             sx={fieldBaseStyles}
             error={errors?.city}
             helperText={errors?.city ? 'This field is required' : ''}
@@ -398,6 +402,7 @@ export default function AddressField({
               name="address_state"
               defaultValue={address?.state ?? 'none'}
               placeholder='Select state'
+              onChange={(e) => onAddressChange?.({ state: e.target.value })}
             >
               {usStates.map((state) => (
                 <option key={state.id} value={state.id}>
@@ -415,6 +420,7 @@ export default function AddressField({
           name="address_zipcode"
           label="Zip code"
           defaultValue={address?.zipCode}
+          onChange={(e) => onAddressChange?.({ zipCode: e.target.value })}
           error={errors?.zip}
           helperText={errors?.zip ? 'This field is required' : ''}
         />
