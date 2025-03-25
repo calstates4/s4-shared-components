@@ -85,8 +85,6 @@ export default function CampusCard({
     },
   };
 
-  console.log(theme.palette);
-
   const contentContainerStyles = {
     [theme.breakpoints.up('md')]: {
       display: 'flex',

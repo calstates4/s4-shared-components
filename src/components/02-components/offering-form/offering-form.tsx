@@ -29,8 +29,10 @@ import AutocompletesDependecyFields, {
 } from '../autocompletes-dependecy-fields/autocompletes-dependecy-fields';
 import Tabs, { type RefHandler } from '../tabs/tabs';
 import ParticipationRequirements , { type ParticipationRequirementsProps } from '../participation-requirements/participation-requirements';
+import StudentsInformation , { type StudentsInformationProps } from '../students-information/students-information';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import AutocompleteFieldNoDropdown, { AutocompleteOptionTypeNoDropdown } from '../autocomplete-field-no-dropdown/autocomplete-field-no-dropdown';
 
 const OFFERING_TYPES = [
   { value: 'on-site', label: 'On-site' },
@@ -91,6 +93,7 @@ export type OfferingFormProps = {
   subFocusAreas?: AutocompleteOptionType[];
   activities?: AutocompleteOptionType[];
   requirements?: AutocompleteOptionType[];
+  offeringCampus?: AutocompleteOptionTypeNoDropdown[];
   FormElement?: ElementType;
   defaultName?: string;
   defaultRequiresApproval?: boolean;
@@ -125,6 +128,7 @@ export type OfferingFormProps = {
   defaultPayFrequency?: string;
   defaultPayAmount?: number;
   emailStudentSelected?: string;
+  defaultOfferingCampus?: string
 
   expectedSkillAcquisition?: string;
   safetyConsiderations?: string[];
@@ -137,6 +141,7 @@ export type OfferingFormProps = {
     label: string;
   }[];
   participationRequirement?: ParticipationRequirementsProps[];
+  studentsInformation?: StudentsInformationProps[];
 };
 
 export default function OfferingForm({
@@ -196,6 +201,9 @@ export default function OfferingForm({
   supervisionComments,
   requirementTypes,
   participationRequirement,
+  studentsInformation,
+  offeringCampus,
+  defaultOfferingCampus,
 }: OfferingFormProps) {
   const theme = useTheme();
   const tabRef = useRef<RefHandler>(null);
@@ -228,7 +236,7 @@ export default function OfferingForm({
     setIsPopulationServed(!isPopulationServed);
   }
 
-  const [isStudentsSelected, setisStudentsSelected] = useState(false);
+  const [isStudentsSelected, setisStudentsSelected] = useState(emailStudentSelected === "1" ? true : false);
 
   function ssChangeHandler() {
     setisStudentsSelected(!isStudentsSelected);
@@ -268,11 +276,15 @@ export default function OfferingForm({
   // auto-incrementing id for requirements and fees fields
   const [sFields, setSFields] = useState(participationRequirement);
 
+  // auto-incrementing id for students information fields
+  const [sStudentsFields, setSStudentsFields] = useState(studentsInformation);
+
   const [initialRowCount, setInitialRowCount] = useState(0);
 
   // useEffect to set initial row count when the component mounts
   useEffect(() => {
     setInitialRowCount(sFields?.length ?? 0);
+    setInitialRowCount(sStudentsFields?.length ?? 0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -281,6 +293,12 @@ export default function OfferingForm({
     const data = [...sFields as []];
     data.splice(idx, 1);
     setSFields(data);
+  };
+
+  const removeStudentElement = (idx: number) => {
+    const data = [...sStudentsFields as []];
+    data.splice(idx, 1);
+    setSStudentsFields(data);
   };
 
   // Add fields by index
@@ -294,6 +312,16 @@ export default function OfferingForm({
     }
 
     setSFields([...sFields as [], newFields]);
+  };
+
+  const addStudentsElement = () => {
+    const newFields = {
+      id: 'new',
+      student_email: '',
+      student_name: '',
+    }
+
+    setSStudentsFields([...sStudentsFields as [], newFields]);
   };
 
   // Styles.
@@ -661,18 +689,76 @@ export default function OfferingForm({
                 </option>
               ))}
             </TextField>
-            <FormControlLabel
-              control={
-                <Switch
-                  onChange={ssChangeHandler}
-                  checked={isStudentsSelected}
-                  id="offering-student-selected"
-                  name="offering-student-selected"
-                />
-              }
-              sx={studentSelected}
-              label="Has a student been selected?"
-            />
+            {offeringCampus && (
+              <AutocompleteFieldNoDropdown
+                id="offering-campus"
+                name="offering-campus"
+                label="Offering Campus"
+                options={offeringCampus}
+                selected={defaultOfferingCampus}
+                sx={formFieldStyles}
+                required = {isStudentsSelected}
+              />
+            )}
+            <Box component="fieldset" sx={fieldSetStyles}>
+              <legend>Selected students</legend>
+              <FormControlLabel
+                control={
+                  <Switch
+                    onChange={ssChangeHandler}
+                    checked={isStudentsSelected}
+                    id="offering-student-selected"
+                    name="offering-student-selected"
+                  />
+                }
+                sx={studentSelected}
+                label="Has a student been selected?"
+              />
+
+              {isStudentsSelected && (
+                <Accordion defaultExpanded={true} sx={accordionStyles}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon sx={{ color: 'primary.dark' }} />}
+                  >
+                    Students Information
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {sStudentsFields &&
+                      sStudentsFields.map((item: any, idx: number) => (
+                        <div
+                          key={idx}
+                          style={{
+                            display: 'flex',
+                            marginBottom: '1rem',
+                          }}
+                        >
+                          <input
+                            type="hidden"
+                            name={'students-information'}
+                            value={item.id}
+                          />
+                          <StudentsInformation
+                            id={item.id}
+                            student_name={item.student_name}
+                            student_email={item.student_email}
+                          />
+                          <Button
+                            onClick={() => removeStudentElement(idx)}
+                            variant={'text'}
+                            aria-label="Remove student button"
+                          >
+                            <DeleteOutlinedIcon sx={{ color: 'primary.dark' }} />
+                          </Button>
+                        </div>
+                      ))}
+                    <Button onClick={addStudentsElement} variant={'contained'}>
+                      Add {sStudentsFields?.length ?? 0 > 0 ? 'more students' : 'students'}
+                    </Button>
+                  </AccordionDetails>
+                </Accordion>
+              )}
+            </Box>
+
             <TextField
               required
               type="number"

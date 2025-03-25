@@ -286,3 +286,7 @@ export {
   default as ParticipationRequirements,
   type ParticipationRequirementsProps,
 } from './components/02-components/participation-requirements/participation-requirements';
+export {
+  default as StudentsInformation,
+  type StudentsInformationProps,
+} from './components/02-components/students-information/students-information';
