@@ -35,13 +35,17 @@ export default function AutocompleteFieldNoDropdown({
   const [inputValue, setInputValue] = useState('');
   const [open, setOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<AutocompleteOptionTypeNoDropdown[]>([]);
+  const [inputValueId, setInputValueId] = useState<string>('');
+
 
   useEffect(() => {
     if (selected) {
       const selectedOption = options.find((item) => item.id === selected);
       setInputValue(selectedOption ? selectedOption.label : (Array.isArray(selected) ? selected.join(', ') : selected ?? ''));
+      setInputValueId(selectedOption?.id ?? '');
     } else {
       setInputValue('');
+      setInputValueId('');
     }
 
     setTimeout(() => setOpen(false), 100); // 🔥 Cierra el dropdown después de la carga inicial
@@ -68,14 +72,17 @@ export default function AutocompleteFieldNoDropdown({
   function onChangeHandler(event: SyntheticEvent, value: AutocompleteOptionTypeNoDropdown | string | null) {
     if (typeof value === 'string') {
       setInputValue(value);
+      setInputValueId('');
       setOpen(value.length >= 2);
       if (onChange) onChange(event, null);
     } else {
       setInputValue(value?.label ?? '');
+      setInputValueId(value?.id ?? '');
       setOpen(false);
       if (onChange) onChange(event, value);
     }
   }
+
 
   return (
     <>
@@ -105,7 +112,15 @@ export default function AutocompleteFieldNoDropdown({
         sx={sx}
         noOptionsText="No options match your search"
       />
-      <input type="hidden" name={name} value={inputValue} />
+      <input
+        type="hidden"
+        name={name}
+        value={JSON.stringify({
+          id: inputValueId,
+          label: inputValue
+        })}
+      />
+
     </>
   );
 }

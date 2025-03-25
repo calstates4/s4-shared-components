@@ -114,6 +114,21 @@ const requirements = [
   },
 ];
 
+const offeringCampus = [
+  {
+    id: '1',
+    label: 'Campus 1',
+  },
+  { id: '2', label: 'Campus 2' },
+  { id: '3', label: 'Campus 3' },
+  { id: '4', label: 'Campus 4' },
+  {
+    id: '5',
+    label:
+      'Campus 5',
+  },
+];
+
 const languages = [
   { id: '1', label: 'Spanish' },
   { id: '2', label: 'French' },
@@ -155,6 +170,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
       zipCode: '10112',
     },
     requirements,
+    offeringCampus,
     primaryContacts: users,
     timeApprovers: users,
     formSigners: users,
@@ -167,6 +183,7 @@ export const AddOffering: StoryObj<typeof OfferingForm> = {
     activities,
     requirementTypes: requirements,
     participationRequirement: [],
+    studentsInformation: [],
   },
 };
 
@@ -211,6 +228,7 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
     subFocusAreas,
     activities,
     requirements,
+    offeringCampus,
     defaultPrimaryContact: '1',
     defaultTimeApprovers: ['1', '4'],
     defaultFormSigners: ['5', '8'],
@@ -259,6 +277,18 @@ export const EditOffering: StoryObj<typeof OfferingForm> = {
         requirements_fee: '5',
         requirements_cost: '0',
         requirement_types: requirements,
+      },
+    ],
+    studentsInformation: [
+      {
+        id: 1,
+        student_name: 'Jose',
+        student_email: 'jose@gmail.com',
+      },
+      {
+        id: 2,
+        student_name: 'Jeff',
+        student_email: 'jeff@gmail.com',
       },
     ],
     defaultPayType: 3,
