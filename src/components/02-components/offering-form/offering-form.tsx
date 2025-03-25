@@ -698,6 +698,7 @@ export default function OfferingForm({
                 selected={defaultOfferingCampus}
                 sx={formFieldStyles}
                 required = {isStudentsSelected}
+                asJson={true}
               />
             )}
             <Box component="fieldset" sx={fieldSetStyles}>
