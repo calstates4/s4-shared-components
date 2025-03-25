@@ -233,6 +233,7 @@ export default function OpportunityList({
           options={organizationByCampus}
           selected={currentFilters.organization}
           sx={formItemStyles}
+          asJson={false}
         />
       )}
 

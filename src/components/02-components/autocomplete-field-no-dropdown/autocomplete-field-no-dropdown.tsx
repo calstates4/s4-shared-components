@@ -17,6 +17,7 @@ type AutocompleteFieldNoDropdownProps = {
   required?: boolean;
   sx?: any;
   error?: boolean;
+  asJson?: boolean;
   onChange?: (event: SyntheticEvent, value: AutocompleteOptionTypeNoDropdown | AutocompleteOptionTypeNoDropdown[] | null) => void;
 };
 
@@ -30,6 +31,7 @@ export default function AutocompleteFieldNoDropdown({
   required = false,
   sx,
   error = false,
+  asJson,
   onChange,
 }: AutocompleteFieldNoDropdownProps) {
   const [inputValue, setInputValue] = useState('');
@@ -115,10 +117,11 @@ export default function AutocompleteFieldNoDropdown({
       <input
         type="hidden"
         name={name}
-        value={JSON.stringify({
-          id: inputValueId,
-          label: inputValue
-        })}
+        value={
+          asJson
+            ? JSON.stringify({ id: inputValueId, label: inputValue }) // para formularios
+            : inputValueId // para filtros en URL
+        }
       />
 
     </>
