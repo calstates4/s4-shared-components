@@ -6,6 +6,7 @@ import {
   GridRenderCellParams,
 } from '@mui/x-data-grid';
 import Link from '../../01-elements/link/link';
+import { Form } from '@remix-run/react';
 
 export const genericTableColumns = [
   { field: 'firstName', headerName: 'First Name', width: 150 },
@@ -720,11 +721,12 @@ export const ApproveExperienceTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <strong>
+      <Form method="post">
+        <input type="hidden" name="time-entry-id" value={params.row.id} />
+        <input type="hidden" name="time-entry-action" value="approval" />
+        {/* Puedes incluir un input de comentario opcional aquí si quieres */}
         <Button
-          component={Link}
-          href={'/organization/experience/approve/' + params.row.id}
-          disabled={false}
+          type="submit"
           sx={{
             flexShrink: 0,
             fontWeight: 700,
@@ -736,7 +738,7 @@ export const ApproveExperienceTableColumns = [
         >
           Approve
         </Button>
-      </strong>
+      </Form>
     ),
   },
   {
@@ -746,15 +748,15 @@ export const ApproveExperienceTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <strong>
+      <Form method="post">
+        <input type="hidden" name="time-entry-id" value={params.row.id} />
+        <input type="hidden" name="time-entry-action" value="declined" />
         <Button
-          component={Link}
-          href={'/organization/experience/deny/' + params.row.id}
-          disabled={false}
+          type="submit"
           sx={{
             flexShrink: 0,
             fontWeight: 700,
-            border: '1px solid ',
+            border: '1px solid',
             whiteSpace: 'nowrap',
             margin: '4px 0',
             color: 'red',
@@ -762,7 +764,7 @@ export const ApproveExperienceTableColumns = [
         >
           Deny
         </Button>
-      </strong>
+      </Form>
     ),
   },
 ];
