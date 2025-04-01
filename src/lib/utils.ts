@@ -39,6 +39,16 @@ export function experienceStatusInfo(
       label: 'Health & Safety Acknowledgement',
       url: '/update-experience/health-safety?experience=',
     },
+    pending: {
+      color: theme.palette.warning.main,
+      label: 'pending',
+      url: '/update-experience/approval?experience=',
+    },
+    declined: {
+      color: theme.palette.warning.main,
+      label: 'declined',
+      url: '/update-experience/approval?experience=',
+    },
     approval: {
       color: theme.palette.warning.main,
       label: 'Approval',

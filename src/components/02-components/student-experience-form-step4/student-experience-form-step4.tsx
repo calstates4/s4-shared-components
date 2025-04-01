@@ -8,7 +8,7 @@ export type StudentExperienceFormStep4Props = {
   programName: string;
   stepsBar: ReactNode;
   FormElement: ElementType;
-  approvalState: boolean;
+  approvalState: string;
   healthSafetyComments?: string;
 };
 
@@ -24,7 +24,7 @@ export default function StudentExperienceFormStep4({
 }: StudentExperienceFormStep4Props) {
   const theme = useTheme();
 
-  const approvalStatus = approvalState ? 'reviewing' : 'approved';
+  const approvalStatus = approvalState == 'pending' ? 'reviewing' : approvalState == 'declined' ? 'declined' : 'approved';
 
   const approvalStates: Record<
     string,
@@ -40,6 +40,10 @@ export default function StudentExperienceFormStep4({
     reviewing: {
       label: 'reviewing',
       backgroundColor: 'warning.main',
+    },
+    declined: {
+      label: 'declined',
+      backgroundColor: 'error.main',
     },
   };
 
@@ -61,6 +65,8 @@ export default function StudentExperienceFormStep4({
       mt: 0,
     },
   };
+
+  console.log(approvalStatus);
 
   // Form.
   const formInner = (
@@ -84,7 +90,7 @@ export default function StudentExperienceFormStep4({
         type="submit"
         variant="contained"
         sx={{ mr: 1, float: 'right' }}
-        disabled={approvalState ? true : false} // disabled if approvalState is true
+        disabled={approvalStatus !== 'approved' ? true : false} // disabled if approvalState is true
       >
         Continue
       </Button>
