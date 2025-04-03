@@ -11,7 +11,6 @@ import Pager from '../../01-elements/pager/pager';
 import AutocompleteField, {
   type AutocompleteOptionType,
 } from '../autocomplete-field/autocomplete-field';
-import { BorderBottom } from '@mui/icons-material';
 
 export type CourseListProps = {
   breadcrumb: {

@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Paper,
   Typography,
   useTheme,
 } from '@mui/material';
