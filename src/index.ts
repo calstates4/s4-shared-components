@@ -116,6 +116,10 @@ export {
   type OpportunityListProps,
 } from './components/02-components/opportunity-list/opportunity-list';
 export {
+  default as CourseList,
+  type CourseListProps,
+} from './components/02-components/course-list/course-list';
+export {
   default as MapField,
   type MapFieldProps,
 } from './components/02-components/map/map';
@@ -127,6 +131,10 @@ export {
   default as OrganizationCard,
   type OrganizationCardProps,
 } from './components/02-components/organization-card/organization-card';
+export {
+  default as CourseCard,
+  type CourseCardProps,
+} from './components/02-components/course-card/course-card';
 export { default as OrganizationForm } from './components/02-components/organization-form/organization-form';
 export { default as OrganizationList } from './components/02-components/organization-list/organization-list';
 export {
