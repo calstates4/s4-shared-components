@@ -1,10 +1,12 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { Box, Divider, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Button, Divider, Paper, Typography, useTheme } from '@mui/material';
 import { ReactNode } from 'react';
 import { experienceStatusInfo } from '../../../lib/utils';
 import Breadcrumbs from '../../01-elements/breadcrumbs/breadcrumbs';
 import CardExperienceHours from '../card-experience-hours/card-experience-hours';
 import ExperienceFormList from '../experience-form-list/experience-form-list';
+import Link from '../../01-elements/link/link';
+import { differenceInDays, parse } from 'date-fns';
 
 type FormProps = {
   id: string;
@@ -33,6 +35,7 @@ export type ExperiencePageProps = {
   timeApprover: string;
   observer: string;
   hasPendingForm: boolean;
+  creationDate: string;
   beginningForms?: FormProps[];
   duringForms?: FormProps[];
   endForms?: FormProps[];
@@ -41,6 +44,7 @@ export type ExperiencePageProps = {
 };
 
 export default function ExperiencePage({
+  id,
   children,
   experienceName,
   url,
@@ -65,11 +69,21 @@ export default function ExperiencePage({
   hasPendingForm,
   formBaseUrl,
   viewSubmissionBaseUrl,
+  creationDate,
 }: ExperiencePageProps) {
   const theme = useTheme();
 
   // Variables to manage workflow status
   const states = experienceStatusInfo(theme);
+
+  // Convertir la fecha de `creationDate` a un objeto Date
+  const parsedCreationDate = parse(creationDate, 'dd/MM/yyyy', new Date());
+
+  // Calcular la diferencia en días entre hoy y la fecha de creación
+  const daysSinceCreation = differenceInDays(new Date(), parsedCreationDate);
+
+  // Determinar si se debe mostrar el botón (solo si han pasado menos de 14 días)
+  const showEditButton = daysSinceCreation <= 14;
 
   // Styles
   const experienceNameStyles = {
@@ -201,6 +215,16 @@ export default function ExperiencePage({
       {states[state].label}
     </Typography>
   );
+  
+  const titleContainerStyles = {
+    mb: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      gap: theme.spacing(2),
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+  };
 
   return (
     <article>
@@ -211,9 +235,20 @@ export default function ExperiencePage({
         ]}
       />
       <Box>
-        <Typography variant="h1" color="primary.main" sx={experienceNameStyles}>
-          {experienceName}
-        </Typography>
+        <Box sx={titleContainerStyles}>
+          <Typography variant="h1" color="primary.main" sx={experienceNameStyles}>
+            {experienceName}
+          </Typography>
+          {showEditButton && states[state].label !== "Archived" && (
+            <Button
+              variant="contained"
+              component={Link}
+              href={`${states[state].url + id}`}
+            >
+              Edit Experience
+            </Button>
+          )}
+        </Box>
 
         <Paper sx={containerStyles}>
           <Box sx={contentStyles}>
@@ -255,7 +290,7 @@ export default function ExperiencePage({
                   )}
                 </Box>
               </Box>
-              {hasPendingForm && (
+              {hasPendingForm && states[state].label === "Active" && (
                 <Box sx={pendingFormStyles}>
                   <ErrorOutlineIcon sx={iconPendingStyles} />
                   <Box>
@@ -306,7 +341,7 @@ export default function ExperiencePage({
           </Box>
         </Paper>
 
-        {beginningForms?.length || duringForms?.length || endForms?.length ? (
+        {states[state].label === "Active" && (beginningForms?.length || duringForms?.length || endForms?.length) ? (
           <ExperienceFormList
             id="experience-forms"
             beginningForms={beginningForms}
