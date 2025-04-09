@@ -263,7 +263,7 @@ export default function CardExperience({
               {renderedDate}
             </Box>
           </Box>
-          {hasPendingForm &&
+          {hasPendingForm && states[state].label === "Active" &&
             (cardCount === 1 ? (
               <Box sx={pendingFormStyles}>
                 <ErrorOutlineIcon sx={iconPendingStyles} />
