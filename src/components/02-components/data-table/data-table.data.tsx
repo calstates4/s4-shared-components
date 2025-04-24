@@ -9,9 +9,42 @@ import Link from '../../01-elements/link/link';
 import { Form } from '@remix-run/react';
 
 export const genericTableColumns = [
-  { field: 'firstName', headerName: 'First Name', width: 150 },
-  { field: 'lastName', headerName: 'Last Name', width: 150 },
-  { field: 'email', headerName: 'Email', width: 150 },
+  {
+    field: 'firstName',
+    headerName: 'First Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'url',
     width: 150,
@@ -158,12 +191,41 @@ export const staffTableRows = [
 ];
 
 export const staffTableColumns = [
-  { field: 'col1', headerName: 'First Name', width: 150 },
-  { field: 'col2', headerName: 'Last Name', width: 150 },
+  {
+    field: 'col1',
+    headerName: 'First Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'col2',
+    headerName: 'Last Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'col3',
     headerName: 'Departments',
     width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
     renderCell: (params: GridRenderCellParams) => (
       <ul style={{listStyleType: 'none', padding: '0'}}>
         {params.row.departments.map((item:string, index: number) => (
@@ -178,6 +240,13 @@ export const staffTableColumns = [
     field: 'col4',
     headerName: 'Roles',
     width: 170,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
     renderCell: (params: GridRenderCellParams) => (
       <ul style={{listStyleType: 'none', padding: '0'}}>
         {params.row.roles.map((item:string, index: number) => (
@@ -295,9 +364,42 @@ export const experiencesTableColumns = [
       </div>
     ),
   },
-  { field: 'email', headerName: 'Email', width: 150 },
-  { field: 'campus', headerName: 'Campus', width: 150 },
-  { field: 'offering', headerName: 'Offering', width: 150 },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'campus',
+    headerName: 'Campus',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'offering',
+    headerName: 'Offering',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   { field: 'status', headerName: 'Status', width: 150 },
   {
     field: 'url',
@@ -419,21 +521,83 @@ export const coursesTableRows = [
 ];
 
 export const coursesTableColumns = [
-  { field: 'term', headerName: 'Term', width: 100 },
+  {
+    field: 'term',
+    headerName: 'Term',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'courseName',
     headerName: 'Course Name',
     width: 300,
     type: 'actions',
     disableExport: true,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
     renderCell: (params: GridRenderCellParams) => (
       <Link href={params.row.linkCourse}>{params.row.courseName}</Link>
     ),
   },
-  { field: 'program', headerName: 'Program', width: 200 },
-  { field: 'enrollment', headerName: 'Enrollment', width: 100 },
-  { field: 'studentExperience', headerName: 'Experiences', width: 100 },
-  { field: 'hoursApproved', headerName: 'Hours approved', width: 150 },
+  {
+    field: 'program',
+    headerName: 'Program',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'enrollment',
+    headerName: 'Enrollment',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'studentExperience',
+    headerName: 'Experiences',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'hoursApproved',
+    headerName: 'Hours approved',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'url',
     width: 200,
@@ -469,19 +633,59 @@ export const coursesTableColumns = [
 ];
 
 export const coursesDashboardTableColumns = [
-  { field: 'term', headerName: 'Term', width: 100 },
+  {
+    field: 'term',
+    headerName: 'Term',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'courseName',
     headerName: 'Course Name',
     width: 300,
     type: 'actions',
     disableExport: true,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
     renderCell: (params: GridRenderCellParams) => (
       <Link href={params.row.linkCourse}>{params.row.courseName}</Link>
     ),
   },
-  { field: 'program', headerName: 'Program', width: 200 },
-  { field: 'enrollment', headerName: 'Enrollment', width: 100 },
+  {
+    field: 'program',
+    headerName: 'Program',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'enrollment',
+    headerName: 'Enrollment',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
 ];
 
 export const enrolledStudentsTableRows = [
@@ -508,9 +712,42 @@ export const enrolledStudentsTableRows = [
 ];
 
 export const enrolledStudentsTableColumns = [
-  { field: 'firstName', headerName: 'First name', width: 200 },
-  { field: 'lastName', headerName: 'Last name', width: 200 },
-  { field: 'lastlogin', headerName: 'Last login', width: 200 },
+  {
+    field: 'firstName',
+    headerName: 'First name',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last name',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'lastlogin',
+    headerName: 'Last login',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'url',
     headerName: 'Experiences',
@@ -600,8 +837,30 @@ export const reportStudentsTableColumns = [
       </Link>
     ),
   },
-  { field: 'firstName', headerName: 'First name', width: 100 },
-  { field: 'lastName', headerName: 'Last name', width: 100 },
+  {
+    field: 'firstName',
+    headerName: 'First name',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last name',
+    width: 100,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'organizationUrl',
     headerName: 'Organization',
@@ -630,15 +889,81 @@ export const reportStudentsTableColumns = [
       </ul>
     ),
   },
-  { field: 'estHours', headerName: 'Estimated hours', width: 125},
-  { field: 'repHours', headerName: 'Reported hours', width: 125},
-  { field: 'siteStaff', headerName: 'Site staff', width: 200},
+  {
+    field: 'estHours',
+    headerName: 'Estimated hours',
+    width: 125,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'repHours',
+    headerName: 'Reported hours',
+    width: 125,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'siteStaff',
+    headerName: 'Site staff',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
 ];
 
 export const membershipsRequestsTableColumns = [
-  { field: 'firstName', headerName: 'First Name', width: 150 },
-  { field: 'lastName', headerName: 'Last Name', width: 150 },
-  { field: 'email', headerName: 'Email', width: 200 },
+  {
+    field: 'firstName',
+    headerName: 'First Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 200,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'col5',
     headerName: 'Approve Request',
@@ -708,12 +1033,78 @@ export const membershipsRequestsTableRows = [
 ];
 
 export const ApproveExperienceTableColumns = [
-  { field: 'experienceId', headerName: 'ID', width: 80 },
-  { field: 'offeringName', headerName: 'Offering Name', width: 120 },
-  { field: 'offeringDepartment', headerName: 'Offering Department', width: 150 },
-  { field: 'studentName', headerName: 'Student Name', width: 150 },
-  { field: 'university', headerName: 'University', width: 150 },
-  { field: 'opportunityProgram', headerName: 'Opportunity Program', width: 150 },
+  {
+    field: 'experienceId',
+    headerName: 'ID',
+    width: 80,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'offeringName',
+    headerName: 'Offering Name',
+    width: 120,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'offeringDepartment',
+    headerName: 'Offering Department',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'studentName',
+    headerName: 'Student Name',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'university',
+    headerName: 'University',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
+  {
+    field: 'opportunityProgram',
+    headerName: 'Opportunity Program',
+    width: 150,
+    renderHeader: (params: any) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Tooltip title="Press Ctrl + Enter to filter" arrow>
+          <span>{params.colDef.headerName}</span>
+        </Tooltip>
+      </div>
+    ),
+  },
   {
     field: 'col5',
     headerName: '',
