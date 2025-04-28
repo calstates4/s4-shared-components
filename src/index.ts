@@ -298,3 +298,7 @@ export {
   default as StudentsInformation,
   type StudentsInformationProps,
 } from './components/02-components/students-information/students-information';
+export {
+  default as ExperienceDeny,
+  type ExperienceDenyProps,
+} from './components/02-components/experience-deny/experience-deny';
