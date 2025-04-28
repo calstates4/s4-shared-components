@@ -1112,7 +1112,7 @@ export const ApproveExperienceTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <Form method="post">
+      <form method="post">
         <input type="hidden" name="time-entry-id" value={params.row.id} />
         <input type="hidden" name="time-entry-action" value="approval" />
         {/* Puedes incluir un input de comentario opcional aquí si quieres */}
@@ -1129,8 +1129,8 @@ export const ApproveExperienceTableColumns = [
         >
           Approve
         </Button>
-      </Form>
-    ),
+      </form>
+    )
   },
   {
     field: 'col6',
@@ -1139,7 +1139,23 @@ export const ApproveExperienceTableColumns = [
     type: 'actions',
     disableExport: true,
     renderCell: (params: GridRenderCellParams) => (
-      <Form method="post">
+      <Button
+        component={Link}
+        href={'/organization/experiences/' + params.row.id + '/deny'}
+        type="contained"
+        sx={{
+          flexShrink: 0,
+          fontWeight: 700,
+          border: '1px solid',
+          whiteSpace: 'nowrap',
+          margin: '4px 0',
+          color: 'red',
+        }}
+      >
+        Deny
+      </Button>
+      
+      /*<form method="post">
         <input type="hidden" name="time-entry-id" value={params.row.id} />
         <input type="hidden" name="time-entry-action" value="declined" />
         <Button
@@ -1155,8 +1171,8 @@ export const ApproveExperienceTableColumns = [
         >
           Deny
         </Button>
-      </Form>
-    ),
+      </form>*/
+    )
   },
 ];
 
