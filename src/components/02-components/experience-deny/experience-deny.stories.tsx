@@ -7,11 +7,9 @@ const meta: Meta<typeof ExperienceDeny> = {
 };
 export default meta;
 
-
 export const DenyExperience: StoryObj<typeof ExperienceDeny> = {
   args: {
     eid: '12',
-    uid: '1',
     pid: '2',
     oid: '3',
     title: 'Experience #12',
@@ -24,4 +22,3 @@ export const DenyExperience: StoryObj<typeof ExperienceDeny> = {
     ],
   },
 };
-

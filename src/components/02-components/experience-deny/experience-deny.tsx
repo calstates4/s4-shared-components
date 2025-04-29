@@ -18,7 +18,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export type ExperienceDenyProps = {
   eid?: string;
-  uid?: string;
   pid?: string;
   oid?: string;
   title: string;
@@ -33,7 +32,6 @@ export type ExperienceDenyProps = {
 
 export default function ExperienceDeny({
   eid,
-  uid,
   pid,
   oid,
   title,
@@ -96,9 +94,8 @@ export default function ExperienceDeny({
   const innerForm = (
     <>
       {eid && <input type="hidden" name="eid" value={eid} />}
-      {uid && <input type="hidden" name="ueid" value={uid} />}
-      {oid && <input type="hidden" name="ueid" value={oid} />}
-      {pid && <input type="hidden" name="ueid" value={pid} />}
+      {oid && <input type="hidden" name="oid" value={oid} />}
+      {pid && <input type="hidden" name="pid" value={pid} />}
       <FormControl 
         fullWidth
         sx={baseFormItemStyles}
