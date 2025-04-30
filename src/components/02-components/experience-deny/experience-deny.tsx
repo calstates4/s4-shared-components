@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { ElementType } from 'react';
 import Link from '../../01-elements/link/link';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { el } from 'date-fns/locale';
 
 export type ExperienceDenyProps = {
   eid?: string;
@@ -45,8 +46,11 @@ export default function ExperienceDeny({
   // Set states for form fields.
   const [error, setErrorText] = React.useState("");
   const [showField, setShowField] = useState(false);
+  const [optField, setOptField] = useState("none");
+  const [otherField, setOtherField] = useState("");
 
   function selectChangeHandler(event: SelectChangeEvent) {
+    setOptField(event.target.value);
     if (event.target.value === 'other') {
       setShowField(true);
     } else {
@@ -58,8 +62,11 @@ export default function ExperienceDeny({
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const form = e.currentTarget.form;
-    if (!showField) {
+
+    if (optField === 'none') {
       setErrorText("Please enter a reason of rejection this experience.");
+    } else if (optField === 'other' && otherField === '') {
+      setErrorText("Please enter an other reason of rejection this experience.");
     } else if (form) {
       form.submit();
     }
@@ -131,6 +138,8 @@ export default function ExperienceDeny({
           name="field-other-reason"
           label="Other reason"
           sx={baseFormItemStyles}
+          value={otherField}
+          onChange={(e) => setOtherField(e.target.value)}
           helperText="Please provide the reason of the rejection"
         />
       </Box>
